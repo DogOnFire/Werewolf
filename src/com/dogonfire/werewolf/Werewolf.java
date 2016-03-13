@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.OfflinePlayer;
@@ -720,7 +719,6 @@ public class Werewolf extends JavaPlugin
 
 		this.useClans = config.getBoolean("Clans.Enabled", true);
 
-		boolean useItems = config.getBoolean("Items.Enabled", true);
 		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
 		this.wolfbaneUntransformChance = config.getInt("Items.WolfbaneUntransformChance", 25);
 		this.craftableSilverSwordEnabled = config.getBoolean("Items.CraftableSilverSword", true);
