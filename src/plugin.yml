@@ -1,7 +1,7 @@
 name: Werewolf
 main: com.dogonfire.werewolf.Werewolf
 author: DogOnFire
-version: 0.7.9
+version: 0.8.0
 description: Werewolves in Minecraft!
 softdepend: [Vault, HealthBar, NoCheatPlus,AntiCheat,PermissionsBukkit, PermissionsEx, bPermissions, GroupManager]
 website: http://dev.bukkit.org/server-mods/werewolf
