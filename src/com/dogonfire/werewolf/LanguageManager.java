@@ -108,7 +108,7 @@ public class LanguageManager
 
 	private void downloadLanguageFile(String fileName) throws IOException
 	{
-		BufferedInputStream in = new BufferedInputStream(new URL("http://www.doggycraft.dk/plugins/werewolf/lang/" + fileName).openStream());
+		BufferedInputStream in = new BufferedInputStream(new URL("https://raw.githubusercontent.com/dogonfire/werewolf/master/lang/" + fileName).openStream());
 
 		FileOutputStream fos = new FileOutputStream(this.plugin.getDataFolder() + "/lang/" + fileName);
 
