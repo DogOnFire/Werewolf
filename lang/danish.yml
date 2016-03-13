@@ -1,0 +1,214 @@
+Version:
+  Name : Danish
+  Author: DogOnFire
+  Version: 0.1
+FullMoonIsRising:
+- &4Pas på! Fuldmånen stiger i $ServerName&4. $Amount&4 spillere vil blive forvandlet til varulve i denne nat...
+YouBoughtAInfectionPotion:
+- You bought a werewolf infection potion for $Amount!
+YouBoughtACurePotion:
+- You bought a werewolf cure potion for $Amount!
+YouDoNotHaveEnoughMoney:
+- You do not have $Amount&4!
+YouPlacedACureSign:
+- You placed a sign selling werewolf cure potions for $Amount
+YouPlacedAPotionSign:
+- You placed a sign selling werewolf potions for $Amount
+YouAreNotTheAlphaOfTheClan:
+- You are not the alpha of your clan  
+NoRecentAlphaCall:
+- There is no call from your alpha  
+ClanAlphaCannotAnswerCall:
+- You cannot answer your own call  
+YouCalledClanMember:
+- You called $PlayerName to you!  
+YouAreBeingCalled:
+- You are being called by $PlayerName!
+NewClanAlpha:
+- PlayerName$ is now the alpha of your clan!  
+CannotTransformSoSoon:
+- You cannot transform again so soon. Gather your strength and try again later!  
+WerewolfCommandControlledTransformation:
+-   You can control your transformation
+WerewolfCommandGoldImmunity:
+-   You are not harmed by gold items
+WerewolfCommandNoDropItems:
+-   You do not drop items during transformation
+WerewolfCommandFullMoonImmunity:
+-   You no longer transform during a full moon
+KilledMobPoints:
+- &bYou got $Amount &bclan points for that kill!
+MustExperienceMoreFullMoons:
+- Du skal gennemleve flere fuldmåner for at gøre dette!  
+NoWerewolfHuntersInWorld:
+- Der er ingen varulve jægere i $ServerName!
+TopWerewolfHunters:
+- ------ De bedste varulve jægere i $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- Du lavede en varulve infektions potion
+CreatedWerewolfCurePotion:
+- Du lavede en varulve kurerings potion
+NowAWerewolf:
+- Du er nu en varulv!
+NotAWerewolfAnymore:
+- Du er ikke længere en varulv... 
+InvalidCommand:
+- Ugyldig varulve kommando
+HelpWerewolf:
+- /werewolf&f - Vis info om Werewolf pluginnet
+HelpCheck:
+- /werewolf check <playername>&f - Check Werewolf status for en spiller
+HelpHunt:
+- /werewolf hunt&f - Set Werewolf hunt mode
+HelpTop:
+- /werewolf top&f - Check toplisten over varulve jægere i $ServerName
+HelpBounty:
+- /werewolf bounty&f - Check den nuværende dusør for at dræbe en varulv
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - Give penge til dusøren for at dræbe en varulv
+HelpInfectSelf:
+- /werewolf infect&f - Giv varulve infektionen til dig selv
+HelpInfectOther:
+- /werewolf infect <playername>&f - Giv varulve infektionen til en spiller
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - Skift varulve status for en spiller
+HelpToggleOther:
+- /werewolf toggle&f - Skift varulve status for dig selv
+HelpPotion:
+- /werewolf potion&f - Lav en varulve infektions potion
+HelpCure:
+- /werewolf cure&f - Lav en varulve kurerings potion
+TakeCompassInHands:
+- Du skal have et kompas i hånden!
+Infected:
+- Du er blevet smittet med varulve infektionen af $PlayerName!
+MadeWerewolf:
+- Du er blevet gjort til varulv af $PlayerName!
+UnMadeWerewolf:
+- Du er blevet kureret fra at være varulv af $PlayerName!
+NoWerewolvesOnline:
+- Der er ingen varulve online.
+WerewolvesCannotHuntWerewolves:
+- Varulve kan ikke jage varulve!
+YouMustHaveYourHandsFree:
+- Du skal have dine hænder frie!
+PlayerIsHuntingWerewolves:
+- $PlayerName jager nu varulve!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName jager ikke længere varulve!
+NoWerewolvesInThisWorld:
+- Der er ingen varulve i denne verden ($Type)
+NoPermissionForCommand:
+- Du har ikke adgang til den kommando
+WerewolfCommandNumberOfWerewolves:
+- Der er &f$Amount varulve&b i $ServerName
+WerewolfCommandIsWerewolf:
+- Du er en varulv
+WerewolfCommandIsNotWerewolf:
+- Du er ikke en varulv
+WerewolfCommandNextFullMoon:
+- Den næste fuldmåne er $Amount
+WerewolfCommandListCommands:
+- Brug &f/werewolf help&b for at se en liste over kommandoer
+In7Days:
+- om 7 dage.
+In6Days:
+- om 6 dage.
+In5Days:
+- om 5 dage.
+In4Days:
+- om 4 dage.
+In3Days:
+- om 3 dage.
+In2Days:
+- om 2 dage.
+Tomorrow:
+- imorgen!
+Today:
+- idag!
+Transform:
+- Det er nat, og du har det goooodt!
+Untransform:
+- Du forvandlede dig tilbage til din menneskelige form!
+BiteVictim:
+- AV! Det føltes ret underligt...
+BiteAttacker:
+- Du smittede $PlayerName med din varulve infektion!
+BiteWildWolf:
+- Av! Det bid føltes ret underligt...
+KilledMob:
+- Det var et godt bytte. Det gav dig $Amount i helbred!
+WerewolfTryEat:
+- Varulve spiser ikke den slags. Du vil ha KØD!
+DrinkInfectionSuccess:
+_ Wow! En varm følelse flyder gennem din krop...
+DrinkInfectionFailure:
+- Hmm... det smager som vand med citron i 
+DrinkCureSuccess:
+- Hmm... du føler dig mere normal...
+DrinkCureFailure:
+- Hmm... det smager af appelsiner!
+UrgesInfectedThisNight:
+- Du føler dig ret svimmel...
+- Det ulve bid begynder at føltes brændende...
+- Det ulve bid ser altså ret rødt ud...
+- Din hud klør...
+- Du har en pludselig trang til at spise kød!
+- Du har en pludselig trang til at stirre på månen
+- Underligt. Du har en pludselig trang til KØD.
+- Wow... Du har det VIRKELIG underligt!
+UrgesInfectedHumanForm:
+- Du føler dig ret svimmel...
+- Det ulve bid begynder at føltes brændende...
+- Det ulve bid ser altså ret rødt ud...
+- Din hud klør...
+- Du har en pludselig trang til at spise kød!
+- Du har en pludselig trang til at stirre på månen
+UrgesInside:
+- Du har en trang til at gå udenfor...
+- Du føler en trang til at føle natteluften udenfor...
+- Du har en underlig trang til at gå udenfor...
+- Du føles draget til måneskinnet udenfor...
+UrgesTransformed:
+- Du føler trangen til at æde!
+- Du føler trangen til at æde råt kød!
+- Månneskinnet gør dig kuldret
+- Du har en trang til at spise mere KØD!
+- Du føler en trang til at stirre på månen
+- Du kan fornemme duften af skræmte dyr i luften...
+- Du vil jage...
+- Du kan føle dit blod pumpe i dine årer
+- Dine sanser er skærpede...
+BountyPlayerAdded:
+- $PlayerName tilføjede $Amount til dusøren for at dræbe en varulv!
+BountyServerAdded:
+- $ServerName tilføjede $Amount til dusøren for at dræbe en varulv!
+BountyTotal:
+- Varulve dusøren er nu $Amount!
+KilledWerewolfBounty:
+- $PlayerName dræbte en varulv og fik dusøren på $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName dræbte en varulv
+CurePotionDescription1:
+- Drik dette for at kurere dig for varulve infektionen!
+- Træt af at have hår over det hele? Drik dette!
+- Kan du ikke lide at være varulv? Drik dette!
+CurePotionDescription2:
+- Har en kraftig eftersmag.
+- Brygget med kærlighed.
+InfectionPotionDescription1:
+- Drik dette for at blive en varulv!
+- Bare en slurk og du er varulv!
+InfectionPotionDescription2:
+- Den mest utrolige potion i $ServerName!
+- Skal drikkes når nattens klareste lys viser dets sande ansigt.
+- Skal drikkes i den mørkeste time i den mest lysende nat.
+- Skal drikkes under sølvnatten.
+- Skal drikkes når tidevandet er på det højeste
+- Skal drikkes om natten når magien er stærkest
+TrophyDescription:
+- Nakket af $PlayerName den $Amount
+InfoCommandHowl:
+- Brug &f/howl&b for at hyle!
+InfoCommandGrowl:
+- Brug &f/growl&b for at knurre growl! 

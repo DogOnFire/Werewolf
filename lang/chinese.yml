@@ -1,0 +1,192 @@
+Version:
+  Name : Chinese Simplified
+  Author: Piggy Nightmare
+  Version: 0.2
+HelpTransform:
+- /werewolf transform&f - 瞬间变身成狼人！
+WerewolfCommandControlledTransformation:
+-   您可控制​​你的狼人变身
+WerewolfCommandGoldImmunity:
+-   你不会被黄金项目伤害
+WerewolfCommandNoDropItems:
+-   在变身过程中物品不掉落
+WerewolfCommandFullMoonImmunity:
+-   你在满月不再自动变身
+KilledMobPoints:
+- &b您获得$Amount&b氏族点！
+MustExperienceMoreFullMoons:
+- 你必须经历$Amount&c次满月才可控制变身！
+NoWerewolfHuntersInWorld:
+- 没有狼人猎人在$ServerName!
+TopWerewolfHunters:
+- ------- 最佳狼人猎人 $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- 您打造了一瓶狼人感染药水
+CreatedWerewolfCurePotion:
+- 您打造了一瓶狼人治愈药水
+NowAWerewolf:
+- 现在你是一个狼人！
+NotAWerewolfAnymore:
+- 你现在不是狼人了...
+InvalidCommand:
+- 狼人命令无效
+HelpWerewolf:
+- /werewolf&f - 显示狼人系统信息
+HelpCheck:
+- /werewolf check <playername>&f - 检查狼人状态
+HelpHunt:
+- /werewolf hunt&f - 切换狼人狩猎模式
+HelpTop:
+- /werewolf top&f - 最佳狼人猎人列表
+HelpBounty:
+- /werewolf bounty&f - 查看猎杀狼人赏金
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - 添加猎杀狼人赏金
+HelpInfectSelf:
+- /werewolf infect&f - 感染自己成为狼人
+HelpInfectOther:
+- /werewolf infect <playername>&f - 感染同伴成为狼人
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - 切换同伴狼人状态
+HelpToggleOther:
+- /werewolf toggle&f -  切换自己狼人状态
+HelpPotion:
+- /werewolf potion&f - 打造一瓶狼人感染药水
+HelpCure:
+- /werewolf cure&f - 打造一瓶狼人治愈药水
+TakeCompassInHands:
+- 你必须有一个指南针在手中！
+Infected:
+- 你已经被$PlayerName感染成狼​​人!
+MadeWerewolf:
+- 你已经被$PlayerName变成狼​​人!
+UnMadeWerewolf:
+- 你已经被$PlayerName变回​​人类!
+NoWerewolvesOnline:
+- 没有狼人在线
+WerewolvesCannotHuntWerewolves:
+- 狼人不能猎杀狼人！
+YouMustHaveYourHandsFree:
+- 你必须有空着的手！
+PlayerIsHuntingWerewolves:
+- $PlayerName正在狩猎狼人！
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName不再狩猎狼人！
+NoWerewolvesInThisWorld:
+- 在（$Type）里没有狼人
+NoPermissionForCommand:
+- 您没有命令权限
+WerewolfCommandNumberOfWerewolves:
+- 目前有&f$Amount狼人在$ServerName
+WerewolfCommandIsWerewolf:
+- 你是一个狼人
+WerewolfCommandIsNotWerewolf:
+- 你不是一个狼人
+WerewolfCommandNextFullMoon:
+- 下一个满月在$Amount
+WerewolfCommandListCommands:
+- 使用&f/werewolf help&b查看狼人命令列表
+In7Days:
+- 7天后。
+In6Days:
+- 6天后。
+In5Days:
+- 5天后。
+In4Days:
+- 4天后。
+In3Days:
+- 3天后。
+In2Days:
+- 2天后。
+Tomorrow:
+- 明天！
+Today:
+- 今天！
+Transform:
+- 黑夜降临，你忽然觉得充满活力！
+Untransform:
+- 你已回复人形！
+BiteVictim:
+- 哎哟！这感觉很奇怪...
+BiteAttacker:
+- 你感染$PlayerName成狼人！
+BiteWildWolf:
+- 哎哟！这感觉很奇怪...
+KilledMob:
+- 这感觉真爽！您获得$Amount 血量！
+WerewolfTryEat:
+- 狼人不吃这种食物。你想吃肉！
+DrinkInfectionSuccess:
+- 哇！一种温暖的感觉流过你的身体......
+DrinkInfectionFailure:
+- 嗯...味道像柠檬水
+DrinkCureSuccess:
+- 嗯...你感觉自己比早先正常
+DrinkCureFailure:
+- 嗯...就像橙子的味道！
+UrgesInfectedThisNight:
+- 你觉得挺晕...
+- 那伤口开始燃烧......
+- 那伤口看起来稍微红润......
+- 你感觉皮肤好痒...
+- 您突然有冲动吃肉
+- 你突然很想凝视月亮
+- 奇怪!您突然有冲动吃肉。
+- 哇！...你觉得非常奇怪！
+UrgesInfectedHumanForm:
+- 你觉得挺晕...
+- 那伤口开始燃烧......
+- 那伤口看起来稍微红润......
+- 你感觉皮肤好痒...
+- 您突然有冲动吃肉
+- 你突然很想凝视月亮 
+UrgesInside:
+- 你感到一种冲动出去外面...
+- 你想去感受外面夜间的空气...
+- 你有一种陌生的冲动到外面去...
+- 您被外面的月光吸引...
+UrgesTransformed:
+- 你有吃肉的冲动！
+- 您想吃生肉
+- 你在月光下觉得头晕
+- 您想吃肉
+- 你很想凝视月亮
+- 你能感觉到动物的恐惧蔓延在空气中......
+- 你闻到动物的气味...
+- 你渴望狩猎...
+- 你感觉到血液在体内跳跃
+- 你的感官变得尖锐...
+- 你的肌肉敦促移动
+BountyPlayerAdded:
+- $PlayerName添了$Amount 到狼人狩猎赏金！
+BountyServerAdded:
+- $ServerName添了$Amount 到狼人狩猎赏金！
+BountyTotal:
+- 現在狼人狩猎赏金有$Amount！
+KilledWerewolfBounty:
+- $PlayerName杀死狼人并获得$Amount赏金！
+KilledWerewolfNoBounty:
+- $PlayerName杀死了狼​​人
+CurePotionDescription1:
+- 喝这來治愈自己！
+- 厌倦了整天毛茸茸？喝这个吧！
+- 不喜欢狼人？喝这个吧！
+CurePotionDescription2:
+- 齿颊留香。
+- 百年酿造。
+InfectionPotionDescription1:
+- 喝这成为狼人！
+InfectionPotionDescription2:
+- 在$ServerName最棒的药水！
+- 只能在最亮的夜里喝这药水。
+- 只能在月明如镜时喝这药水。
+- 只能在月圓之夜喝这药水。
+- 只能在涨潮最高时喝这药水。
+- 只能在銀光闪烁时喝这药水。
+- 只能在人月团圆时喝这药水。
+TrophyDescription:
+- 被$PlayerName在$Amount杀死
+InfoCommandHowl:
+- 使用&f/howl&b狼嚎！
+InfoCommandGrowl:
+- 使用&f/growl&b 咆哮

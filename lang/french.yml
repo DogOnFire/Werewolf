@@ -1,0 +1,190 @@
+Version:
+  Name : French
+  Author: lucaspart7
+  Version: 0.2
+HelpTransform:
+- /werewolf transform&f - Permet de vous transformer en loup-garou manuellement
+WerewolfCommandControlledTransformation:
+-   Vous pouvez contrôler votre transformation
+WerewolfCommandGoldImmunity:
+-   Vous n'êtes pas armé d'items en or
+WerewolfCommandNoDropItems:
+-   Vous ne perdrez plus d'items durant votre transformation
+WerewolfCommandFullMoonImmunity:
+-   Vous ne vous transformerez plus automatiquement durant la pleine lune
+KilledMobPoints:
+- &bVous recevez $Amount &bde point de clan pour ce kill!
+MustExperienceMoreFullMoons:
+- Vous devez avoir $Amount&c transformations durant la pleine lune de plus pour pouvoir faire cela!
+NoWerewolfHuntersInWorld:
+- Il n'y a pas de chasseurs de loups-garous dans$ServerName!
+TopWerewolfHunters:
+- ------ Les chasseurs de loups -garous dans $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- Vous avez créé une potion d'infection de loup-garou
+CreatedWerewolfCurePotion:
+- Vous avez créé une potion de guérison de l'infection loup-garou
+NowAWerewolf:
+- Vous êtes désormais un loup-garou!
+NotAWerewolfAnymore:
+- Vous n'êtes plus un loup-garou ...
+InvalidCommand:
+- Commande de loup-garou Invalide
+HelpWerewolf:
+- /werewolf&f - Afficher l'aide du plugin
+HelpCheck:
+- /werewolf check <playername>&f - Vérifier si un joueur est un loup-garou ou non
+HelpHunt:
+- /werewolf hunt&f - Permet de devenir chasseur de loup-garou
+HelpTop:
+- /werewolf top&f - Voir le classement des meilleurs chasseurs de loups garous dans $ServerName
+HelpBounty:
+- /werewolf bounty&f - Afficher la prime pour tuer un loup-garou
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - Ajouter de la valeur à la prime de chasse
+HelpInfectSelf:
+- /werewolf infect&f - Vous contamine de l'infection du loup-garou
+HelpInfectOther:
+- /werewolf infect <playername>&f - Contamine le joueur sélectionné de l'infection du loup-garou
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - Activer/Désactiver le mode loup-garou
+HelpToggleOther:
+- /werewolf toggle&f - Activer/Désactiver le mode loup-garou au joueur sélectionné
+HelpPotion:
+- /werewolf potion&f - Crée une potion d'infection de loup-garou
+HelpCure:
+- /werewolf cure&f - Crée une potion de guérison de l'infection du loup-garou
+TakeCompassInHands:
+- Vous devez avoir une boussole dans vos mains!
+Infected:
+- Vous avez été infecté par l'infection duloup-garou par $PlayerName!
+MadeWerewolf:
+- Vous avez été transformé en loup-garou par $PlayerName!
+UnMadeWerewolf:
+- Vous avez été retiré du statut loup-garou par $PlayerName!
+NoWerewolvesOnline:
+- Il n'y a pas de loups-garous en ligne
+WerewolvesCannotHuntWerewolves:
+- les loups-garous ne peuvent pas chasser les loups-garous!
+YouMustHaveYourHandsFree:
+- Vous devez d'abord avoir les mains libres!
+PlayerIsHuntingWerewolves:
+- $PlayerName est désormais chasseur de loups-garous!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName n'est plus chasseur de loups-Garous!
+NoWerewolvesInThisWorld:
+- Il n'y a pas de loups-garous dans ce monde ($Type)
+NoPermissionForCommand:
+- Vous n'avez pas l'autorisation d'effectuer cette commande
+WerewolfCommandNumberOfWerewolves:
+- Il y a &f$Amount loups-garous&b dans $ServerName
+WerewolfCommandIsWerewolf:
+- Vous êtes un loup-garou
+WerewolfCommandIsNotWerewolf:
+- Vous n'êtes pas un loup-garou
+WerewolfCommandNextFullMoon:
+- La prochaine pleine lune est $Amount
+WerewolfCommandListCommands:
+- Utilisation et &f/werewolf help&b pour une liste de commandes
+In7Days:
+- dans 7 jours.
+In6Days:
+- dans 6 jours.
+In5Days:
+- dans 5 jours.
+In4Days:
+- dans 4 jours.
+In3Days:
+- dans 3 jours.
+In2Days:
+- dans 2 jours.
+Tomorrow:
+- demain!
+Today:
+- aujourd'hui!
+Transform:
+- C'est la nuit, et vous vous sentez bien!
+Untransform:
+- Vous êtes revenu à votre forme humaine!
+BiteVictim:
+- Aïe! C'était bizarre ...
+BiteAttacker:
+- Vous avez infecté $PlayerName avec votre infection de loup-garou!
+BiteWildWolf:
+- Aïe! Ce morceau me semblait vraiment étrange ...
+KilledMob:
+- C'était un bon kill. Vous recevez $Amount de santé!
+WerewolfTryEat:
+- les loups ne mangent pas cela. Vous avez envie de viande!
+DrinkInfectionSuccess:
+- Whoa! Une sensation de chaleur circule dans votre corps ...
+DrinkInfectionFailure:
+- Hmm ... qui a le goût de l'eau avec du citron dedans
+DrinkCureSuccess:
+- Hmm ... vous vous sentez plus normal en quelque sorte ...
+DrinkCureFailure:
+- Hmm ... comme du jus d'orange!
+UrgesInfectedThisNight:
+- Vous vous sentez étourdi ...
+- Cette morsure de loup commence à brûler ...
+- Ce loup morsure est un peu rouge ...
+- Votre peau vous démange ...
+- Vous sentez une envie soudaine de manger de la viande
+- Vous regardez la lune avec admiration
+- C'est étrange. Vous sentez une envie soudaine de manger de la viande
+- Woa ... Vous vous sentez vraiment étrange!
+UrgesInfectedHumanForm:
+- Vous vous sentez assez étourdi ...
+- Cette morsure de loup commence à brûler ...
+- Votre peau vous démange ...
+- Vous sentez une envie soudaine de manger de la viande
+- Vous regardez la lune avec admiration
+UrgesInside:
+- Vous avez envie de sortir dehors ...
+- Vous sentez le besoin de sentir l'air à l'extérieur ...
+- Vous sentez une étrange envie d'aller à l'extérieur ...
+- Vous vous sentez attiré par le clair de lune à l'extérieur ...
+UrgesTransformed:
+- Vous avez envie de vous régaler!
+- Vous sentez le besoin de manger de la viande crue
+- Vous vous sentez étourdi par le clair de lune
+- Vous sentez le besoin de manger de la viande
+- Vous avez envie de contempler la lune
+- Vous sentez des animaux proches ...
+- Vous sentez l'odeur des animaux dans l'air ...
+- Vous avez envie de chasse ...
+- Vous avez envie de chasse ...
+- Vos sens sont aiguisés ...
+- Vos muscles ont du mal à bouger
+BountyPlayerAdded:
+- $PlayerName ajoute $Amount à la prime pour avoir tué un loup-garou!
+BountyServerAdded:
+- $ServerName ajoute $Amount à la prime pour avoir tué un loup-garou!
+BountyTotal:
+- La prime de loup-garou est maintenant $Amount!
+KilledWerewolfBounty:
+- $PlayerName a tué un loup-garou et a reçu la prime de $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName a tué un loup-garou
+CurePotionDescription1:
+- Buvez cela pour vous guérir de l'infection de loup-garou!
+- Fatigué d'être poilu? Buvez ça!
+- Vous n'aimez pas être un loup-garou? Buvez ça!
+CurePotionDescription2:
+- Méfiez-vous de l'arrière-goût.
+- Brassée avec soin.
+InfectionPotionDescription1:
+- Buvez pour devenir un loup-garou!
+InfectionPotionDescription2:
+- La potion la plus impressionnante de $ServerName!
+- Doit être vu pendant la nuit la plus brillante.
+- Doit être bu pendant l'heure la plus sombre de la nuit.
+- Doit être bu pendant la nuit.
+- Doit être bu quand la marée est à son plus haut
+- Doit être bu la nuit quand la magie est la plus forte
+TrophyDescription:
+- Tué par $PlayerName sur $Amount
+InfoCommandHowl:
+- Utilisez &f/howl&b pour hurler!
+InfoCommandGrowl:
+- Utilisez &f/growl&b pour grogner!

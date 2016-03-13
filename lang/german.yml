@@ -1,0 +1,190 @@
+Version:
+  Name : German
+  Author: RasCas
+  Version: 0.4
+HelpTransform:
+- /werewolf transform&f - sofortige Verwandlung in einen Werwolf!
+WerewolfCommandControlledTransformation:
+-   Du kannst jetzt Deine Verwandlung kontrollieren
+WerewolfCommandGoldImmunity:
+-   Gold kann dich nicht verletzen
+WerewolfCommandNoDropItems:
+-   Du verlierst keine Dinge durch die Transformation
+WerewolfCommandFullMoonImmunity:
+-   Du musst Dich bei Vollmond nicht mehr in einen Werwolf verwandeln
+KilledMobPoints:
+- &bDu bekommst $Amount &bClan-Punkte für diesen Kill!
+MustExperienceMoreFullMoons:
+- Du musst noch $Amount&c vollständige Verwandlungen durchleben um das zu tun!  
+NoWerewolfHuntersInWorld:
+- Es gibt keine Werewolf Jäger in $ServerName!
+TopWerewolfHunters:
+- ------ Die Top Werewolf Jäger von $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- Du hast einen Werwolftrank gemischt
+CreatedWerewolfCurePotion:
+- Du hast einen Heiltrank für Werwölfe gemischt
+NowAWerewolf:
+- Du bist jetzt ein Werwolf!
+NotAWerewolfAnymore:
+- Du bist endlich kein Werwolf mehr... 
+InvalidCommand:
+- Invalid Werewolf command
+HelpWerewolf:
+- /werewolf&f - Zeige Werwolfbasis Infos
+HelpCheck:
+- /werewolf check <playername>&f - Prüfe den Werwolfstatus eines Spielers
+HelpHunt:
+- /werewolf hunt&f - Werwolf Jagdmodus umschalten
+HelpTop:
+- /werewolf top&f - Zeigt die Top Werwolfjäger auf $ServerName
+HelpBounty:
+- /werewolf bounty&f - Prüfe die Höhe der Kopfprämie für Werwölfe
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - Kopfprämie für Werwölfe aussetzen
+HelpInfectSelf:
+- /werewolf infect&f - Infiziere dich selbst mit dem Werwolfvirus
+HelpInfectOther:
+- /werewolf infect <playername>&f - Infiziere einen Spieler mit dem Werwolfvirus
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - Wechselt den Werwolfstatus für einen Spieler
+HelpToggleOther:
+- /werewolf toggle&f - Wechselt den Werwolfstatus für Dich selbst
+HelpPotion:
+- /werewolf potion&f - erschafft einen Werwolftrank
+HelpCure:
+- /werewolf cure&f - erschafft einen Heiltrank für Werwölfe
+TakeCompassInHands:
+- Du musst einen Kompass in der Hand halten!
+Infected:
+- Du wurdest von $PlayerName mit dem Werwolfvirus infiziert!
+MadeWerewolf:
+- Du wurdest von $PlayerName zum Werwolf gemacht!
+UnMadeWerewolf:
+- Du wurdest durch $PlayerName von der Werwolfinfektion geheilt!
+NoWerewolvesOnline:
+- Es sind gerade keine Werwölfe online
+WerewolvesCannotHuntWerewolves:
+- Werwölfe können keine Werwölfe jagen!
+YouMustHaveYourHandsFree:
+- Du musst Deine Hände frei haben!
+PlayerIsHuntingWerewolves:
+- $PlayerName jagt nun Werwölfe!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName hat die Werwolfjagd aufgegeben!
+NoWerewolvesInThisWorld:
+- Es gibt in dieser Welt keine Werwölfe ($Type)
+NoPermissionForCommand:
+- Du darfst dieses Kommando nicht benutzen
+WerewolfCommandNumberOfWerewolves:
+- Es gibt aktuell &f$Amount werewolves&b Werwölfe auf $ServerName
+WerewolfCommandIsWerewolf:
+- Du bist ein Werwolf
+WerewolfCommandIsNotWerewolf:
+- Du bist kein Werwolf
+WerewolfCommandNextFullMoon:
+- Der nächste Vollmond ist $Amount
+WerewolfCommandListCommands:
+- Nutze &f/werewolf help&b um alle Kommandos zu sehen
+In7Days:
+- in 7 Tagen.
+In6Days:
+- in 6 Tagen.
+In5Days:
+- in 5 Tagen.
+In4Days:
+- in 4 Tagen.
+In3Days:
+- in 3 Tagen.
+In2Days:
+- in 2 Tagen.
+Tomorrow:
+- morgen!
+Today:
+- heute!
+Transform:
+- Es ist Nacht und du fühlst Dich so guuuut!!!
+Untransform:
+- Du hast Dich gerade wieder in Deine menschliche Form zurück verwandelt!
+BiteVictim:
+- Uuhh! Das fühlt sich komisch an...
+BiteAttacker:
+- Dein Biss hat $PlayerName mit dem Werwolfvirus infiziert!
+BiteWildWolf:
+- OUuhh! Dieser Biss fühlte sich sehr komisch an...
+KilledMob:
+- Das war eine gute Jagd. Du hast Dich an $Amount Lebenspunkten gelabt!
+WerewolfTryEat:
+- Werwölfe essen das nicht. Du schmachtest nach FLEISCH!
+DrinkInfectionSuccess:
+- Whoa! Ein warmes Gefühl fliesst durch Deine Adern...
+DrinkInfectionFailure:
+- Hmm... das schmeckte wie Wasser mit Zitronensaft
+DrinkCureSuccess:
+- Hmm... du fühlst dich schon fast normal ...irgendwie
+DrinkCureFailure:
+- Hmm... das schmeckt wie Orangensaft!
+UrgesInfectedThisNight:
+- Dir ist etwas schwindelig...
+- Der Wolfsbiss beginnt zu brennen...
+- Der Wolfsbiss hat sich rot verfärbt...
+- Deine Haut beginnt zu jucken...
+- Du fühlst ein plötzliches Verlangen nach rohem Fleisch
+- Du fühlst ein plötzliches Verlangen den Mond anzustarren
+- Das ist seltsam, du willst rohes Fleich essen.
+- Woa... Du fühlst Dich WIRKLICH komisch!
+UrgesInfectedHumanForm:
+- Dir ist etwas schwindelig...
+- Der Wolfsbiss beginnt zu brennen...
+- Deine Haut beginnt zu jucken...
+- Du fühlst ein plötzliches Verlangen nach rohem Fleisch
+- Du fühlst ein plötzliches Verlangen den Mond anzustarren
+UrgesInside:
+- Du fühlst ein plötzliches Verlangen raus zu gehen...
+- Du fühlst den Zwang die frische Nachtluft zu schnuppern...
+- Du fühlst ein nie gekanntes Verlangen raus zu gehen...
+- Das kalte Mondlicht zieht dich unwiderstehlich an...
+UrgesTransformed:
+- Du fühlst das Verlangen zu schmausen!
+- Du fühlst das unwiderstehliche Verlangen nach rohem Fleisch
+- Das Mondlicht macht Dich schwindelig
+- Du fühlst das Verlangen rohes Fleisch zu essen
+- Du fühlst das Verlangen den Mond anzustarren
+- Du riechst den Geruch von ängstlichen Tieren in der Luft...
+- Du witterst den Geruch von Tieren...
+- Du ersehnst die Jagd...
+- Dein Blut kocht in Deinen Adern
+- Deine Sinne sind geschärft...
+- Deine Muskeln schreien nach Bewegung
+BountyPlayerAdded:
+- $PlayerName hat das Kopfgeld für einen Werwolf um $Amount erhöht!
+BountyServerAdded:
+- $ServerName hat das Kopfgeld für einen Werwolf um $Amount erhöht!
+BountyTotal:
+- Die Kopfprämie für einen Werwolf betragt jetzt $Amount!
+KilledWerewolfBounty:
+- $PlayerName hat einen Werwolf getötet und erhält die Prämie von $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName hat einen Werwolf erlegt
+CurePotionDescription1:
+- Trink diese Medizin um dich selbst zu heilen!
+- Genug von den ganzen Haaren? Trink das!
+- Müde ein Werwolf zu sein? Trink das!
+CurePotionDescription2:
+- Warnung vor dem Nachgeschmack.
+- Mit Liebe gebraut.
+InfectionPotionDescription1:
+- Trink das um ein Werwolf zu werden!
+InfectionPotionDescription2:
+- Der geilste Drink auf $ServerName!
+- Muss beim zarten Nachtlicht getrunken werden, dann zeigt es sein wahres Gesicht.
+- Muss in der dunkelsten Stunde der hellsten Nacht getrunken werden.
+- Muss bei Vollmond getrunken werden.
+- Muss getrunken werden, wenn die Flut am höchsten ist
+- Muss in der Nacht getrungen werden, wenn die Magie am stärksten ist
+TrophyDescription:
+- Erlegt von $PlayerName Prämie $Amount
+InfoCommandHowl:
+- Nutze &f/howl&b um den Mond anzuheulen!
+InfoCommandGrowl:
+- Nutze &f/growl&b um böse zu knurren!

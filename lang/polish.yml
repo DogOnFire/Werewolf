@@ -1,0 +1,190 @@
+ Version:
+  Name : Polish
+  Author: ShabyPederastian
+  Version: 0.3
+HelpTransform:
+- /werewolf transform&f - Od razu zamienia cie w wilkolaka!
+WerewolfCommandControlledTransformation:
+-   Mozesz kontrolowac swoja przemiane
+WerewolfCommandGoldImmunity:
+-   Nie zostales uszkodzony przez zlote narzedzia
+WerewolfCommandNoDropItems:
+-   Nie upusc przedmiotow podczas przemiany
+WerewolfCommandFullMoonImmunity:
+-   Juz nie bedziesz przemieniac sie podczas pelni ksiezyca
+KilledMobPoints:
+- &bMasz $Amount &bstadnich punktow za to zabicie!
+MustExperienceMoreFullMoons:
+- Musisz doswiatczyc $Amount&c wiecej pelno-ksiezycowych przemian by to zrobic!
+NoWerewolfHuntersInWorld:
+- Nie ma lowcow wilkolakow na $ServerName!
+TopWerewolfHunters:
+- ------ TOP lowcow wilkolakow na $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- Stworzyles miksture przemiany w wilkolaka 
+CreatedWerewolfCurePotion:
+- Stworzyles miksture leczenia sie z wilkolaka
+NowAWerewolf:
+- Jestes teraz Wilkolakiem!
+NotAWerewolfAnymore:
+- Nie jestes juz wiecej Wilkolakiem... 
+InvalidCommand:
+- Zla komenda
+HelpWerewolf:
+- /werewolf&f - Pokazuje informacje na temat Wilkolaka
+HelpCheck:
+- /werewolf check <playername>&f - Sprawdz status wilkolaka dla gracza
+HelpHunt:
+- /werewolf hunt&f - Zamienia w tryb lowcy
+HelpTop:
+- /werewolf top&f - Zobacz top wilkolakow na $ServerName
+HelpBounty:
+- /werewolf bounty&f - Sprawdz jaka jest nagroda za zabicie wilkolaka
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - Dodaj wartosc pienieznom za zabicie wilkolaka
+HelpInfectSelf:
+- /werewolf infect&f - Infekuje cie na wilkolacyzm
+HelpInfectOther:
+- /werewolf infect <playername>&f - Infekuje gracza na wilkolacyzm
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - Zamienia gracza w wilkolaka
+HelpToggleOther:
+- /werewolf toggle&f - Zamienia cie w wilkolaka
+HelpPotion:
+- /werewolf potion&f - Tworzy miksture infekcji w wilkolaka
+HelpCure:
+- /werewolf cure&f - Tworzy miksture leczenia w wilkolaka
+TakeCompassInHands:
+- Musisz miec kompas w rece!
+Infected:
+- Zostales zainfekowany na wilkolacyzm przez $PlayerName!
+MadeWerewolf:
+- Zostales przemieniony w wilkolaka przez $PlayerName!
+UnMadeWerewolf:
+- Zostales wyleczony z wilkolacyzmu przez $PlayerName!
+NoWerewolvesOnline:
+- Niema wilkolakow na serwerze
+WerewolvesCannotHuntWerewolves:
+- Wilkolaki nie moga polowac na wilkolaki!
+YouMustHaveYourHandsFree:
+- Nie mozesz miec nic w rece!
+PlayerIsHuntingWerewolves:
+- $PlayerName poluje na wilkolaki!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName juz nie poluje na wilkolaki!
+NoWerewolvesInThisWorld:
+- Nie ma wilkolakow na tym swiecie ($Type)
+NoPermissionForCommand:
+- Nie masz uprawnien do tej komendy
+WerewolfCommandNumberOfWerewolves:
+- Aktualnie jest &f$Amount werewolves&b in $ServerName
+WerewolfCommandIsWerewolf:
+- Jestes wilkolakiem
+WerewolfCommandIsNotWerewolf:
+- Nie jestes wilkolakiem
+WerewolfCommandNextFullMoon:
+- Nastepna pelnia ksiezyca jest za $Amount
+WerewolfCommandListCommands:
+- Uzyj &f/werewolf help&b by zobaczyc liste komend
+In7Days:
+- 7 dni.
+In6Days:
+- 6 dni.
+In5Days:
+- 5 dni.
+In4Days:
+- 4 dni.
+In3Days:
+- 3 dni.
+In2Days:
+- 2 dni.
+Tomorrow:
+- Jutro!
+Today:
+- Dzisiaj!
+Transform:
+- Jest dobrze i czujesz sie swieeeetnie!
+Untransform:
+- Wruciles do ludzkiej postaci!
+BiteVictim:
+- Ala! To jest dziwne...
+BiteAttacker:
+- Zostales zainfekowany przez $PlayerName wilkolacyzmem!
+BiteWildWolf:
+- Ala! To ugryzienie bylo naprawde dziwne...
+KilledMob:
+- To bylo dobre zabojstwo. Dostales $Amount health!
+WerewolfTryEat:
+- Wilkolak nie je tego. Tylko mieso
+DrinkInfectionSuccess:
+- Whoa! Uczucie ciepla przeplywa przez twoje cialo ...
+DrinkInfectionFailure:
+- Hmm... smakuje jak woda z cytryna
+DrinkCureSuccess:
+- Hmm... czujesz sie bardziej normalny jakos...
+DrinkCureFailure:
+- Hmm... smakuje jak pomarancze!
+UrgesInfectedThisNight:
+- Czujesz sie dosyc oszolomiony ...
+- To ugryzienie wilka zaczyna palic ...
+- To ugryzienie wilka czerwienieje lekko
+- Twoja skora czuje ze swedzi
+- Czujesz nagla potrzebe jedzenia miesa
+- Czujesz poped naglego spojrzenia na ksiezyc
+- To dziwne. Czujesz nagla potrzebe jedzenia miesa.
+- Woa... Czujesz sie NAPRAWDE dziwnie!
+UrgesInfectedHumanForm:
+- Czujesz sie zupelnie oszolomiony ...
+- To ugryzienie wilka zaczyna palic ...
+- Twoja skora czuje ze swedzi
+- Czujesz nagla potrzebe jedzenia miesa
+- Czujesz poped naglego spojrzenia na ksiezyc
+UrgesInside:
+- Czujesz ze musisz wyjsc na zewnatrz ...
+- Czujesz koniecznosc poczuc nocne powietrze na zewnatrz ...
+- Czujesz dziwna chec wyjsc na zewnatrz ...
+- Zwracasz uwage tylko na ksiezyc ...
+UrgesTransformed:
+- Masz ochote jesc!
+- Czujesz potrzebe surowego miesa
+- Odczuwasz zawroty glowy w swietle ksiezyca
+- Czujesz koniecznosc jedzenia miesa
+- Masz ochote spojrzenia na ksiezyc
+- Wyczuwasz strach zwierzzt w powietrzu ...
+- Wyczuwasz zapach zwierzzt w powietrzu ...
+- Pragniesz polowac ...
+- Czujesz jak krew plynie w twoich zylach
+- Twoje zmysly sa wyostrzone ...
+- Twoje miesnie wzywaja do chodzenia
+BountyPlayerAdded:
+- $PlayerName dodal $Amount nagrody za zabicie wilkolaka!
+BountyServerAdded:
+- $ServerName dodal $Amount nagrody za zabicie wilkolaka!
+BountyTotal:
+- Zagroda za glowe wilkolaka wynosi $Amount!
+KilledWerewolfBounty:
+- $PlayerName zabil wilkolaka i otrzymal nagrode $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName zabil wilkolaka
+CurePotionDescription1:
+- Wypij to, aby wyleczyc sie z zakazenia wilkolaka!
+- Masz juz dosc bedac owlosiony? Wypij to!
+- Nie lubisz byc wilkolakiem? Wypij to!
+CurePotionDescription2:
+- Uwaga na posmak.
+- Obchodz sie ostroznie.
+InfectionPotionDescription1:
+- Wypij to, aby stac sie wilkolakiem!
+InfectionPotionDescription2:
+- Najbardziej niesamowita mikstura na $ServerName!
+- Musisz wypic, gdy najjasniejsze swiatlo w nocy, pokazuje swoje prawdziwe oblicze.
+- Musisz wypic podczas najciemniejszej godziniy najjasniejsza noc.
+- Musisz wypic w srebrnej nocy.
+- Musisz wypic, gdy fala jest na najwyzszym poziomie
+- Musisz wypic w nocy, kiedy magia jest najsilniejsza
+TrophyDescription:
+- Zabity przez $PlayerName za $Amount
+InfoCommandHowl:
+- Uzyj &f/howl&b aby zawyc!
+InfoCommandGrowl:
+- Uzyj &f/growl&b aby zawarczec!

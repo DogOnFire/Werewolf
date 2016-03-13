@@ -1,0 +1,176 @@
+Version:
+  Name : Spanish
+  Author: David_204
+  Version: 0.2
+NoWerewolfHuntersInWorld:
+- No hay cazadores de hombre lobo en $ServerName!
+TopWerewolfHunters:
+- ------ Los mejores cazadores de hombres lobo $ServerName ------  
+CreatedWerewolfInfectionPotion:
+- Has creado la infeccion de hombre lobo
+CreatedWerewolfCurePotion:
+- Has creado la cura de hombre lobo
+NowAWerewolf:
+- Ahora eres un hombre lobo!
+NotAWerewolfAnymore:
+- Ya no seras hombre lobo nunca más ... 
+InvalidCommand:
+- Comando invalido
+HelpWerewolf:
+- /werewolf&f - Muestra la informacion basica de werewolf
+HelpCheck:
+- /werewolf check <playername>&f - Comprueba si un jugador esta infectado
+HelpHunt:
+- /werewolf hunt&f - Cambia al modo cazador de hombres lobo
+HelpTop:
+- /werewolf top&f - Muestra a los mejores cazadores de hombres lobo en $ServerName
+HelpBounty:
+- /werewolf bounty&f - Comprueba la recompensa actual por matar a un hombre lobo
+HelpAddBounty:
+- /werewolf addbounty <amount>&f - Añade mas dinero a la recompensa por matar a un hombre lobo
+HelpInfectSelf:
+- /werewolf infect&f - Te infecta a ti mismo con la infección del hombre lobo
+HelpInfectOther:
+- /werewolf infect <playername>&f - Infecta un jugador con la infección Hombre-lobo
+HelpToggleSelf:
+- /werewolf toggle <playername>&f - Quita la infeccion de hombre lobo a un jugador
+HelpToggleOther:
+- /werewolf toggle&f - Quita la infeccion de hombre lobo para ti mismo
+HelpPotion:
+- /werewolf potion&f - Crea la pocion con la infeccion de hombre lobo
+HelpCure:
+- /werewolf cure&f - Crea la cura para la infeccion de hombre lobo
+TakeCompassInHands:
+- Debes tener una brújula en tus manos!
+Infected:
+- Has sido infectado por el hombre lobo $PlayerName!
+MadeWerewolf:
+- Te has convertido en hombre lobo por $PlayerName!
+UnMadeWerewolf:
+- Has sido removido de hombre lobo $PlayerName!
+NoWerewolvesOnline:
+- No hay hombres lobo online ahora mismo
+WerewolvesCannotHuntWerewolves:
+- No puedes cazar a los de tu misma especie!
+YouMustHaveYourHandsFree:
+- Tienes que tener las manos libres primero!
+PlayerIsHuntingWerewolves:
+- $PlayerName ahora es un cazador de hombres lobo!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName ya dejo de cazar hombres lobo!
+NoWerewolvesInThisWorld:
+- No hay hombres lobo en este mundo ($Type)
+NoPermissionForCommand:
+- No tienes permiso para ese comando
+WerewolfCommandNumberOfWerewolves:
+- Actualmente hay &f$Amount hombres lobo&b en $ServerName
+WerewolfCommandIsWerewolf:
+- Eres un hombre lobo
+WerewolfCommandIsNotWerewolf:
+- Ya no eres un hombre lobo
+WerewolfCommandNextFullMoon:
+- La próxima luna llena es en $Amount
+WerewolfCommandListCommands:
+- Usa &f/werewolf help&b para obtener una lista de comandos
+In7Days:
+- en 7 dias.
+In6Days:
+- en 6 dias.
+In5Days:
+- en 5 dias.
+In4Days:
+- en 4 dias.
+In3Days:
+- en 3 dias.
+In2Days:
+- en 2 dias.
+Tomorrow:
+- mañana!
+Today:
+- hoy!
+Transform:
+- Es de noche, y te sientes muy bieeeen!
+Untransform:
+- Acabas de regresar a tu forma humana!
+BiteVictim:
+- Ouch! Eso me hizo sentir extraño...
+BiteAttacker:
+- Has infectado a $PlayerName con la infección del hombre lobo!
+BiteWildWolf:
+- Ouch! Ese mordisco me hace sentir muy extraño...
+KilledMob:
+- Esa fue una buena presa. Se dio un festín de $Amount carne!
+WerewolfTryEat:
+- Los hombres lobo no comen eso. A ti te gusta la carne!
+DrinkInfectionSuccess:
+- Whoa! Una sensación de calor que fluye a traves de tu cuerpo ...
+DrinkInfectionFailure:
+- Hmm ... sabe a agua con limon
+DrinkCureSuccess:
+- Hmm ... me siento mas normal de alguna manera ...
+DrinkCureFailure:
+- Hmm... Sabe a zumo de naranja!
+UrgesInfectedThisNight:
+- Me siento muy mareado ...
+- Esa mordedura del lobo me comienza a quemar ...
+- Esa mordedura del lobo se ve un poco rojo e inflamada ...
+- Notas que te pica la piel ...
+- Sientes un repentino deseo de comer carne
+- Sientes una necesidad extrema de mirar a la luna
+- Esto es raro. Siento un repentino deseo de comer carne.
+- Woa ... Me siento muy raro!
+UrgesInfectedHumanForm:
+- Se siente muy mareado ...
+- Esa mordedura del lobo te comienza a quemar ...
+- Sientes que tu piel te pica mas y mas ...
+- Sientes un repentino deseo de comer carne
+- Sientes que necesitas mirar a la luna
+UrgesInside:
+- Quieres salir a la calle ...
+- Sientes la necesidad de notar el aire durante la noche ...
+- Sientes una extraña necesidad de salir a la calle ...
+- Te sientes atraído por la luz de la luna ...
+UrgesTransformed:
+- Sientes el impulso de darte festín!
+- Sientes la necesidad de comer la carne cruda
+- Te sientes mareado por la luna
+- Sientes la necesidad de comer carne
+- Sientes la tentación de mirar a la luna
+- Sientes una sensación de estar con los animales salvajes ...
+- Sientes el olor de los animales salvajes ...
+- Te le gusta la caza ...
+- Sientes el bombeo de la sangre por tus venas
+- Tus sentidos se agudizan ...
+- Tus músculos están deseando a moverse
+BountyPlayerAdded:
+- $PlayerName añadio $Amount a la recompensa por matar a un hombre lobo!
+BountyServerAdded:
+- $ServerName añadio $Amount a la recompensa por matar a un hombre lobo!
+BountyTotal:
+- La recompensa por matar a un hombre lobo es ahora $Amount!
+KilledWerewolfBounty:
+- $PlayerName a matado a un hombre lobo y se pagó la recompensa de $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName a matado a un hombre lobo
+CurePotionDescription1:
+- Beba esto para curarse de la infección de hombre lobo!
+- ¿Cansado de ser peludo? Bebe esto!
+- ¿No te gusta ser un hombre lobo? Bebe esto!
+CurePotionDescription2:
+- Cuidado con el retrogusto.
+- Elaborada con cuidado.
+InfectionPotionDescription1:
+- Beba esto para convertirse en un hombre lobo!
+InfectionPotionDescription2:
+- La poción más impresionante en $ServerName!
+- Debe ser bebido cuando la luz brillante de la noche, muestre su verdadero rostro.
+- Debe ser bebido durante la hora más oscura de la noche más brillante.
+- Debe ser bebido durante la noche de plata.
+- Debe ser bebido cuando la marea este en su punto más alto
+- Debe ser bebido por la noche cuando la magia es más fuerte
+TrophyDescription:
+- Asesinado por$PlayerName en $Amount
+InfoCommandHowl:
+- Usa &f/howl&b para aullar!
+InfoCommandGrowl:
+- Usa &f/growl&b para gruñir! 

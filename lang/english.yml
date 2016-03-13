@@ -1,0 +1,299 @@
+Version:
+  Name : English
+  Author: DogOnFire
+  Version: 0.4
+PlayerIsAFullWerewolf:
+- $PlayerName is a $Type Werewolf 
+PlayerIsAnInfectedWerewolf:
+- $PlayerName is an infected werewolf 
+PlayerIsNotAWerewolf:
+- $PlayerName is not a werewolf 
+YouTeleportedToClanHome:
+- You are now in the home of the $Type clan 
+CurrentBounty:
+- The bounty for slaying a werewolf is $Amount
+YouCutTheHeadOfWerewolf:
+- You cut the head of that werewolf!
+FullMoonNumberOfWerewolves:
+- $Amount werewolves will appear during this night...
+FullMoonIsRising:
+- Beware! A full moon is rising in $PlayerName
+YouBoughtAInfectionPotion:
+- You bought a werewolf infection potion for $Amount!
+YouBoughtACurePotion:
+- You bought a werewolf cure potion for $Amount!
+YouBoughtAWolfbanePotion:
+- You bought a werewolf wolfbane potion for $Amount!
+YouBoughtASilverSword:
+- You bought a werewolf silver sword for $Amount!
+YouBoughtALoreBook:
+- You bought a werewolf lorebook for $Amount!
+YouDoNotHaveEnoughMoney:
+- You do not have $Amount!
+YouPlacedACurePotionSign:
+- You placed a sign selling werewolf cure potions for $Amount
+YouPlacedAInfectionPotionSign:
+- You placed a sign selling werewolf infection potions for $Amount
+YouPlacedAWolfbanePotionSign:
+- You placed a sign selling werewolf wolfbane potions for $Amount
+YouPlacedASilverSwordSign:
+- You placed a sign selling werewolf silver swords for $Amount
+YouPlacedABookSign:
+- You placed a sign selling werewolf lorebooks for $Amount
+YouAreNotTheAlphaOfTheClan:
+- You are not the alpha of your clan  
+NoRecentAlphaCall:
+- There is no call from your alpha  
+ClanAlphaCannotAnswerCall:
+- You cannot answer your own call  
+YouCalledClanMember:
+- You called $PlayerName to you!  
+YouAreBeingCalled:
+- You are being called by $PlayerName!
+NewClanAlpha:
+- $PlayerName is now the alpha of your clan!  
+CannotTransformSoSoon:
+- You cannot transform again so soon. Gather your strength and try again later!  
+WerewolfCommandControlledTransformation:
+-   You can control your transformation
+WerewolfCommandGoldImmunity:
+-   You are not harmed by gold items
+WerewolfCommandNoDropItems:
+-   You do not drop items during transformation
+WerewolfCommandFullMoonImmunity:
+-   You no longer transform during a full moon
+KilledMobPoints:
+- You got $Amount clan points for that kill!
+MustExperienceMoreFullMoons:
+- You must experience $Amount&c more full moon transformations to do that!
+NoWerewolfHuntersInWorld:
+- There are no Werewolf hunters in $ServerName!
+TopWerewolfHunters:
+- ------ The top Werewolf hunters of $ServerName ------  
+CreatedWerewolfLoreBook:
+- You created a Werewolf lore book
+CreatedWerewolfInfectionPotion:
+- You created a Werewolf infection potion
+CreatedWerewolfCurePotion:
+- You created a Werewolf cure potion
+CreatedWerewolfSilverSword:
+- You created a Silver sword
+CreatedWerewolfWolfbanePotion:
+- You created a Wolfbane potion
+NowAWerewolf:
+- You are now a Werewolf!
+NotAWerewolfAnymore:
+- You are not a werewolf anymore... 
+InvalidCommand:
+- Invalid Werewolf command
+HelpWerewolf:
+- $Type - Show basic Werewolf info
+HelpCheck:
+- $Type - Check Werewolf status for a player
+HelpHunt:
+- $Type - Toggles Werewolf hunt mode
+HelpTop:
+- $Type - View the top Werewolf hunters in $ServerName
+HelpBounty:
+- $Type - Check the current bounty for killing a Werewolf
+HelpAddBounty:
+- $Type - Add to the bounty for killing a Werewolf
+HelpInfectSelf:
+- $Type - Infects yourself with the Werewolf infection
+HelpInfectOther:
+- $Type - Infects a player with the Werewolf infection
+HelpToggleSelf:
+- $Type - Toggles Werewolf status for a player
+HelpToggleOther:
+- $Type - Toggles Werewolf status for yourself
+HelpInfectionotion:
+- $Type - Creates a Werewolf infection potion
+HelpInfectionotion:
+- $Type - Creates a Werewolf infection potion
+HelpInfectionotion:
+- $Type - Creates a Werewolf infection potion
+HelpInfectionotion:
+- $Type - Creates a Werewolf infection potion
+HelpInfectionPotion:
+- $Type - Creates a Werewolf infection potion
+HelpCurePotion:
+- $Type - Creates a Werewolf cure potion
+HelpWolfbanePotion:
+- $Type - Creates a Werewolf wolfbane potion
+HelpSilverSword:
+- $Type - Creates a Werewolf silver sword
+HelpLoreBook:
+- $Type - Creates a Werewolf lorebook
+HelpTransform:
+- $Type - Instantly transform yourself between Werewolf or Human form!
+HelpClan:
+- Use $Type to view your clan info
+HelpHome:
+- Use $Type to teleport you to your clan home
+HelpSetHome:
+- Use $Type to set the home for your clan
+TakeCompassInHands:
+- You must have a compass in your hands!
+Infected:
+- You have been infected with the Werewolf infection by $PlayerName!
+MadeWerewolf:
+- You have been turned into a werewolf by $PlayerName!
+UnMadeWerewolf:
+- You have been unturned from being a werewolf by $PlayerName!
+NoWerewolvesOnline:
+- There are no werewolves online
+WerewolvesCannotHuntWerewolves:
+- Werewolves cannot hunt Werewolves!
+YouMustHaveYourHandsFree:
+- You must have free hands first!
+PlayerIsHuntingWerewolves:
+- $PlayerName is now hunting Werewolves!
+PlayerIsNoLongerHuntingWerewolves:
+- $PlayerName is no longer hunting Werewolves!
+NoWerewolvesInThisWorld:
+- There are no werewolves in this world ($Type)
+NoPermissionForCommand:
+- You do not have permission for that command
+WerewolfCommandNumberOfWerewolves:
+- There are currently $Amount werewolves in $ServerName
+WerewolfCommandIsWerewolfAlpha:
+- You are the Clan Alpha of the $Type!
+WerewolfCommandIsWerewolf:
+- You are a $Amount $Type Werewolf
+WerewolfCommandIsNotWerewolf:
+- You are a not a Werewolf
+WerewolfCommandNextFullMoon:
+- The next full moon is $Amount
+WerewolfCommandListCommands:
+- Use $Type for a list of commands
+In7Days:
+- in 7 days.
+In6Days:
+- in 6 days.
+In5Days:
+- in 5 days.
+In4Days:
+- in 4 days.
+In3Days:
+- in 3 days.
+In2Days:
+- in 2 days.
+Tomorrow:
+- tomorrow!
+Today:
+- today!
+Transform:
+- It's night, and you feel gooood!
+- You have now experienced $Amount fullmoons!
+- You are now a level $Amount Werewolf!
+Untransform:
+- You just returned to your human form!
+BiteVictim:
+- Ouch! That felt strange...
+BiteAttacker:
+- You infected $PlayerName with your Werewolf infection!
+BiteWildWolf:
+- Ouch! That bite felt really strange...
+KilledMob:
+- That was a good kill. You feasted for $Amount health!
+WerewolfTryEat:
+- Werewolves do not eat that. You crave meat!
+DrinkInfectionSuccess:
+- Whoa! A warm feeling is flowing through your body...
+DrinkInfectionFailure:
+- Hmm... that tastes like water with lemon in it
+DrinkCureSuccess:
+- Hmm... you feel more normal somehow...
+DrinkCureFailure:
+- Hmm... that tastes just like oranges!
+UrgesInfectedThisNight:
+- You feel quite dizzy...
+- That wolf bite starts to burn...
+- That wolf bite looks a little red...
+- Your skin feels itchy...
+- You feel a sudden urge to eat meat
+- You feel a sudden urge gaze at the moon
+- That's odd. You feel an sudden urge to eat meat.
+- Woa... You feel REALLY strange!
+UrgesInfectedHumanForm:
+- You feel quite dizzy...
+- That wolf bite starts to burn...
+- Your skin feels itchy...
+- You feel a sudden urge to eat meat
+- You feel a sudden urge gaze at the moon
+UrgesInside:
+- You feel an urge go outside...
+- You feel the need to feel the nighttime air outside...
+- You feel a strange urge to go outside...
+- You feel drawn to the moonlight outside...
+UrgesTransformed:
+- You feel the urge to feast!
+- You feel the need for raw meat
+- You feel dizzy from the moonlight
+- You feel the need to eat meat
+- You feel the urge to gaze at the moon
+- You sense a feeling of fearful animals in the air...
+- You sense the scent of animals in the air...
+- You crave the hunt...
+- Your feel your blood pumping through your veins
+- Your senses are sharpened...
+- Your muscles are urging to move
+BountyPlayerAdded:
+- $PlayerName added $Amount to the bounty for killing a Werewolf!
+BountyServerAdded:
+- $ServerName added $Amount to the bounty for killing a Werewolf!
+BountyTotal:
+- The Werewolf bounty is now $Amount!
+KilledWerewolfBounty:
+- $PlayerName killed a Werewolf and was paid the bounty of $Amount!
+KilledWerewolfNoBounty:
+- $PlayerName killed a Werewolf
+CurePotionTitle:
+- Werewolf cure potion
+CurePotionDescription1:
+- Drink this to cure yourself from the werewolf infection!
+- Tired of being hairy? Drink this!
+- Don't like being a Werewolf? Drink this!
+CurePotionDescription2:
+- Beware of the aftertaste.
+- Brewed with care.
+InfectionPotionDescription:
+- Werewolf infection potion
+InfectionPotionDescription1:
+- Drink this to become a werewolf!
+InfectionPotionDescription2:
+- The most awesome potion in $ServerName!
+- Must be drunk during a fullmoon.
+- Must be drunk at night while the magic is strongest
+WolfbanePotionTitle:
+- Wolfbane potion
+WolfbanePotionDescription1:
+- $Amount % chance of untransforming a werewolf
+WolfbanePotionDescription2:
+- Very effective against werewolves!
+- A werewolf hunters best friend!
+- Must be thrown at a werewolf.
+- Point in the direction of werewolves.
+SilverSwordTitle:
+- Silver Sword
+SilverSwordDescription1:
+- x$Amount damage against werewolves
+SilverSwordDescription2:
+- Very effective against werewolves!
+- A werewolf hunters best friend!
+- Good for slaying werewolves!
+SilverArmorTitle:
+- Silver Armor
+SilverArmorDescription1:
+- Does $Amount damage against werewolves on hit
+SilverArmorDescription2:
+- Very effective against werewolves!
+- Good for protection against werewolves!
+LoreBookTitle:
+- The Big Book of Werewolves
+TrophyDescription:
+- Slain by $PlayerName on $Amount
+InfoCommandHowl:
+- Use $Type to howl!
+InfoCommandGrowl:
+- Use $Type to growl! 
