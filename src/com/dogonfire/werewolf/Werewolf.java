@@ -33,6 +33,7 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -106,7 +107,7 @@ public class Werewolf extends JavaPlugin
 	private static WerewolfManager				werewolfManager							= null;
 	private static HuntManager					huntManager								= null;
 	private static TrophyManager				trophyManager							= null;
-	private static WerewolfSkinManager					skinManager								= null;
+	private static WerewolfSkinManager			skinManager								= null;
 	private static PermissionsManager			permissionsManager						= null;
 	private static WerewolfScoreboardManager	werewolfScoreboardManager				= null;
 	private static StatisticsManager			statisticsManager						= null;
@@ -131,10 +132,12 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version;
-	public static final String					MAX										= "1.8.4-R0.1-SNAPSHOT";
-	public static final String					MIN										= "1.8.4";
+	public static final String					MAX										= "1.9-R0.1-SNAPSHOT";
+	public static final String					MIN										= "1.9";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
+	
+	private ConsoleCommandSender console;
 	
 	public static Class<?> isCombatibleServer() throws Exception
 	{
@@ -282,16 +285,20 @@ public class Werewolf extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
+		plugin = this;
+		server = getServer();
+		config = getConfig();
 		version = VersionFactory.getServerVersion();
 
 		this.commands = new Commands(this);
+		this.console = server.getConsoleSender();
 
 		if (!version.isSupported(MAX) || !version.isCompatible(MIN))
 		{
-			getLogger().info("* Werewolf is not compatible with your server");
-			getLogger().info("* The supported version for this plugin is " + MIN);
-			// getLogger().info("* The minimum capatible version is " + MIN);
-			getLogger().info("* Werewolves are now disabled.");
+			log(ChatColor.RED + "* Werewolf is not compatible with your server");
+			log(ChatColor.RED + "* Your server version is " + ChatColor.GOLD + version.toString());
+			log(ChatColor.RED + "* The supported version for this plugin is " + ChatColor.GOLD + MIN);
+			log(ChatColor.RED + "* Werewolves are now disabled.");
 
 			pluginEnabled = false;
 
@@ -300,6 +307,7 @@ public class Werewolf extends JavaPlugin
 
 			return;
 		}
+
 
 		pluginEnabled = true;
 
@@ -322,11 +330,6 @@ public class Werewolf extends JavaPlugin
 
 		pu = new PacketUtils(this);
 
-		plugin = this;
-
-		server = getServer();
-
-		config = getConfig();
 
 		PluginManager pm = getServer().getPluginManager();
 		if (pm.isPluginEnabled("NoCheatPlus"))
@@ -585,7 +588,8 @@ public class Werewolf extends JavaPlugin
 
 	public void log(String message)
 	{
-		Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
+		console.sendMessage("[" + getDescription().getFullName() + "] " + message);
+		//Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
 	}
 
 	public void logDebug(String message)

@@ -257,6 +257,8 @@ CurePotionDescription1:
 CurePotionDescription2:
 - Beware of the aftertaste.
 - Brewed with care.
+InfectionPotionTitle:
+- Werewolf potion
 InfectionPotionDescription:
 - Werewolf infection potion
 InfectionPotionDescription1:
