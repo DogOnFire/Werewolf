@@ -6,7 +6,7 @@ The plugin for adding werewolves in minecraft!
 ### Resources
 
 * [Bukkit Plugin Page](https://dev.bukkit.org/bukkit-plugins/werewolf/)
-* [Spigot Resource page](https://www.spigotmc.org/resources/residence.11480/)
+* [Spigot Resource page](https://www.spigotmc.org/resources/werewolf.7442/)
 
 
 Rules
