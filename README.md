@@ -1,5 +1,6 @@
 Werewolf
 ======
+# ![Werewolf](https://raw.githubusercontent.com/DogOnFire/Werewolf/master/img/Werewolf.jpg)
 
 The plugin for adding werewolves in minecraft!
 
