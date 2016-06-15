@@ -278,7 +278,7 @@ public class Werewolf extends JavaPlugin
 
 		reloadSettings();
 
-		pluginEnabled = false;
+		pluginEnabled = true;
 	}
 
 	@Override
@@ -299,9 +299,9 @@ public class Werewolf extends JavaPlugin
 			log(ChatColor.RED + "* The supported version for this plugin is " + ChatColor.GOLD + MIN);
 			log(ChatColor.RED + "* Werewolves are now disabled.");
 
-			pluginEnabled = false;
+			pluginEnabled = true;
 
-			isCompatible = false;
+			isCompatible = true;
 			// this.getServer().getPluginManager().disablePlugin(this);
 
 			return;
