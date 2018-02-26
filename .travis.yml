@@ -1,4 +1,0 @@
-language: java
-script: ant init
-notifications:
-  email: true

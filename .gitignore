@@ -1,1 +1,8 @@
 /bin 
+/target
+/lib
+/.settings
+.classpath
+.project
+.travis.yml
+build.xml
