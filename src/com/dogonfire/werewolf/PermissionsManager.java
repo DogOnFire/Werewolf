@@ -140,29 +140,31 @@ public class PermissionsManager
 
 	public String getGroup(String playerName)
 	{
+		Player player = Werewolf.server.getPlayer(playerName);
 		if (this.pluginName.equals("PermissionsBukkit"))
 		{
-			if (this.permissionsBukkit.getGroups(playerName) == null)
+			if (this.permissionsBukkit.getGroups(player.getUniqueId()) == null)
 			{
 				return "";
 			}
-			if (this.permissionsBukkit.getGroups(playerName).size() == 0)
+			if (this.permissionsBukkit.getGroups(player.getUniqueId()).size() == 0)
 			{
 				return "";
 			}
-			return ((com.platymuus.bukkit.permissions.Group) this.permissionsBukkit.getGroups(playerName).get(0)).getName();
+			return ((com.platymuus.bukkit.permissions.Group) this.permissionsBukkit.getGroups(player.getUniqueId()).get(0)).getName();
 		}
 		if (this.pluginName.equals("PermissionsEx"))
 		{
-			if ((this.pex.getUser(playerName).getGroups() == null) || (this.pex.getUser(playerName).getGroups().length == 0))
+			String[] gnames = this.pex.getUser(player.getUniqueId()).getGroupsNames(player.getWorld().getName());
+			if (gnames == null || gnames.length == 0)
 			{
 				return "";
 			}
-			return this.pex.getUser(playerName).getGroups()[0].getName();
+			return gnames[0];
 		}
 		if (this.pluginName.equals("GroupManager"))
 		{
-			AnjoPermissionsHandler handler = this.groupManager.getWorldsHolder().getWorldPermissionsByPlayerName(playerName);
+			AnjoPermissionsHandler handler = this.groupManager.getWorldsHolder().getWorldPermissions(player);
 			if (handler == null)
 			{
 				this.plugin.logDebug("PermissionManager(): No handler for player " + playerName);
@@ -221,11 +223,13 @@ public class PermissionsManager
 
 	public void setGroup(String playerName, String groupName)
 	{
+		Player player = Werewolf.server.getPlayer(playerName);
 		if (this.pluginName.equals("PermissionsBukkit"))
 		{
-			if (this.permissionsBukkit.getServer().getPlayer(playerName) != null)
+			Player pbp = this.permissionsBukkit.getServer().getPlayer(player.getUniqueId());
+			if (pbp != null)
 			{
-				if (this.permissionsBukkit.getServer().getPlayer(playerName).getGameMode() == GameMode.CREATIVE)
+				if (pbp.getGameMode() == GameMode.CREATIVE)
 				{
 					this.permissionsBukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gm " + playerName);
 				}
@@ -234,13 +238,13 @@ public class PermissionsManager
 		}
 		else
 		{
-			String[] groups;
+			//String[] groups;
 			if (this.pluginName.equals("PermissionsEx"))
 			{
-				PermissionUser user = PermissionsEx.getPermissionManager().getUser(playerName);
+				PermissionUser user = PermissionsEx.getPermissionManager().getUser(player.getUniqueId());
 
-				groups = new String[] { groupName };
-				user.setGroups(groups);
+				//groups = new String[] { groupName };
+				user.addGroup(groupName);
 			}
 			else if (this.pluginName.equals("bPermissions"))
 			{

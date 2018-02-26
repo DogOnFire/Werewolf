@@ -2,7 +2,6 @@ package com.dogonfire.werewolf.tasks;
 
 import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -16,7 +15,7 @@ public class DropItemsTask implements Runnable
 	{
 		PlayerInventory inventory = player.getInventory();
 
-		ItemStack stack = inventory.getItemInHand();
+		ItemStack stack = inventory.getItemInMainHand();
 		if ((stack == null) || (stack.getAmount() == 0) || (stack.getType().equals(Material.AIR)))
 		{
 			return;

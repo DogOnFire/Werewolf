@@ -69,8 +69,8 @@ public class ClanManager
 		this.plugin.log("Loaded " + this.clansConfig.getKeys(false).size() + " clans.");
 
 		this.clanNames.put(ClanType.Potion, "Witherfang");
-		this.clanNames.put(ClanType.WerewolfBite, "Silvermane");
-		this.clanNames.put(ClanType.WildBite, "Bloodmoon");
+		this.clanNames.put(ClanType.WerewolfBite, "Bloodmoon");
+		this.clanNames.put(ClanType.WildBite, "Silvermane");
 
 		this.werewolfAccount.put(ClanType.Potion,         "xeonbuilder");
 		this.werewolfAccount.put(ClanType.WerewolfBite,   "SM_Werewolf");

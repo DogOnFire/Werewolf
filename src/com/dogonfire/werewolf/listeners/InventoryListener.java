@@ -1,14 +1,8 @@
 package com.dogonfire.werewolf.listeners;
 
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,12 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.inventory.CraftingInventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryListener implements Listener
 {
@@ -79,7 +69,7 @@ public class InventoryListener implements Listener
 				player.getWorld().dropItem(player.getLocation(), helmet);
 			}
 
-			pinv.setHelmet(new ItemStack(0));
+			pinv.setHelmet(new ItemStack(Material.AIR));
 		}
 
 		if (chestplate != null)
@@ -92,7 +82,7 @@ public class InventoryListener implements Listener
 			{
 				player.getWorld().dropItem(player.getLocation(), chestplate);
 			}
-			pinv.setChestplate(new ItemStack(0));
+			pinv.setChestplate(new ItemStack(Material.AIR));
 		}
 
 		if (leggings != null)
@@ -105,7 +95,7 @@ public class InventoryListener implements Listener
 			{
 				player.getWorld().dropItem(player.getLocation(), leggings);
 			}
-			pinv.setLeggings(new ItemStack(0));
+			pinv.setLeggings(new ItemStack(Material.AIR));
 		}
 
 		if (boots != null)
@@ -118,7 +108,7 @@ public class InventoryListener implements Listener
 			{
 				player.getWorld().dropItem(player.getLocation(), boots);
 			}
-			pinv.setBoots(new ItemStack(0));
+			pinv.setBoots(new ItemStack(Material.AIR));
 		}
 	}
 
@@ -178,6 +168,8 @@ public class InventoryListener implements Listener
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getHelmet());
 					player.getInventory().setHelmet(null);
 					break;
+				default:
+					break;
 			}
 		}
 		if (player.getInventory().getChestplate() != null)
@@ -191,6 +183,8 @@ public class InventoryListener implements Listener
 				case DIAMOND_CHESTPLATE:
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getChestplate());
 					player.getInventory().setChestplate(null);
+					break;
+				default:
 					break;
 			}
 		}
@@ -206,6 +200,8 @@ public class InventoryListener implements Listener
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getLeggings());
 					player.getInventory().setLeggings(null);
 					break;
+				default:
+					break;
 			}
 		}
 		if (player.getInventory().getBoots() != null)
@@ -219,6 +215,8 @@ public class InventoryListener implements Listener
 				case DIAMOND_BOOTS:
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getBoots());
 					player.getInventory().setBoots(null);
+					break;
+				default:
 					break;
 			}
 		}

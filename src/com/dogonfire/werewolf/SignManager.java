@@ -361,12 +361,12 @@ public class SignManager implements Listener
 						Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.infectionPrice));
 
 						price = this.plugin.infectionPrice;
-						if (!Werewolf.getEconomy().has(player.getName(), price))
+						if (!Werewolf.getEconomy().has(player, price))
 						{
 							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
 							return true;
 						}
-						Werewolf.getEconomy().withdrawPlayer(player.getName(), price);
+						Werewolf.getEconomy().withdrawPlayer(player, price);
 					}
 					else
 					{
@@ -391,12 +391,12 @@ public class SignManager implements Listener
 					if (this.plugin.vaultEnabled)
 					{
 						price = this.plugin.curePrice;
-						if (!Werewolf.getEconomy().has(player.getName(), price))
+						if (!Werewolf.getEconomy().has(player, price))
 						{
 							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
 							return true;
 						}
-						Werewolf.getEconomy().withdrawPlayer(player.getName(), price);
+						Werewolf.getEconomy().withdrawPlayer(player, price);
 					}
 					else
 					{
@@ -420,12 +420,12 @@ public class SignManager implements Listener
 					if (this.plugin.vaultEnabled)
 					{
 						price = this.plugin.wolfbanePrice;
-						if (!Werewolf.getEconomy().has(player.getName(), price))
+						if (!Werewolf.getEconomy().has(player, price))
 						{
 							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
 							return true;
 						}
-						Werewolf.getEconomy().withdrawPlayer(player.getName(), price);
+						Werewolf.getEconomy().withdrawPlayer(player, price);
 					}
 					else
 					{
@@ -449,12 +449,12 @@ public class SignManager implements Listener
 					if (this.plugin.vaultEnabled)
 					{
 						price = this.plugin.silverSwordPrice;
-						if (!Werewolf.getEconomy().has(player.getName(), price))
+						if (!Werewolf.getEconomy().has(player, price))
 						{
 							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
 							return true;
 						}
-						Werewolf.getEconomy().withdrawPlayer(player.getName(), price);
+						Werewolf.getEconomy().withdrawPlayer(player, price);
 					}
 					else
 					{
@@ -478,12 +478,12 @@ public class SignManager implements Listener
 					if (this.plugin.vaultEnabled)
 					{
 						price = this.plugin.bookPrice;
-						if (!Werewolf.getEconomy().has(player.getName(), price))
+						if (!Werewolf.getEconomy().has(player, price))
 						{
 							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
 							return true;
 						}
-						Werewolf.getEconomy().withdrawPlayer(player.getName(), price);
+						Werewolf.getEconomy().withdrawPlayer(player, price);
 					}
 					else
 					{

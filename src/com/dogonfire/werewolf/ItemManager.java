@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.bukkit.Bukkit;
@@ -29,37 +28,37 @@ public class ItemManager
 	{
 		if(plugin.craftableInfectionPotionEnabled)
 		{			
-			Bukkit.addRecipe(Recipes.InfectionPotion());
+			Bukkit.addRecipe(Recipes.InfectionPotion(plugin));
 			plugin.logDebug("Cratable infection potions are enabled");
 		}
 		
 		if(plugin.craftableCurePotionEnabled)
 		{
-			Bukkit.addRecipe(Recipes.CurePotion());
+			Bukkit.addRecipe(Recipes.CurePotion(plugin));
 			plugin.logDebug("Craftable cure potions are enabled");
 		}
 
 		if(plugin.craftableWolfbanePotionEnabled)
 		{
-			Bukkit.addRecipe(Recipes.WolfbanePotion());
+			Bukkit.addRecipe(Recipes.WolfbanePotion(plugin));
 			plugin.logDebug("Craftable wolfbane potions are enabled");
 		}
 
 		if(plugin.craftableSilverSwordEnabled)
 		{
-			Bukkit.addRecipe(Recipes.SilverSwordRecipe());
+			Bukkit.addRecipe(Recipes.SilverSwordRecipe(plugin));
 			plugin.logDebug("Craftable silver swords are enabled");
 		}
 
 		if(plugin.craftableSilverArmorEnabled)
 		{
-			Bukkit.addRecipe(Recipes.SilverArmorRecipe());
+			Bukkit.addRecipe(Recipes.SilverArmorRecipe(plugin));
 			plugin.logDebug("Craftable silver armors are enabled");
 		}
 
 		if(plugin.craftableLoreBookEnabled)
 		{
-			Bukkit.addRecipe(Recipes.LoreBook());
+			Bukkit.addRecipe(Recipes.LoreBook(plugin));
 			plugin.logDebug("Craftable lore books are enabled");
 		}
 	}
@@ -78,7 +77,8 @@ public class ItemManager
 	    pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.InfectionPotionDescription2, ChatColor.GRAY));
 	    
 	    potionMeta.setLore(pages);
-	    potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    //potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 0), true);
 
 		potion.setItemMeta(potionMeta);
 
@@ -99,7 +99,8 @@ public class ItemManager
 	    pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionDescription2, ChatColor.GRAY));
 	    
 	    potionMeta.setLore(pages);
-	    potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    //potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 0), true);
 
 		potion.setItemMeta(potionMeta);
 
@@ -108,12 +109,14 @@ public class ItemManager
 	
 	public ItemStack newWolfbanePotion()
 	{
-		Potion potion = new Potion(PotionType.POISON, 2);
-		potion.setSplash(true);
+		ItemStack potion = new ItemStack(Material.SPLASH_POTION);
+		//Potion potion = new Potion(PotionType.POISON, 2);
+		//potion.setSplash(true);
 		
-		ItemStack itemStack = potion.toItemStack(1);
+		//ItemStack itemStack = potion.toItemStack(1);
 
-		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		//PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+		PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
 
 		potionMeta.setDisplayName(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WolfbanePotionTitle, ChatColor.GOLD));
 
@@ -124,11 +127,18 @@ public class ItemManager
 	    pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WolfbanePotionDescription2, ChatColor.GRAY));
 	    
 	    potionMeta.setLore(pages);
-	    potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    PotionData pd = new PotionData(PotionType.POISON);
+	    potionMeta.setBasePotionData(pd);
+	    //potionMeta.setMainEffect(PotionEffectType.CONFUSION);
+	    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 0), true);
 
-	    itemStack.setItemMeta(potionMeta);
+	    //itemStack.setItemMeta(potionMeta);
 		
-		return itemStack;
+		//return itemStack;
+	    
+	    potion.setItemMeta(potionMeta);
+		
+		return potion;
 	}
 
 	public ItemStack newSilverSword(int level)
@@ -180,103 +190,104 @@ public class ItemManager
 		// Add pages
 		List<String> bookPages = new ArrayList<String>();
 
-		bookPages.add("§lThe Werewolf infection\n§r\nThe werewolf curse is a ancient curse carried by some wolves who only come out at night.\n§r\nAn human infected with the werewolf curse will turn into his werewolf form every fullmoon.");
+		bookPages.add("Â§lThe Werewolf infection\nÂ§r\nThe werewolf curse is a ancient curse carried by some wolves who only come out at night.\nÂ§r\nAn human infected with the werewolf curse will turn into his werewolf form every fullmoon.");
 		
 		if(plugin.useClans)
 		{
-			bookPages.add("§lWerewolves in combat\n§r\nThe werewolf is a ferocious creature. A werewolf does " + DamageManager.werewolfHandDamage + " damage with his hands and " + DamageManager.werewolfItemDamage + " with an item in his hands. Because of his unique physique, a werewolf takes " + 100*DamageManager.SilverArmorMultiplier + " %  damage\n§r\n");		
+			bookPages.add("Â§lWerewolves in combat\nÂ§r\nThe werewolf is a ferocious creature. A werewolf does " + DamageManager.werewolfHandDamage + " damage with his hands and " + DamageManager.werewolfItemDamage + " with an item in his hands. Because of his unique physique, a werewolf takes " + 100*DamageManager.SilverArmorMultiplier + " %  damage\nÂ§r\n");		
 		}
 		else
 		{
-			bookPages.add("§lWerewolves in combat\n§r\nThe werewolf is a ferocious creature. A werewolf does " + DamageManager.werewolfHandDamage + " damage with his hands and " + DamageManager.werewolfItemDamage + " with an item in his hands. Because of his unique physique, a werewolf takes " + 100*DamageManager.SilverArmorMultiplier + " %  damage\n§r\nThe leader of a clan, an alpha werewolf, takes " + 100*DamageManager.SilverArmorMultiplier/2 + " %  damage and does " + 2*DamageManager.werewolfHandDamage + "  damage!");					
+			bookPages.add("Â§lWerewolves in combat\nÂ§r\nThe werewolf is a ferocious creature. A werewolf does " + DamageManager.werewolfHandDamage + " damage with his hands and " + DamageManager.werewolfItemDamage + " with an item in his hands. Because of his unique physique, a werewolf takes " + 100*DamageManager.SilverArmorMultiplier + " %  damage\nÂ§r\nThe leader of a clan, an alpha werewolf, takes " + 100*DamageManager.SilverArmorMultiplier/2 + " %  damage and does " + 2*DamageManager.werewolfHandDamage + "  damage!");					
 		}		
 		
-		bookPages.add("§lTransformation\n§r\nDuring transformation, a werewolf will drop his clothes to the ground. But for each fullmoon, a werewolf will gain more control over his condition.\nAfter having experienced enough fullmoons, the werewolf may be able to not drop his clothes or even transform at will!");
+		bookPages.add("Â§lTransformation\nÂ§r\nDuring transformation, a werewolf will drop his clothes to the ground. But for each fullmoon, a werewolf will gain more control over his condition.\nAfter having experienced enough fullmoons, the werewolf may be able");
+		bookPages.add("Â§rto not drop his clothes or even transform at will!");
 
-		bookPages.add("§lGetting infected\n§r\nYou can be infected in 3 ways:\n§r\n 1) Getting bitten by a wolf at night\n§r\n 2) Drinking a werewolf potion\n§r\n 3) Being bitten by a werewolf.");
-		bookPages.add("§lWerewolf language\n§r\nWhen in werewolf form, werewolves speak in a language only understood by themselves.\n§r\nA non-infected player will only hear wolf noises when they chat.");
+		bookPages.add("Â§lGetting infected\nÂ§r\nYou can be infected in 3 ways:\nÂ§r\n 1) Getting bitten by a wolf at night\nÂ§r\n 2) Drinking a werewolf potion\nÂ§r\n 3) Being bitten by a werewolf.");
+		bookPages.add("Â§lWerewolf language\nÂ§r\nWhen in werewolf form, werewolves speak in a language only understood by themselves.\nÂ§r\nA non-infected player will only hear wolf noises when they chat.");
 		
 		if(plugin.useClans)
 		{
-			bookPages.add("§lClans\n§r\nWerewolves are flock animals and they live in groups. There are three werewolf clans fighting for power.\n§r\nWerewolf players can check their clan info with the /ww clan command.");
-			bookPages.add("§lThe Witherfangs\n§r\nWhen a human drinks a werewolf potion, he will turn into a Witherfang werewolf.\n§r\nWitherfang werewolves has yellow eyes, grey fur are fast and can jump higher than other werewolves.");
-			bookPages.add("§lThe Silvermanes\n§r\nWhen a human is bitten by a wild wolf, he will turn into a Silvermane werewolf.\n§r\nSilvermane werewolves has blue eyes, grey fur and can take more damage than other werewolves.");
-			bookPages.add("§lThe Bloodmoons\n§r\nWhen a human is bitten by a werewolf, he will turn into a Bloodmoon werewolf.\n§r\nThe Bloodmoon werewolves has red eyes, black fur and do more damage than other werewolves.");
+			bookPages.add("Â§lClans\nÂ§r\nWerewolves are flock animals and they live in groups. There are three werewolf clans fighting for power.\nÂ§r\nWerewolf players can check their clan info with the /ww clan command.");
+			bookPages.add("Â§lThe Witherfangs\nÂ§r\nWhen a human drinks a werewolf potion, he will turn into a Witherfang werewolf.\nÂ§r\nWitherfang werewolves has yellow eyes, grey fur are fast and can jump higher than other werewolves.");
+			bookPages.add("Â§lThe Silvermanes\nÂ§r\nWhen a human is bitten by a wild wolf, he will turn into a Silvermane werewolf.\nÂ§r\nSilvermane werewolves has blue eyes, grey fur and can take more damage than other werewolves.");
+			bookPages.add("Â§lThe Bloodmoons\nÂ§r\nWhen a human is bitten by a werewolf, he will turn into a Bloodmoon werewolf.\nÂ§r\nThe Bloodmoon werewolves has red eyes, black fur and do more damage than other werewolves.");
 		}
 		
 		if(plugin.useTrophies)
 		{
-			bookPages.add("§lTrophies\n§r\nIf you able to slay a werewolf using a sword, you may be able to cut the of the werewolf and keep it as a trophy!");
+			bookPages.add("Â§lTrophies\nÂ§r\nIf you able to slay a werewolf using a sword, you may be able to cut the of the werewolf and keep it as a trophy!");
 		}
 
-		bookPages.add("§lCuring the infection\n§r\nA werewolf can drink the werewolf cure potion to cure himself.");		
+		bookPages.add("Â§lCuring the infection\nÂ§r\nA werewolf can drink the werewolf cure potion to cure himself.");		
 		if(plugin.craftableCurePotionEnabled)
 		{
-			bookPages.add("§lCrafting the Cure\n§r\nIn a workbench, place the following ingredients:");			
+			bookPages.add("Â§lCrafting the Cure\nÂ§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.CurePotion().getIngredientList())
+			for(ItemStack ingredient : Recipes.CurePotion(plugin).getIngredientList())
 			{
-				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
+				bookPages.add("\nÂ§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
 			}			
 		}		
 
 		if(plugin.craftableInfectionPotionEnabled)
 		{
-			bookPages.add("§lThe infection potion\n§r\nA potion can be made that infects the drinker with the werewolf infection. This special potion must be used during a fullmoon.");		
-			bookPages.add("§lCrafting the Infection\n§r\nIn a workbench, place the following ingredients:");			
+			bookPages.add("Â§lThe infection potion\nÂ§r\nA potion can be made that infects the drinker with the werewolf infection. This special potion must be used during a fullmoon.");		
+			bookPages.add("Â§lCrafting the Infection\nÂ§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.InfectionPotion().getIngredientList())
+			for(ItemStack ingredient : Recipes.InfectionPotion(plugin).getIngredientList())
 			{
-				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
+				bookPages.add("\nÂ§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
 			}			
 		}		
 
 		if(plugin.craftableWolfbanePotionEnabled)
 		{
-			bookPages.add("§lThe wolfbane potion\n§r\nA potion can be made that severely hurts the werewolf and has a chance to untransform him into human form. This special potion must be used during a fullmoon.");		
-			bookPages.add("§lCrafting the Wolfbane\n§r\nIn a workbench, place the following ingredients:");			
+			bookPages.add("Â§lThe wolfbane potion\nÂ§r\nA potion can be made that severely hurts the werewolf and has a chance to untransform him into human form. This special potion must be used during a fullmoon.");		
+			bookPages.add("Â§lCrafting the Wolfbane\nÂ§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.WolfbanePotion().getIngredientList())
+			for(ItemStack ingredient : Recipes.WolfbanePotion(plugin).getIngredientList())
 			{
-				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
+				bookPages.add("\nÂ§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
 			}			
 		}		
 		
-		bookPages.add("§lHunting werewolves\n§r\nWerewolves are vulnerable to silver. Hitting a werewolf with a silver sword will do x" + DamageManager.SilverSwordMultiplier + " damage compared to a normal sword.\n§r\nOnly a werewolf hunter using the /ww hunt command can use this item.");
+		bookPages.add("Â§lHunting werewolves\nÂ§r\nWerewolves are vulnerable to silver. Hitting a werewolf with a silver sword will do x" + DamageManager.SilverSwordMultiplier + " damage compared to a normal sword.\nÂ§r\nOnly a werewolf hunter using the /ww hunt command can use this item.");
 		if(plugin.craftableSilverSwordEnabled)
 		{
-			bookPages.add("§lThe Silver Sword\n§r\nBecause a werewolf is especially vulnerable to silver, a sword can be made that severely hurts the werewolf.");		
-			bookPages.add("§lCrafting the Silver Sword\n§r\nIn a workbench, place the following ingredients:");			
+			bookPages.add("Â§lThe Silver Sword\nÂ§r\nBecause a werewolf is especially vulnerable to silver, a sword can be made that severely hurts the werewolf.");		
+			bookPages.add("Â§lCrafting the Silver Sword\nÂ§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.SilverSwordRecipe().getIngredientMap().values())
+			for(ItemStack ingredient : Recipes.SilverSwordRecipe(plugin).getIngredientMap().values())
 			{
 				if(ingredient!=null)
 				{
-					bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
+					bookPages.add("\nÂ§r\n " + n + ") " + ingredient.getType().name()); 
 					n++;
 				}
 			}						
 		}
 								
-		bookPages.add("§lHunting werewolves\n§r\nWerewolves are vulnerable to silver. When a werewolf hits a silver armor, it will take x" + DamageManager.SilverArmorMultiplier + " damage.\n§r\nOnly a werewolf hunter using the /ww hunt command can use this item.");
+		bookPages.add("Â§lHunting werewolves\nÂ§r\nWerewolves are vulnerable to silver. When a werewolf hits a silver armor, it will take x" + DamageManager.SilverArmorMultiplier + " damage.\nÂ§r\nOnly a werewolf hunter using the /ww hunt command can use this item.");
 		if(plugin.craftableSilverArmorEnabled)
 		{
-			bookPages.add("§lThe Silver Armor\n§r\nBecause a werewolf is especially vulnerable to silver, an armor can be made that hurts the werewolf.");		
-			bookPages.add("§lCrafting the Silver Armor\n§r\nIn a workbench, place the following ingredients:");			
+			bookPages.add("Â§lThe Silver Armor\nÂ§r\nBecause a werewolf is especially vulnerable to silver, an armor can be made that hurts the werewolf.");		
+			bookPages.add("Â§lCrafting the Silver Armor\nÂ§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.SilverArmorRecipe().getIngredientMap().values())
+			for(ItemStack ingredient : Recipes.SilverArmorRecipe(plugin).getIngredientMap().values())
 			{
 				if(ingredient!=null)
 				{
-					bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
+					bookPages.add("\nÂ§r\n " + n + ") " + ingredient.getType().name()); 
 					n++;
 				}
 			}						
