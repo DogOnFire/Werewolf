@@ -4,5 +4,4 @@
 /.settings
 .classpath
 .project
-.travis.yml
 build.xml
