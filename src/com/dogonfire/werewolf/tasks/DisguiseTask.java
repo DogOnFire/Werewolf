@@ -5,10 +5,9 @@ import com.dogonfire.werewolf.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
 
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import net.gravitydevelopment.anticheat.api.AntiCheatAPI;
-import net.gravitydevelopment.anticheat.check.CheckType;
+import net.dynamicdev.anticheat.api.AntiCheatAPI;
+import net.dynamicdev.anticheat.check.CheckType;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 public class DisguiseTask implements Runnable
 {
@@ -36,7 +34,7 @@ public class DisguiseTask implements Runnable
 		{
 			if (stack != null && !stack.getType().equals(Material.AIR) && stack.getAmount() != 0)
 			{
-				if (Werewolf.getWerewolfManager().getNumberOfTransformations(this.player.getUniqueId()) < this.plugin.transformsForNoDropItems)
+				if (Werewolf.getWerewolfManager().hasToDropItems(this.player.getUniqueId()))
 				{
 					this.player.getWorld().dropItemNaturally(this.player.getLocation(), stack);
 					inventory.remove(stack);
@@ -60,27 +58,57 @@ public class DisguiseTask implements Runnable
 		this.player.getInventory().setArmorContents(new ItemStack[] { new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR) });
 	}
 
-	private void dropHandItem()
+	private void dropMainHandItem()
 	{
 		PlayerInventory inventory = this.player.getInventory();
 
-		ItemStack stack = inventory.getItemInHand();
+		ItemStack stack = inventory.getItemInMainHand();
 		if ((stack == null) || (stack.getAmount() == 0) || (stack.getType().equals(Material.AIR)))
 		{
 			return;
 		}
-		if (Werewolf.getWerewolfManager().getNumberOfTransformations(this.player.getUniqueId()) < this.plugin.transformsForNoDropItems)
+		if (Werewolf.getWerewolfManager().hasToDropItems(this.player.getUniqueId()))
 		{
 			this.player.getWorld().dropItemNaturally(this.player.getLocation(), stack);
 			inventory.remove(stack);
 		}
 		else
 		{
-			int slot = this.player.getInventory().firstEmpty();
+			int slot = inventory.firstEmpty();
 			if (slot > -1)
 			{
-				this.player.getInventory().setItem(slot, stack);
-				this.player.setItemInHand(null);
+				inventory.setItem(slot, stack);
+				inventory.setItemInMainHand(null);
+			}
+			else
+			{
+				this.player.getWorld().dropItemNaturally(this.player.getLocation(), stack);
+				inventory.remove(stack);
+			}
+		}
+	}
+	
+	private void dropOffHandItem()
+	{
+		PlayerInventory inventory = this.player.getInventory();
+
+		ItemStack stack = inventory.getItemInOffHand();
+		if ((stack == null) || (stack.getAmount() == 0) || (stack.getType().equals(Material.AIR)))
+		{
+			return;
+		}
+		if (Werewolf.getWerewolfManager().hasToDropItems(this.player.getUniqueId()))
+		{
+			this.player.getWorld().dropItemNaturally(this.player.getLocation(), stack);
+			inventory.remove(stack);
+		}
+		else
+		{
+			int slot = inventory.firstEmpty();
+			if (slot > -1)
+			{
+				inventory.setItem(slot, stack);
+				inventory.setItemInOffHand(null);
 			}
 			else
 			{
@@ -105,7 +133,8 @@ public class DisguiseTask implements Runnable
 		
 		if (this.plugin.noCheatPlusEnabled)
 		{
-			NCPExemptionManager.exemptPermanently(this.player);
+			NCPExemptionManager.exemptPermanently(this.player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_SURVIVALFLY);
+			NCPExemptionManager.exemptPermanently(this.player, fr.neatmonster.nocheatplus.checks.CheckType.MOVING_CREATIVEFLY);
 		}
 		
 		if (this.plugin.antiCheatEnabled)
@@ -128,14 +157,14 @@ public class DisguiseTask implements Runnable
 
 				this.player.setWalkSpeed(1.0F);
 				break;
-			case WerewolfBite:
+			case WildBite:
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.JUMP, 32000, 2)), 16L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.REGENERATION, 32000, 2)), 64L);
 
 				this.player.setWalkSpeed(0.5F);
 				break;
-			case WildBite:
+			case WerewolfBite:
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.JUMP, 32000, 2)), 16L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 32000, 2)), 64L);
@@ -144,7 +173,8 @@ public class DisguiseTask implements Runnable
 		}
 		
 		dropArmor();
-		dropHandItem();
+		dropMainHandItem();
+		dropOffHandItem();
 
 		Werewolf.getSkinManager().setWerewolfSkin(this.player);
 		Werewolf.getWerewolfManager().pushPlayerData(this.player);

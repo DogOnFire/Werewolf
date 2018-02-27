@@ -1,12 +1,12 @@
 package com.dogonfire.werewolf.tasks;
 
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_12_R1.IChatBaseComponent;
+import net.minecraft.server.v1_12_R1.PacketPlayOutChat;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.dogonfire.werewolf.Werewolf;
@@ -32,7 +32,7 @@ public class CentralMessageTask implements Runnable
 		{
 			String translatedMessage = ChatColor.translateAlternateColorCodes('&', messageText);
 			IChatBaseComponent chatComponent = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + translatedMessage + "\"}");
-			PacketPlayOutChat chatPacket = new PacketPlayOutChat(chatComponent, (byte) 2);
+			PacketPlayOutChat chatPacket = new PacketPlayOutChat(chatComponent);
 
 			((CraftPlayer) player).getHandle().playerConnection.sendPacket(chatPacket);
 			

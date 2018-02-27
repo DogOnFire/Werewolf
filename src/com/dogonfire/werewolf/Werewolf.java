@@ -13,6 +13,8 @@ import com.dogonfire.werewolf.versioning.Version;
 import com.dogonfire.werewolf.versioning.VersionFactory;
 import com.massivecraft.vampire.entity.UPlayer;
 
+import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -95,6 +97,10 @@ public class Werewolf extends JavaPlugin
 	public boolean								usePounce								= false;
 	public float								pouncePlaneSpeed						= 1.0F;
 	public float								pounceHeightSpeed						= 1.0F;
+	public String								alphaSkin								= "WerewolfAlpha";
+	public String								witherfangSkin							= "Werewolf";
+	public String								silvermoonSkin							= "SM_Werewolf";
+	public String								bloodmoonSkin							= "BM_Werewolf";
 	public List<String>							allowedWorlds							= new ArrayList<String>();
 	private static Werewolf						plugin;
 	private static FileConfiguration			config									= null;
@@ -131,8 +137,8 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version;
-	public static final String					MAX										= "1.9-R0.1-SNAPSHOT";
-	public static final String					MIN										= "1.9";
+	public static final String					MAX										= "1.12.2-R0.1-SNAPSHOT";
+	public static final String					MIN										= "1.12";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
 	
@@ -318,7 +324,7 @@ public class Werewolf extends JavaPlugin
 		languageManager = new LanguageManager(this);
 
 		statisticsManager = new StatisticsManager(this);		
-		this.itemManager = new ItemManager(this);		
+		itemManager = new ItemManager(this);		
 		this.damageListener = new DamageListener(this);
 		this.playerListener = new PlayerListener(this);
 		this.interactListener = new InteractListener(this);
@@ -577,7 +583,7 @@ public class Werewolf extends JavaPlugin
 		werewolfManager.unsetWerewolfSkin(player.getUniqueId(), true);
 	}
 
-	public void setPositionUpdater(Player player, WerewolfSkin skin)
+	public void setPositionUpdater(Player player, PlayerDisguise skin)
 	{
 		if (this.movementUpdateThreading)
 		{
@@ -727,7 +733,10 @@ public class Werewolf extends JavaPlugin
 		this.craftableInfectionPotionEnabled = config.getBoolean("Items.CraftableInfectionPotionEnabled", true);
 		this.craftableCurePotionEnabled = config.getBoolean("Items.CraftableCurePotionEnabled", true);
 		this.craftableWolfbanePotionEnabled = config.getBoolean("Items.CraftableWolfbanePotionEnabled", true);
-		
+		this.alphaSkin = config.getString("Skins.AlphaSkin", "WerewolfAlpha");
+		this.witherfangSkin = config.getString("Skins.WitherfangSkin", "Werewolf");
+		this.silvermoonSkin = config.getString("Skins.SilvermoonSkin", "SM_Werewolf");
+		this.bloodmoonSkin = config.getString("Skins.BloodmoonSkin", "BM_Werewolf");
 	}
 
 	public void saveSettings()
@@ -798,6 +807,10 @@ public class Werewolf extends JavaPlugin
 		config.set("Items.CraftableCurePotionEnabled", Boolean.valueOf(this.craftableCurePotionEnabled));
 		config.set("Items.CraftableWolfbanePotionEnabled", Boolean.valueOf(this.craftableWolfbanePotionEnabled));
 		
+		config.set("Skins.AlphaSkin", this.alphaSkin);
+		config.set("Skins.WitherfangSkin", this.witherfangSkin);
+		config.set("Skins.SilvermoonSkin", this.silvermoonSkin);
+		config.set("Skins.BloodmoonSkin", this.bloodmoonSkin);
 		/*
 		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
 		this.craftableSilverSwordEnabled = config.getBoolean("Items.CraftableSilverSword", true);

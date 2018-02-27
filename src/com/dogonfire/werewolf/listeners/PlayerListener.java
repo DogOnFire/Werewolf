@@ -7,7 +7,6 @@ import com.dogonfire.werewolf.ClanManager;
 import com.dogonfire.werewolf.DamageManager;
 import com.dogonfire.werewolf.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfSkin;
 import com.dogonfire.werewolf.tasks.CheckTransformationTask;
 import com.dogonfire.werewolf.tasks.PotionEffectTask;
 import com.dogonfire.werewolf.versioning.UpdateNotifier;
@@ -15,33 +14,26 @@ import com.dogonfire.werewolf.versioning.UpdateNotifier;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftWolf;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftWolf;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-
-import net.minecraft.server.v1_8_R3.Packet;
 
 public class PlayerListener implements Listener
 {
@@ -63,8 +55,7 @@ public class PlayerListener implements Listener
 		Werewolf.getWerewolfManager().unsetWerewolfSkin(event.getPlayer().getUniqueId(), true);
 
 		this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new CheckTransformationTask(plugin, event.getPlayer().getUniqueId()), 20L);
-
-		Werewolf.getSkinManager().showWorldDisguises(event.getPlayer());
+		
 		if (this.plugin.useUpdateNotifications && (event.getPlayer().isOp() || Werewolf.getPermissionsManager().hasPermission(event.getPlayer(), "werewolf.updates")))
 		{
 			this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin, new UpdateNotifier(this.plugin, event.getPlayer()));
@@ -72,63 +63,9 @@ public class PlayerListener implements Listener
 	}
 
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event)
-	{
-		Werewolf.getSkinManager().removeSkinFromWorld(event.getPlayer().getWorld(), event.getPlayer());
-	}
-
-	@EventHandler
-	public void onPlayerPortal(PlayerPortalEvent event)
-	{
-		if (!Werewolf.pluginEnabled)
-		{
-			return;
-		}
-		
-		Werewolf.getSkinManager().removeSkinFromWorld(event.getFrom().getWorld(), event.getPlayer());
-		Werewolf.getSkinManager().showWorldDisguises(event.getPlayer());
-		Werewolf.getSkinManager().setVisibleToWorld(event.getPlayer());
-	}
-
-	@EventHandler
-	public void onPlayerRespawn(PlayerRespawnEvent event)
-	{
-		if (!Werewolf.pluginEnabled)
-		{
-			return;
-		}
-
-		final Player player = event.getPlayer();
-		
-		this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable()
-		{
-			public void run()
-			{
-				//Werewolf.getSkinManager().showWorldDisguises(player);
-				Werewolf.getSkinManager().removeSkinFromWorld(player.getWorld(), player);
-				Werewolf.getSkinManager().setVisibleToWorld(player);
-			}
-		}, 20L);
-	}
-
-	@EventHandler
 	public void onPlayerWorldChange(PlayerChangedWorldEvent event)
 	{
-		Werewolf.getSkinManager().removeSkinFromWorld(event.getFrom(), event.getPlayer());
-
 		Werewolf.getWerewolfManager().unsetWerewolfSkin(event.getPlayer().getUniqueId(), true);
-
-		final Player player = event.getPlayer();
-
-		this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable()
-		{
-			public void run()
-			{
-				Werewolf.getSkinManager().showWorldDisguises(player);
-			}
-		}, 20L);
-
-		Werewolf.getSkinManager().setVisibleToWorld(event.getPlayer());
 	}
 
 	@EventHandler
@@ -146,16 +83,6 @@ public class PlayerListener implements Listener
 				return;
 			}
 
-			if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getPlayer().getUniqueId()))
-			{
-				WerewolfSkin skin = Werewolf.getSkinManager().getSkin(event.getPlayer());
-
-				if(skin!=null)
-				{
-					Werewolf.getSkinManager().sendPacketsToWorld(event.getPlayer().getWorld(), new Packet[] { skin.getAnimationPacket(0) });
-				}
-			}
-
 			Player nearestWerewolf = Werewolf.getWerewolfManager().getNearestWerewolf(event.getPlayer().getUniqueId());
 			if (nearestWerewolf != null && DamageManager.canPlayerHit(event.getPlayer(), nearestWerewolf.getLocation()))
 			{
@@ -164,45 +91,6 @@ public class PlayerListener implements Listener
 				plugin.logDebug("Doing " + damage + " damage to " + nearestWerewolf.getName());
 
 				nearestWerewolf.damage(damage, event.getPlayer());
-			}
-		}
-	}
-
-	@EventHandler
-	public void onPlayerToggleSneak(PlayerToggleSneakEvent event)
-	{
-		if (!Werewolf.pluginEnabled)
-		{
-			return;
-		}
-		if (!Werewolf.getWerewolfManager().hasWerewolfSkin(event.getPlayer().getUniqueId()))
-		{
-			return;
-		}
-		
-		WerewolfSkin skin = Werewolf.getSkinManager().getSkin(event.getPlayer());
-		
-		if (skin != null)
-		{
-			skin.setCrouch(event.isSneaking());
-			Werewolf.getSkinManager().sendPacketsToWorld(event.getPlayer().getWorld(), new Packet[] { skin.getMetadataPacket() });
-		}
-	}
-
-	@EventHandler
-	public void onHeldItemChange(PlayerItemHeldEvent event)
-	{
-		Player player = event.getPlayer();
-		if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
-		{
-			WerewolfSkin skin = Werewolf.getSkinManager().getSkin(player);
-			if (skin != null)
-			{
-				org.bukkit.inventory.ItemStack heldItem = event.getPlayer().getInventory().getItem(event.getNewSlot());
-
-				net.minecraft.server.v1_8_R3.ItemStack craftItem = CraftItemStack.asNMSCopy(heldItem);
-
-				Werewolf.getSkinManager().sendPacketsToWorld(event.getPlayer().getWorld(), new Packet[] { skin.getEquipmentChangePacket((short) 0, craftItem) });
 			}
 		}
 	}
@@ -230,39 +118,6 @@ public class PlayerListener implements Listener
 			return;
 		}
 		Player player = event.getPlayer();
-
-		/*
-		Vector newDirection;
-		if (this.plugin.usePounce)
-		{
-			double diff = event.getTo().getY() - event.getFrom().getY();
-			if (diff <= 0.0D)
-			{
-				Werewolf.getWerewolfManager().removePouncing(player.getUniqueId());
-			}
-			else if (!Werewolf.getWerewolfManager().isPouncing(player.getUniqueId()))
-			{
-				if (event.getTo().getWorld().getBlockAt(event.getTo()).getType() == Material.AIR)
-				{
-					newDirection = event.getTo().toVector();
-					newDirection.subtract(event.getFrom().toVector());
-
-					newDirection.setY(0);
-					newDirection.normalize();
-					newDirection.multiply(this.plugin.pouncePlaneSpeed);
-					newDirection.setY(this.plugin.pounceHeightSpeed);
-
-					newDirection = event.getPlayer().getVelocity().add(newDirection);
-
-					event.getPlayer().setVelocity(event.getPlayer().getVelocity().add(newDirection));
-
-					Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
-				}
-			}
-		}
-		*/
-		
-		Werewolf.getSkinManager().sendMovement(event.getPlayer(), event.getPlayer().getVelocity(), event.getTo());
 		
 		if (Math.random() < 0.05D)
 		{
@@ -358,7 +213,7 @@ public class PlayerListener implements Listener
 
 				if (killer != null)
 				{
-					switch (killer.getItemInHand().getType())
+					switch (killer.getInventory().getItemInMainHand().getType())
 					{
 						case DIAMOND_SWORD:
 						case GOLD_SWORD:
@@ -417,58 +272,62 @@ public class PlayerListener implements Listener
 	}
 
 	@EventHandler
-	public void onPlayerPickupItem(PlayerPickupItemEvent event)
+	public void onPlayerPickupItem(EntityPickupItemEvent event)
 	{
-		Player player = event.getPlayer();
-		
-		if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
-		{
-			return;
-		}
-		
-		Material material = event.getItem().getItemStack().getType();
-		switch (material)
-		{
-			case GOLD_CHESTPLATE:
-			case LEATHER_CHESTPLATE:
-			case DIAMOND_CHESTPLATE:
-			case CHAINMAIL_CHESTPLATE:
-			case IRON_CHESTPLATE:
-			case WOOD_SWORD:
-			case GOLD_SWORD:
-			case STONE_SWORD:
-			case DIAMOND_SWORD:
-			case IRON_SWORD:
-			case CHAINMAIL_BOOTS:
-			case GOLD_BOOTS:
-			case LEATHER_BOOTS:
-			case IRON_BOOTS:
-			case DIAMOND_BOOTS:
-			case GOLD_LEGGINGS:
-			case CHAINMAIL_LEGGINGS:
-			case LEATHER_LEGGINGS:
-			case IRON_LEGGINGS:
-			case DIAMOND_LEGGINGS:
-			case CHAINMAIL_HELMET:
-			case GOLD_HELMET:
-			case LEATHER_HELMET:
-			case IRON_HELMET:
-			case DIAMOND_HELMET:
-			case BOW:
-				event.setCancelled(true);
+		Entity entity = event.getEntity();
+		if (entity.getType() == EntityType.PLAYER) {
+			Player player = (Player) entity;
+			
+			if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
+			{
 				return;
-		}
-
-		if (this.plugin.keepWerewolfHandsFree)
-		{
-			if (player.getItemInHand().getType() == Material.AIR)
-			{				
-				event.setCancelled(true);
-				
-				//final Inventory inventory = player.getInventory();
-				//inventory.addItem(event.getItem().getItemStack());
-			}				
-		}						
+			}
+			
+			Material material = event.getItem().getItemStack().getType();
+			switch (material)
+			{
+				case GOLD_CHESTPLATE:
+				case LEATHER_CHESTPLATE:
+				case DIAMOND_CHESTPLATE:
+				case CHAINMAIL_CHESTPLATE:
+				case IRON_CHESTPLATE:
+				case WOOD_SWORD:
+				case GOLD_SWORD:
+				case STONE_SWORD:
+				case DIAMOND_SWORD:
+				case IRON_SWORD:
+				case CHAINMAIL_BOOTS:
+				case GOLD_BOOTS:
+				case LEATHER_BOOTS:
+				case IRON_BOOTS:
+				case DIAMOND_BOOTS:
+				case GOLD_LEGGINGS:
+				case CHAINMAIL_LEGGINGS:
+				case LEATHER_LEGGINGS:
+				case IRON_LEGGINGS:
+				case DIAMOND_LEGGINGS:
+				case CHAINMAIL_HELMET:
+				case GOLD_HELMET:
+				case LEATHER_HELMET:
+				case IRON_HELMET:
+				case DIAMOND_HELMET:
+				case BOW:
+					event.setCancelled(true);
+					return;
+				default:
+			}
+	
+			if (this.plugin.keepWerewolfHandsFree)
+			{
+				if (player.getInventory().getItemInMainHand().getType() == Material.AIR)
+				{				
+					event.setCancelled(true);
+					
+					//final Inventory inventory = player.getInventory();
+					//inventory.addItem(event.getItem().getItemStack());
+				}				
+			}	
+		}				
 	}	
 	
 	@EventHandler
@@ -491,7 +350,7 @@ public class PlayerListener implements Listener
 					if (random.nextInt(100) < plugin.wolfbaneUntransformChance)
 					{
 						Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, player, new PotionEffect(PotionEffectType.POISON, 4 * 20, 2)), 16L);
-
+						
 						player.getLocation().getWorld().playEffect(player.getLocation(), Effect.FIREWORKS_SPARK, 100);
 						player.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 1, 0)), Effect.COLOURED_DUST, 100);
 						player.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 2, 0)), Effect.COLOURED_DUST, 100);

@@ -15,7 +15,7 @@ public class DamageManager
 		
 	public static double getDamageFromItemInHand(Player player)
 	{
-		ItemStack is = player.getItemInHand();
+		ItemStack is = player.getInventory().getItemInMainHand();
 		if (is == null)
 		{
 			return 1;

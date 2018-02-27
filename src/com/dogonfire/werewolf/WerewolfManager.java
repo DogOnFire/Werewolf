@@ -745,6 +745,11 @@ public class WerewolfManager
 	{
 		return getNumberOfTransformations(playerId) >= this.plugin.transformsForControlledTransformation;
 	}
+	
+	public boolean hasToDropItems(UUID playerId)
+	{
+		return getNumberOfTransformations(playerId) < this.plugin.transformsForNoDropItems;
+	}
 
 	public boolean hasRecentTransformAutoCure(UUID playerId)
 	{
@@ -837,12 +842,12 @@ public class WerewolfManager
 
 	public void howl(Player player)
 	{
-		player.getWorld().playSound(player.getLocation(), Sound.WOLF_HOWL, 10.0F, 1.0F);
+		player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WOLF_HOWL, 10.0F, 1.0F);
 	}
 
 	public void growl(Player player)
 	{
-		player.getWorld().playSound(player.getLocation(), Sound.WOLF_GROWL, 10.0F, 1.0F);
+		player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WOLF_GROWL, 10.0F, 1.0F);
 	}
 
 	public void sendWerewolfUrges(Player player)
@@ -981,8 +986,8 @@ public class WerewolfManager
 						String fullMoonText = ChatColor.BOLD + Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.FullMoonIsRising, ChatColor.GOLD);
 						String numberOfWerewolvesText = ChatColor.BOLD + Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.FullMoonNumberOfWerewolves, ChatColor.GOLD);
 												
-						plugin.announcementMessage(world, fullMoonText, Sound.AMBIENCE_CAVE, 20);
-						plugin.announcementMessage(world, numberOfWerewolvesText, Sound.AMBIENCE_CAVE, 140);
+						plugin.announcementMessage(world, fullMoonText, Sound.AMBIENT_CAVE, 20);
+						plugin.announcementMessage(world, numberOfWerewolvesText, Sound.AMBIENT_CAVE, 140);
 						
 						this.lastFullMoonAnnouncementTimes.put(world.getUID(), System.currentTimeMillis());
 						
@@ -1067,18 +1072,19 @@ public class WerewolfManager
 
 	private boolean isValidBiomeForWildWolf(Biome biome)
 	{
+		Boolean bool;
 		switch (biome)
 		{
-			case BIRCH_FOREST:
-			case BIRCH_FOREST_MOUNTAINS:
+			case TAIGA_COLD:
+			case TAIGA_COLD_HILLS:
+			case TAIGA:
+			case REDWOOD_TAIGA:
 			case FOREST:
-			case FROZEN_RIVER:
-			case JUNGLE_MOUNTAINS:
-			case MEGA_SPRUCE_TAIGA:
-			case SAVANNA:
-				return true;
+				bool = true;
+			default:
+				bool = false;
 		}
-		return false;
+		return bool;
 	}
 
 	private void spawnWildWolf(Player player)

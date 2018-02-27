@@ -36,11 +36,11 @@ public class InfoTask implements Runnable
 			return;
 		}
 		
-		this.plugin.getLanguageManager().setPlayerName(this.name);
+		Werewolf.getLanguageManager().setPlayerName(this.name);
 				
-		this.plugin.getLanguageManager().setAmount("" + this.amount);
+		Werewolf.getLanguageManager().setAmount("" + this.amount);
 
-		String questionMessage = this.plugin.getLanguageManager().getLanguageString(this.message, this.color);
+		String questionMessage = Werewolf.getLanguageManager().getLanguageString(this.message, this.color);
 
 		player.sendMessage(
 

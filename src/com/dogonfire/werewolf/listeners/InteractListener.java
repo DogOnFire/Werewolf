@@ -1,17 +1,12 @@
 package com.dogonfire.werewolf.listeners;
 
 import com.dogonfire.werewolf.ClanManager;
-import com.dogonfire.werewolf.ClanManager.ClanType;
 import com.dogonfire.werewolf.LanguageManager;
-import com.dogonfire.werewolf.LanguageManager.LANGUAGESTRING;
-import com.dogonfire.werewolf.PermissionsManager;
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfManager;
 
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,9 +14,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitScheduler;
 
 public class InteractListener implements Listener
 {
@@ -36,7 +28,7 @@ public class InteractListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		Material type = player.getItemInHand().getType();
+		Material type = player.getInventory().getItemInMainHand().getType();
 		switch (type)
 		{
 			case APPLE:
@@ -52,6 +44,8 @@ public class InteractListener implements Listener
 				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryEat, ChatColor.RED));
 				event.setCancelled(true);
 				return true;
+			default:
+				break;
 		}
 		
 		return false;
@@ -60,9 +54,9 @@ public class InteractListener implements Listener
 	private boolean checkForDrinkingWerewolfCurePotion(PlayerItemConsumeEvent event)
 	{
 		Player player = event.getPlayer();
-		ItemStack handItem = player.getItemInHand();
+		ItemStack handItem = player.getInventory().getItemInMainHand();
 		
-		if(!plugin.getItemManager().isCurePotion(handItem))
+		if(!Werewolf.getItemManager().isCurePotion(handItem))
 		{
 			return false;
 		}
@@ -109,13 +103,13 @@ public class InteractListener implements Listener
 			return false;
 		}
 		
-		if (player.getItemInHand().getAmount() == 1)
+		if (player.getInventory().getItemInMainHand().getAmount() == 1)
 		{
 			player.getInventory().remove(handItem);
 		}
 		else
 		{
-			player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+			player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
 		}
 		return false;
 	}
@@ -123,9 +117,9 @@ public class InteractListener implements Listener
 	private boolean checkForDrinkingWerewolfInfectionPotion(PlayerItemConsumeEvent event)
 	{
 		Player player = event.getPlayer();
-		ItemStack handItem = player.getItemInHand();
+		ItemStack handItem = player.getInventory().getItemInMainHand();
 
-		if(!plugin.getItemManager().isInfectionPotion(handItem))
+		if(!Werewolf.getItemManager().isInfectionPotion(handItem))
 		{
 			return false;
 		}
@@ -180,13 +174,13 @@ public class InteractListener implements Listener
 			player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.DrinkInfectionFailure, ChatColor.LIGHT_PURPLE));
 		}
 		
-		if (player.getItemInHand().getAmount() == 1)
+		if (player.getInventory().getItemInMainHand().getAmount() == 1)
 		{
 			player.getInventory().remove(handItem);
 		}
 		else
 		{
-			player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+			player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
 		}
 		
 		return true;

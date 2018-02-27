@@ -1,9 +1,9 @@
-name: Werewolf
+name: Werewolf-Reloaded
 main: com.dogonfire.werewolf.Werewolf
 author: DogOnFire
-version: 0.8.0
+version: 0.8.1
 description: Werewolves in Minecraft!
-softdepend: [Vault, HealthBar, NoCheatPlus,AntiCheat,PermissionsBukkit, PermissionsEx, bPermissions, GroupManager]
+softdepend: [Vault, HealthBar, NoCheatPlus,AntiCheatPlus,PermissionsBukkit, PermissionsEx, bPermissions, GroupManager]
 website: http://dev.bukkit.org/server-mods/werewolf
 commands:
    ww:

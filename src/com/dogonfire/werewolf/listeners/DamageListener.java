@@ -6,15 +6,15 @@ import com.dogonfire.werewolf.ClanManager;
 import com.dogonfire.werewolf.DamageManager;
 import com.dogonfire.werewolf.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfSkin;
 
-import net.minecraft.server.v1_8_R3.Packet;
+import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftWolf;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftWolf;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -50,11 +50,9 @@ public class DamageListener implements Listener
 				
 				if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 				{
-					WerewolfSkin skin = Werewolf.getSkinManager().getSkin(player);
+					PlayerDisguise skin = Werewolf.getSkinManager().getSkin(player);
 					if (skin != null)
 					{
-						Werewolf.getSkinManager().sendPacketsToWorld(player.getWorld(), new Packet[] { skin.getAnimationPacket(1) });
-
 						Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
 					}
 					else
@@ -110,12 +108,10 @@ public class DamageListener implements Listener
 					return;
 				}
 				
-				WerewolfSkin skin = Werewolf.getSkinManager().getSkin(werewolfPlayer);
+				PlayerDisguise skin = Werewolf.getSkinManager().getSkin(werewolfPlayer);
 				
 				if(skin!=null)
 				{
-					Werewolf.getSkinManager().sendPacketsToWorld(werewolfPlayer.getWorld(), new Packet[] { skin.getAnimationPacket(1) });
-
 					werewolfPlayer.playEffect(EntityEffect.HURT);
 
 					Werewolf.getWerewolfManager().growl(werewolfPlayer);
@@ -136,7 +132,7 @@ public class DamageListener implements Listener
 				{
 					double damage = 0.0D;
 					
-					if (player.getItemInHand().getType().equals(Material.AIR))
+					if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR))
 					{
 						damage = DamageManager.werewolfHandDamage;
 					}
@@ -307,14 +303,14 @@ public class DamageListener implements Listener
 					break;
 			}
 			
-			if (health > 0 && killer.getHealth() < killer.getMaxHealth())
+			if (health > 0 && killer.getHealth() < killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue())
 			{
 				Werewolf.getLanguageManager().setAmount("" + health);
 				killer.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.KilledMob, ChatColor.LIGHT_PURPLE));
 				
-				if (killer.getHealth() + health > killer.getMaxHealth())
+				if (killer.getHealth() + health > killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue())
 				{
-					killer.setHealth(killer.getMaxHealth());
+					killer.setHealth(killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
 				}
 				else
 				{

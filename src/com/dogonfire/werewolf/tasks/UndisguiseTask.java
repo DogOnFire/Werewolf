@@ -2,18 +2,13 @@ package com.dogonfire.werewolf.tasks;
 
 import java.util.UUID;
 
-import com.dogonfire.werewolf.PacketUtils;
-import com.dogonfire.werewolf.PermissionsManager;
-import com.dogonfire.werewolf.WerewolfSkinManager;
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfManager;
 
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import net.gravitydevelopment.anticheat.api.AntiCheatAPI;
-import net.gravitydevelopment.anticheat.check.CheckType;
+import net.dynamicdev.anticheat.api.AntiCheatAPI;
+import net.dynamicdev.anticheat.check.CheckType;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.World;
 
 import org.bukkit.entity.Player;
@@ -93,22 +88,7 @@ public class UndisguiseTask implements Runnable
 			if(plugin.useScoreboards)
 			{
 				Werewolf.getWerewolfScoreboardManager().removePlayerHuntingScoreboard(player);
-			}
-			
-			if (!this.makeVisible)
-			{
-				if (this.world != null)
-				{
-					Werewolf.getSkinManager().removeSkinFromWorld(this.world, player);
-				}
-				else
-				{
-					for (World world : this.plugin.getServer().getWorlds())
-					{
-						Werewolf.getSkinManager().removeSkinFromWorld(world, player);
-					}
-				}
-			}			
+			}		
 		}
 				
 		Werewolf.getWerewolfManager().popPlayerData(this.playerId);

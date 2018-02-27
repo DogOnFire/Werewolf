@@ -75,12 +75,12 @@ public class HuntManager
 	public void addBounty(String playerName, int bounty)
 	{
 		Player player = this.plugin.getServer().getPlayer(playerName);
-		if (!Werewolf.getEconomy().has(playerName, bounty))
+		if (!Werewolf.getEconomy().has(player, bounty))
 		{
 			player.sendMessage(ChatColor.RED + "You do not have that much.");
 			return;
 		}
-		Werewolf.getEconomy().withdrawPlayer(playerName, bounty);
+		Werewolf.getEconomy().withdrawPlayer(player, bounty);
 		this.totalBounty += bounty;
 
 		Werewolf.getLanguageManager().setPlayerName(playerName);
@@ -165,7 +165,8 @@ public class HuntManager
 		this.plugin.getServer().broadcastMessage(message);
 		this.plugin.log(message);
 
-		Werewolf.getEconomy().depositPlayer(killerName, this.totalBounty);
+		Player killer = this.plugin.getServer().getPlayer(killerName);
+		Werewolf.getEconomy().depositPlayer(killer, this.totalBounty);
 		this.totalBounty = 0;
 
 		int kills = this.huntersConfig.getInt(killerName + ".Kills");

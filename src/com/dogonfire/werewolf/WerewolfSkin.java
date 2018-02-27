@@ -7,30 +7,34 @@ import com.dogonfire.werewolf.ClanManager.ClanType;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
-import net.minecraft.server.v1_8_R3.DataWatcher;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
-//import net.minecraft.server.v1_8_R3.EnumPlayerInfoAction;
-import net.minecraft.server.v1_8_R3.ItemStack;
-import net.minecraft.server.v1_8_R3.MathHelper;
-import net.minecraft.server.v1_8_R3.PacketPlayOutAnimation;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntity.PacketPlayOutEntityLook;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook;
-//import net.minecraft.server.v1_8_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
-//import net.minecraft.server.v1_8_R1.PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityEquipment;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityHeadRotation;
-//import net.minecraft.server.v1_8_R2.PacketPlayOutEntityLook;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityMetadata;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityTeleport;
-import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
-import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo;
-import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
-//import net.minecraft.server.v1_8_R2.PacketPlayOutRelEntityMoveLook;
-import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardTeam;
+import net.minecraft.server.v1_12_R1.DataWatcher;
+import net.minecraft.server.v1_12_R1.DataWatcherObject;
+import net.minecraft.server.v1_12_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_12_R1.Entity;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import net.minecraft.server.v1_12_R1.EnumItemSlot;
+//import net.minecraft.server.v1_11_R1.EnumPlayerInfoAction;
+import net.minecraft.server.v1_12_R1.ItemStack;
+import net.minecraft.server.v1_12_R1.MathHelper;
+import net.minecraft.server.v1_12_R1.PacketPlayOutAnimation;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook;
+//import net.minecraft.server.v1_11_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
+//import net.minecraft.server.v1_11_R1.PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityDestroy;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityEquipment;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityHeadRotation;
+//import net.minecraft.server.v1_11_R1.PacketPlayOutEntityLook;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityMetadata;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityTeleport;
+import net.minecraft.server.v1_12_R1.PacketPlayOutNamedEntitySpawn;
+import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
+//import net.minecraft.server.v1_11_R1.PacketPlayOutRelEntityMoveLook;
+import net.minecraft.server.v1_12_R1.PacketPlayOutScoreboardTeam;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
@@ -62,10 +66,10 @@ public class WerewolfSkin
 		this.textureSignature = textureSignature;
 		
 		this.metadata = new WerewolfDataWatcher(null);
-		this.metadata.a(0, (byte) 0);
-		this.metadata.a(5, accountName);
+		this.metadata.register(new DataWatcherObject<>(0, DataWatcherRegistry.a), (byte) 0);
+		this.metadata.register(new DataWatcherObject<>(5, DataWatcherRegistry.d), accountName);
 
-		this.metadata.a(12, 0);
+		this.metadata.register(new DataWatcherObject<>(12, DataWatcherRegistry.b), 0);
 
 		setCustomName(true);
 	}
@@ -84,11 +88,11 @@ public class WerewolfSkin
 	{
 		if (crouched)
 		{
-			this.metadata.watch(0, (byte) 2);
+			((WerewolfDataWatcher) this.metadata).watch(0, (byte) 2);
 		}
 		else
 		{
-			this.metadata.watch(0, (byte) 0);
+			((WerewolfDataWatcher) this.metadata).watch(0, (byte) 0);
 		}
 	}
 
@@ -96,11 +100,11 @@ public class WerewolfSkin
 	{
 		if (burning)
 		{
-			this.metadata.watch(0, (byte) 1);
+			((WerewolfDataWatcher) this.metadata).watch(0, (byte) 1);
 		}
 		else
 		{
-			this.metadata.watch(0, (byte) 0);
+			((WerewolfDataWatcher) this.metadata).watch(0, (byte) 0);
 		}
 	}
 
@@ -113,8 +117,9 @@ public class WerewolfSkin
 		return new PacketPlayOutEntityMetadata(this.entityID, this.metadata, true);
 	}
 
-	public PacketPlayOutNamedEntitySpawn getPlayerSpawnPacket(Location loc, short item)
+	public PacketPlayOutNamedEntitySpawn getPlayerSpawnPacket(Player p)
 	{
+		Location loc = p.getLocation();
 		PacketPlayOutNamedEntitySpawn packet = new PacketPlayOutNamedEntitySpawn();
 
 		int x = MathHelper.floor(loc.getX() * 32.0D);
@@ -137,8 +142,8 @@ public class WerewolfSkin
 			Field zField = packet.getClass().getDeclaredField("e");
 			Field yawField = packet.getClass().getDeclaredField("f");
 			Field pitchField = packet.getClass().getDeclaredField("g");
-			Field itemField = packet.getClass().getDeclaredField("h");
-			Field metadataField = packet.getClass().getDeclaredField("i");
+			Field dataWatcherField = packet.getClass().getDeclaredField("h");
+			//Field dataWatcherItemsField = packet.getClass().getDeclaredField("i");
 
 			idField.setAccessible(true);
 			UUIDField.setAccessible(true);
@@ -147,8 +152,8 @@ public class WerewolfSkin
 			zField.setAccessible(true);
 			yawField.setAccessible(true);
 			pitchField.setAccessible(true);
-			itemField.setAccessible(true);
-			metadataField.setAccessible(true);
+			dataWatcherField.setAccessible(true);
+			//dataWatcherItemsField.setAccessible(true);
 
 			idField.set(packet, Integer.valueOf(this.entityID));
 			UUIDField.set(packet, this.accountUUID);
@@ -157,8 +162,7 @@ public class WerewolfSkin
 			zField.set(packet, Integer.valueOf(z));
 			yawField.set(packet, Byte.valueOf(degreeToByte(loc.getYaw())));
 			pitchField.set(packet, Byte.valueOf(degreeToByte(loc.getPitch())));
-			itemField.set(packet, Short.valueOf(item));
-			metadataField.set(packet, this.metadata);
+			dataWatcherField.set(packet, ((CraftPlayer) p).getHandle().getDataWatcher());
 		}
 		catch (Exception e)
 		{
@@ -173,7 +177,7 @@ public class WerewolfSkin
 		return new PacketPlayOutEntityDestroy(new int[] { this.entityID });
 	}
 
-	public PacketPlayOutEntityEquipment getEquipmentChangePacket(short slot, ItemStack item)
+	public PacketPlayOutEntityEquipment getEquipmentChangePacket(EnumItemSlot slot, ItemStack item)
 	{
 		PacketPlayOutEntityEquipment packet;
 
@@ -192,7 +196,7 @@ public class WerewolfSkin
 				{
 					Field field = packet.getClass().getDeclaredField("b");
 					field.setAccessible(true);
-					field.setShort(packet, slot);
+					field.setInt(packet, slot.ordinal() - 1);
 				}
 
 				{

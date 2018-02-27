@@ -24,7 +24,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.dogonfire.werewolf.ClanManager.ClanType;
-import com.dogonfire.werewolf.Commands.Hunter;
 
 public class Commands implements Listener
 {
@@ -824,62 +823,61 @@ public class Commands implements Listener
 	{
 		if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check") || player.isOp())
 		{
-			Player checkPlayer = null;
 			try
 			{
-				checkPlayer = this.plugin.getServer().getPlayer(args[1]);
+				Player checkPlayer = this.plugin.getServer().getPlayer(args[1]);
+				
+				if (checkPlayer != null)
+				{
+					if (Werewolf.getWerewolfManager().isFullWerewolf(checkPlayer.getUniqueId()))
+					{
+						if (player != null)
+						{
+							int level = Werewolf.getWerewolfManager().getNumberOfTransformations(player.getUniqueId());
+							
+							Werewolf.getLanguageManager().setPlayerName(player.getName());
+							Werewolf.getLanguageManager().setType(String.valueOf(level));
+							this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsAFullWerewolf, ChatColor.AQUA));
+							//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is a full werewolf");
+						}
+						else
+						{
+							this.plugin.log(checkPlayer.getName() + " is a full werewolf");
+						}
+					}
+					else if (Werewolf.getWerewolfManager().isInfectedWerewolf(checkPlayer.getUniqueId()))
+					{
+						if (player != null)
+						{
+							Werewolf.getLanguageManager().setPlayerName(player.getName());
+							this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsAnInfectedWerewolf, ChatColor.AQUA));
+							//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is a infected werewolf");
+						}
+						else
+						{
+							this.plugin.log(checkPlayer.getName() + " is a infected werewolf");
+						}
+					}
+					else if (player != null)
+					{
+						Werewolf.getLanguageManager().setPlayerName(player.getName());
+						this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsNotAWerewolf, ChatColor.AQUA));
+						//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is not a werewolf");
+					}
+					else
+					{
+						this.plugin.log(checkPlayer.getName() + " is not a werewolf");
+					}
+					
+					if (player != null)
+					{
+						this.plugin.log(player.getName() + ": /werewolf check " + checkPlayer.getName());
+					}
+				}
 			}
 			catch (Exception ex)
 			{
 				this.plugin.log("'" + player.getName() + "' made a command error");
-			}
-			
-			if (checkPlayer != null)
-			{
-				if (Werewolf.getWerewolfManager().isFullWerewolf(checkPlayer.getUniqueId()))
-				{
-					if (player != null)
-					{
-						int level = Werewolf.getWerewolfManager().getNumberOfTransformations(player.getUniqueId());
-						
-						Werewolf.getLanguageManager().setPlayerName(player.getName());
-						Werewolf.getLanguageManager().setType(String.valueOf(level));
-						this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsAFullWerewolf, ChatColor.AQUA));
-						//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is a full werewolf");
-					}
-					else
-					{
-						this.plugin.log(checkPlayer.getName() + " is a full werewolf");
-					}
-				}
-				else if (Werewolf.getWerewolfManager().isInfectedWerewolf(checkPlayer.getUniqueId()))
-				{
-					if (player != null)
-					{
-						Werewolf.getLanguageManager().setPlayerName(player.getName());
-						this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsAnInfectedWerewolf, ChatColor.AQUA));
-						//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is a infected werewolf");
-					}
-					else
-					{
-						this.plugin.log(checkPlayer.getName() + " is a infected werewolf");
-					}
-				}
-				else if (player != null)
-				{
-					Werewolf.getLanguageManager().setPlayerName(player.getName());
-					this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsNotAWerewolf, ChatColor.AQUA));
-					//player.sendMessage(ChatColor.AQUA + checkPlayer.getName() + " is not a werewolf");
-				}
-				else
-				{
-					this.plugin.log(checkPlayer.getName() + " is not a werewolf");
-				}
-				
-				if (player != null)
-				{
-					this.plugin.log(player.getName() + ": /werewolf check " + checkPlayer.getName());
-				}
 			}
 		}
 		else
@@ -926,41 +924,50 @@ public class Commands implements Listener
 		}
 		else if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.addbounty") || player.isOp())
 		{
-			if (Werewolf.getWerewolfManager().isWerewolf(player))
-			{
-				this.plugin.sendInfo(player, ChatColor.RED + "Werewolves cannot add to the Werewolf bounty!");
-				return true;
-			}
 			try
 			{
-				int bounty = Integer.parseInt(args[1]);
-				if (bounty <= 0)
-				{
-					this.plugin.sendInfo(player, ChatColor.RED + "How about adding a real amount?");
-
-					return false;
-				}
-				
-				Werewolf.getHuntManager().addBounty(player.getName(), bounty);
-				
 				if (player == null)
 				{
 					return true;
 				}
 				
-				this.plugin.log(player.getName() + ": /werewolf addbounty " + bounty);
+				if (Werewolf.getWerewolfManager().isWerewolf(player))
+				{
+					this.plugin.sendInfo(player, ChatColor.RED + "Werewolves cannot add to the Werewolf bounty!");
+					return false;
+				}
+				else {
+					int bounty = Integer.parseInt(args[1]);
+					
+					if (bounty <= 0)
+					{
+						this.plugin.sendInfo(player, ChatColor.RED + "How about adding a real amount?");
+	
+						return false;
+					}
+					
+					Werewolf.getHuntManager().addBounty(player.getName(), bounty);
+					
+					this.plugin.log(player.getName() + ": /werewolf addbounty " + bounty);
+					
+					return true;
+				}
 			}
-			catch (Exception ex)
+			catch (NumberFormatException ex)
 			{
 				this.plugin.sendInfo(player, ChatColor.RED + "Come on, that is not a valid bounty :/");
+				
+				return false;
 			}
 		}
 		else
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
+			
+			return false;
 		}
 
-		return true;
+		return false;
 	}
 
 	public boolean CommandHuntWerewolf(Player player)
@@ -1003,13 +1010,13 @@ public class Commands implements Listener
 				return false;
 			}
 			
-			if (player.getItemInHand().getType() != Material.AIR)
+			if (player.getInventory().getItemInMainHand().getType() != Material.AIR)
 			{
 				this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 				return false;
 			}
 			
-			player.setItemInHand(new ItemStack(Material.COMPASS));
+			player.getInventory().setItemInMainHand(new ItemStack(Material.COMPASS));
 
 			Werewolf.getLanguageManager().setPlayerName(player.getName());
 			this.plugin.getServer().broadcastMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsHuntingWerewolves, ChatColor.GOLD));
@@ -1018,12 +1025,12 @@ public class Commands implements Listener
 		}
 		else
 		{
-			if (player.getItemInHand().getType() != Material.COMPASS)
+			if (player.getInventory().getItemInMainHand().getType() != Material.COMPASS)
 			{
 				this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.TakeCompassInHands, ChatColor.RED));
 				return false;
 			}
-			player.setItemInHand(new ItemStack(Material.AIR));
+			player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
 			Werewolf.getLanguageManager().setPlayerName(player.getName());
 			this.plugin.getServer().broadcastMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.PlayerIsNoLongerHuntingWerewolves, ChatColor.GOLD));
 			Werewolf.getHuntManager().setHunting(player.getUniqueId(), false);
@@ -1182,7 +1189,7 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
 			return false;
 		}
-		if ((player.getItemInHand() != null) && (player.getItemInHand().getType() != Material.AIR))
+		if ((player.getInventory().getItemInMainHand() != null) && (player.getInventory().getItemInMainHand().getType() != Material.AIR))
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 			return false;
@@ -1190,7 +1197,7 @@ public class Commands implements Listener
 		
 		ItemStack potionItem = Werewolf.getItemManager().newInfectionPotion();
 
-		player.setItemInHand(potionItem);
+		player.getInventory().setItemInMainHand(potionItem);
 
 		this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CreatedWerewolfInfectionPotion, ChatColor.GREEN));
 
@@ -1209,7 +1216,7 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
 			return false;
 		}
-		if ((player.getItemInHand() != null) && (player.getItemInHand().getType() != Material.AIR))
+		if ((player.getInventory().getItemInMainHand() != null) && (player.getInventory().getItemInMainHand().getType() != Material.AIR))
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 			return false;
@@ -1217,7 +1224,7 @@ public class Commands implements Listener
 		
 		ItemStack potionItem = Werewolf.getItemManager().newCurePotion();
 		
-		player.setItemInHand(potionItem);
+		player.getInventory().setItemInMainHand(potionItem);
 
 		this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CreatedWerewolfCurePotion, ChatColor.GREEN));
 
@@ -1236,7 +1243,7 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
 			return false;
 		}
-		if ((player.getItemInHand() != null) && (player.getItemInHand().getType() != Material.AIR))
+		if ((player.getInventory().getItemInMainHand() != null) && (player.getInventory().getItemInMainHand().getType() != Material.AIR))
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 			return false;
@@ -1244,7 +1251,7 @@ public class Commands implements Listener
 		
 		ItemStack potionItem = Werewolf.getItemManager().newWolfbanePotion();
 
-		player.setItemInHand(potionItem);
+		player.getInventory().setItemInMainHand(potionItem);
 
 		this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CreatedWerewolfWolfbanePotion, ChatColor.GREEN));
 
@@ -1265,7 +1272,7 @@ public class Commands implements Listener
 			return false;
 		}
 		
-		if ((player.getItemInHand() != null) && (player.getItemInHand().getType() != Material.AIR))
+		if ((player.getInventory().getItemInMainHand() != null) && (player.getInventory().getItemInMainHand().getType() != Material.AIR))
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 			return false;
@@ -1273,7 +1280,7 @@ public class Commands implements Listener
 		
 		ItemStack swordItem = Werewolf.getItemManager().newSilverSword(1);
 
-		player.setItemInHand(swordItem);
+		player.getInventory().setItemInMainHand(swordItem);
 
 		this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CreatedWerewolfSilverSword, ChatColor.GREEN));
 
@@ -1294,7 +1301,7 @@ public class Commands implements Listener
 			return false;
 		}
 		
-		if ((player.getItemInHand() != null) && (player.getItemInHand().getType() != Material.AIR))
+		if ((player.getInventory().getItemInMainHand() != null) && (player.getInventory().getItemInMainHand().getType() != Material.AIR))
 		{
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouMustHaveYourHandsFree, ChatColor.RED));
 			return false;
@@ -1302,7 +1309,7 @@ public class Commands implements Listener
 		
 		ItemStack bookItem = Werewolf.getItemManager().newLoreBook();
 
-		player.setItemInHand(bookItem);
+		player.getInventory().setItemInMainHand(bookItem);
 
 		this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CreatedWerewolfLoreBook, ChatColor.GREEN));
 
