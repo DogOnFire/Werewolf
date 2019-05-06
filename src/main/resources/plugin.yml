@@ -1,0 +1,159 @@
+name: Werewolf-Reloaded
+main: com.dogonfire.werewolf.Werewolf
+author: DogOnFire
+version: ${project.version}
+api-version: 1.13
+load: POSTWORLD
+description: Werewolves in Minecraft!
+depend: [LibsDisguises, ProtocolLib]
+softdepend: [Vault, HealthBar]
+website: http://dev.bukkit.org/server-mods/werewolf
+commands:
+   werewolf:
+      description: Command for Werewolf
+      usage: /werewolf <playername>
+      aliases: [ww]
+   growl:
+      description: Command for Werewolves to growl
+      usage: /growl
+   howl:
+      description: Command for Werewolves to howl
+      usage: /howl
+permissions:
+    werewolf.*:
+        description: Gives access to all Werewolf commands
+        children:
+            werewolf.sethome: true
+            werewolf.home: true
+            werewolf.alpha.call: true
+            werewolf.acceptcall: true
+            werewolf.sign.infection.use: true
+            werewolf.sign.cure.use: true
+            werewolf.sign.wolfbane.use: true
+            werewolf.sign.silversword.use: true
+            werewolf.sign.lorebook.use: true
+            werewolf.potion.cure.drink: true
+            werewolf.potion.infection.drink: true
+            werewolf.howl: true
+            werewolf.growl: true
+            werewolf.cure: true
+            werewolf.becomeinfected: true
+            werewolf.infectother: true
+            werewolf.bounty: true
+            werewolf.top: true
+            werewolf.addbounty: true
+            werewolf.hunt: true
+            werewolf.transform: true
+            werewolf.clan: true
+            werewolf.list: true
+    werewolf.sethome:
+        description: Player can set the clan home
+        default: true
+    werewolf.home:
+        description: Player can teleport to their clan home
+        default: true
+    werewolf.list:
+        description: Player can see ranked list of clan members
+        default: true
+    werewolf.updates:
+        description: Player will see notifications about new versions of the Werewolf plugin
+        default: false
+    werewolf.sign.infection.use:
+        description: Allows the player to place a sign selling Werewolf infection potions
+        default: true
+    werewolf.sign.cure.use:
+        description: Allows the player to place a sign selling Werewolf infection potions 
+        default: true
+    werewolf.sign.wolfbane.use:
+        description: Allows the player to place a sign selling Werewolf wolfbane potions 
+        default: true
+    werewolf.sign.silversword.use:
+        description: Allows the player to place a sign selling Werewolf silver swords 
+        default: true
+    werewolf.sign.lorebook.use:
+        description: Allows the player to place a sign selling lore books 
+        default: true
+    werewolf.sign.infection.place:
+        description: Allows the player to place a sign selling Werewolf infection potions
+        default: false
+    werewolf.sign.cure.place:
+        description: Allows the player to place a sign selling Werewolf infection potions 
+        default: false
+    werewolf.alpha.call:
+        description: Allows the player to call clan members when he is the clan alpha 
+        default: true
+    werewolf.accept:
+        description: Allows the player to accept calls from the clan alpha 
+        default: true
+    werewolf.potion.infection.create:
+        description: Allows the player to create a Werewolf infection potion 
+        default: false           
+    werewolf.potion.cure.create:
+        description: Allows the Player to create a Werewolf cure potion 
+        default: false            
+    werewolf.potion.wolfbane.create:
+        description: Allows the player to create a Werewolf wolfbane potion 
+        default: false           
+    werewolf.silversword.create:
+        description: Allows the player to create a Werewolf silver sword 
+        default: false           
+    werewolf.lorebook.create:
+        description: Allows the player to create a Werewolf lorebook 
+        default: false           
+    werewolf.potion.infection.drink:
+        description: Allows the player to drink a Werewolf infection potion 
+        default: true           
+    werewolf.potion.cure.drink:
+        description: Allows the player to drink a Werewolf cure potion 
+        default: true           
+    werewolf.clan:
+        description: Displays the Werewolf clan info 
+        default: true           
+    werewolf.transform:
+        description: Instantly transforms player into Werewolf form 
+        default: true           
+    werewolf.seer:
+        description: Allows the Player to see a Werewolf players original skin 
+        default: false           
+    werewolf.listener:
+        description: Allows the Player to understand Werewolf chat 
+        default: false           
+    werewolf.howl:
+        description: Allows a Player to howl when being a werewolf 
+        default: true            
+    werewolf.growl:
+        description: Allows a Player to growl when being a werewolf 
+        default: true            
+    werewolf.top:
+        description: Allows the Player to view the top 10 Werewolf hunters 
+        default: true            
+    werewolf.bounty:
+        description: Allows the Player to check the bounty for killing a Werewolf 
+        default: true            
+    werewolf.addbounty:
+        description: Allows the Player to add to the Werewolf bounty 
+        default: true            
+    werewolf.hunt:
+        description: Allows the Player to put himself into Werewolf hunt mode 
+        default: true            
+    werewolf.check:
+        description: Allows the Player to check Werewolf status of other players 
+        default: false            
+    werewolf.infect:
+        description: Allows the Player to give the Werewolf infection to other players by using commands 
+        default: false            
+    werewolf.infectself:
+        description: Allows the Player to infect himself with the Werewolf infection using commands 
+        default: false            
+    werewolf.togglewerewolf:
+        description: Allows the Player to toggle Werewolf status of other players 
+        default: false            
+    werewolf.togglewerewolfself:
+        description: Allows the Player to toggle Werewolf status of himself 
+        default: false            
+    werewolf.becomeinfected:
+        description: Allows the Player to become infected with the Werewolf infection 
+        default: true            
+    werewolf.infectother:
+        description: Allows the Player to infect others with the Werewolf infection by attacking them 
+        default: true            

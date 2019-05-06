@@ -1,7 +1,16 @@
-/bin 
-/target
+# Libs and stuff
+/bukkit
 /lib
-/.settings
+/jar
+dependency-reduced-pom.xml
+
+# Eclipse Core
+/bin
+
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
 .project
-build.xml
+/.settings/
+
+# Maven build
+/target/
