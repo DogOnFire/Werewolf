@@ -1,4 +1,11 @@
 language: java
-script: ant init
-notifications:
-  email: true
+jdk:
+  - oraclejdk8
+deploy:
+  provider: releases
+  file_glob: true
+  file: "target/Werewolf-*.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+sudo: false
