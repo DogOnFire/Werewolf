@@ -335,6 +335,7 @@ public class LanguageManager
 		BiteWildWolf,
 		KilledMob,
 		WerewolfTryEat,
+		WerewolfTryDefense,
 		DrinkCureSuccess,
 		DrinkCureFailure,
 		DrinkInfectionSuccess,

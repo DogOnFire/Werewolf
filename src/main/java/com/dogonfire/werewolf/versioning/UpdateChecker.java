@@ -14,17 +14,8 @@ public class UpdateChecker
 {
 	private final int			projectID				= 39095;
 	private final String		apiKey					= null;
-	private static final String	API_NAME_VALUE			= "name";
-	private static final String	API_LINK_VALUE			= "downloadUrl";
-	private static final String	API_RELEASE_TYPE_VALUE	= "releaseType";
-	private static final String	API_FILE_NAME_VALUE		= "fileName";
-	private static final String	API_GAME_VERSION_VALUE	= "gameVersion";
 	private static final String	API_QUERY				= "/servermods/files?projectIds=";
 	private static final String	API_HOST				= "https://api.curseforge.com";
-	private static String		versionName;
-	private static String		versionLink;
-	private static String		versionType;
-	private static String		versionFileName;
 	private static String		versionGameVersion;
 
 	public String getLatestVersionName()
@@ -60,12 +51,6 @@ public class UpdateChecker
 				JSONObject latest = (JSONObject) array.get(array.size() - 1);
 
 				versionName = (String) latest.get("name");
-
-				versionLink = (String) latest.get("downloadUrl");
-
-				versionType = (String) latest.get("releaseType");
-
-				versionFileName = (String) latest.get("fileName");
 
 				versionGameVersion = (String) latest.get("gameVersion");
 			}

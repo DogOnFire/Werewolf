@@ -111,6 +111,7 @@ public class DisguiseTask implements Runnable
 				inventory.remove(stack);
 			}
 		}
+		this.player.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
 	}
 
 	public void run()
@@ -153,6 +154,9 @@ public class DisguiseTask implements Runnable
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 32000, 2)), 64L);
 
 				this.player.setWalkSpeed(0.5F);
+				break;
+			default:
+				break;
 		}
 		
 		dropArmor();

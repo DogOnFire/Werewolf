@@ -43,7 +43,6 @@ public class WerewolfManager
 	private File						werewolvesConfigFile			= null;
 	private Random						random							= new Random();
 	private long						lastSaveTime					= 0L;
-	private long						lastFullMoonAnnouncementTime	= 0L;
 	private String						datePattern						= "HH:mm:ss dd-MM-yyyy";
 	private HashMap<UUID, Long>			lastFullMoonAnnouncementTimes	= new HashMap<UUID, Long>();
 	private HashMap<UUID, String>		originalGroup					= new HashMap<UUID, String>();
@@ -123,16 +122,13 @@ public class WerewolfManager
 		
 		for (Player onlinePlayer : this.plugin.getServer().getOnlinePlayers())
 		{
-			if (hasWerewolfSkin(onlinePlayer.getUniqueId()))
+			if (hasWerewolfSkin(onlinePlayer.getUniqueId()) && ((player.getWorld() == onlinePlayer.getWorld()) && (player.getEntityId() != onlinePlayer.getEntityId())))
 			{
-				if ((player.getWorld() == onlinePlayer.getWorld()) && (player.getEntityId() != onlinePlayer.getEntityId()))
+				float dist = (float) onlinePlayer.getLocation().toVector().subtract(player.getLocation().toVector()).length();
+				if (dist < minDist)
 				{
-					float dist = (float) onlinePlayer.getLocation().toVector().subtract(player.getLocation().toVector()).length();
-					if (dist < minDist)
-					{
-						minWerewolf = onlinePlayer;
-						minDist = dist;
-					}
+					minWerewolf = onlinePlayer;
+					minDist = dist;
 				}
 			}
 		}
@@ -208,12 +204,9 @@ public class WerewolfManager
 
 		for (UUID playerId : getOnlineWerewolves(world))
 		{
-			if (this.isWerewolf(playerId))
+			if (this.isWerewolf(playerId) && this.isWolfForm(playerId))
 			{
-				if (this.isWolfForm(playerId))
-				{
-					werewolfPlayers.add(playerId);
-				}
+				werewolfPlayers.add(playerId);
 			}
 		}
 
@@ -274,7 +267,9 @@ public class WerewolfManager
 			
 			ClanType playerClanType = this.getWerewolfClan(playerId);
 
-			werewolfList.add(playerId);
+			if (playerClanType == clanType) {
+				werewolfList.add(playerId);
+			}
 		}
 		
 		return werewolfList;
@@ -563,7 +558,6 @@ public class WerewolfManager
 
 	public UUID getAlphaCandidate(ClanManager.ClanType clan)
 	{
-		Set<String> playerList = this.werewolvesConfig.getKeys(false);
 		List<UUID> clanMembers = Werewolf.getWerewolfManager().getWerewolfClanMembersRanked(clan);//new ArrayList<UUID>();
 		
 		/*
@@ -605,10 +599,6 @@ public class WerewolfManager
 
 	public class TransformationsComparator implements Comparator<UUID>
 	{
-		public TransformationsComparator()
-		{
-		}
-
 		public int compare(UUID member1, UUID member2)
 		{
 			return Werewolf.getWerewolfManager().getNumberOfTransformations(member2) - Werewolf.getWerewolfManager().getNumberOfTransformations(member1);
@@ -635,7 +625,7 @@ public class WerewolfManager
 				{
 				}
 				
-				if ((clanType != null) && (clanType == clan))
+				if ((clanType.equals(null)) && (clanType.equals(clan)))
 				{
 					clanMembers.add(playerName);
 				}
@@ -1000,19 +990,16 @@ public class WerewolfManager
 			this.lastWorldUpdates.put(world.getUID(), System.currentTimeMillis());
 		}
 		
-		if (this.plugin.autoCureDays > 0 && this.random.nextInt(100) == 0)
+		if (this.plugin.autoCureDays > 0 && this.random.nextInt(100) == 0 && Werewolf.getWerewolfManager().getAllWerewolves().size() > 0)
 		{
-			if (Werewolf.getWerewolfManager().getAllWerewolves().size() > 0)
+			int r = this.random.nextInt(Werewolf.getWerewolfManager().getAllWerewolves().size());
+			UUID werewolfPlayerId = (UUID) Werewolf.getWerewolfManager().getAllWerewolves().toArray()[r];
+			
+			if (!hasRecentTransformAutoCure(werewolfPlayerId))
 			{
-				int r = this.random.nextInt(Werewolf.getWerewolfManager().getAllWerewolves().size());
-				UUID werewolfPlayerId = (UUID) Werewolf.getWerewolfManager().getAllWerewolves().toArray()[r];
-				
-				if (!hasRecentTransformAutoCure(werewolfPlayerId))
-				{
-					String werewolfPlayerName = plugin.getServer().getOfflinePlayer(werewolfPlayerId).getName();
-					unmakeWerewolf(werewolfPlayerId);
-					this.plugin.log(werewolfPlayerName + " has not transformed for " + this.plugin.autoCureDays + " days. Removing his werewolf infection.");
-				}
+				String werewolfPlayerName = plugin.getServer().getOfflinePlayer(werewolfPlayerId).getName();
+				unmakeWerewolf(werewolfPlayerId);
+				this.plugin.log(werewolfPlayerName + " has not transformed for " + this.plugin.autoCureDays + " days. Removing his werewolf infection.");
 			}
 		}
 

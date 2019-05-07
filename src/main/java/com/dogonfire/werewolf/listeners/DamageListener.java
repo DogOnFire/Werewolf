@@ -38,23 +38,20 @@ public class DamageListener implements Listener
 			return;
 		}
 		
-		if (!event.isCancelled())
+		if (!event.isCancelled() && (event.getEntity() instanceof Player))
 		{
-			if (event.getEntity() instanceof Player)
+			Player player = (Player) event.getEntity();
+			
+			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 			{
-				Player player = (Player) event.getEntity();
-				
-				if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
+				PlayerDisguise skin = Werewolf.getSkinManager().getSkin(player);
+				if (skin != null)
 				{
-					PlayerDisguise skin = Werewolf.getSkinManager().getSkin(player);
-					if (skin != null)
-					{
-						Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
-					}
-					else
-					{
-						this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
-					}
+					Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
+				}
+				else
+				{
+					this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
 				}
 			}
 		}
@@ -149,21 +146,18 @@ public class DamageListener implements Listener
 			if (event.getEntity() != null && (event.getEntity() instanceof Player))
 			{
 				Player player = (Player) event.getEntity();
-				if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()) && (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.becomeinfected") || player.isOp()))
+				if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()) && (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.becomeinfected") || player.isOp()) && (!Werewolf.getWerewolfManager().isWerewolf(player) && (damageEvent.getDamager() instanceof Wolf) && Math.random() < this.plugin.wildWolfInfectionRisk))
 				{
-					if (!Werewolf.getWerewolfManager().isWerewolf(player) && (damageEvent.getDamager() instanceof Wolf) && Math.random() < this.plugin.wildWolfInfectionRisk)
+					Tameable tameable = (Tameable)damageEvent.getDamager();
+						
+					if(!tameable.isTamed())
 					{
-						Tameable tameable = (Tameable)damageEvent.getDamager();
-						
-						if(!tameable.isTamed())
-						{
-							Random random = new Random();
-							Werewolf.getWerewolfManager().makeWerewolf(player, false, ClanManager.ClanType.values()[random.nextInt(ClanManager.ClanType.values().length)]);
+						Random random = new Random();
+						Werewolf.getWerewolfManager().makeWerewolf(player, false, ClanManager.ClanType.values()[random.nextInt(ClanManager.ClanType.values().length)]);
 
-							player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
-						
-							plugin.log(player.getName() + " contracted the werewolf infection from a wild wolf!");
-						}
+						player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
+					
+						plugin.log(player.getName() + " contracted the werewolf infection from a wild wolf!");
 					}
 				}
 			}

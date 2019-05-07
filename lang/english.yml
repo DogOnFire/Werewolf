@@ -198,6 +198,8 @@ KilledMob:
 - That was a good kill. You feasted for $Amount health!
 WerewolfTryEat:
 - Werewolves do not eat that. You crave meat!
+WerewolfTryDefense:
+- Werewolves does not need any defense!
 DrinkInfectionSuccess:
 - Whoa! A warm feeling is flowing through your body...
 DrinkInfectionFailure:

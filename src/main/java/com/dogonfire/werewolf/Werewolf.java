@@ -110,11 +110,6 @@ public class Werewolf extends JavaPlugin
 	
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
-	private DamageListener						damageListener							= null;
-	private PlayerListener						playerListener							= null;
-	private InteractListener					interactListener						= null;
-	private InventoryListener					inventoryListener						= null;
-	private ChatListener						chatListener							= null;
 	private String								chatPrefix								= "<Werewolf>: ";
 	public String								serverName								= "Your Server";
 
@@ -126,7 +121,7 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableSilverArmorEnabled				= true;
 	public boolean								craftableLoreBookEnabled				= true;
 
-	private Version								version;
+	private Version								version									= null;
 	public static final String					MAX										= "1.13.2-R0.1-SNAPSHOT";
 	public static final String					MIN										= "1.12";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
@@ -217,7 +212,7 @@ public class Werewolf extends JavaPlugin
 
 	public void announcementMessage(World world, String messageText, Sound sound, long delay)
 	{
-		server.getScheduler().scheduleSyncDelayedTask(plugin, new CentralMessageTask(plugin, world, messageText, sound), delay);
+		server.getScheduler().scheduleSyncDelayedTask(plugin, new CentralMessageTask(world, messageText, sound), delay);
 	}
 
 	public void disguiseWerewolf(Player p)
@@ -231,11 +226,11 @@ public class Werewolf extends JavaPlugin
 
 		if (player != null)
 		{
-			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, null, playerId, makeVisible, forever), 8L);
+			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, playerId, makeVisible, forever), 8L);
 		}
 		else
 		{
-			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, null, playerId, makeVisible, forever), 8L);
+			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, playerId, makeVisible, forever), 8L);
 		}
 	}
 
@@ -273,7 +268,7 @@ public class Werewolf extends JavaPlugin
 		return isCompatible;
 	}
 
-	public void OnDisable()
+	public void onDisable()
 	{
 		CompassTracker.stop();
 
@@ -285,6 +280,11 @@ public class Werewolf extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
+		DamageListener damageListener = null;
+		PlayerListener playerListener = null;
+		InteractListener interactListener = null;
+		InventoryListener inventoryListener = null;
+		ChatListener chatListener = null;
 		plugin = this;
 		server = getServer();
 		config = getConfig();
@@ -320,13 +320,16 @@ public class Werewolf extends JavaPlugin
 
 		statisticsManager = new StatisticsManager(this);		
 		itemManager = new ItemManager(this);		
-		this.damageListener = new DamageListener(this);
-		this.playerListener = new PlayerListener(this);
-		this.interactListener = new InteractListener(this);
-		this.chatListener = new ChatListener(this);
+		damageListener = new DamageListener(this);
+		playerListener = new PlayerListener(this);
+		interactListener = new InteractListener(this);
+		chatListener = new ChatListener(this);
 		
 		// If ! prevent armor
-		this.inventoryListener = new InventoryListener(this);
+		if (this.dropArmorOnTransform)
+		{
+			inventoryListener = new InventoryListener(this);
+		}
 
 		pu = new PacketUtils(this);
 
@@ -363,10 +366,14 @@ public class Werewolf extends JavaPlugin
 
 			this.healthBarEnabled = true;
 		}
-		getServer().getPluginManager().registerEvents(this.playerListener, this);
-		getServer().getPluginManager().registerEvents(this.interactListener, this);
-		getServer().getPluginManager().registerEvents(this.damageListener, this);
-		getServer().getPluginManager().registerEvents(this.chatListener, this);
+		getServer().getPluginManager().registerEvents(playerListener, this);
+		getServer().getPluginManager().registerEvents(interactListener, this);
+		getServer().getPluginManager().registerEvents(damageListener, this);
+		getServer().getPluginManager().registerEvents(chatListener, this);
+		if (this.dropArmorOnTransform)
+		{
+			getServer().getPluginManager().registerEvents(inventoryListener, this);
+		}
 
 		loadSettings();
 		saveSettings();

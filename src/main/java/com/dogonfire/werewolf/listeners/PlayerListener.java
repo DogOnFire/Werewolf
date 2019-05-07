@@ -167,6 +167,9 @@ public class PlayerListener implements Listener
 							break;
 						case 2:
 							event.setDeathMessage("Werewolf died");
+							break;
+						default:
+							break;
 					}
 				}
 			}
@@ -193,6 +196,9 @@ public class PlayerListener implements Listener
 						break;
 					case 3:
 						event.setDeathMessage(victimName + " was eaten by a Werewolf");
+						break;
+					default:
+						break;
 				}
 			}
 			else if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
@@ -208,55 +214,43 @@ public class PlayerListener implements Listener
 			}
 		}
 
-		if (this.plugin.useTrophies)
+		if (this.plugin.useTrophies && Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
 		{
-			if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
+			Player killer = this.plugin.getServer().getPlayer(killerName);
+
+			if (killer != null)
 			{
-				Player killer = this.plugin.getServer().getPlayer(killerName);
-
-				if (killer != null)
+				switch (killer.getInventory().getItemInMainHand().getType())
 				{
-					switch (killer.getInventory().getItemInMainHand().getType())
+					case DIAMOND_SWORD:
+					case GOLDEN_SWORD:
+					case IRON_SWORD:
+					case STONE_SWORD:
+					case WOODEN_SWORD:
 					{
-						case DIAMOND_SWORD:
-						case GOLDEN_SWORD:
-						case IRON_SWORD:
-						case STONE_SWORD:
-						case WOODEN_SWORD:
-						{
-							org.bukkit.inventory.ItemStack trophy = Werewolf.getTrophyManager().getTrophyFromWerewolfPlayer(killer.getUniqueId(), event.getEntity().getUniqueId());
-							event.getDrops().add(trophy);
+						org.bukkit.inventory.ItemStack trophy = Werewolf.getTrophyManager().getTrophyFromWerewolfPlayer(killer.getUniqueId(), event.getEntity().getUniqueId());
+						event.getDrops().add(trophy);
 
-							event.getEntity().getKiller().sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouCutTheHeadOfWerewolf, ChatColor.WHITE));
-						} break;
+						event.getEntity().getKiller().sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YouCutTheHeadOfWerewolf, ChatColor.WHITE));
+					} break;
 
-						default:
-						  break;
-					}
+					default:
+					  break;
 				}
 			}
 		}
 
-		if (this.plugin.useClans)
+		if (this.plugin.useClans && Werewolf.getWerewolfManager().isWerewolf(event.getEntity().getUniqueId()) && Werewolf.getWerewolfManager().isWerewolf(event.getEntity().getKiller().getUniqueId()))
 		{
-			if (Werewolf.getWerewolfManager().isWerewolf(event.getEntity().getUniqueId()))
+			ClanManager.ClanType killerClan = Werewolf.getWerewolfManager().getWerewolfClan(event.getEntity().getKiller().getUniqueId());
+			ClanManager.ClanType victimClan = Werewolf.getWerewolfManager().getWerewolfClan(event.getEntity().getUniqueId());
+			
+			if (killerClan.equals(victimClan) && Werewolf.getClanManager().isAlpha(victimClan, event.getEntity().getUniqueId()))
 			{
-				if (Werewolf.getWerewolfManager().isWerewolf(event.getEntity().getKiller().getUniqueId()))
-				{
-					ClanManager.ClanType killerClan = Werewolf.getWerewolfManager().getWerewolfClan(event.getEntity().getKiller().getUniqueId());
-					ClanManager.ClanType victimClan = Werewolf.getWerewolfManager().getWerewolfClan(event.getEntity().getUniqueId());
-					
-					if (killerClan == victimClan)
-					{
-						if (Werewolf.getClanManager().isAlpha(victimClan, event.getEntity().getUniqueId()))
-						{
-							Werewolf.getClanManager().assignAlphaInClan(killerClan, event.getEntity().getKiller().getUniqueId());
+				Werewolf.getClanManager().assignAlphaInClan(killerClan, event.getEntity().getKiller().getUniqueId());
 
-							Werewolf.getLanguageManager().setPlayerName(killerName);
-							Werewolf.getWerewolfManager().sendMessageToClan(killerClan, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NewClanAlpha, ChatColor.WHITE));
-						}
-					}
-				}
+				Werewolf.getLanguageManager().setPlayerName(killerName);
+				Werewolf.getWerewolfManager().sendMessageToClan(killerClan, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NewClanAlpha, ChatColor.WHITE));
 			}
 		}
 
@@ -315,6 +309,8 @@ public class PlayerListener implements Listener
 				case LEATHER_HELMET:
 				case IRON_HELMET:
 				case DIAMOND_HELMET:
+				case TURTLE_HELMET:
+				case SHIELD:
 				case BOW:
 					event.setCancelled(true);
 					return;

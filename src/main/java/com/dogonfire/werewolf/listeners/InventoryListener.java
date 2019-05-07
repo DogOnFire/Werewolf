@@ -156,6 +156,24 @@ public class InventoryListener implements Listener
 		{
 			return;
 		}
+		if (player.getInventory().getItemInOffHand() != null)
+		{
+			switch (player.getInventory().getItemInOffHand().getType())
+			{
+				case SHIELD:
+				case WOODEN_SWORD:
+				case GOLDEN_SWORD:
+				case STONE_SWORD:
+				case DIAMOND_SWORD:
+				case IRON_SWORD:
+				case BOW:
+					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
+					player.getInventory().setItemInOffHand(null);
+					break;
+				default:
+					break;
+			}
+		}
 		if (player.getInventory().getHelmet() != null)
 		{
 			switch (player.getInventory().getHelmet().getType())
@@ -165,6 +183,7 @@ public class InventoryListener implements Listener
 				case CHAINMAIL_HELMET:
 				case GOLDEN_HELMET:
 				case DIAMOND_HELMET:
+				case TURTLE_HELMET:
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getHelmet());
 					player.getInventory().setHelmet(null);
 					break;

@@ -101,11 +101,7 @@ public class DamageManager
 		int[] playerVector = getVectorForPoints(startPos[0], startPos[1], l.getBlockX(), l.getBlockY());
 
 		double angle = getAngleBetweenVectors(endA, playerVector);
-		if ((Math.toDegrees(angle) < degrees) && (Math.toDegrees(angle) > 0.0D))
-		{
-			return true;
-		}
-		return false;
+		return ((Math.toDegrees(angle) < degrees) && (Math.toDegrees(angle) > 0.0D));
 	}
 
 	public static int[] getVectorForPoints(int x1, int y1, int x2, int y2)

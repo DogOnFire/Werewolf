@@ -32,7 +32,7 @@ public class Commands implements Listener
 		this.plugin = p;
 	}
 
-	public boolean CommandInfo(Player player)
+	public boolean commandInfo(Player player)
 	{
 		if (player == null)
 		{
@@ -109,13 +109,10 @@ public class Commands implements Listener
 				player.sendMessage("");
 			}			
 
-			if(plugin.useClans)
-			{			
-				if (Werewolf.getWerewolfManager().isWerewolf(player))
-				{
-					Werewolf.getLanguageManager().setType("/ww clan");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpClan, ChatColor.AQUA));
-				}
+			if(plugin.useClans && Werewolf.getWerewolfManager().isWerewolf(player))
+			{
+				Werewolf.getLanguageManager().setType("/ww clan");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpClan, ChatColor.AQUA));
 			}
 			
 			Werewolf.getLanguageManager().setType("/ww help");
@@ -126,7 +123,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public void CommandReload(Player player)
+	public void commandReload(Player player)
 	{
 		this.plugin.reloadSettings();
 		Werewolf.getWerewolfManager().load();
@@ -140,7 +137,7 @@ public class Commands implements Listener
 		}
 	}
 
-	public boolean CommandHelp(Player player)
+	public boolean commandHelp(Player player)
 	{
 		if (player == null)
 		{
@@ -271,7 +268,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	private boolean CommandList(CommandSender sender)
+	private boolean commandList(CommandSender sender)
 	{
 		if (sender == null)
 		{
@@ -349,7 +346,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	private void CommandTopHunters(Player player)
+	private void commandTopHunters(Player player)
 	{
 		if (!this.plugin.vaultEnabled)
 		{
@@ -420,7 +417,7 @@ public class Commands implements Listener
 		}
 	}
 
-	public boolean CommandTransform(Player player)
+	public boolean commandTransform(Player player)
 	{
 		if (player == null)
 		{
@@ -460,7 +457,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandClan(Player player)
+	public boolean commandClan(Player player)
 	{
 		if (!this.plugin.useClans)
 		{
@@ -550,7 +547,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	private boolean CommandSetHome(Player player)
+	private boolean commandSetHome(Player player)
 	{
 		if (!this.plugin.useClans)
 		{
@@ -589,7 +586,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	private boolean CommandHome(Player player)
+	private boolean commandHome(Player player)
 	{
 		if (!player.isOp() && !Werewolf.getPermissionsManager().hasPermission(player, "werewolf.home"))
 		{
@@ -619,7 +616,7 @@ public class Commands implements Listener
 		return true;
 	}	
 	
-	public boolean CommandToggleSelfWerewolf(Player player, String[] args)
+	public boolean commandToggleSelfWerewolf(Player player, String[] args)
 	{
 		if (player == null)
 		{
@@ -656,7 +653,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandTogglePlayerWerewolf(Player player, String[] args)
+	public boolean commandTogglePlayerWerewolf(Player player, String[] args)
 	{
 		if ((player == null) || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolf")) || player.isOp())
 		{
@@ -725,7 +722,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandInfect(Player player, String[] args)
+	public boolean commandInfect(Player player, String[] args)
 	{
 		if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect") || player.isOp())
 		{
@@ -772,7 +769,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandInfectSelf(Player player, String[] args)
+	public boolean commandInfectSelf(Player player, String[] args)
 	{
 		if (player == null)
 		{
@@ -806,7 +803,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandCheck(Player player, String[] args)
+	public boolean commandCheck(Player player, String[] args)
 	{
 		if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check") || player.isOp())
 		{
@@ -874,7 +871,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandBounty(Player player)
+	public boolean commandBounty(Player player)
 	{
 		if (!this.plugin.vaultEnabled)
 		{
@@ -903,7 +900,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandAddBounty(Player player, String[] args)
+	public boolean commandAddBounty(Player player, String[] args)
 	{
 		if (!this.plugin.vaultEnabled)
 		{
@@ -957,7 +954,7 @@ public class Commands implements Listener
 		return false;
 	}
 
-	public boolean CommandHuntWerewolf(Player player)
+	public boolean commandHuntWerewolf(Player player)
 	{
 		if (player == null)
 		{
@@ -1029,7 +1026,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandGrowl(Player player)
+	public boolean commandGrowl(Player player)
 	{
 		if (player == null)
 		{
@@ -1051,7 +1048,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandHowl(Player player)
+	public boolean commandHowl(Player player)
 	{
 		if (player == null)
 		{
@@ -1086,7 +1083,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandCall(Player player)
+	public boolean commandCall(Player player)
 	{
 		if (player == null)
 		{
@@ -1127,7 +1124,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandAcceptCall(Player player)
+	public boolean commandAcceptCall(Player player)
 	{
 		if (player == null)
 		{
@@ -1164,7 +1161,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandInfectionPotion(Player player)
+	public boolean commandInfectionPotion(Player player)
 	{
 		if (player == null)
 		{
@@ -1191,7 +1188,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandCurePotion(Player player)
+	public boolean commandCurePotion(Player player)
 	{
 		if (player == null)
 		{
@@ -1218,7 +1215,7 @@ public class Commands implements Listener
 		return true;
 	}
 	
-	public boolean CommandWolfbanePotion(Player player)
+	public boolean commandWolfbanePotion(Player player)
 	{
 		if (player == null)
 		{
@@ -1245,7 +1242,7 @@ public class Commands implements Listener
 		return true;
 	}
 	
-	public boolean CommandSilverSword(Player player)
+	public boolean commandSilverSword(Player player)
 	{
 		if (player == null)
 		{
@@ -1274,7 +1271,7 @@ public class Commands implements Listener
 		return true;
 	}
 
-	public boolean CommandLoreBook(Player player)
+	public boolean commandLoreBook(Player player)
 	{
 		if (player == null)
 		{
@@ -1320,37 +1317,37 @@ public class Commands implements Listener
 		
 		if (label.equalsIgnoreCase("growl"))
 		{
-			CommandGrowl(player);
+			commandGrowl(player);
 		}
 		if (label.equalsIgnoreCase("howl"))
 		{
-			CommandHowl(player);
+			commandHowl(player);
 		}
 		
 		if ((label.equalsIgnoreCase("werewolf")) || (label.equalsIgnoreCase("ww")))
 		{
 			if (args.length == 0)
 			{
-				CommandInfo(player);
+				commandInfo(player);
 				return true;
 			}
 			if (args.length == 2)
 			{
 				if (args[0].equalsIgnoreCase("toggle"))
 				{
-					CommandTogglePlayerWerewolf(player, args);
+					commandTogglePlayerWerewolf(player, args);
 				}
 				else if (args[0].equalsIgnoreCase("infect"))
 				{
-					CommandInfect(player, args);
+					commandInfect(player, args);
 				}
 				else if (args[0].equalsIgnoreCase("addbounty"))
 				{
-					CommandAddBounty(player, args);
+					commandAddBounty(player, args);
 				}
 				else if (args[0].equalsIgnoreCase("check"))
 				{
-					CommandCheck(player, args);
+					commandCheck(player, args);
 				}
 				else
 				{
@@ -1363,75 +1360,75 @@ public class Commands implements Listener
 			{
 				if (args[0].equalsIgnoreCase("reload"))
 				{
-					CommandReload(player);
+					commandReload(player);
 				}
 				else if (args[0].equalsIgnoreCase("help"))
 				{
-					CommandHelp(player);
+					commandHelp(player);
 				}
 				else if (args[0].equalsIgnoreCase("clan"))
 				{
-					CommandClan(player);
+					commandClan(player);
 				}
 				else if (args[0].equalsIgnoreCase("list"))
 				{
-					CommandList(player);
+					commandList(player);
 				}
 				else if (args[0].equalsIgnoreCase("transform"))
 				{
-					CommandTransform(player);
+					commandTransform(player);
 				}
 				else if (args[0].equalsIgnoreCase("toggle"))
 				{
-					CommandToggleSelfWerewolf(player, args);
+					commandToggleSelfWerewolf(player, args);
 				}
 				else if (args[0].equalsIgnoreCase("infect"))
 				{
-					CommandInfectSelf(player, args);
+					commandInfectSelf(player, args);
 				}
 				else if (args[0].equalsIgnoreCase("bounty"))
 				{
-					CommandBounty(player);
+					commandBounty(player);
 				}
 				else if (args[0].equalsIgnoreCase("home"))
 				{
-					CommandHome(player);
+					commandHome(player);
 				}
 				else if (args[0].equalsIgnoreCase("sethome"))
 				{
-					CommandSetHome(player);
+					commandSetHome(player);
 				}
 				else if (args[0].equalsIgnoreCase("call"))
 				{
-					CommandCall(player);
+					commandCall(player);
 				}
 				else if (args[0].equalsIgnoreCase("top"))
 				{
-					CommandTopHunters(player);
+					commandTopHunters(player);
 				}
 				else if (args[0].equalsIgnoreCase("hunt"))
 				{
-					CommandHuntWerewolf(player);
+					commandHuntWerewolf(player);
 				}
 				else if (args[0].equalsIgnoreCase("infectionpotion"))
 				{
-					CommandInfectionPotion(player);
+					commandInfectionPotion(player);
 				}
 				else if (args[0].equalsIgnoreCase("curepotion"))
 				{
-					CommandCurePotion(player);
+					commandCurePotion(player);
 				}
 				else if (args[0].equalsIgnoreCase("wolfbane"))
 				{
-					CommandWolfbanePotion(player);
+					commandWolfbanePotion(player);
 				}
 				else if (args[0].equalsIgnoreCase("silversword"))
 				{
-					CommandSilverSword(player);
+					commandSilverSword(player);
 				}
 				else if (args[0].equalsIgnoreCase("lorebook"))
 				{
-					CommandLoreBook(player);
+					commandLoreBook(player);
 				}
 				else if (args[0].equalsIgnoreCase("on"))
 				{
@@ -1510,10 +1507,6 @@ public class Commands implements Listener
 
 	public class TopHuntersComparator implements Comparator<Commands.Hunter>
 	{
-		public TopHuntersComparator()
-		{
-		}
-
 		public int compare(Commands.Hunter object1, Commands.Hunter object2)
 		{
 			Commands.Hunter h1 = object1;

@@ -1,7 +1,7 @@
 Version:
   Name : Danish
   Author: DogOnFire
-  Version: 0.1
+  Version: 0.2
 FullMoonIsRising:
 - &4Pas på! Fuldmånen stiger i $ServerName&4. $Amount&4 spillere vil blive forvandlet til varulve i denne nat...
 YouBoughtAInfectionPotion:
@@ -140,8 +140,10 @@ KilledMob:
 - Det var et godt bytte. Det gav dig $Amount i helbred!
 WerewolfTryEat:
 - Varulve spiser ikke den slags. Du vil ha KØD!
+WerewolfTryDefense:
+- Varulve bruger da ikke rustning!
 DrinkInfectionSuccess:
-_ Wow! En varm følelse flyder gennem din krop...
+- Wow! En varm følelse flyder gennem din krop...
 DrinkInfectionFailure:
 - Hmm... det smager som vand med citron i 
 DrinkCureSuccess:

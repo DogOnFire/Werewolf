@@ -14,14 +14,11 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class WerewolfScoreboardManager
 {
-	private Werewolf plugin;
 	private ScoreboardManager manager;
 	private HashMap<UUID, Objective> playerHuntingObjectives = new HashMap<UUID, Objective>();
 	
 	WerewolfScoreboardManager(Werewolf plugin)
 	{
-		this.plugin = plugin;
-
 		manager = Bukkit.getScoreboardManager();
 	}
 

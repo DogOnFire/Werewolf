@@ -58,7 +58,7 @@ public class ClanManager
 	//https://sessionserver.mojang.com/session/minecraft/profile/b68a8f00-7d24-4c52-b6ad-1423bfbe26ee?unsigned=false
 	//https://sessionserver.mojang.com/session/minecraft/profile/da508ecc-dbd9-46c5-8095-47b91aa4ff5f?unsigned=false
 	//UUID of player DogOnFire is 54f089fc-19e7-4a3e-9902-b90c5eb1cbed
-	void load()
+	public void load()
 	{
 		if (this.clansConfigFile == null)
 		{
@@ -87,8 +87,6 @@ public class ClanManager
 		this.werewolfTextureSignatures.put(ClanType.Potion,       "vN7JzBCT9Fr2sKQmk0chBLUH4qNHsFBsC09U44HOpSWvH3qFt+3lKPkctUhQuBqrM6/TOPgG9yFB3k/5LA+vW4v+pk94vSYbh/iWMUHfNHN5FSNrwIMvIk9Qr8Bn8QKIHHn2Guq4V6y1xV9eM6GM5c9mUNgdbNs3Mqp80r5Pm8L04pr69/VhB5uKRzDBVI1UrRubq6ibYJKG/cktYkakiejAnv7y8YFzWkUwBKHPcsAkj0GzbmDx1a8vgvogS+CYCqvvbHZD9Tva2/UC81N4jbdiB0Dl1zIT0FAYjkyx6DPPFoTOqV9m6DjowwA7D6cCoS29YfgHB9kUiZnbcOO9qnrCImx998v0a71an1pvmETaH9WF+5SpP0SWDWl9ccQdI9Roc1UNzzg9ueBapzsoYgQ957H2iBuWdOZVGYnhFJ1pcHrwd8c6l2dgKQ1WMABV+W3p5N6KCStAfbz25kPdmnQCY+g7wpT6q/WJ9/a0vliUH8aWqhpNoDq79w5URsTgSoQrzTDa+wvGxWW7w+D56nD2yl86gxn5ELdzTjYRr4K8ThbYUprErvFHDjACSYVW/WveMT9+diKEAcTAFsy0kNM1oUUz1sjTpuUj57UM+AzY6c4cyUak7tiDWai4O3brkRyVCLY6r8nOZXWWw69h0zabDHM+bsJDQ8+52aNbcYQ=");
 		this.werewolfTextureSignatures.put(ClanType.WerewolfBite, "rmVoUjl/eeoJbDV2Twh/G8/HQeTcu1my04dnfckjpLzrMhBRW9F8O2diI6x7n9BI0chB7CPa/AmnvkqBxM6RViGD3p9Iw532ddYk9Dk7/jBJ/XAMKNQfsDuyB95lgHfDyuP+DsJXsWQ4CzmUAOahhOjswtT13nKZkGRtyzpmx4GiOtVgQlgnTJyhoRU7YRu6fYAAWPMyAKtx+c8/uflRpbGoJV1BaMYp8skCoB8eoi3ylo3gUy63Zgwcqs68g68P4YNuokcHrMXs0UbjAUVFWza7tcCdKj22Rou/erQPcCbRZKofjECFSb71MyidocyLxpL7MUURJNvh7w8JccLQ+MDUFILsD6j2w8XcGSP9tXeYWUpUjrCN5aeCh7e85/pxs/Dkmn69EUyyghC8P0WE8kZenVb55OQ3XISZ8KvJH42a2NvgJBuHdj9XwmHzT2CIsNVoAmAYCDawGpYbAnfwrXm67V/u8ekxnahB0+y2GhW4FByfT88fE3Kord01gpuQbZ/iS6ruwSHgge513WH6Q4dR14VHUnx+i3ONl2EbNaEIs5+UmVQ/AD/A2v8RufLsSCKWxi4tUzvhfDKNs5VHagZco9wjMyeSbL/rLQBK7u/ehkBgju+ggODok+xMk9Osp+GlmBkXEkWjM8MDhMggXdWIIur6C4UNlOuaJx2FZGU=");
 		this.werewolfTextureSignatures.put(ClanType.WildBite,     "IbElGTsg5vIrDi/VDYjHPjdVB/n/Fh1SH45jfR8f2fkgozGkd6wxifIpBkBcgYl0GrsbQvvghO0+Euar4UCbHPa7xOnjqzt/gz2Y/VbotX/tPAJc7B2LoCG6xsF8K9xWCjHnfoM2wmgj1NfFtHjfBGd/LjkSNGyO4WG/Lg6XOzYUznUiX8Q6Bb/h5IFw+pfaO2ACH6r+NovorThvjCZqdZrW9mgQD6nzsd+u2LOAlMBa07nqfThzQDFkyfckLEp4/nGXuuQbp07uA+PqYWt488LEKbTk4ft8v0QT4M4DC0iMzZ+ghS6rCxQsPfKnL9U+eBe655JjEriQ/CbrDjT3zlwFTGmLiRQ8D0YEAKJVNnL3JlhObhNeIt/yvxZx4UNzm6Hfgg3ZyJMczGDaE+UnJn00qGUKpP9UMozMNtnglfRmMI0+s0FCmQit5cc4kKwIRCjgRVwje1MEVkhjc2eGPCU1XBvex42DHq8G6Nw8PCZ1/ESLjmMs41kSMMUkL9rbUigvxMIW9Xe8RaVWFuYt3l5ETmPt/K/0taz09TdcZxEgQo8Hhn5BYiGDi9ztVwG2XPbrfneyjqtS7wmYYn7LFdMh9idLwreGq6UjSBeOH6Ha16KIyMemfUuPZHQaBDAoenuNpJaGt6YKYNLT1x+9YJQ1LeSsBN8Natp3Bxrztf8=");
-				
-		
 		
 		
 		for (ClanType clan : ClanType.values())
@@ -455,10 +453,6 @@ public class ClanManager
 
 	public class ClanComparator implements Comparator<ClanManager.ClanType>
 	{
-		public ClanComparator()
-		{
-		}
-
 		public int compare(ClanManager.ClanType clan1, ClanManager.ClanType clan2)
 		{
 			return (int) (((Double) ClanManager.this.totalClanPoints.get(clan2)).doubleValue() - ((Double) ClanManager.this.totalClanPoints.get(clan1)).doubleValue());

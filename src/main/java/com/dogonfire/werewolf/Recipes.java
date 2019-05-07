@@ -79,7 +79,7 @@ public class Recipes
 		return apple;
 	}
 */
-	public static ShapedRecipe SilverArmorRecipe(Plugin plugin)
+	public static ShapedRecipe silverArmorRecipe(Plugin plugin)
 	{
 		ItemStack silverArmor = Werewolf.getItemManager().newSilverArmor(1);
 		NamespacedKey key = new NamespacedKey(plugin, "SilverArmor");
@@ -94,7 +94,7 @@ public class Recipes
 		return silverArmorRecipe;
 	}
 
-	public static ShapedRecipe SilverSwordRecipe(Plugin plugin)
+	public static ShapedRecipe silverSwordRecipe(Plugin plugin)
 	{
 		ItemStack silverSword = Werewolf.getItemManager().newSilverSword(1);
 		NamespacedKey key = new NamespacedKey(plugin, "SilverSword");
@@ -108,7 +108,7 @@ public class Recipes
 		return silverSwordRecipe;
 	}
 
-	public static ShapelessRecipe WolfbanePotion(Plugin plugin)
+	public static ShapelessRecipe wolfbanePotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newWolfbanePotion();
 		NamespacedKey key = new NamespacedKey(plugin, "WolfbanePotion");
@@ -123,7 +123,7 @@ public class Recipes
 		return wolfbaneRecipe;
 	}
 
-	public static ShapelessRecipe InfectionPotion(Plugin plugin)
+	public static ShapelessRecipe infectionPotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newInfectionPotion();
 		NamespacedKey key = new NamespacedKey(plugin, "InfectionPotion");
@@ -138,7 +138,7 @@ public class Recipes
 		return infectionRecipe;
 	}
 
-	public static ShapelessRecipe CurePotion(Plugin plugin)
+	public static ShapelessRecipe curePotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newCurePotion();
 		NamespacedKey key = new NamespacedKey(plugin, "CurePotion");
@@ -151,7 +151,7 @@ public class Recipes
 		return cureRecipe;
 	}
 
-	public static ShapedRecipe LoreBook(Plugin plugin)
+	public static ShapedRecipe loreBook(Plugin plugin)
 	{
 		NamespacedKey key = new NamespacedKey(plugin, "LoreBook");
 		ShapedRecipe loreBookRecipe = new ShapedRecipe(key, Werewolf.getItemManager().newLoreBook());

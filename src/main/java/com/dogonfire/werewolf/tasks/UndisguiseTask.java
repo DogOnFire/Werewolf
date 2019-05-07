@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -16,7 +15,7 @@ public class UndisguiseTask implements Runnable
 	private boolean	makeVisible;
 	private boolean	forever;
 
-	public UndisguiseTask(Werewolf instance, World world, UUID playerId, boolean visible, boolean forever)
+	public UndisguiseTask(Werewolf instance, UUID playerId, boolean visible, boolean forever)
 	{
 		this.plugin = instance;
 		this.playerId = playerId;
