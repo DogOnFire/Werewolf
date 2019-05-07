@@ -42,7 +42,6 @@ public class WerewolfSkinManager
 			return true;
 		}
 		
-		int entityID = getNextAvailableID();
 		String account;
 
 		ClanManager.ClanType clantype = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
@@ -55,6 +54,10 @@ public class WerewolfSkinManager
 		else
 		{
 			account = Werewolf.getClanManager().getWerewolfAccountForClan(clantype);
+		}
+		
+		if (DisguiseAPI.isViewSelfToggled(player)) {
+			DisguiseAPI.setViewDisguiseToggled(player, false);
 		}
 		
 		PlayerDisguise skin = new PlayerDisguise(player.getName());

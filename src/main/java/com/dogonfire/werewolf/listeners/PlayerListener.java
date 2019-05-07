@@ -125,7 +125,6 @@ public class PlayerListener implements Listener
 		
 		if (Math.random() < 0.05D)
 		{
-			int wolfsOwned = 0;
 			for (Entity entity : player.getNearbyEntities(this.plugin.wolfdistance, this.plugin.wolfdistance, this.plugin.wolfdistance))
 			{
 				if (entity instanceof Wolf)
@@ -141,8 +140,6 @@ public class PlayerListener implements Listener
 						wolf.setHealth(maxHealth);
 						wolf.setOwner(player);
 						wolf.setTamed(true);
-
-						wolfsOwned++;
 
 						Werewolf.getWerewolfManager().increaseNumberOfPackWolvesForPlayer(player.getUniqueId());
 					}

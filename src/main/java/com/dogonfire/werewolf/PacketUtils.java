@@ -7,11 +7,10 @@ import org.bukkit.potion.PotionEffectType;
 
 public class PacketUtils
 {
-	private Werewolf	plugin;
 
 	PacketUtils(Werewolf p)
 	{
-		this.plugin = p;
+		
 	}
 
 	
