@@ -42,6 +42,8 @@ YouPlacedABookSign:
 - You placed a sign selling werewolf lorebooks for $Amount
 YouAreNotTheAlphaOfTheClan:
 - You are not the alpha of your clan  
+DenyVampire:
+- You cannot be a werewolf when you are a vampire!  
 NoRecentAlphaCall:
 - There is no call from your alpha  
 ClanAlphaCannotAnswerCall:

@@ -16,6 +16,8 @@ YouPlacedAPotionSign:
 - You placed a sign selling werewolf potions for $Amount
 YouAreNotTheAlphaOfTheClan:
 - You are not the alpha of your clan  
+DenyVampire:
+- Du kan ikke være en vareulv når du er en vampyr!  
 NoRecentAlphaCall:
 - There is no call from your alpha  
 ClanAlphaCannotAnswerCall:

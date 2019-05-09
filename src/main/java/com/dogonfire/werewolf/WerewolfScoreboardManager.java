@@ -42,6 +42,14 @@ public class WerewolfScoreboardManager
 		
 		setMobKillsForPlayer(player, 0);
 		setHumanKillsForPlayer(player, 0);	
+		
+		/* TODO: re-add Vampire integration..
+		
+		if(plugin.vampireEnabled)	
+		{	
+			setVampireKillsForPlayer(player, 0);				
+		}
+		*/
 	}
 	
 

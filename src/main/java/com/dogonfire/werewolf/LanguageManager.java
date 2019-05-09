@@ -267,6 +267,7 @@ public class LanguageManager
 		YouPlacedASilverSwordSign,
 		YouPlacedABookSign,
 		YouAreNotTheAlphaOfTheClan,
+		DenyVampire,
 		NoRecentAlphaCall,
 		ClanAlphaCannotAnswerCall,
 		YouCalledClanMember,

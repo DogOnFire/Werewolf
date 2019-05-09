@@ -227,6 +227,6 @@ public class DisguiseTask implements Runnable
 			this.player.sendMessage( message);
 		}
 		
-		this.plugin.log(this.player.getName() + " turned into a Werewolf!");
+		this.plugin.log(this.player.getName() + " turned into a werewolf!");
 	}
 }

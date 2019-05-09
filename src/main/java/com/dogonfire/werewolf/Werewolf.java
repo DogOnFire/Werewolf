@@ -38,10 +38,18 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+/* TODO: re-add Vampire integration..
+
+import com.massivecraft.vampire.entity.UPlayer;
+*/
 
 public class Werewolf extends JavaPlugin
 {
-	public static boolean						pluginEnabled							= false;
+	public static boolean						pluginEnabled	
+	/* TODO: re-add Vampire integration..
+
+	public boolean								vapireEnabled							= false;
+	*/						= false;
 	public boolean								vaultEnabled							= false;
 	public boolean								healthBarEnabled						= false;
 	public static int							nightStart								= 13300;
@@ -360,6 +368,15 @@ public class Werewolf extends JavaPlugin
 		{
 			log("Vault not found. Werewolf bounties and signs are disabled.");
 		}
+		/* TODO: re-add Vampire integration..
+		
+		if (pm.getPlugin("Vampire") != null)	
+		{	
+			log("Vampire plugin detected. Enabling support for vampirism :-)");	
+
+			this.vampireEnabled = true;	
+		}
+		*/
 		if (pm.getPlugin("HealthBar") != null)
 		{
 			log("HealthBar plugin detected. Enabling support for healthbars.");
@@ -424,6 +441,24 @@ public class Werewolf extends JavaPlugin
 	{
 		return this.allowedWorlds.contains(player.getWorld().getName());
 	}
+	
+
+	/* TODO: re-add Vampire integration..
+	
+	public boolean isVampire(Player player)	
+	{	
+		if (this.vampireEnabled)	
+		{	
+			UPlayer uplayer = UPlayer.get(player);	
+			if (uplayer == null)	
+			{	
+				return false;	
+			}	
+			return uplayer.isVampire();	
+		}	
+		return false;	
+	}
+	*/
 
 	public boolean isUnderOpenSky(Player player)
 	{
@@ -808,6 +843,22 @@ public class Werewolf extends JavaPlugin
 					return 0;
 				}
 			});
+			
+			/* TODO: re-add Vampire integration..
+			
+			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Vampire")	
+			{	
+				@Override	
+				public int getValue()	
+				{	
+					if (Werewolf.this.vampireEnabled)	
+					{	
+						return 1;	
+					}	
+					return 0;	
+				}	
+			});
+			*/
 
 			
 

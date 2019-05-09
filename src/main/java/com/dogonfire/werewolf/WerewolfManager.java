@@ -1012,6 +1012,15 @@ public class WerewolfManager
 
 		if (isWerewolf(player))
 		{
+			/* TODO: re-add Vampire integration..
+			
+			if (this.plugin.isVampire(player))
+			{	
+				this.plugin.log(player.getName() + " is a Vampire! Removing his Werewolf infection...");	
+				Werewolf.getWerewolfManager().unmakeWerewolf(player.getUniqueId());	
+				return;	
+			}
+			*/
 			if (Werewolf.getWerewolfManager().canTransform(player))
 			{
 				this.plugin.transform(player);
