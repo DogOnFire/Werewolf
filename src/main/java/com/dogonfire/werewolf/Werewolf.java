@@ -45,12 +45,13 @@ import com.massivecraft.vampire.entity.UPlayer;
 
 public class Werewolf extends JavaPlugin
 {
-	public static boolean						pluginEnabled	
+	public static boolean						pluginEnabled							= false;
 	/* TODO: re-add Vampire integration..
 
 	public boolean								vapireEnabled							= false;
-	*/						= false;
+	*/
 	public boolean								vaultEnabled							= false;
+	public boolean								disguisesEnabled						= false;
 	public boolean								healthBarEnabled						= false;
 	public static int							nightStart								= 13300;
 	public static int							nightEnd								= 23500;
@@ -116,6 +117,18 @@ public class Werewolf extends JavaPlugin
 	private static StatisticsManager			statisticsManager						= null;
 	private static ItemManager					itemManager								= null;
 	
+	public String								potionName 								= "Witherfang";
+	public String								werewolfBiteName  						= "Bloodmoon";
+	public String								wildBiteName  							= "Silvermane";
+	public String								alphaAccountName  						= "WerewolfAlpha";
+	public String								potionAccountName  						= "xeonbuilder";
+	public String								werewolfBiteAccountName  				= "SM_Werewolf";
+	public String								wildBiteAccountName  					= "BM_Werewolf";
+	public String								alphaAccountUUID  						= "e0d074bd-6722-47fc-95d3-f28e2899e155";
+	public String								potionAccountUUID  						= "039c53aa-5873-4420-a095-9af971321408";
+	public String								werewolfBiteAccountUUID  				= "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee";
+	public String								wildBiteAccountUUID  					= "da508ecc-dbd9-46c5-8095-47b91aa4ff5f";
+	
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
 	private String								chatPrefix								= "<Werewolf>: ";
@@ -130,8 +143,8 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version									= null;
-	public static final String					MAX										= "1.13.2-R0.1-SNAPSHOT";
-	public static final String					MIN										= "1.12";
+	public static final String					MAX										= "1.14-R0.1-SNAPSHOT";
+	public static final String					MIN										= "1.13";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
 	
@@ -344,6 +357,7 @@ public class Werewolf extends JavaPlugin
 
 		PluginManager pm = getServer().getPluginManager();
 
+		// Check for Vault
 		if (pm.getPlugin("Vault") != null)
 		{
 			this.vaultEnabled = true;
@@ -377,12 +391,28 @@ public class Werewolf extends JavaPlugin
 			this.vampireEnabled = true;	
 		}
 		*/
+		
+		// Check for HealthBar
 		if (pm.getPlugin("HealthBar") != null)
 		{
 			log("HealthBar plugin detected. Enabling support for healthbars.");
 
 			this.healthBarEnabled = true;
 		}
+		
+		// Check for Lib's Disguises
+		if (pm.getPlugin("LibsDisguises") != null)
+		{
+			log("Lib's Disguises plugin detected. Enabling support for skins.");
+
+			this.disguisesEnabled = true;
+		}
+		
+		// Check for PlaceholderAPI
+		if(pm.getPlugin("PlaceholderAPI") != null){
+            new WerewolfExpansion(this).register();
+		}
+		
 		getServer().getPluginManager().registerEvents(playerListener, this);
 		getServer().getPluginManager().registerEvents(interactListener, this);
 		getServer().getPluginManager().registerEvents(damageListener, this);
@@ -611,12 +641,17 @@ public class Werewolf extends JavaPlugin
 	public void reloadSettings()
 	{
 		reloadConfig();
-
 		loadSettings();
+		
+		getWerewolfManager().load();
+		getClanManager().load();
+		getLanguageManager().load();
 	}
 
 	public void loadSettings()
 	{
+		config = getConfig();
+		
 		this.debug = config.getBoolean("Settings.Debug", false);
 
 		DamageManager.werewolfItemDamage = config.getInt("WerewolfWolf.ItemDamage", 3);
@@ -727,6 +762,17 @@ public class Werewolf extends JavaPlugin
 		this.useScoreboards = config.getBoolean("Scoreboards.Enabled", true);
 
 		this.useClans = config.getBoolean("Clans.Enabled", true);
+		this.potionName = config.getString("Clans.PotionName", "Witherfang");
+		this.werewolfBiteName = config.getString("Clans.WerewolfBiteName", "Bloodmoon");
+		this.wildBiteName = config.getString("Clans.WildBiteName", "Silvermane");
+		this.alphaAccountName = config.getString("Clans.AlphaAccountName", "WerewolfAlpha");
+		this.potionAccountName = config.getString("Clans.PotionAccountName", "xeonbuilder");
+		this.werewolfBiteAccountName = config.getString("Clans.WerewolfBiteAccountName", "SM_Werewolf");
+		this.wildBiteAccountName = config.getString("Clans.WildBiteAccountName", "BM_Werewolf");
+		this.alphaAccountUUID = config.getString("Clans.AlphaAccountUUID", "e0d074bd-6722-47fc-95d3-f28e2899e155");
+		this.potionAccountUUID = config.getString("Clans.PotionAccountUUID", "039c53aa-5873-4420-a095-9af971321408");
+		this.werewolfBiteAccountUUID = config.getString("Clans.WerewolfBiteAccountUUID", "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee");
+		this.wildBiteAccountUUID = config.getString("Clans.WildBiteAccountUUID", "da508ecc-dbd9-46c5-8095-47b91aa4ff5f");
 
 		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
 		this.wolfbaneUntransformChance = config.getInt("Items.WolfbaneUntransformChance", 25);
@@ -782,6 +828,17 @@ public class Werewolf extends JavaPlugin
 		config.set("Night.End", Integer.valueOf(nightEnd));
 
 		config.set("Clans.Enabled", Boolean.valueOf(this.useClans));
+		config.set("Clans.PotionName", this.potionName);
+		config.set("Clans.WerewolfBiteName", this.werewolfBiteName);
+		config.set("Clans.WildBiteName", this.wildBiteName);
+		config.set("Clans.AlphaAccountName", this.alphaAccountName);
+		config.set("Clans.PotionAccountName", this.potionAccountName);
+		config.set("Clans.WerewolfBiteAccountName", this.werewolfBiteAccountName);
+		config.set("Clans.WildBiteAccountName", this.wildBiteAccountName);
+		config.set("Clans.AlphaAccountUUID", this.alphaAccountUUID);
+		config.set("Clans.PotionAccountUUID", this.potionAccountUUID);
+		config.set("Clans.WerewolfBiteAccountUUID", this.werewolfBiteAccountUUID);
+		config.set("Clans.WildBiteAccountUUID", this.wildBiteAccountUUID);
 
 		config.set("Signs.Enabled", Boolean.valueOf(this.useSigns));
 		config.set("Signs.CurePrice", Double.valueOf(this.curePrice));

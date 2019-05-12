@@ -59,7 +59,10 @@ public class UndisguiseTask implements Runnable
 			}
 			if (this.makeVisible)
 			{
-				Werewolf.getSkinManager().unsetWerewolfSkin(player);
+				// Before trying to disguise, check if LibsDisguises is enabled...
+				if (plugin.disguisesEnabled) {
+					Werewolf.getSkinManager().unsetWerewolfSkin(player);
+				}
 			}
 			if (this.plugin.healthBarEnabled)
 			{

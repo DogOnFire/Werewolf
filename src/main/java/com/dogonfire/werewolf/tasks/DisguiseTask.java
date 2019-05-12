@@ -162,8 +162,11 @@ public class DisguiseTask implements Runnable
 		dropArmor();
 		dropMainHandItem();
 		dropOffHandItem();
-
-		Werewolf.getSkinManager().setWerewolfSkin(this.player);
+		
+		// Before trying to disguise, check if LibsDisguises is enabled...
+		if (plugin.disguisesEnabled) {
+			Werewolf.getSkinManager().setWerewolfSkin(this.player);
+		}
 		Werewolf.getWerewolfManager().pushPlayerData(this.player);
 		Werewolf.getStatisticsManager().clearStatistics(this.player.getUniqueId());
 		

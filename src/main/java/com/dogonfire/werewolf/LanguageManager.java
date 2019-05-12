@@ -110,6 +110,27 @@ public class LanguageManager
 			}
 		}
 	}
+	
+	public void save()
+	{
+		String languageFileName = this.plugin.language + ".yml";
+		File languageConfigFile = new File(this.plugin.getDataFolder() + "/lang/" + languageFileName);
+		
+		if ((!languageConfigFile.exists()) || languageConfigFile == null)
+		{
+			return;
+		}
+		
+		try
+		{
+			this.languageConfig = new YamlConfiguration();
+			this.languageConfig.save(languageConfigFile);
+		}
+		catch (Exception ex)
+		{
+			this.plugin.log("Could not save language config to " + languageConfigFile + ": " + ex.getMessage());
+		}
+	}
 
 	public String getLanguageString(LANGUAGESTRING type, ChatColor color)
 	{

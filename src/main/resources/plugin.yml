@@ -46,9 +46,17 @@ permissions:
             werewolf.transform: true
             werewolf.clan: true
             werewolf.list: true
+            werewolf.reload: true
+            werewolf.save: true
     werewolf.sethome:
         description: Player can set the clan home
         default: true
+    werewolf.reload:
+        description: Player can reload the configuration(s)
+        default: false
+    werewolf.save:
+        description: Player can save the configuration(s)
+        default: false
     werewolf.home:
         description: Player can teleport to their clan home
         default: true

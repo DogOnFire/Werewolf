@@ -1,4 +1,4 @@
-	package com.dogonfire.werewolf;
+package com.dogonfire.werewolf;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,15 +125,33 @@ public class Commands implements Listener
 
 	public void commandReload(Player player)
 	{
-		this.plugin.reloadSettings();
-		Werewolf.getWerewolfManager().load();
 		if (player == null)
 		{
+			this.plugin.reloadSettings();
 			this.plugin.log(this.plugin.getDescription().getFullName() + ": Reloaded configuration.");
 		}
-		else
+		else if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.reload")))
 		{
+			this.plugin.reloadSettings();
 			player.sendMessage(ChatColor.YELLOW + this.plugin.getDescription().getFullName() + ": " + ChatColor.WHITE + "Reloaded configuration.");
+		}
+	}
+	
+	public void commandSave(Player player)
+	{
+		if (player == null)
+		{
+			Werewolf.getClanManager().save();
+			Werewolf.getWerewolfManager().save();
+			Werewolf.getLanguageManager().save();
+			this.plugin.log(this.plugin.getDescription().getFullName() + ": Saved configuration(s).");
+		}
+		else if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.save")))
+		{
+			Werewolf.getClanManager().save();
+			Werewolf.getWerewolfManager().save();
+			Werewolf.getLanguageManager().save();
+			player.sendMessage(ChatColor.YELLOW + this.plugin.getDescription().getFullName() + ": " + ChatColor.WHITE + "Saved configuration(s).");
 		}
 	}
 
@@ -434,14 +452,6 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfCommandIsNotWerewolf, ChatColor.RED));
 			return false;
 		}
-		/* TODO: re-add Vampire integration..
-		
-		if (this.plugin.isVampire(player))	
-		{
-			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.DenyVampire, ChatColor.RED));
-			return false;	
-		}
-		*/
 		if (Werewolf.getWerewolfManager().getNumberOfTransformations(player.getUniqueId()) < this.plugin.transformsForControlledTransformation)
 		{
 			int fullMoons = this.plugin.transformsForControlledTransformation - Werewolf.getWerewolfManager().getNumberOfTransformations(player.getUniqueId());
@@ -637,15 +647,6 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
 			return false;
 		}
-		
-		/* TODO: re-add Vampire integration..
-		
-		if (this.plugin.isVampire(player))	
-		{
-			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.DenyVampire, ChatColor.RED));
-			return false;	
-		}
-		*/
 		
 		if (!Werewolf.getWerewolfManager().isWerewolf(player))
 		{
@@ -1378,6 +1379,10 @@ public class Commands implements Listener
 				if (args[0].equalsIgnoreCase("reload"))
 				{
 					commandReload(player);
+				}
+				else if (args[0].equalsIgnoreCase("save"))
+				{
+					commandSave(player);
 				}
 				else if (args[0].equalsIgnoreCase("help"))
 				{

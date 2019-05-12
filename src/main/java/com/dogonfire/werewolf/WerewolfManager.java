@@ -358,9 +358,10 @@ public class WerewolfManager
 			return;
 		}
 		
-		this.plugin.disguiseWerewolf(player);
-
-		howl(player);
+		// Before trying to disguise, check if LibsDisguises is enabled...
+		if (plugin.disguisesEnabled) {
+			this.plugin.disguiseWerewolf(player);
+		}
 	}
 
 	public void unsetWerewolfSkin(UUID playerId, boolean makeVisible)
@@ -625,7 +626,7 @@ public class WerewolfManager
 				{
 				}
 				
-				if ((clanType.equals(null)) && (clanType.equals(clan)))
+				if (clanType.equals(clan))
 				{
 					clanMembers.add(playerName);
 				}

@@ -56,16 +56,26 @@ public class WerewolfSkinManager
 			account = Werewolf.getClanManager().getWerewolfAccountForClan(clantype);
 		}
 		
-		if (DisguiseAPI.isViewSelfToggled(player)) {
-			DisguiseAPI.setViewDisguiseToggled(player, false);
-		}
-		
-		PlayerDisguise skin = new PlayerDisguise(player.getName());
-		skin.setSkin(account);
-		this.skins.put(player.getUniqueId(), skin);
-		DisguiseAPI.disguiseToAll(player, skin);
+		// since it may be missing..
+		try {
+			if (DisguiseAPI.isViewSelfToggled(player)) {
+				DisguiseAPI.setViewDisguiseToggled(player, false);
+			}
+			
+			PlayerDisguise skin = new PlayerDisguise(player.getName());
+			skin.setSkin(account);
+			this.skins.put(player.getUniqueId(), skin);
+			DisguiseAPI.disguiseToAll(player, skin);
+			
+			Werewolf.getWerewolfManager().howl(player);
 
-		return true;
+			return true;
+		}
+		catch (NoClassDefFoundError e) {
+			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
+			Werewolf.getWerewolfManager().howl(player);
+			return false;
+		}
 	}
 
 	public void unsetWerewolfSkin(Player player)
