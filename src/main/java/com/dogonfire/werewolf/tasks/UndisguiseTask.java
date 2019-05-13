@@ -48,6 +48,7 @@ public class UndisguiseTask implements Runnable
 				player.setAllowFlight(false);
 			}
 			
+			/*
 			String playerListName = Werewolf.getWerewolfManager().getPlayerListName(player);
 			if (playerListName == null)
 			{
@@ -56,10 +57,11 @@ public class UndisguiseTask implements Runnable
 			else
 			{
 				player.setPlayerListName(playerListName);
-			}
+			}*/
+			player.setPlayerListName(player.getDisplayName());
 			if (this.makeVisible)
 			{
-				// Before trying to disguise, check if LibsDisguises is enabled...
+				// Before trying to undisguise, check if LibsDisguises is enabled...
 				if (plugin.disguisesEnabled) {
 					Werewolf.getSkinManager().unsetWerewolfSkin(player);
 				}

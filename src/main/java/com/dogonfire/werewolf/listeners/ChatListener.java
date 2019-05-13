@@ -59,7 +59,12 @@ public class ChatListener implements Listener
 			String messageToSend = "";
 			for (Player receiver : e.getRecipients())
 			{
-				if ((receiver.isOp()) || (Werewolf.getPermissionsManager().hasPermission(receiver, "werewolf.listener")))
+				if (Werewolf.getPermissionsManager().hasPermission(receiver, "werewolf.superlistener"))
+				{
+					messageToSend = String.format(e.getFormat(), "Werewolf " + player.getName(), e.getMessage());
+					this.plugin.logDebug("Recipent for message has superlistener perm: " + receiver.getName() + " - Message: " + messageToSend);
+				}
+				else if ((receiver.isOp()) || (Werewolf.getPermissionsManager().hasPermission(receiver, "werewolf.listener")))
 				{
 					messageToSend = String.format(e.getFormat(), Werewolf.getWerewolfManager().getPlayerListName(player), e.getMessage());
 					this.plugin.logDebug("Recipent for message is OP or has perm: " + receiver.getName() + " - Message: " + messageToSend);
@@ -76,7 +81,7 @@ public class ChatListener implements Listener
 				}
 				receiver.sendMessage(messageToSend);
 			}
-			this.plugin.log("<" + Werewolf.getWerewolfManager().getPlayerListName(player) + ">(Werewolf): " + message);
+			this.plugin.log(String.format(e.getFormat(), "Werewolf " + player.getName(), e.getMessage()));
 
 			Werewolf.getWerewolfManager().growl(player);
 		}

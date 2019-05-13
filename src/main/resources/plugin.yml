@@ -125,7 +125,10 @@ permissions:
         default: false           
     werewolf.listener:
         description: Allows the Player to understand Werewolf chat 
-        default: false           
+        default: false                
+    werewolf.superlistener:
+        description: Allows the Player to understand Werewolf chat and see their names
+        default: false      
     werewolf.howl:
         description: Allows a Player to howl when being a werewolf 
         default: true            
