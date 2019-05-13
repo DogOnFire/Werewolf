@@ -432,7 +432,8 @@ public class Commands implements Listener
 			this.plugin.sendInfo(player, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NoPermissionForCommand, ChatColor.RED));
 		}
 	}
-
+	
+	// The command that is called by a player when the player wants to transform into a Werewolf manually.
 	public boolean commandTransform(Player player)
 	{
 		if (player == null)
@@ -473,6 +474,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// The command that is runned by a Werewolf to get info about their current clan and the other clans
 	public boolean commandClan(Player player)
 	{
 		if (!this.plugin.useClans)
@@ -563,6 +565,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// The command that is run by the clan alpha to set the home for the clan
 	private boolean commandSetHome(Player player)
 	{
 		if (!this.plugin.useClans)
@@ -602,6 +605,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// The command that is run by werewolves to get to their clan home
 	private boolean commandHome(Player player)
 	{
 		if (!player.isOp() && !Werewolf.getPermissionsManager().hasPermission(player, "werewolf.home"))
@@ -632,6 +636,7 @@ public class Commands implements Listener
 		return true;
 	}	
 	
+	// The command that is run manually to toggle the player who ran the command is a werewolf
 	public boolean commandToggleSelfWerewolf(Player player, String[] args)
 	{
 		if (player == null)
@@ -669,6 +674,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// The command that is run manually to toggle if a player is a werewolf
 	public boolean commandTogglePlayerWerewolf(Player player, String[] args)
 	{
 		if ((player == null) || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolf")) || player.isOp())
@@ -738,6 +744,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to infect a player with the werewolf infection
 	public boolean commandInfect(Player player, String[] args)
 	{
 		if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect") || player.isOp())
@@ -785,6 +792,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to infect yourself with the werewolf infection
 	public boolean commandInfectSelf(Player player, String[] args)
 	{
 		if (player == null)
@@ -819,6 +827,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to check if a player is a werewolf
 	public boolean commandCheck(Player player, String[] args)
 	{
 		if (player == null || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check") || player.isOp())
@@ -887,6 +896,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to check werewolf bounties
 	public boolean commandBounty(Player player)
 	{
 		if (!this.plugin.vaultEnabled)
@@ -916,6 +926,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to add bounties to a werewolf
 	public boolean commandAddBounty(Player player, String[] args)
 	{
 		if (!this.plugin.vaultEnabled)
@@ -970,6 +981,7 @@ public class Commands implements Listener
 		return false;
 	}
 
+	// Command to hunt a werewolf
 	public boolean commandHuntWerewolf(Player player)
 	{
 		if (player == null)
@@ -1042,6 +1054,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command for a werewolf to growl
 	public boolean commandGrowl(Player player)
 	{
 		if (player == null)
@@ -1064,6 +1077,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command for a werewolf to howl
 	public boolean commandHowl(Player player)
 	{
 		if (player == null)
@@ -1099,6 +1113,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command for an alpha to call a werewolf to him
 	public boolean commandCall(Player player)
 	{
 		if (player == null)
@@ -1140,6 +1155,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to accept the call
 	public boolean commandAcceptCall(Player player)
 	{
 		if (player == null)
@@ -1177,6 +1193,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to get an infection potion
 	public boolean commandInfectionPotion(Player player)
 	{
 		if (player == null)
@@ -1204,6 +1221,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// Command to get a cure potion
 	public boolean commandCurePotion(Player player)
 	{
 		if (player == null)
@@ -1231,6 +1249,7 @@ public class Commands implements Listener
 		return true;
 	}
 	
+	// Command to get the wolfbane potion
 	public boolean commandWolfbanePotion(Player player)
 	{
 		if (player == null)
@@ -1258,6 +1277,7 @@ public class Commands implements Listener
 		return true;
 	}
 	
+	// Command to get a silver sword
 	public boolean commandSilverSword(Player player)
 	{
 		if (player == null)
@@ -1316,6 +1336,7 @@ public class Commands implements Listener
 		return true;
 	}
 
+	// What happens when a command is run?
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
 		Player player = null;
@@ -1323,10 +1344,11 @@ public class Commands implements Listener
 		{
 			player = (Player) sender;
 			
+			// Is Werewolf compatible with this version of the server?
 			if(!Werewolf.isCompatible())
 			{
 				player.sendMessage(ChatColor.RED + "Your server version is incompatible with this version of the Werewolf plugin");
-				player.sendMessage(ChatColor.RED + "This Werewolf plugin is compatible with bukkit " + ChatColor.GOLD + Werewolf.MIN);
+				player.sendMessage(ChatColor.RED + "This version of the Werewolf plugin is compatible with " + ChatColor.GOLD + Werewolf.MIN + ChatColor.RED + " to " + ChatColor.GOLD + Werewolf.MAX);
 				return false;
 			}
 		}
