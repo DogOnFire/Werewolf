@@ -5,8 +5,8 @@ version: ${project.version}
 api-version: 1.13
 load: POSTWORLD
 description: Werewolves in Minecraft!
-depend: [LibsDisguises, ProtocolLib]
-softdepend: [Vault, HealthBar]
+depend: []
+softdepend: [Vault, HealthBar, ProtocolLib, LibsDisguises]
 website: http://dev.bukkit.org/server-mods/werewolf
 commands:
    werewolf:

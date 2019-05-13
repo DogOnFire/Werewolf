@@ -3,10 +3,10 @@ package com.dogonfire.werewolf;
 import java.util.HashMap;
 import java.util.UUID;
 import org.bukkit.entity.Player;
-
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 
 public class WerewolfSkinManager
 {
@@ -35,7 +35,7 @@ public class WerewolfSkinManager
 	}
 	
 	// TODO: Only disguise for everyone BUT the player, so they don't have to see their own face
-	public boolean setWerewolfSkin(Player player)
+	public boolean setWerewolfSkin(Player player, String werewolfName)
 	{
 		if (this.skins.containsKey(player.getUniqueId()))
 		{
@@ -62,10 +62,16 @@ public class WerewolfSkinManager
 				DisguiseAPI.setViewDisguiseToggled(player, false);
 			}
 			
-			PlayerDisguise skin = new PlayerDisguise(player.getName());
-			skin.setSkin(account);
-			this.skins.put(player.getUniqueId(), skin);
+			if (werewolfName.isEmpty() || werewolfName == null) {
+				werewolfName = "Werewolf";
+			}
+			
+			PlayerDisguise skin = new PlayerDisguise(werewolfName, account);
+			skin.getWatcher().setCapeEnabled(false);
 			DisguiseAPI.disguiseToAll(player, skin);
+
+			this.skins.put(player.getUniqueId(), skin);
+			
 			
 			Werewolf.getWerewolfManager().howl(player);
 
@@ -84,8 +90,15 @@ public class WerewolfSkinManager
 		{
 			return;
 		}
-
-		DisguiseAPI.undisguiseToAll(player);
+		
+		try {
+			DisguiseAPI.undisguiseToAll(player);
+			player.setCustomNameVisible(false);
+		}
+		catch (NoClassDefFoundError e) {
+			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
+			Werewolf.getWerewolfManager().howl(player);
+		}
 
 		this.skins.remove(player.getUniqueId());
 	}

@@ -10,7 +10,6 @@ public class PacketUtils
 
 	PacketUtils(Werewolf p)
 	{
-		
 	}
 
 	

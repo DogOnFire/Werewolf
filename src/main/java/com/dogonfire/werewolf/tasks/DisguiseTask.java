@@ -163,12 +163,39 @@ public class DisguiseTask implements Runnable
 		dropMainHandItem();
 		dropOffHandItem();
 		
-		// Before trying to disguise, check if LibsDisguises is enabled...
-		if (plugin.disguisesEnabled) {
-			Werewolf.getSkinManager().setWerewolfSkin(this.player);
+		int n = 1;
+		Boolean renamed = false;
+		while (!renamed)
+		{
+			renamed = true;
+			
+			// Go through all online players and check for Werewolf1, Werewolf2 etc. until one is found where the number isn't taken
+			for (Player otherPlayer : plugin.getServer().getOnlinePlayers()) {
+				if (otherPlayer.getPlayerListName().contains("Werewolf" + n)) {
+					n++;
+				}
+			}
+			
+			// Now let's try to use this number :))
+			try
+			{
+				player.setPlayerListName(ChatColor.GOLD + "Werewolf" + n);
+			} 
+			catch (Exception ex)
+			{
+				n++;
+
+				renamed = false;
+			}
 		}
+		
 		Werewolf.getWerewolfManager().pushPlayerData(this.player);
 		Werewolf.getStatisticsManager().clearStatistics(this.player.getUniqueId());
+		
+		// Before trying to disguise, check if LibsDisguises is enabled...
+		if (plugin.disguisesEnabled) {
+			Werewolf.getSkinManager().setWerewolfSkin(this.player, this.player.getPlayerListName());
+		}
 		
 		if(plugin.useScoreboards)
 		{
@@ -192,25 +219,7 @@ public class DisguiseTask implements Runnable
 			String originalGroup = Werewolf.getPermissionsManager().getGroup(this.player.getName());
 			Werewolf.getWerewolfManager().setOriginalPermissionGroup(this.player.getUniqueId(), originalGroup);
 			Werewolf.getPermissionsManager().setGroup(this.player.getName(), this.plugin.werewolfGroupName);
-		}
-		
-		int n = 1;
-		Boolean renamed = false;
-		while (!renamed)
-		{
-			renamed = true;
-			try
-			{
-				player.setPlayerListName(ChatColor.GOLD + "Werewolf" + n);
-			} 
-			catch (Exception ex)
-			{
-				n++;
-
-				renamed = false;
-			}
 		}	
-		
 
 		Werewolf.getLanguageManager().setAmount("" + Werewolf.getWerewolfManager().getNumberOfTransformations(this.player.getUniqueId()));
 

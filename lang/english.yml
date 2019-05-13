@@ -143,9 +143,9 @@ TakeCompassInHands:
 Infected:
 - You have been infected with the Werewolf infection by $PlayerName!
 MadeWerewolf:
-- You have been turned into a werewolf by $PlayerName!
+- You have been turned into a Werewolf by $PlayerName!
 UnMadeWerewolf:
-- You have been unturned from being a werewolf by $PlayerName!
+- You have been unturned from being a Werewolf by $PlayerName!
 NoWerewolvesOnline:
 - There are no werewolves online
 WerewolvesCannotHuntWerewolves:

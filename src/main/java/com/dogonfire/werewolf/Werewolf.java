@@ -121,17 +121,17 @@ public class Werewolf extends JavaPlugin
 	public String								werewolfBiteName  						= "Bloodmoon";
 	public String								wildBiteName  							= "Silvermane";
 	public String								alphaAccountName  						= "WerewolfAlpha";
-	public String								potionAccountName  						= "xeonbuilder";
+	public String								potionAccountName  						= "WF_Werewolf";
 	public String								werewolfBiteAccountName  				= "SM_Werewolf";
 	public String								wildBiteAccountName  					= "BM_Werewolf";
 	public String								alphaAccountUUID  						= "e0d074bd-6722-47fc-95d3-f28e2899e155";
-	public String								potionAccountUUID  						= "039c53aa-5873-4420-a095-9af971321408";
+	public String								potionAccountUUID  						= "c61647e5-fc2f-4536-abe9-c851911ad22f";
 	public String								werewolfBiteAccountUUID  				= "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee";
 	public String								wildBiteAccountUUID  					= "da508ecc-dbd9-46c5-8095-47b91aa4ff5f";
 	
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
-	private String								chatPrefix								= "<Werewolf>: ";
+	private String								chatPrefix								= "Werewolf";
 	public String								serverName								= "Your Server";
 
 	public int 									wolfbaneUntransformChance				= 25;
@@ -293,6 +293,7 @@ public class Werewolf extends JavaPlugin
 	{
 		CompassTracker.stop();
 
+		saveSettings();
 		reloadSettings();
 
 		pluginEnabled = false;
@@ -757,7 +758,7 @@ public class Werewolf extends JavaPlugin
 		}
 		*/
 
-		this.chatPrefix = config.getString("Chat.Prefix", "<Werewolf>: ");
+		this.chatPrefix = config.getString("Chat.Prefix", "Werewolf");
 
 		this.useScoreboards = config.getBoolean("Scoreboards.Enabled", true);
 
@@ -766,11 +767,11 @@ public class Werewolf extends JavaPlugin
 		this.werewolfBiteName = config.getString("Clans.WerewolfBiteName", "Bloodmoon");
 		this.wildBiteName = config.getString("Clans.WildBiteName", "Silvermane");
 		this.alphaAccountName = config.getString("Clans.AlphaAccountName", "WerewolfAlpha");
-		this.potionAccountName = config.getString("Clans.PotionAccountName", "xeonbuilder");
+		this.potionAccountName = config.getString("Clans.PotionAccountName", "WF_Werewolf");
 		this.werewolfBiteAccountName = config.getString("Clans.WerewolfBiteAccountName", "SM_Werewolf");
 		this.wildBiteAccountName = config.getString("Clans.WildBiteAccountName", "BM_Werewolf");
 		this.alphaAccountUUID = config.getString("Clans.AlphaAccountUUID", "e0d074bd-6722-47fc-95d3-f28e2899e155");
-		this.potionAccountUUID = config.getString("Clans.PotionAccountUUID", "039c53aa-5873-4420-a095-9af971321408");
+		this.potionAccountUUID = config.getString("Clans.PotionAccountUUID", "c61647e5-fc2f-4536-abe9-c851911ad22f");
 		this.werewolfBiteAccountUUID = config.getString("Clans.WerewolfBiteAccountUUID", "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee");
 		this.wildBiteAccountUUID = config.getString("Clans.WildBiteAccountUUID", "da508ecc-dbd9-46c5-8095-47b91aa4ff5f");
 

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dogonfire</groupId>
   <artifactId>werewolf</artifactId>
-  <version>0.8.5</version>
+  <version>0.8.6</version>
   <name>Werewolf</name>
   <repositories>
     <repository>

@@ -251,6 +251,13 @@ public class PlayerListener implements Listener
 
 				Werewolf.getLanguageManager().setPlayerName(killerName);
 				Werewolf.getWerewolfManager().sendMessageToClan(killerClan, Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.NewClanAlpha, ChatColor.WHITE));
+				
+				// Apply the new alpha skin if player is in werewolf form
+				if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getKiller().getUniqueId()))
+				{
+					Werewolf.getSkinManager().unsetWerewolfSkin(event.getEntity().getKiller());
+					Werewolf.getSkinManager().setWerewolfSkin(event.getEntity().getKiller(), event.getEntity().getKiller().getPlayerListName());
+				}
 			}
 		}
 

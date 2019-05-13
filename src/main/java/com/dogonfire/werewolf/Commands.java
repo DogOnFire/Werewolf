@@ -143,14 +143,12 @@ public class Commands implements Listener
 		{
 			Werewolf.getClanManager().save();
 			Werewolf.getWerewolfManager().save();
-			Werewolf.getLanguageManager().save();
 			this.plugin.log(this.plugin.getDescription().getFullName() + ": Saved configuration(s).");
 		}
 		else if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.save")))
 		{
 			Werewolf.getClanManager().save();
 			Werewolf.getWerewolfManager().save();
-			Werewolf.getLanguageManager().save();
 			player.sendMessage(ChatColor.YELLOW + this.plugin.getDescription().getFullName() + ": " + ChatColor.WHITE + "Saved configuration(s).");
 		}
 	}
@@ -702,7 +700,7 @@ public class Commands implements Listener
 						Werewolf.getLanguageManager().setPlayerName("CONSOLE");
 					}
 
-					Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.MadeWerewolf, ChatColor.AQUA);
+					newWerewolf.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.MadeWerewolf, ChatColor.AQUA));
 				}
 				else
 				{
