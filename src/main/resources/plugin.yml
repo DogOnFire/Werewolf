@@ -10,15 +10,15 @@ softdepend: [Vault, HealthBar]
 website: http://dev.bukkit.org/server-mods/werewolf
 commands:
    werewolf:
-      description: Command for Werewolf
-      usage: /werewolf <playername>
+      description: Command for the Werewolf plugin
+      usage: /<command> [toggle|infect|addbounty|check|reload|save|help|clan|list|transform|toggle|bounty|home|sethome|call|top|hunt|infectionpotion|curepotion|wolfbane|silversword|lorebook|on|off] [player]
       aliases: [ww]
    growl:
       description: Command for Werewolves to growl
-      usage: /growl
+      usage: /<command>
    howl:
       description: Command for Werewolves to howl
-      usage: /howl
+      usage: /<command>
 permissions:
     werewolf.*:
         description: Gives access to all Werewolf commands
