@@ -14,6 +14,7 @@ public class Version implements Comparable<Version>
 	 * Because, if the plugin is disabled, then our compatibility check should
 	 * fail.
 	 */
+	@SuppressWarnings("rawtypes")
 	private Tester	tester;
 	private Object	object;
 	final String	version;
@@ -47,6 +48,7 @@ public class Version implements Comparable<Version>
 	 * @param object
 	 *            The object to be tested. <br/>
 	 */
+	@SuppressWarnings("rawtypes")
 	public Version(String version, Tester tester, Object object)
 	{
 		this.version = version;
@@ -54,6 +56,7 @@ public class Version implements Comparable<Version>
 		this.object = object;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isEnabled()
 	{
 		return tester.isEnabled(object);

@@ -12,6 +12,7 @@ public class VersionFactory
 	public static Version getPluginVersion(Plugin plugin)
 	{
 		String version = (plugin == null) ? null : plugin.getDescription().getVersion();
+		@SuppressWarnings("rawtypes")
 		Tester tester = TesterFactory.getNewTester(plugin);
 		return new Version(version, tester, plugin);
 	}
@@ -24,6 +25,7 @@ public class VersionFactory
 	{
 		Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
 		String version = (plugin == null) ? null : plugin.getDescription().getVersion();
+		@SuppressWarnings("rawtypes")
 		Tester tester = TesterFactory.getNewTester(plugin);
 		return new Version(version, tester, plugin);
 	}

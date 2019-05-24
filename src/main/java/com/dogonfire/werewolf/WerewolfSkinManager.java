@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
-import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 
 public class WerewolfSkinManager
 {

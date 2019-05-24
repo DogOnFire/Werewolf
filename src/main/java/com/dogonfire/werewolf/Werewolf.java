@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -31,7 +30,6 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -148,7 +146,6 @@ public class Werewolf extends JavaPlugin
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
 	
-	private ConsoleCommandSender console;
 	
 	public static Class<?> isCombatibleServer() throws Exception
 	{
@@ -313,7 +310,6 @@ public class Werewolf extends JavaPlugin
 		version = VersionFactory.getServerVersion();
 
 		this.commands = new Commands(this);
-		this.console = server.getConsoleSender();
 
 		if (!version.isSupported(MAX) || !version.isCompatible(MIN))
 		{
@@ -627,15 +623,14 @@ public class Werewolf extends JavaPlugin
 
 	public void log(String message)
 	{
-		console.sendMessage("[" + getDescription().getFullName() + "] " + message);
-		//Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
+		plugin.getLogger().info(message);
 	}
 
 	public void logDebug(String message)
 	{
 		if (this.debug)
 		{
-			Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
+			plugin.getLogger().info(message);
 		}
 	}
 

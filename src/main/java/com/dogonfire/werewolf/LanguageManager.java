@@ -11,10 +11,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Random;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.EntityType;
 
 public class LanguageManager
 {
@@ -241,30 +239,6 @@ public class LanguageManager
 			this.plugin.logDebug("WARNING: Setting null type");
 		}
 		this.type = t;
-	}
-
-	public String getItemTypeName(Material material)
-	{
-		String itemTypeName = null;
-		if (itemTypeName == null)
-		{
-			String languageFileName = this.plugin.language + ".yml";
-			this.plugin.logDebug("WARNING: No language string in " + languageFileName + " for the item '" + material.name() + "'");
-			return material.name();
-		}
-		return itemTypeName;
-	}
-
-	public String getMobTypeName(EntityType type)
-	{
-		String mobTypeName = null;
-		if (mobTypeName == null)
-		{
-			String languageFileName = this.plugin.language + ".yml";
-			this.plugin.logDebug("WARNING: No language string in " + languageFileName + " for the mob type '" + type.name() + "'");
-			return type.name();
-		}
-		return mobTypeName;
 	}
 
 	public static enum LANGUAGESTRING

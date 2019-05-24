@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 public class TesterFactory
 {
 
+	@SuppressWarnings("rawtypes")
 	public static Tester getNewTester(Plugin plugin)
 	{
 		if (plugin == null)
@@ -33,6 +34,7 @@ public class TesterFactory
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Tester getDefaultTester()
 	{
 		return new Tester()

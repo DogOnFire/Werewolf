@@ -15,19 +15,21 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Wolf;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import com.dogonfire.werewolf.ClanManager.ClanType;
 import com.dogonfire.werewolf.tasks.CheckTransformationTask;
+/*
+import org.bukkit.block.Biome;
+import org.bukkit.entity.Wolf;
+import org.bukkit.entity.EntityType;
+import org.bukkit.Location;
+*/
 
 
 public class WerewolfManager
@@ -1058,6 +1060,7 @@ public class WerewolfManager
 		}
 	}
 
+	/*
 	private boolean isValidBiomeForWildWolf(Biome biome)
 	{
 		Boolean bool;
@@ -1098,5 +1101,5 @@ public class WerewolfManager
 		Wolf wolf = (Wolf) world.spawnEntity(spawnLocation, EntityType.WOLF);
 
 		wolf.setTarget(player);
-	}
+	}*/
 }

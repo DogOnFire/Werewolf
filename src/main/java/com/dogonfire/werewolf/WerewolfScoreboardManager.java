@@ -28,13 +28,14 @@ public class WerewolfScoreboardManager
 	
 		//Team team = board.registerNewTeam("teamname");
 	
-		Objective objective = board.registerNewObjective("test", "dummy");
+		// Setting the scoreboard/objective and it's display name
+		Objective objective = board.registerNewObjective("test", "dummy", ChatColor.DARK_AQUA + "Hunting Status");
 	
 		// Setting where to display the scoreboard/objective (either SIDEBAR, PLAYER_LIST or BELOW_NAME)
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 	 
 		// Setting the display name of the scoreboard/objective
-		objective.setDisplayName(ChatColor.DARK_AQUA + "Hunting Status");
+		//objective.setDisplayName(ChatColor.DARK_AQUA + "Hunting Status");
 		
 		playerHuntingObjectives.put(player.getUniqueId(), objective);
 		
