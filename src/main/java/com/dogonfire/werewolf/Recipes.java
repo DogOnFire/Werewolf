@@ -117,7 +117,7 @@ public class Recipes
 		wolfbaneRecipe.addIngredient(Material.GLASS_BOTTLE);
 		wolfbaneRecipe.addIngredient(Material.MILK_BUCKET);
 		wolfbaneRecipe.addIngredient(Material.CARROT);
-		wolfbaneRecipe.addIngredient(Material.GLOWSTONE);
+		wolfbaneRecipe.addIngredient(Material.GUNPOWDER);
 		wolfbaneRecipe.addIngredient(Material.CACTUS);
 
 		return wolfbaneRecipe;
