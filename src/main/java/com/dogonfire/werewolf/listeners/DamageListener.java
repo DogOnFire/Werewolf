@@ -44,14 +44,17 @@ public class DamageListener implements Listener
 			
 			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 			{
-				PlayerDisguise skin = Werewolf.getSkinManager().getSkin(player);
-				if (skin != null)
-				{
-					Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
-				}
-				else
-				{
-					this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
+				// Before trying to use LibsDisguises, check if LibsDisguises is enabled...
+				if (plugin.disguisesEnabled) {
+					PlayerDisguise skin = Werewolf.getSkinManager().getSkin(player);
+					if (skin != null)
+					{
+						Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
+					}
+					else
+					{
+						this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
+					}
 				}
 			}
 		}
