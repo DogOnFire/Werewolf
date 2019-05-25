@@ -360,10 +360,7 @@ public class WerewolfManager
 			return;
 		}
 		
-		// Before trying to disguise, check if LibsDisguises is enabled...
-		if (plugin.disguisesEnabled) {
-			this.plugin.disguiseWerewolf(player);
-		}
+		this.plugin.disguiseWerewolf(player);
 	}
 
 	public void unsetWerewolfSkin(UUID playerId, boolean makeVisible)

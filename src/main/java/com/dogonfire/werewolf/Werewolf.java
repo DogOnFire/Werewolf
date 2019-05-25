@@ -332,7 +332,6 @@ public class Werewolf extends JavaPlugin
 		permissionsManager = new PermissionsManager(this);
 		werewolfManager = new WerewolfManager(this);
 		clanManager = new ClanManager(this);
-		skinManager = new WerewolfSkinManager(this);
 		//potionManager = new PotionManager(this);
 		languageManager = new LanguageManager(this);
 
@@ -355,7 +354,7 @@ public class Werewolf extends JavaPlugin
 		PluginManager pm = getServer().getPluginManager();
 
 		// Check for Vault
-		if (pm.getPlugin("Vault") != null)
+		if (pm.getPlugin("Vault") != null && pm.getPlugin("Vault").isEnabled())
 		{
 			this.vaultEnabled = true;
 			huntManager = new HuntManager(this);
@@ -390,7 +389,7 @@ public class Werewolf extends JavaPlugin
 		*/
 		
 		// Check for HealthBar
-		if (pm.getPlugin("HealthBar") != null)
+		if (pm.getPlugin("HealthBar") != null && pm.getPlugin("HealthBar").isEnabled())
 		{
 			log("HealthBar plugin detected. Enabling support for healthbars.");
 
@@ -398,15 +397,16 @@ public class Werewolf extends JavaPlugin
 		}
 		
 		// Check for Lib's Disguises
-		if (pm.getPlugin("LibsDisguises") != null)
+		if (pm.getPlugin("LibsDisguises") != null && pm.getPlugin("LibsDisguises").isEnabled())
 		{
 			log("Lib's Disguises plugin detected. Enabling support for skins.");
 
 			this.disguisesEnabled = true;
+			skinManager = new WerewolfSkinManager(this);
 		}
 		
 		// Check for PlaceholderAPI
-		if(pm.getPlugin("PlaceholderAPI") != null){
+		if(pm.getPlugin("PlaceholderAPI") != null && pm.getPlugin("PlaceholderAPI").isEnabled()){
             new WerewolfExpansion(this).register();
 		}
 		

@@ -70,9 +70,6 @@ public class WerewolfSkinManager
 			DisguiseAPI.disguiseToAll(player, skin);
 
 			this.skins.put(player.getUniqueId(), skin);
-			
-			
-			Werewolf.getWerewolfManager().howl(player);
 
 			return true;
 		}
