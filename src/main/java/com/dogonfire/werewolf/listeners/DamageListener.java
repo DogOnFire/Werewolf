@@ -104,10 +104,18 @@ public class DamageListener implements Listener
 					return;
 				}
 				
-				PlayerDisguise skin = Werewolf.getSkinManager().getSkin(werewolfPlayer);
-				
-				if(skin!=null)
-				{
+				try {
+					PlayerDisguise skin = Werewolf.getSkinManager().getSkin(werewolfPlayer);
+					
+					if(skin!=null)
+					{
+						werewolfPlayer.playEffect(EntityEffect.HURT);
+
+						Werewolf.getWerewolfManager().growl(werewolfPlayer);
+					}
+				}
+				catch (NullPointerException e) {
+					// well, looks like there is no Lib's Disguises there
 					werewolfPlayer.playEffect(EntityEffect.HURT);
 
 					Werewolf.getWerewolfManager().growl(werewolfPlayer);

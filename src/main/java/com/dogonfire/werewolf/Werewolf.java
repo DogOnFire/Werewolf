@@ -126,7 +126,11 @@ public class Werewolf extends JavaPlugin
 	public String								potionAccountUUID  						= "c61647e5-fc2f-4536-abe9-c851911ad22f";
 	public String								werewolfBiteAccountUUID  				= "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee";
 	public String								wildBiteAccountUUID  					= "da508ecc-dbd9-46c5-8095-47b91aa4ff5f";
-	
+
+	public boolean								werewolfNamesEnabled					= true;
+	public List<String>							givenNames								= Arrays.asList("Black", "White", "Red", "Blood", "Blue", "Gray", "Neon", "Lurking", "Rampaging", "Bloodthirsty", "Fearsome", "Ghoulish", "Demonic", "Wrathful", "Sadistic", "Teenage", "Rogue");
+	public List<String>							surnames								= Arrays.asList("Devourer", "Fang", "Wolf", "Howl", "Turned", "Ghoul");
+
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
 	private String								chatPrefix								= "Werewolf";
@@ -141,7 +145,7 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version									= null;
-	public static final String					MAX										= "1.14-R0.1-SNAPSHOT";
+	public static final String					MAX										= "1.14.3-R0.1-SNAPSHOT";
 	public static final String					MIN										= "1.13";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
@@ -770,6 +774,15 @@ public class Werewolf extends JavaPlugin
 		this.werewolfBiteAccountUUID = config.getString("Clans.WerewolfBiteAccountUUID", "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee");
 		this.wildBiteAccountUUID = config.getString("Clans.WildBiteAccountUUID", "da508ecc-dbd9-46c5-8095-47b91aa4ff5f");
 
+		this.werewolfNamesEnabled = config.getBoolean("WerewolfNames.Enabled", true);
+		if (config.contains("WerewolfNames.Given_names")) {
+			this.givenNames = config.getStringList("WerewolfNames.Given_names");
+		}
+
+		if (config.contains("WerewolfNames.Surnames")) {
+			this.surnames = config.getStringList("WerewolfNames.Surnames");
+		}
+
 		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
 		this.wolfbaneUntransformChance = config.getInt("Items.WolfbaneUntransformChance", 25);
 		this.craftableSilverSwordEnabled = config.getBoolean("Items.CraftableSilverSword", true);
@@ -836,6 +849,10 @@ public class Werewolf extends JavaPlugin
 		config.set("Clans.WerewolfBiteAccountUUID", this.werewolfBiteAccountUUID);
 		config.set("Clans.WildBiteAccountUUID", this.wildBiteAccountUUID);
 
+		config.set("WerewolfNames.Enabled", this.werewolfNamesEnabled);
+		config.set("WerewolfNames.Given_names", this.givenNames);
+		config.set("WerewolfNames.Surnames", this.surnames);
+
 		config.set("Signs.Enabled", Boolean.valueOf(this.useSigns));
 		config.set("Signs.CurePrice", Double.valueOf(this.curePrice));
 		config.set("Signs.InfectionPrice", Double.valueOf(this.infectionPrice));
@@ -865,7 +882,7 @@ public class Werewolf extends JavaPlugin
 		this.craftableInfectionPotionEnabled = config.getBoolean("Items.CraftableInfectionPotionEnabled", true);
 		this.craftableCurePotionEnabled = config.getBoolean("Items.CraftableCurePotionEnabled", true);
 		this.craftableWolfbanePotionEnabled = config.getBoolean("Items.CraftableWolfbanePotionEnabled", true);
-*/
+		*/
 
 		saveConfig();
 	}

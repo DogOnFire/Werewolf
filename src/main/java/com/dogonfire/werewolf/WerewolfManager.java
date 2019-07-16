@@ -297,6 +297,8 @@ public class WerewolfManager
 
 			setWerewolfClan(player.getUniqueId(), clan);
 
+			setWerewolfName(player.getUniqueId());
+
 			setWerewolfSkin(player);
 
 			setWolfForm(player.getUniqueId(), player.getName());
@@ -310,6 +312,8 @@ public class WerewolfManager
 			setInfectedThisNight(player.getUniqueId(), player.getName(), true);
 
 			setWerewolfClan(player.getUniqueId(), clan);
+
+			setWerewolfName(player.getUniqueId());
 
 			setInfectedWerewolf(player.getUniqueId(), player.getName());
 
@@ -528,6 +532,18 @@ public class WerewolfManager
 		}
 		
 		return wolfState == WolfState.HumanForm;
+	}
+
+	public String getWerewolfName(UUID playerId)
+	{
+		if (playerId == null)
+		{
+			return "";
+		}
+		
+		String werewolfName = this.werewolvesConfig.getString(playerId.toString() + ".WerewolfName");
+		
+		return werewolfName;
 	}
 
 	public ClanManager.ClanType getWerewolfClan(UUID playerId)
@@ -791,6 +807,48 @@ public class WerewolfManager
 		return this.playerlistNames.containsKey(playerId);
 	}
 
+	private String newWerewolfName()
+	{
+		String givenName = "";
+		String surname = "";
+		
+		// Generate a random givenName
+		List<String> strings = plugin.givenNames;
+		if (strings.size() == 0)
+		{
+			this.plugin.log("No given name strings found in the config!");
+		}
+		else {
+			givenName = (String) strings.toArray()[this.random.nextInt(strings.size())];
+		}
+		
+		// Generate a random surname
+		List<String> strings2 = plugin.surnames;
+		if (strings2.size() == 0)
+		{
+			this.plugin.log("No surname strings found in the config!");
+		}
+		else {
+			surname = (String) strings2.toArray()[this.random.nextInt(strings2.size())];
+		}
+		
+		String fullName = givenName + surname;
+		
+		if (fullName == "")
+		{
+			fullName = "Werewolf";
+		}
+
+		return fullName;
+	}
+	
+	public void setWerewolfName(UUID playerId)
+	{
+		this.werewolvesConfig.set(playerId.toString() + ".WerewolfName", newWerewolfName());
+
+		saveTimed();
+	}
+
 	public void setHumanForm(UUID playerId, String playerName)
 	{
 		this.werewolvesConfig.set(playerId.toString() + ".PlayerName", playerName);
@@ -806,7 +864,7 @@ public class WerewolfManager
 
 		saveTimed();
 	}
-
+	
 	public void setInfectedWerewolf(UUID playerId, String playerName)
 	{
 		Date thisDate = new Date();

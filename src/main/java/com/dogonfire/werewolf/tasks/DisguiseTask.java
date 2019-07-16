@@ -163,29 +163,83 @@ public class DisguiseTask implements Runnable
 		dropMainHandItem();
 		dropOffHandItem();
 		
-		int n = 1;
 		Boolean renamed = false;
-		while (!renamed)
-		{
-			renamed = true;
+		
+		if (plugin.werewolfNamesEnabled) {
+			String werewolfName = Werewolf.getWerewolfManager().getWerewolfName(player.getUniqueId());
 			
-			// Go through all online players and check for Werewolf1, Werewolf2 etc. until one is found where the number isn't taken
-			for (Player otherPlayer : plugin.getServer().getOnlinePlayers()) {
-				if (otherPlayer.getPlayerListName().contains("Werewolf" + n)) {
-					n++;
+			if (werewolfName != "")
+			{
+				Boolean inUse = false;
+				
+				// We check if anyone else online maybe already uses this randomly generated name...
+				for (Player otherPlayer : plugin.getServer().getOnlinePlayers()) {
+					if (otherPlayer.getPlayerListName().contains(werewolfName)) {
+						inUse = true;
+					}
+				}
+				
+				// if there are noone else with the name right now, just use it
+				if (inUse == false)
+				{
+					player.setPlayerListName(ChatColor.GOLD + werewolfName);
+					renamed = true;
+				}
+				else { // oh boy, someone already use it. Time to use integers
+					int n = 1;
+					
+					while (!renamed)
+					{
+						renamed = true;
+						
+						// Go through all online players and check for WerewolfName1, WerewolfName2 etc. until one is found where the number isn't taken
+						for (Player otherPlayer : plugin.getServer().getOnlinePlayers()) {
+							if (otherPlayer.getPlayerListName().contains(werewolfName + n)) {
+								n++;
+							}
+						}
+						
+						// Now let's try to use this number :))
+						try
+						{
+							player.setPlayerListName(ChatColor.GOLD + werewolfName + n);
+						} 
+						catch (Exception ex)
+						{
+							n++;
+
+							renamed = false;
+						}
+					}
 				}
 			}
+		}
+		
+		if (renamed == false) {
+			int n = 1;
 			
-			// Now let's try to use this number :))
-			try
+			while (!renamed)
 			{
-				player.setPlayerListName(ChatColor.GOLD + "Werewolf" + n);
-			} 
-			catch (Exception ex)
-			{
-				n++;
+				renamed = true;
+				
+				// Go through all online players and check for Werewolf1, Werewolf2 etc. until one is found where the number isn't taken
+				for (Player otherPlayer : plugin.getServer().getOnlinePlayers()) {
+					if (otherPlayer.getPlayerListName().contains("Werewolf" + n)) {
+						n++;
+					}
+				}
+				
+				// Now let's try to use this number :))
+				try
+				{
+					player.setPlayerListName(ChatColor.GOLD + "Werewolf" + n);
+				} 
+				catch (Exception ex)
+				{
+					n++;
 
-				renamed = false;
+					renamed = false;
+				}
 			}
 		}
 		

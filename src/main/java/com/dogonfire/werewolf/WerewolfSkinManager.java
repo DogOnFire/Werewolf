@@ -32,8 +32,7 @@ public class WerewolfSkinManager
 	{
 		return this.nextID++;
 	}
-	
-	// TODO: Only disguise for everyone BUT the player, so they don't have to see their own face
+
 	public boolean setWerewolfSkin(Player player, String werewolfName)
 	{
 		if (this.skins.containsKey(player.getUniqueId()))

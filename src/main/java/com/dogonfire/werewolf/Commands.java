@@ -157,7 +157,7 @@ public class Commands implements Listener
 	{
 		if (player == null)
 		{
-			this.plugin.log(ChatColor.WHITE + "/werewolf" + ChatColor.AQUA + " - Show basic info");
+			this.plugin.log("/werewolf - Show basic info");
 			this.plugin.log("/howl - Howl as a Werewolf!");
 			this.plugin.log("/growl - Growl as a Werewolf!");
 			this.plugin.log("/werewolf top - View the top Werewolf hunters in " + this.plugin.serverName);
@@ -636,7 +636,7 @@ public class Commands implements Listener
 		return true;
 	}	
 	
-	// The command that is run manually to toggle the player who ran the command is a werewolf
+	// The command that is run manually to toggle the player who ran the command to/from a werewolf
 	public boolean commandToggleSelfWerewolf(Player player, String[] args)
 	{
 		if (player == null)
