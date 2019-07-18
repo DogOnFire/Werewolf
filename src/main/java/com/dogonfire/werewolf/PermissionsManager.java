@@ -17,11 +17,13 @@ public class PermissionsManager
 	{
 		this.plugin = p;
 		
-		RegisteredServiceProvider<Permission> permissionProvider = plugin.getServer().getServicesManager().getRegistration(Permission.class);
-		vaultPermission = permissionProvider.getProvider();
-		
-		RegisteredServiceProvider<Chat> chatProvider = plugin.getServer().getServicesManager().getRegistration(Chat.class);
-        vaultChat = chatProvider.getProvider();
+		if (p.vaultEnabled) {
+			RegisteredServiceProvider<Permission> permissionProvider = plugin.getServer().getServicesManager().getRegistration(Permission.class);
+			vaultPermission = permissionProvider.getProvider();
+			
+			RegisteredServiceProvider<Chat> chatProvider = plugin.getServer().getServicesManager().getRegistration(Chat.class);
+	        vaultChat = chatProvider.getProvider();
+		}
 	}
 
 	public void load()
@@ -41,32 +43,45 @@ public class PermissionsManager
 
 	public boolean hasPermission(Player player, String node)
 	{
-		return vaultPermission.has(player, node);
+		if (this.plugin.vaultEnabled) { 
+			return vaultPermission.has(player, node);
+		}
+		return false;
 	}
 
 	public boolean isGroup(String groupName)
 	{
-		for(String str: vaultPermission.getGroups()) {
-		    if(str.contains(groupName))
-		       return true;
+		if (this.plugin.vaultEnabled) {
+			for(String str: vaultPermission.getGroups()) {
+			    if(str.contains(groupName))
+			       return true;
+			}
 		}
 		return false;
 	}
 
 	public String getGroup(String playerName)
 	{
-		return vaultPermission.getPrimaryGroup(plugin.getServer().getPlayer(playerName));
+		if (this.plugin.vaultEnabled) {
+			return vaultPermission.getPrimaryGroup(plugin.getServer().getPlayer(playerName));
+		}
+		return "";
 	}
 
 	public String getPrefix(String playerName)
 	{
-		Player player = plugin.getServer().getPlayer(playerName);
-		return vaultChat.getPlayerPrefix(player);
+		if (this.plugin.vaultEnabled) {
+			Player player = plugin.getServer().getPlayer(playerName);
+			return vaultChat.getPlayerPrefix(player);
+		}
+		return "";
 	}
 
 	public void setGroup(String playerName, String groupName)
 	{
-		Player player = plugin.getServer().getPlayer(playerName);
-		vaultPermission.playerAddGroup(player, groupName);
+		if (this.plugin.vaultEnabled) {
+			Player player = plugin.getServer().getPlayer(playerName);
+			vaultPermission.playerAddGroup(player, groupName);
+		}
 	}
 }

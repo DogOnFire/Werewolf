@@ -7,13 +7,13 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
-public class WerewolfSkinManager
+public class SkinManager
 {
 	private Werewolf						plugin;
 	private HashMap<UUID, PlayerDisguise>	skins			= new HashMap<UUID, PlayerDisguise>();
 	protected int							nextID			= -2147483648;
 
-	WerewolfSkinManager(Werewolf p)
+	SkinManager(Werewolf p)
 	{
 		this.plugin = p;
 	}

@@ -109,7 +109,7 @@ public class Werewolf extends JavaPlugin
 	private static WerewolfManager				werewolfManager							= null;
 	private static HuntManager					huntManager								= null;
 	private static TrophyManager				trophyManager							= null;
-	private static WerewolfSkinManager			skinManager								= null;
+	private static SkinManager			skinManager								= null;
 	private static PermissionsManager			permissionsManager						= null;
 	private static WerewolfScoreboardManager	werewolfScoreboardManager				= null;
 	private static StatisticsManager			statisticsManager						= null;
@@ -217,7 +217,7 @@ public class Werewolf extends JavaPlugin
 		return trophyManager;
 	}
 
-	public static WerewolfSkinManager getSkinManager()
+	public static SkinManager getSkinManager()
 	{
 		return skinManager;
 	}
@@ -333,7 +333,6 @@ public class Werewolf extends JavaPlugin
 
 		pluginEnabled = true;
 
-		permissionsManager = new PermissionsManager(this);
 		werewolfManager = new WerewolfManager(this);
 		clanManager = new ClanManager(this);
 		//potionManager = new PotionManager(this);
@@ -382,6 +381,8 @@ public class Werewolf extends JavaPlugin
 		{
 			log("Vault not found. Werewolf bounties and signs are disabled.");
 		}
+		
+		permissionsManager = new PermissionsManager(this);
 		/* TODO: re-add Vampire integration..
 		
 		if (pm.getPlugin("Vampire") != null)	
@@ -406,7 +407,7 @@ public class Werewolf extends JavaPlugin
 			log("Lib's Disguises plugin detected. Enabling support for skins.");
 
 			this.disguisesEnabled = true;
-			skinManager = new WerewolfSkinManager(this);
+			skinManager = new SkinManager(this);
 		}
 		
 		// Check for PlaceholderAPI
