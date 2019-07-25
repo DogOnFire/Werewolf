@@ -66,6 +66,15 @@ public class SkinManager
 			
 			PlayerDisguise skin = new PlayerDisguise(werewolfName, account);
 			skin.getWatcher().setCapeEnabled(false);
+			
+			if (plugin.werewolfNamesEnabled) {
+				String customWerewolfName = Werewolf.getWerewolfManager().getWerewolfName(player.getUniqueId());
+				if (customWerewolfName != null && !customWerewolfName.isEmpty()) {
+					skin.getWatcher().setCustomName(customWerewolfName);
+					skin.getWatcher().setCustomNameVisible(true);
+				}
+			}
+			
 			DisguiseAPI.disguiseToAll(player, skin);
 
 			this.skins.put(player.getUniqueId(), skin);

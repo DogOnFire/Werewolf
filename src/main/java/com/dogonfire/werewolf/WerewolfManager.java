@@ -543,6 +543,11 @@ public class WerewolfManager
 		
 		String werewolfName = this.werewolvesConfig.getString(playerId.toString() + ".WerewolfName");
 		
+		if (werewolfName == null || werewolfName.isEmpty()) {
+			setWerewolfName(playerId);
+			werewolfName = this.werewolvesConfig.getString(playerId.toString() + ".WerewolfName");
+		}
+		
 		return werewolfName;
 	}
 
