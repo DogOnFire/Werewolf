@@ -174,108 +174,105 @@ public class Commands implements Listener
 			player.sendMessage(ChatColor.YELLOW + "---------- " + this.plugin.getDescription().getFullName() + " ----------");
 			Werewolf.getLanguageManager().setType("/werewolf help");
 			player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpWerewolf, ChatColor.AQUA));
-			if (this.plugin.vaultEnabled)
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.hunt"))
 			{
-				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.hunt"))
+				Werewolf.getLanguageManager().setType("/ww hunt");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpHunt, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")))
+			{
+				Werewolf.getLanguageManager().setType("/ww top");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpTop, ChatColor.AQUA ));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.bounty")))
+			{
+				Werewolf.getLanguageManager().setType("/ww bounty");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpBounty, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.addbounty")))
+			{
+				Werewolf.getLanguageManager().setType("/ww addbounty <amount>");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpAddBounty, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.transform")))
+			{
+				Werewolf.getLanguageManager().setType("/ww transform");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpTransform, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check")))
+			{
+				Werewolf.getLanguageManager().setType("/ww check <playername>");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCheck, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectself")))
+			{
+				Werewolf.getLanguageManager().setType("/ww infect");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectSelf, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect")))
+			{
+				Werewolf.getLanguageManager().setType("/ww infect <playername>");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectOther, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolf")))
+			{
+				Werewolf.getLanguageManager().setType("/ww toggle <playername>");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpToggleOther, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolfself")))
+			{
+				Werewolf.getLanguageManager().setType("/ww toggle");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpToggleSelf, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.infection.create")))
+			{
+				Werewolf.getLanguageManager().setType("/ww infectionpotion");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectionPotion, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.cure.create")))
+			{
+				Werewolf.getLanguageManager().setType("/ww curepotion");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCurePotion, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.wolfbane.create")))
+			{
+				Werewolf.getLanguageManager().setType("/ww wolfbane");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpWolfbanePotion, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.silversword.create")))
+			{
+				Werewolf.getLanguageManager().setType("/ww silversword");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpSilverSword, ChatColor.AQUA));
+			}
+			if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.lorebook.create")))
+			{
+				Werewolf.getLanguageManager().setType("/ww lorebook");
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpLoreBook, ChatColor.AQUA));
+			}
+			if (this.plugin.useClans)
+			{
+				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.clan")))
 				{
-					Werewolf.getLanguageManager().setType("/ww hunt");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpHunt, ChatColor.AQUA));
+					Werewolf.getLanguageManager().setType("/ww clan");
+					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpClan, ChatColor.AQUA));
 				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")))
+				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.home")))
 				{
-					Werewolf.getLanguageManager().setType("/ww top");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpTop, ChatColor.AQUA ));
+					Werewolf.getLanguageManager().setType("/ww home");
+					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpHome, ChatColor.AQUA));
 				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.bounty")))
-				{
-					Werewolf.getLanguageManager().setType("/ww bounty");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpBounty, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.addbounty")))
-				{
-					Werewolf.getLanguageManager().setType("/ww addbounty <amount>");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpAddBounty, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.transform")))
-				{
-					Werewolf.getLanguageManager().setType("/ww transform");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpTransform, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check")))
-				{
-					Werewolf.getLanguageManager().setType("/ww check <playername>");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCheck, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectself")))
-				{
-					Werewolf.getLanguageManager().setType("/ww infect");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectSelf, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect")))
-				{
-					Werewolf.getLanguageManager().setType("/ww infect <playername>");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectOther, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolf")))
-				{
-					Werewolf.getLanguageManager().setType("/ww toggle <playername>");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpToggleOther, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.togglewerewolfself")))
-				{
-					Werewolf.getLanguageManager().setType("/ww toggle");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpToggleSelf, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.infection.create")))
-				{
-					Werewolf.getLanguageManager().setType("/ww infectionpotion");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpInfectionPotion, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.cure.create")))
-				{
-					Werewolf.getLanguageManager().setType("/ww curepotion");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCurePotion, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.wolfbane.create")))
-				{
-					Werewolf.getLanguageManager().setType("/ww wolfbane");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpWolfbanePotion, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.silversword.create")))
-				{
-					Werewolf.getLanguageManager().setType("/ww silversword");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpSilverSword, ChatColor.AQUA));
-				}
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.lorebook.create")))
-				{
-					Werewolf.getLanguageManager().setType("/ww lorebook");
-					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpLoreBook, ChatColor.AQUA));
-				}
-				if (this.plugin.useClans)
-				{
-					if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.clan")))
-					{
-						Werewolf.getLanguageManager().setType("/ww clan");
-						player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpClan, ChatColor.AQUA));
-					}
-					if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.home")))
-					{
-						Werewolf.getLanguageManager().setType("/ww home");
-						player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpHome, ChatColor.AQUA));
-					}
 
-					if(Werewolf.getClanManager().isAlpha(player.getUniqueId()))
+				if(Werewolf.getClanManager().isAlpha(player.getUniqueId()))
+				{
+					if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.call")))
 					{
-						if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.call")))
-						{
-							Werewolf.getLanguageManager().setType("/ww call");
-							player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCall, ChatColor.AQUA));
-						}
-						if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sethome")))
-						{
-							Werewolf.getLanguageManager().setType("/ww sethome");
-							player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpSetHome, ChatColor.AQUA));
-						}
+						Werewolf.getLanguageManager().setType("/ww call");
+						player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpCall, ChatColor.AQUA));
+					}
+					if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sethome")))
+					{
+						Werewolf.getLanguageManager().setType("/ww sethome");
+						player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.HelpSetHome, ChatColor.AQUA));
 					}
 				}
 			}

@@ -635,7 +635,7 @@ public class Werewolf extends JavaPlugin
 	{
 		if (this.debug)
 		{
-			plugin.getLogger().info(message);
+			plugin.getLogger().info("[Debug] " + message);
 		}
 	}
 
