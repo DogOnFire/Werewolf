@@ -8,22 +8,25 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.StringUtil;
+
 import com.dogonfire.werewolf.ClanManager.ClanType;
 
-public class Commands implements Listener
+public class Commands implements TabExecutor
 {
 	private Werewolf	plugin;
 
@@ -1530,6 +1533,103 @@ public class Commands implements Listener
 			return false;
 		}
 		return true;
+	}
+
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+	    Validate.notNull(sender, "Sender cannot be null");
+	    Validate.notNull(args, "Arguments cannot be null");
+	    Validate.notNull(alias, "Alias cannot be null");
+	    
+		List<String> result = new ArrayList<>();
+		
+		Player player = null;
+		if (sender instanceof Player)
+		{
+			player = (Player) sender;
+		}
+		
+		if (args.length == 1 && (cmd.getName().equalsIgnoreCase("werewolf") || cmd.getName().equalsIgnoreCase("ww"))) {
+			List<String> arg1 = new ArrayList<String>();
+			arg1.add("help");
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")) {
+				arg1.add("top");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.hunt")) {
+				arg1.add("hunt");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.check")) {
+				arg1.add("check");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.bounty")) {
+				arg1.add("bounty");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.addbounty")) {
+				arg1.add("addbounty");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.toggle")) {
+				arg1.add("toggle");
+			}
+			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect")) {
+				arg1.add("infect");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.transform")) {
+				arg1.add("transform");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectionpotion")) {
+				arg1.add("infectionpotion");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.curepotion")) {
+				arg1.add("curepotion");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.wolfbane")) {
+				arg1.add("wolfbane");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.silversword")) {
+				arg1.add("silversword");
+			}
+			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.lorebook")) {
+				arg1.add("lorebook");
+			}
+			if (this.plugin.useClans) {
+				if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.clan")) {
+					arg1.add("clan");
+				}
+				if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")) {
+					arg1.add("home");
+				}
+				if(Werewolf.getClanManager().isAlpha(player.getUniqueId())) {
+					if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.call")) {
+						arg1.add("call");
+					}
+					if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.sethome")) {
+						arg1.add("sethome");
+					}
+				}
+			}
+			Iterable<String> FIRST_ARGUMENTS = arg1;
+			StringUtil.copyPartialMatches(args[0], FIRST_ARGUMENTS, result);
+		}
+		else if (args.length == 2 && args[0].equalsIgnoreCase("addbounty")) {
+			List<String> arg2 = new ArrayList<String>();
+			
+			arg2.add("100");
+			arg2.add("200");
+			arg2.add("300");
+			arg2.add("500");
+			arg2.add("1000");
+			arg2.add("2000");
+			arg2.add("2500");
+			arg2.add("5000");
+			
+			Iterable<String> SECOND_ARGUMENTS = arg2;
+			StringUtil.copyPartialMatches(args[1], SECOND_ARGUMENTS, result);
+		}
+		else if (args.length == 2 && (args[0].equalsIgnoreCase("check") || args[0].equalsIgnoreCase("infect") || args[0].equalsIgnoreCase("toggle"))) {
+			return null;
+		}
+		
+		Collections.sort(result);
+		return result;
 	}
 
 	public class Hunter

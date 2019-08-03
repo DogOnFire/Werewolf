@@ -893,6 +893,12 @@ public class Werewolf extends JavaPlugin
 	{
 		return this.commands.onCommand(sender, cmd, label, args);
 	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args)
+	{
+		return this.commands.onTabComplete(sender, cmd, alias, args);
+	}
 
 	public void startMetrics()
 	{
