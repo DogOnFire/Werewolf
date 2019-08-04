@@ -32,7 +32,8 @@ public class UndisguiseTask implements Runnable
 		{
 			
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.CONFUSION);
-			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.SPEED);
+			// Walkspeed works sooo
+			// Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.SPEED);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.HUNGER);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.NIGHT_VISION);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.INCREASE_DAMAGE);

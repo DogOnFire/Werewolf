@@ -135,22 +135,25 @@ public class DisguiseTask implements Runnable
 		
 		switch (clan)
 		{
-			case Potion:
+			case Potion: // Witherfang
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.JUMP, 32000, 3)), 16L);
-				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 3)), 32L);
+				// Walkspeed works
+				//Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 3)), 32L);
 
 				this.player.setWalkSpeed(1.0F);
 				break;
-			case WildBite:
+			case WildBite: // Silvermane
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.JUMP, 32000, 2)), 16L);
-				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
+				// Walkspeed works
+				//Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.REGENERATION, 32000, 2)), 64L);
 
 				this.player.setWalkSpeed(0.5F);
 				break;
-			case WerewolfBite:
+			case WerewolfBite: // Bloodmoon
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.JUMP, 32000, 2)), 16L);
-				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
+				// Walkspeed works
+				// Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.SPEED, 32000, 1)), 32L);
 				Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, this.player, new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 32000, 2)), 64L);
 
 				this.player.setWalkSpeed(0.5F);

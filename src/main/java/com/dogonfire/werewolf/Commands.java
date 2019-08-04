@@ -1572,37 +1572,39 @@ public class Commands implements TabExecutor
 			if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infect")) {
 				arg1.add("infect");
 			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.transform")) {
-				arg1.add("transform");
-			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectionpotion")) {
-				arg1.add("infectionpotion");
-			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.curepotion")) {
-				arg1.add("curepotion");
-			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.wolfbane")) {
-				arg1.add("wolfbane");
-			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.silversword")) {
-				arg1.add("silversword");
-			}
-			if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.lorebook")) {
-				arg1.add("lorebook");
-			}
-			if (this.plugin.useClans) {
-				if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.clan")) {
-					arg1.add("clan");
+			if (player != null) {
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.transform")) {
+					arg1.add("transform");
 				}
-				if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")) {
-					arg1.add("home");
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectionpotion")) {
+					arg1.add("infectionpotion");
 				}
-				if(Werewolf.getClanManager().isAlpha(player.getUniqueId())) {
-					if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.call")) {
-						arg1.add("call");
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.curepotion")) {
+					arg1.add("curepotion");
+				}
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.wolfbane")) {
+					arg1.add("wolfbane");
+				}
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.silversword")) {
+					arg1.add("silversword");
+				}
+				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.lorebook")) {
+					arg1.add("lorebook");
+				}
+				if (this.plugin.useClans) {
+					if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.clan")) {
+						arg1.add("clan");
 					}
-					if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.sethome")) {
-						arg1.add("sethome");
+					if (player == null || player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.top")) {
+						arg1.add("home");
+					}
+					if(Werewolf.getClanManager().isAlpha(player.getUniqueId())) {
+						if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.call")) {
+							arg1.add("call");
+						}
+						if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.alpha.sethome")) {
+							arg1.add("sethome");
+						}
 					}
 				}
 			}

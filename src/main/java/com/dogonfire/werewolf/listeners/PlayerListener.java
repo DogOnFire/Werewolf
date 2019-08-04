@@ -12,20 +12,17 @@ import com.dogonfire.werewolf.tasks.PotionEffectTask;
 import com.dogonfire.werewolf.versioning.UpdateNotifier;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
@@ -275,67 +272,6 @@ public class PlayerListener implements Listener
 			}
 		}
 	}
-
-	@EventHandler
-	public void onPlayerPickupItem(EntityPickupItemEvent event)
-	{
-		Entity entity = event.getEntity();
-		if (entity.getType() == EntityType.PLAYER) {
-			Player player = (Player) entity;
-			
-			if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
-			{
-				return;
-			}
-			
-			Material material = event.getItem().getItemStack().getType();
-			switch (material)
-			{
-				case GOLDEN_CHESTPLATE:
-				case LEATHER_CHESTPLATE:
-				case DIAMOND_CHESTPLATE:
-				case CHAINMAIL_CHESTPLATE:
-				case IRON_CHESTPLATE:
-				case WOODEN_SWORD:
-				case GOLDEN_SWORD:
-				case STONE_SWORD:
-				case DIAMOND_SWORD:
-				case IRON_SWORD:
-				case CHAINMAIL_BOOTS:
-				case GOLDEN_BOOTS:
-				case LEATHER_BOOTS:
-				case IRON_BOOTS:
-				case DIAMOND_BOOTS:
-				case GOLDEN_LEGGINGS:
-				case CHAINMAIL_LEGGINGS:
-				case LEATHER_LEGGINGS:
-				case IRON_LEGGINGS:
-				case DIAMOND_LEGGINGS:
-				case CHAINMAIL_HELMET:
-				case GOLDEN_HELMET:
-				case LEATHER_HELMET:
-				case IRON_HELMET:
-				case DIAMOND_HELMET:
-				case TURTLE_HELMET:
-				case SHIELD:
-				case BOW:
-					event.setCancelled(true);
-					return;
-				default:
-			}
-	
-			if (this.plugin.keepWerewolfHandsFree)
-			{
-				if (player.getInventory().getItemInMainHand().getType() == Material.AIR)
-				{				
-					event.setCancelled(true);
-					
-					//final Inventory inventory = player.getInventory();
-					//inventory.addItem(event.getItem().getItemStack());
-				}				
-			}	
-		}				
-	}	
 	
 	@EventHandler
 	public void onPotionSplash(PotionSplashEvent event)
