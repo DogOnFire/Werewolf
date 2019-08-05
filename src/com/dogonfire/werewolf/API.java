@@ -1,10 +1,14 @@
 package com.dogonfire.werewolf;
 
 import java.util.UUID;
+
 import org.bukkit.inventory.ItemStack;
 
 public class API
 {
+	public API()
+	{}
+	
 	public static void setFullWerewolf(UUID playerId)
 	{
 		// Werewolf.getWerewolfManager().makeWerewolf(player, turnNow, clan);
