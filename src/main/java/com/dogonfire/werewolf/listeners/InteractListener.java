@@ -87,6 +87,7 @@ public class InteractListener implements Listener
 			case IRON_HELMET:
 			case DIAMOND_HELMET:
 			case TURTLE_HELMET:
+			case ELYTRA:
 			case SHIELD:
 				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryDefense, ChatColor.RED));
 				event.setCancelled(true);

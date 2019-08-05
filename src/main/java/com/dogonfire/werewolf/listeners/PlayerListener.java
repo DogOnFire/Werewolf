@@ -54,6 +54,20 @@ public class PlayerListener implements Listener
 			return;
 		}
 		Werewolf.getWerewolfManager().unsetWerewolfSkin(event.getPlayer().getUniqueId(), true);
+		
+		if (Werewolf.getWerewolfManager().isWerewolf(event.getPlayer().getUniqueId())) {
+			// We want to be sure potion effects are cleared...
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.CONFUSION);
+			// Walkspeed works sooo, but let's still remove it...
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.SPEED);
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.HUNGER);
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.NIGHT_VISION);
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.INCREASE_DAMAGE);
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.REGENERATION);
+			Werewolf.pu.removePotionEffectNoGraphic(event.getPlayer(), PotionEffectType.JUMP);
+			
+			event.getPlayer().setWalkSpeed(0.2F);
+		}
 
 		this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new CheckTransformationTask(plugin, event.getPlayer().getUniqueId()), 20L);
 		
@@ -154,16 +168,20 @@ public class PlayerListener implements Listener
 			{
 				if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
 				{
+					String werewolfName = "Werewolf";
+					if (plugin.werewolfNamesEnabled) {
+						werewolfName = Werewolf.getWerewolfManager().getWerewolfName(event.getEntity().getUniqueId());
+					}
 					switch (this.random.nextInt(3))
 					{
 						case 0:
-							event.setDeathMessage("Werewolf died");
+							event.setDeathMessage(werewolfName + " died");
 							break;
 						case 1:
-							event.setDeathMessage("Werewolf was killed");
+							event.setDeathMessage(werewolfName + " was killed");
 							break;
 						case 2:
-							event.setDeathMessage("Werewolf died");
+							event.setDeathMessage(werewolfName + " died");
 							break;
 						default:
 							break;

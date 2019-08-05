@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -295,20 +294,6 @@ public class Werewolf extends JavaPlugin
 	{
 		if (vaultEnabled) {
 			CompassTracker.stop();
-		}
-		
-		if (getServer().getOnlinePlayers().size() != 0)
-		{
-			Random random = new Random();
-
-			Player player = (Player) getServer().getOnlinePlayers().toArray()[random.nextInt(plugin.getServer().getOnlinePlayers().size())];
-
-			if (getWerewolfManager().isWerewolf(player))
-			{
-				if (getWerewolfManager().hasWerewolfSkin(player.getUniqueId())) {
-					untransform(player);
-				}
-			}
 		}
 
 		saveSettings();

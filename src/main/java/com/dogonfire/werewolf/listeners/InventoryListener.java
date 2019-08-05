@@ -205,7 +205,6 @@ public class InventoryListener implements Listener
 				case TRIDENT:
 					if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
 						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-						player.getInventory().setItemInOffHand(null);
 					}
 					else {
 						ItemStack stack = player.getInventory().getItemInOffHand();
@@ -213,14 +212,13 @@ public class InventoryListener implements Listener
 						if (slot > -1)
 						{
 							player.getInventory().setItem(slot, stack);
-							player.getInventory().setItemInOffHand(null);
 						}
 						else
 						{
 							player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-							player.getInventory().setItemInOffHand(null);
 						}
 					}
+					player.getInventory().setItemInOffHand(null);
 					break;
 				default:
 					break;
@@ -264,7 +262,6 @@ public class InventoryListener implements Listener
 				case TRIDENT:
 					if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
 						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
-						player.getInventory().setItemInMainHand(null);
 					}
 					else {
 						ItemStack stack = player.getInventory().getItemInMainHand();
@@ -272,14 +269,13 @@ public class InventoryListener implements Listener
 						if (slot > -1)
 						{
 							player.getInventory().setItem(slot, stack);
-							player.getInventory().setItemInMainHand(null);
 						}
 						else
 						{
 							player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
-							player.getInventory().setItemInMainHand(null);
 						}
 					}
+					player.getInventory().setItemInMainHand(null);
 					break;
 				default:
 					break;
@@ -423,7 +419,6 @@ public class InventoryListener implements Listener
 				if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId()))
 				{
 					player.getWorld().dropItemNaturally(player.getLocation(), stack);
-					inventory.remove(stack);
 				}
 				else
 				{
@@ -435,7 +430,6 @@ public class InventoryListener implements Listener
 					else
 					{
 						player.getWorld().dropItemNaturally(player.getLocation(), stack);
-						inventory.remove(stack);
 					}
 				}
 			}
@@ -503,7 +497,7 @@ public class InventoryListener implements Listener
 					}
 					
 					ItemStack stack = player.getInventory().getItem(heldItemSlot);
-					int inventorySlots = player.getInventory().getSize();
+					int inventorySlots = 36; //player.getInventory().getSize();
 					Boolean foundSlot = false;
 					
 					for (int slot = 0; slot < inventorySlots; slot++) {
@@ -609,7 +603,7 @@ public class InventoryListener implements Listener
 					ItemStack stack = event.getItem().getItemStack();
 					
 					int heldItemSlot = player.getInventory().getHeldItemSlot();
-					int inventorySlots = player.getInventory().getSize();
+					int inventorySlots = 36; //player.getInventory().getSize();
 					Boolean foundSlot = false;
 					
 					for (int slot = 0; slot < inventorySlots; slot++) {

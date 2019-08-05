@@ -8,6 +8,7 @@ import com.dogonfire.werewolf.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -19,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.util.Vector;
 
 public class DamageListener implements Listener
 {
@@ -152,13 +154,14 @@ public class DamageListener implements Listener
 					
 					event.setDamage(damage);
 					
-					/* TODO: Readd Vampire integration
+					
 					
 					if (damageEvent.getEntity() instanceof Player)
 					{
 						Player victim = (Player) damageEvent.getEntity();
+						/* TODO: Readd Vampire integration
 						if (!this.plugin.isVampire(victim))
-						{
+						{*/
 							if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected"))
 							{
 								if (!Werewolf.getWerewolfManager().isWerewolf(victim))
@@ -184,10 +187,9 @@ public class DamageListener implements Listener
 										this.plugin.log(player.getName() + " infected " + victim.getName() + " with the werewolf infection!");
 									}
 								}
-							}
+							/*}*/
 						}
 					}
-					*/
 				}
 			}
 			
@@ -220,10 +222,6 @@ public class DamageListener implements Listener
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event)
 	{
-		if (!this.plugin.vaultEnabled)
-		{
-			return;
-		}
 		if (event.getEntity().getKiller() == null)
 		{
 			return;
@@ -243,6 +241,9 @@ public class DamageListener implements Listener
 				case PLAYER:
 					health = 4;
 					break;
+				case VILLAGER:
+					health = 4;
+					break;
 				case HORSE:
 					health = 4;
 					break;
@@ -253,6 +254,15 @@ public class DamageListener implements Listener
 					health = 3;
 					break;
 				case ZOMBIE:
+					health = 3;
+					break;
+				case LLAMA:
+					health = 3;
+					break;
+				case DROWNED:
+					health = 3;
+					break;
+				case DOLPHIN:
 					health = 3;
 					break;
 				case PIG_ZOMBIE:
@@ -271,6 +281,9 @@ public class DamageListener implements Listener
 					health = 2;
 					break;
 				case WOLF:
+					health = 2;
+					break;
+				case TURTLE:
 					health = 2;
 					break;
 				case SPIDER:
