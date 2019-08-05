@@ -13,6 +13,8 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.dogonfire.werewolf.api.WerewolfAPI;
+
 public class SignManager implements Listener
 {
 	private Werewolf	plugin;
@@ -347,7 +349,7 @@ public class SignManager implements Listener
 					Werewolf.getLanguageManager().setAmount("free");
 				}
 				
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfInfectionPotion());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfInfectionPotion());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAInfectionPotion, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf infection potion for " + price);
@@ -373,7 +375,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfCurePotion());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfCurePotion());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtACurePotion, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf cure potion for " + price);
@@ -399,7 +401,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfWolfbanePotion());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfWolfbanePotion());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAWolfbanePotion, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf wolfbane potion for " + price);
@@ -425,7 +427,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfSilverSword());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfSilverSword());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtASilverSword, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);
@@ -451,7 +453,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfLorebook());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLorebook());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtALoreBook, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);

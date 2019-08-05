@@ -13,21 +13,22 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class PermissionsManager
 {
-	private String				pluginName			= "null";
-	private Werewolf			plugin;
-	private Permission			vaultPermission		= null;
-    private static Chat 		vaultChat 			= null;
+	private String		pluginName		= "null";
+	private Werewolf	plugin;
+	private Permission	vaultPermission	= null;
+	private static Chat	vaultChat		= null;
 
 	public PermissionsManager(Werewolf p)
 	{
 		this.plugin = p;
-		
-		if (p.vaultEnabled) {
+
+		if (p.vaultEnabled)
+		{
 			RegisteredServiceProvider<Permission> permissionProvider = plugin.getServer().getServicesManager().getRegistration(Permission.class);
 			vaultPermission = permissionProvider.getProvider();
-			
+
 			RegisteredServiceProvider<Chat> chatProvider = plugin.getServer().getServicesManager().getRegistration(Chat.class);
-	        vaultChat = chatProvider.getProvider();
+			vaultChat = chatProvider.getProvider();
 		}
 	}
 
@@ -49,38 +50,49 @@ public class PermissionsManager
 	public boolean hasPermission(Player player, String node)
 	{
 		this.plugin.logDebug("Checking for perm.. Player: " + player.getName() + " - Node: " + node);
-		if (this.plugin.vaultEnabled) { 
+		if (this.plugin.vaultEnabled)
+		{
 			this.plugin.logDebug("Vault is enabled, checking there...");
 			return vaultPermission.has(player, node);
 		}
-		else {
-			// We check the permissions the other way, using the defaults given through plugin.yml
+		else
+		{
+			// We check the permissions the other way, using the defaults given
+			// through plugin.yml
 			this.plugin.logDebug("No vault. Checking the old way..");
 			List<org.bukkit.permissions.Permission> permissions = this.plugin.getDescription().getPermissions();
-			
-			for (org.bukkit.permissions.Permission permission : permissions) {
+
+			for (org.bukkit.permissions.Permission permission : permissions)
+			{
 				this.plugin.logDebug("Current permission: " + permission.getName());
-				Map<String,Boolean> permissionChildren = permission.getChildren();
-				
-				if ((permissionChildren.containsKey(node) && permissionChildren.get(node).booleanValue() == true) || permission.getName().contains(node)) {
-					if (permission.getName().contains(node)) {
+				Map<String, Boolean> permissionChildren = permission.getChildren();
+
+				if ((permissionChildren.containsKey(node) && permissionChildren.get(node).booleanValue() == true) || permission.getName().contains(node))
+				{
+					if (permission.getName().contains(node))
+					{
 						this.plugin.logDebug("Heyy, it was the correct perm finally... Perm: " + permission.getName() + " - Node: " + node);
 						this.plugin.logDebug("Current permissionDefault: " + permission.getDefault().toString());
-						if (permission.getDefault() == PermissionDefault.TRUE) {
+						if (permission.getDefault() == PermissionDefault.TRUE)
+						{
 							this.plugin.logDebug("It was defautl true! Returning true!");
 							return true;
 						}
-						else if (permission.getDefault() == PermissionDefault.OP) {
+						else if (permission.getDefault() == PermissionDefault.OP)
+						{
 							this.plugin.logDebug("It was for operators!");
-							if (player.isOp()) {
+							if (player.isOp())
+							{
 								this.plugin.logDebug("Player is an operator! Returning true!");
 								return true;
 							}
 							this.plugin.logDebug("Player is not an operator!");
 						}
-						else if (permission.getDefault() == PermissionDefault.NOT_OP) {
+						else if (permission.getDefault() == PermissionDefault.NOT_OP)
+						{
 							this.plugin.logDebug("It was for non-operators!");
-							if (!player.isOp()) {
+							if (!player.isOp())
+							{
 								this.plugin.logDebug("Player is not an operator! Returning true!");
 								return true;
 							}
@@ -97,10 +109,12 @@ public class PermissionsManager
 
 	public boolean isGroup(String groupName)
 	{
-		if (this.plugin.vaultEnabled) {
-			for(String str: vaultPermission.getGroups()) {
-			    if(str.contains(groupName))
-			       return true;
+		if (this.plugin.vaultEnabled)
+		{
+			for (String str : vaultPermission.getGroups())
+			{
+				if (str.contains(groupName))
+					return true;
 			}
 		}
 		return false;
@@ -108,7 +122,8 @@ public class PermissionsManager
 
 	public String getGroup(String playerName)
 	{
-		if (this.plugin.vaultEnabled) {
+		if (this.plugin.vaultEnabled)
+		{
 			return vaultPermission.getPrimaryGroup(plugin.getServer().getPlayer(playerName));
 		}
 		return "";
@@ -116,7 +131,8 @@ public class PermissionsManager
 
 	public String getPrefix(String playerName)
 	{
-		if (this.plugin.vaultEnabled) {
+		if (this.plugin.vaultEnabled)
+		{
 			Player player = plugin.getServer().getPlayer(playerName);
 			return vaultChat.getPlayerPrefix(player);
 		}
@@ -125,7 +141,8 @@ public class PermissionsManager
 
 	public void setGroup(String playerName, String groupName)
 	{
-		if (this.plugin.vaultEnabled) {
+		if (this.plugin.vaultEnabled)
+		{
 			Player player = plugin.getServer().getPlayer(playerName);
 			vaultPermission.playerAddGroup(player, groupName);
 		}
