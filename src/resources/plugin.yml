@@ -1,8 +1,8 @@
-name: Werewolf-Reloaded
+name: Werewolf
 main: com.dogonfire.werewolf.Werewolf
 author: DogOnFire
 version: ${project.version}
-api-version: 1.13
+api-version: 1.14
 load: POSTWORLD
 description: Werewolves in Minecraft!
 depend: []
