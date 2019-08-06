@@ -7,11 +7,11 @@ import com.dogonfire.werewolf.Werewolf;
 
 /* From https://github.com/PlaceholderAPI/PlaceholderAPI/wiki/PlaceholderExpansion#internal-class */
 
-class WerewolfExpansion extends PlaceholderExpansion
+class WerewolfPlaceholderExpansion extends PlaceholderExpansion
 {
 	private Werewolf plugin;
 
-	WerewolfExpansion(Werewolf plugin)
+	WerewolfPlaceholderExpansion(Werewolf plugin)
 	{
 		this.plugin = plugin;
 	}

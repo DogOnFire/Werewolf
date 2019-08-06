@@ -7,7 +7,6 @@ import org.bukkit.plugin.PluginManager;
 import com.dogonfire.werewolf.ClanManager.ClanType;
 import com.dogonfire.werewolf.Werewolf;
 
-
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin
 public class WerewolfDisguiseAPI
 {
