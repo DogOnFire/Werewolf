@@ -13,4 +13,4 @@ deploy:
 sudo: false
 before_install:
   - mkdir lib/
-  - wget -P "lib/" https://www.spigotmc.org/resources/myskin-1-8-1-14-4.52303/download?version=273006
+  - wget -P "lib/" https://www.doggycraft.dk/lib/MySkin.jar
