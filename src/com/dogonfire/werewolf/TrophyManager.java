@@ -144,10 +144,12 @@ public class TrophyManager implements Listener
 		{
 			return false;
 		}
+		
 		SkullMeta skullMeta = (SkullMeta) skullItem.getItemMeta();
+		
 		skullMeta.setDisplayName(ChatColor.GOLD + "Werewolf Head");
 
-		List<String> lorePages = new ArrayList<>();
+		List<String> lorePages = new ArrayList<String>();
 		lorePages.add(description);
 		skullMeta.setLore(lorePages);
 

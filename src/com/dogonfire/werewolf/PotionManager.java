@@ -46,7 +46,7 @@ public class PotionManager
     
     potionMeta.setDisplayName(ChatColor.GOLD + "Werewolf cure potion");
     
-    List<String> pages = new ArrayList<>();
+    List<String> pages = new ArrayList<String>();
     
     pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionDescription1, ChatColor.GRAY));
     pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionDescription2, ChatColor.GRAY));
