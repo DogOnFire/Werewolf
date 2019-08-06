@@ -7,10 +7,6 @@ import org.bukkit.entity.Player;
 import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
 
-//import me.libraryaddict.disguise.DisguiseAPI;
-//import me.libraryaddict.disguise.disguisetypes.Disguise;
-//import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
-
 public class SkinManager
 {
 	private Werewolf						plugin;

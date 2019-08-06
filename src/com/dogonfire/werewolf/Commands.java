@@ -1540,7 +1540,7 @@ public class Commands implements TabExecutor
 	    Validate.notNull(args, "Arguments cannot be null");
 	    Validate.notNull(alias, "Alias cannot be null");
 	    
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<String>();
 		
 		Player player = null;
 		if (sender instanceof Player)

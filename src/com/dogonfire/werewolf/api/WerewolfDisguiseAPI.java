@@ -1,12 +1,12 @@
 package com.dogonfire.werewolf.api;
 
 import java.util.UUID;
-
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 
 import com.dogonfire.werewolf.ClanManager.ClanType;
 import com.dogonfire.werewolf.Werewolf;
+
 
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin
 public class WerewolfDisguiseAPI
@@ -122,6 +122,38 @@ public class WerewolfDisguiseAPI
 		public String getSkinAccountName() {
 			return accountName;
 		}
+
+		public String getSkinTextureValue(Player player) {
+			if (Werewolf.getClanManager().isAlpha(player.getUniqueId()))
+			{
+				return Werewolf.getClanManager().getWerewolfTextureForAlpha(Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId()));
+			}
+
+			if (Werewolf.getWerewolfManager().isWerewolf(player.getUniqueId()))
+			{
+				if (plugin.useClans)
+				{
+					return Werewolf.getClanManager().getWerewolfTextureForClan(Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId()));
+				}
+			}
+			return "eyJ0aW1lc3RhbXAiOjE1NjUxMjM3NTE5NDEsInByb2ZpbGVJZCI6IjQ1NjZlNjlmYzkwNzQ4ZWU4ZDcxZDdiYTVhYTAwZDIwIiwicHJvZmlsZU5hbWUiOiJUaGlua29mZGVhdGgiLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzRkMWUwOGIwYmI3ZTlmNTkwYWYyNzc1ODEyNWJiZWQxNzc4YWM2Y2VmNzI5YWVkZmNiOTYxM2U5OTExYWU3NSJ9LCJDQVBFIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjYzA4ODQwNzAwNDQ3MzIyZDk1M2EwMmI5NjVmMWQ2NWExM2E2MDNiZjY0YjE3YzgwM2MyMTQ0NmZlMTYzNSJ9fX0=";
+		}
+
+		public String getSkinTextureSignature(Player player) {
+			if (Werewolf.getClanManager().isAlpha(player.getUniqueId()))
+			{
+				return Werewolf.getClanManager().getWerewolfTextureSignatureForAlpha(Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId()));
+			}
+
+			if (Werewolf.getWerewolfManager().isWerewolf(player.getUniqueId()))
+			{
+				if (plugin.useClans)
+				{
+					return Werewolf.getClanManager().getWerewolfTextureSignatureForClan(Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId()));
+				}
+			}
+			return "ef4Zb4mm9alUQUjk28gO85/Rug8DFYPyVAjT1hq+csjw23FVpCIQPvl3Bc4/zcDGIUiGGX/hi9G1U6LMcGyQg/4ONbMLFZtB7P1i9Dak/sIqZstMuBnWblK0//cdnFwEpZh+psdvsZUHOq6k37omwwc1wboIsqbe6r+23EZzZ9fBCWnk3qiYoWK+CMMhSJrhiamYIxjoMafJWeIkKhCUWiKrDJQw47NVnVTeEG4B8t4pRKs4L1wMsUavRgKQpWD9Lb/ivE0mNhQrLFT0IxEu7v5+e47OaEWhyL8OZ8/hcY/D7+Mf86M4jOP1AcKsvh4KdklHHZyrwSlGFcHKMvA6q1BLdj2BT4DlsqGF9eTv8aGwwXHxTi5L5JzeIwaE/6wZebolNWvZs/aXop2gMEn9yBFju82KeB89yrC75vUxHzH2zT6393/BV6le6m3mWRFAMJfXzLVSUaOK8CgBGnEOkc1Gy+LSXLayCgvBPzF0Rn0m0elIf/h4NV4pPhCe6Prh0lFKVpc5u2keihOhm7LpweBOBq8e4JN7eOUmojVKkAvAXWXYfAqjg49M0Uau3s+UeNqt+REcB9Di7J1++GKKtBBErJDChU6jt+kmkMJ+7frbIEV/1U2TA7FMIYQbvvZR3JJj9W9xI2L0GYadO/sAa1uYxjHiOTa12Jy4k6meobw=";
+		}
 		
 		public UUID getSkinAccountUUID() {
 			return accountId;
@@ -154,30 +186,37 @@ public class WerewolfDisguiseAPI
 	public void disguise(Player player, WerewolfDisguise skin)
 	{
 		// TODO implement support for all kind of plugins here
+		// If a plugin fails to apply the disguise, go to next one and try.
 		boolean disguised = false;
-		
-		// Loop to go through each plugin (or other method) given below. If a plugin fails to apply the disguise, go to next one and try.
-		for (method = 1; method < 2; method++)
+
+		// Lib's Disguises \\
+		if (disguised == false && pm.getPlugin("LibsDisguises") != null && pm.getPlugin("LibsDisguises").isEnabled()) 
 		{
-			// Lib's Disguises \\
-			if (method == 1 && pm.getPlugin("LibsDisguises") != null && pm.getPlugin("LibsDisguises").isEnabled()) 
-			{
-				plugin.logDebug("Lib's Disguises found, using that for the disguise!");
-	
-				if (new LibsDisguiseAPI(plugin).setDisguise(player, skin)) { disguised = true; }
-			}
-			else
-			{
-				plugin.logDebug("No Lib's Disguises found... Next plugin check!");
-				continue;
-			}
-	
-	
-			// End Check \\
-			if (disguised)
-			{
-				Werewolf.getWerewolfManager().howl(player);
-			}
+			plugin.logDebug("Lib's Disguises found, using that for the disguise!");
+
+			if (new LibsDisguiseAPI(plugin).setDisguise(player, skin)) { disguised = true; method = 1; }
+		}
+		else
+		{
+			plugin.logDebug("No Lib's Disguises found... Next plugin check!");
+		}
+
+		// MySkin \\
+		if (disguised == false && pm.getPlugin("MySkin") != null && pm.getPlugin("MySkin").isEnabled()) 
+		{
+			plugin.logDebug("MySkin found, using that for the disguise!");
+
+			if (new MySkinAPI(plugin).setDisguise(player, skin)) { disguised = true; method = 2; }
+		}
+		else
+		{
+			plugin.logDebug("No MySkin found... No more plugin checks!");
+		}
+
+		// End Check \\
+		if (disguised)
+		{
+			Werewolf.getWerewolfManager().howl(player);
 		}
 	}
 
@@ -197,6 +236,14 @@ public class WerewolfDisguiseAPI
 			plugin.logDebug("Lib's Disguises found, using that for the undisguise!");
 
 			if (new LibsDisguiseAPI(plugin).removeDisguise(player)) { undisguised = true; }
+		}
+
+		// MySkin \\
+		if (method == 2 && pm.getPlugin("MySkin") != null && pm.getPlugin("MySkin").isEnabled()) 
+		{
+			plugin.logDebug("MySkin found, using that for the undisguise!");
+
+			if (new MySkinAPI(plugin).removeDisguise(player)) { undisguised = true; }
 		}
 
 		// End Check \\

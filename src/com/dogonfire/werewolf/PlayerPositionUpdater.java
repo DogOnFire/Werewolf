@@ -1,8 +1,9 @@
 package com.dogonfire.werewolf;
 
-import org.bukkit.entity.Player;
+/*import org.bukkit.entity.Player;
 
-import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
+import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
+
 
 
 public class PlayerPositionUpdater implements Runnable
@@ -21,4 +22,4 @@ public class PlayerPositionUpdater implements Runnable
 	public void run()
 	{
 	}
-}
+}*/
