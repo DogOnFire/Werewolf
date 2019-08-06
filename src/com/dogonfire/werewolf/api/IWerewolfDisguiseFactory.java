@@ -1,15 +1,8 @@
 package com.dogonfire.werewolf.api;
 
-import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import com.dogonfire.werewolf.Werewolf;
-
-import eu.blackfire62.myskin.bukkit.MySkin;
-import net.md_5.bungee.api.ChatColor;
 
 
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin

@@ -12,12 +12,9 @@ import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
 import eu.blackfire62.myskin.bukkit.MySkin;
 import net.md_5.bungee.api.ChatColor;
 
-
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin
 public abstract class WerewolfDisguiseAPI
-{	
-	
-	
+{			
 	//static private DisguiseCraft disguiseCraft; 
 	//static private DisguiseAPI libsDisguises; 
 	//static private DisguiseAPI iDisguise; 
@@ -54,7 +51,7 @@ public abstract class WerewolfDisguiseAPI
 		}
 		else						
 		{
-			Werewolf.instance().log(ChatColor.DARK_RED + "No disguise plugin found. Werewolves disabled.");		
+			Werewolf.instance().log(ChatColor.DARK_RED + "No supported disguise plugin found. Werewolves are disabled.");		
 			Werewolf.instance().onDisable();
 		}		
 	}
@@ -70,11 +67,12 @@ public abstract class WerewolfDisguiseAPI
 		
 	public static boolean isViewSelfToggled(Player player)
 	{
-		return false;
+		return false; //disguises.get(player.getUniqueId()).isViewSelfToggled
 	}	
 	
 	public static void setViewDisguiseToggled(Player player, boolean value)
 	{
+		//disguises.get(player.getUniqueId()).setViewDisguiseToggled
 	}
 	
 	public static void disguiseToAll(Player player, WerewolfDisguise skin)

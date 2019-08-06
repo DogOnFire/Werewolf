@@ -1,19 +1,13 @@
 package com.dogonfire.werewolf.api;
 
-import java.util.HashMap;
-import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.dogonfire.werewolf.Werewolf;
 
 import eu.blackfire62.myskin.bukkit.MySkin;
 import eu.blackfire62.myskin.shared.SkinProperty;
-import net.md_5.bungee.api.ChatColor;
 
 
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin
@@ -84,6 +78,5 @@ public class MySkinDisguise implements IWerewolfDisguiseFactory
 	public MySkinWerewolfDisguise newDisguise(String werewolfName, Player player, UUID disguiseAccountId)
 	{
 		return new MySkinWerewolfDisguise(werewolfName, player, disguiseAccountId);
-	}
-	
+	}	
 }

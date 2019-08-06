@@ -429,7 +429,7 @@ public class Werewolf extends JavaPlugin
 		// Check for PlaceholderAPI
 		if (pm.getPlugin("PlaceholderAPI") != null && pm.getPlugin("PlaceholderAPI").isEnabled())
 		{
-			new WerewolfExpansion(this).register();
+			new WerewolfPlaceholderExpansion(this).register();
 		}
 
 		getServer().getPluginManager().registerEvents(playerListener, this);
