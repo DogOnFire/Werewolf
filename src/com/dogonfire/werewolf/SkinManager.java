@@ -3,29 +3,35 @@ package com.dogonfire.werewolf;
 import java.util.HashMap;
 import java.util.UUID;
 import org.bukkit.entity.Player;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.Disguise;
-import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
+
+import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
+import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
+
+//import me.libraryaddict.disguise.DisguiseAPI;
+//import me.libraryaddict.disguise.disguisetypes.Disguise;
+//import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
 public class SkinManager
 {
 	private Werewolf						plugin;
-	private HashMap<UUID, PlayerDisguise>	skins			= new HashMap<UUID, PlayerDisguise>();
-	protected int							nextID			= -2147483648;
+	private WerewolfDisguiseAPI 			disguiseAPI;
+	private HashMap<UUID, WerewolfDisguise>	skins	= new HashMap<UUID, WerewolfDisguise>();
+	protected int							nextID	= -2147483648;
 
 	SkinManager(Werewolf p)
 	{
 		this.plugin = p;
+		this.disguiseAPI = new WerewolfDisguiseAPI(p);
 	}
 
-	public PlayerDisguise getSkin(Player player)
+	public WerewolfDisguise getSkin(Player player)
 	{
-		return (PlayerDisguise) this.skins.get(player.getUniqueId());
+		return this.skins.get(player.getUniqueId());
 	}
-	
-	public Disguise getDisguise(Player player)
+
+	public WerewolfDisguise getDisguise(Player player)
 	{
-		return (Disguise) this.skins.get(player.getUniqueId());
+		return this.skins.get(player.getUniqueId());
 	}
 
 	public int getNextAvailableID()
@@ -39,53 +45,39 @@ public class SkinManager
 		{
 			return true;
 		}
-		
-		String account;
+
+		UUID accountId;
+		String accountName;
 
 		ClanManager.ClanType clantype = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
-		
+
 		// Get the correct account, if alpha, alphaskin, else the clanskin
-		if(plugin.useClans && Werewolf.getClanManager().isAlpha(player.getUniqueId()))
+		if (plugin.useClans && Werewolf.getClanManager().isAlpha(player.getUniqueId()))
 		{
-			account = Werewolf.getClanManager().getWerewolfAccountForAlpha(clantype);	
+			accountId = Werewolf.getClanManager().getWerewolfAccountIdForAlpha(clantype);
+			accountName = Werewolf.getClanManager().getWerewolfAccountForAlpha(clantype);
 		}
 		else
 		{
-			account = Werewolf.getClanManager().getWerewolfAccountForClan(clantype);
+			accountId = Werewolf.getClanManager().getWerewolfAccountIdForClan(clantype);
+			accountName = Werewolf.getClanManager().getWerewolfAccountForClan(clantype);
 		}
-		
-		// since it may be missing..
-		try {
-			if (DisguiseAPI.isViewSelfToggled(player)) {
-				DisguiseAPI.setViewDisguiseToggled(player, false);
-			}
-			
-			if (werewolfName.isEmpty() || werewolfName == null) {
-				werewolfName = "Werewolf";
-			}
-			
-			PlayerDisguise skin = new PlayerDisguise(werewolfName, account);
-			skin.getWatcher().setCapeEnabled(false);
-			
-			if (plugin.werewolfNamesEnabled) {
-				String customWerewolfName = Werewolf.getWerewolfManager().getWerewolfName(player.getUniqueId());
-				if (customWerewolfName != null && !customWerewolfName.isEmpty()) {
-					skin.getWatcher().setCustomName(customWerewolfName);
-					skin.getWatcher().setCustomNameVisible(true);
-				}
-			}
-			
-			DisguiseAPI.disguiseToAll(player, skin);
 
-			this.skins.put(player.getUniqueId(), skin);
+		if (werewolfName.isEmpty() || werewolfName == null)
+		{
+			werewolfName = "Werewolf";
+		}
 
-			return true;
+		WerewolfDisguise skin = disguiseAPI.newDisguise(werewolfName, accountId, accountName);
+		if (skin == null) {
+			plugin.log("Skin is null!");
 		}
-		catch (NoClassDefFoundError e) {
-			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
-			Werewolf.getWerewolfManager().howl(player);
-			return false;
-		}
+		plugin.logDebug("Skin: " + skin.toString() + ". Skin others: " + skin.getSkinAccountName() + " " + skin.getWerewolfName());
+		disguiseAPI.disguise(player, skin);
+
+		this.skins.put(player.getUniqueId(), skin);
+
+		return true;
 	}
 
 	public void unsetWerewolfSkin(Player player)
@@ -94,15 +86,8 @@ public class SkinManager
 		{
 			return;
 		}
-		
-		try {
-			DisguiseAPI.undisguiseToAll(player);
-			player.setCustomNameVisible(false);
-		}
-		catch (NoClassDefFoundError e) {
-			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
-			Werewolf.getWerewolfManager().howl(player);
-		}
+
+		disguiseAPI.undisguise(player);
 
 		this.skins.remove(player.getUniqueId());
 	}

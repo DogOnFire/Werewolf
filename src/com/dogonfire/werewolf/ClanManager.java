@@ -31,10 +31,11 @@ public class ClanManager
 	
 	private HashMap<ClanType, String>	werewolfAccount		= new HashMap<ClanType, String>();
 	private HashMap<ClanType, UUID>		werewolfAccountId	= new HashMap<ClanType, UUID>();
-	private HashMap<ClanType, String>	werewolfTextures	= new HashMap<ClanType, String>();
-	private HashMap<ClanType, String>	werewolfTextureSignatures	= new HashMap<ClanType, String>();
-	
+
 	/* Let's try not using the old textures for a while.. might remove later, saving for now
+	 * private HashMap<ClanType, String>	werewolfTextures	= new HashMap<ClanType, String>();
+	 * private HashMap<ClanType, String>	werewolfTextureSignatures	= new HashMap<ClanType, String>();
+	 * 
 	 * private String alphaTexture = "eyJ0aW1lc3RhbXAiOjE0MzQyNzgzMTczMzYsInByb2ZpbGVJZCI6ImUwZDA3NGJkNjcyMjQ3ZmM5NWQzZjI4ZTI4OTllMTU1IiwicHJvZmlsZU5hbWUiOiJXZXJld29sZkFscGhhIiwiaXNQdWJsaWMiOnRydWUsInRleHR1cmVzIjp7IlNLSU4iOnsidXJsIjoiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9lMDMzODY5NWQwMWY0NTQ2ZmVmZGU0YzllOTVlMTRiNzgzMmExMzg3Mjc3MjQ1ZDI4MmMyOThkNzgxYmFkNTMiLCJtZXRhZGF0YSI6eyJtb2RlbCI6InNsaW0ifX19fQ==";
 	 * private String alphaTextureSignature = "KVI3HBmEn027sMbETloJRyyVjG1gf4p9+S1QmF7r3mEr2UPp+vHEjz/9+aJmOXrYfj4Xvj5xAJRJJYGc9Q5sTk+zimxTDUTRHSyk1lAy5R0fmULRspCKy7+Z7gL5MyFLB/Pcc9Jqwax/JrhH1Sj8Buq5fA4xzBQ5R1dY2yjONfuz1CYUf4jUHm+X4iEXBZ2nSKLaum6ZUf3qWSoUdV9cd3kgokN2xocm0fNwSXpOLyaaD55pbdeZJBXXiPipZKab7wQW0loWVSh+G1e931Ex/Zk3Kxeq1IszOCMBC54DYUk8MDHN+UayeiyaV3na2tgGWpWvJQtUqX57uaVKSoyUHLwYEn0D2V4lbzcJ/hDyErtJMQgclmylseB8TAuJNGF+cSVm8u5ug++bYwv2ZSb4lxXtvoqgimV+aStzE/PIwEZSHwD/rTTLd6IxV0Yak1XqasFNt08boymghCgd/JnHqbXJysPXKxQQv36A7do2rMM7fJKKhojCO400mYnfvrog8/mkqk7C+G1cMwSCzHjVLs/dk12meMS+7gVZY+2mgfoN9uYPyUk4TgpIU7XH70KFcQ2BSHPcYrS24s/XmYwrRsH7eudAuuCke60/FX5n8W2L26TXcBqHsuk/ralIh7Xgu5DF1NcPat6C61adeAMuwJfCBAScYpkDVqlqzDrtbEk=";
 	 */
@@ -145,15 +146,17 @@ public class ClanManager
 		return this.werewolfAccountId.get(type);
 	}
 
-	public String getWerewolfTextureForClan(ClanType type)
-	{
-		return this.werewolfTextures.get(type);
-	}
-
-	public String getWerewolfTextureSignatureForClan(ClanType type)
-	{
-		return this.werewolfTextureSignatures.get(type);
-	}
+	/*
+	 * public String getWerewolfTextureForClan(ClanType type)
+	 * {
+	 * 	return this.werewolfTextures.get(type);
+	 * }
+	 *
+	 * public String getWerewolfTextureSignatureForClan(ClanType type)
+	 * {
+	 * 	return this.werewolfTextureSignatures.get(type);
+	 * }
+	 */
 
 	public String getWerewolfAccountForAlpha(ClanType type)
 	{
