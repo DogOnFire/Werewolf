@@ -1,7 +1,8 @@
 package com.dogonfire.werewolf;
 
 import com.dogonfire.werewolf.Metrics.Graph;
-import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
+import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
+import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.listeners.ChatListener;
 import com.dogonfire.werewolf.listeners.DamageListener;
 import com.dogonfire.werewolf.listeners.InteractListener;
@@ -45,6 +46,7 @@ import com.massivecraft.vampire.entity.UPlayer;
 
 public class Werewolf extends JavaPlugin
 {
+	public static Werewolf 						instance;
 	public static boolean						pluginEnabled							= false;
 	/*
 	 * TODO: re-add Vampire integration..
@@ -148,11 +150,16 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version									= null;
-	public static final String					MAX										= "1.14.3-R0.1-SNAPSHOT";
+	public static final String					MAX										= "1.14.4-R0.1-SNAPSHOT";
 	public static final String					MIN										= "1.14";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
 
+	public static Werewolf instance()
+	{
+		return instance;
+	}
+	
 	public static Class<?> isCombatibleServer() throws Exception
 	{
 		return Class.forName("net.minecraft.server." + NMS + ".ItemStack");
@@ -317,7 +324,9 @@ public class Werewolf extends JavaPlugin
 		InteractListener interactListener = null;
 		InventoryListener inventoryListener = null;
 		ChatListener chatListener = null;
+		
 		plugin = this;
+		instance = this;
 		server = getServer();
 		config = getConfig();
 		version = VersionFactory.getServerVersion();
@@ -345,14 +354,15 @@ public class Werewolf extends JavaPlugin
 		clanManager = new ClanManager(this);
 		// potionManager = new PotionManager(this);
 		languageManager = new LanguageManager(this);
-
 		statisticsManager = new StatisticsManager(this);
-		itemManager = new ItemManager(this);
+		itemManager = new ItemManager(this);		
 		damageListener = new DamageListener(this);
 		playerListener = new PlayerListener(this);
 		interactListener = new InteractListener(this);
 		chatListener = new ChatListener(this);
 
+		WerewolfDisguiseAPI.init();
+		
 		// If ! prevent armor
 		if (this.dropArmorOnTransform)
 		{
@@ -552,7 +562,7 @@ public class Werewolf extends JavaPlugin
 		case 5:
 			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In3Days, ChatColor.GOLD);
 		case 6:
-			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In3Days, ChatColor.GOLD);
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In2Days, ChatColor.GOLD);
 		case 7:
 			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.Tomorrow, ChatColor.GOLD);
 		}
@@ -607,13 +617,14 @@ public class Werewolf extends JavaPlugin
 		werewolfManager.unsetWerewolfSkin(player.getUniqueId(), true);
 	}
 
-	public void setPositionUpdater(Player player, WerewolfDisguise skin)
+	/*public void setPositionUpdater(Player player, WerewolfDisguise skin)
 	{
 		if (this.movementUpdateThreading)
 		{
 			this.positionUpdaters.put(player, Integer.valueOf(getServer().getScheduler().scheduleSyncRepeatingTask(this, new PlayerPositionUpdater(this, player, skin), 1L, this.movementUpdateFrequency)));
 		}
 	}
+	*/
 
 	public void log(String message)
 	{

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.UUID;
 import org.bukkit.entity.Player;
 
+import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
 import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
-import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
 
 //import me.libraryaddict.disguise.DisguiseAPI;
 //import me.libraryaddict.disguise.disguisetypes.Disguise;
@@ -44,18 +44,18 @@ public class SkinManager
 			return true;
 		}
 
-		String account;
+		UUID disguiseAccountId;
 
 		ClanManager.ClanType clantype = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
 
 		// Get the correct account, if alpha, alphaskin, else the clanskin
 		if (plugin.useClans && Werewolf.getClanManager().isAlpha(player.getUniqueId()))
 		{
-			account = Werewolf.getClanManager().getWerewolfAccountForAlpha(clantype);
+			disguiseAccountId = Werewolf.getClanManager().getWerewolfAccountIdForAlpha(clantype);
 		}
 		else
 		{
-			account = Werewolf.getClanManager().getWerewolfAccountForClan(clantype);
+			disguiseAccountId = Werewolf.getClanManager().getWerewolfAccountIdForClan(clantype);
 		}
 
 		// since it may be missing..
@@ -71,7 +71,7 @@ public class SkinManager
 				werewolfName = "Werewolf";
 			}
 
-			WerewolfDisguise skin = WerewolfDisguiseAPI.newDisguise(werewolfName, account);
+			WerewolfDisguise skin = WerewolfDisguiseAPI.newDisguise(werewolfName, player, disguiseAccountId);
 			skin.setCapeEnabled(false);
 
 			if (plugin.werewolfNamesEnabled)
@@ -92,7 +92,7 @@ public class SkinManager
 		}
 		catch (NoClassDefFoundError e)
 		{
-			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
+			plugin.logDebug("Couldn't disguise player: " + e.getMessage());
 			Werewolf.getWerewolfManager().howl(player);
 			return false;
 		}
@@ -112,7 +112,7 @@ public class SkinManager
 		}
 		catch (NoClassDefFoundError e)
 		{
-			plugin.logDebug("Couldn't disguise player... Libs Disguises not found!");
+			plugin.logDebug("Couldn't un-disguise player: " + e.getMessage());
 			Werewolf.getWerewolfManager().howl(player);
 		}
 
