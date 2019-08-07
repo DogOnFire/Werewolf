@@ -1,6 +1,7 @@
 package com.dogonfire.werewolf;
 
 import com.dogonfire.werewolf.Metrics.Graph;
+import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.listeners.ChatListener;
 import com.dogonfire.werewolf.listeners.DamageListener;
 import com.dogonfire.werewolf.listeners.InteractListener;
@@ -360,6 +361,18 @@ public class Werewolf extends JavaPlugin
 		this.disguisesEnabled = true;
 		skinManager = new SkinManager(this);
 		
+		if(!WerewolfDisguiseAPI.init())
+		{
+			onDisable();
+			return;
+		}
+		
+		// Pre-cache some known disguises
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(potionAccountUUID), potionAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(wildBiteAccountUUID), wildBiteAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(werewolfBiteAccountUUID), werewolfBiteAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(alphaAccountUUID), alphaAccountName);
+				
 		// If ! prevent armor
 		if (this.dropArmorOnTransform)
 		{

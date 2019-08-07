@@ -21,7 +21,7 @@ import com.dogonfire.werewolf.ClanManager;
 import com.dogonfire.werewolf.DamageManager;
 import com.dogonfire.werewolf.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.api.WerewolfDisguiseAPI.WerewolfDisguise;
+import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
 
 public class DamageListener implements Listener
 {

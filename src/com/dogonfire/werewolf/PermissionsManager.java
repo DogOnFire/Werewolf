@@ -64,7 +64,7 @@ public class PermissionsManager
 
 			for (org.bukkit.permissions.Permission permission : permissions)
 			{
-				this.plugin.logDebug("Current permission: " + permission.getName());
+				//this.plugin.logDebug("Current permission: " + permission.getName());
 				Map<String, Boolean> permissionChildren = permission.getChildren();
 
 				if ((permissionChildren.containsKey(node) && permissionChildren.get(node).booleanValue() == true) || permission.getName().contains(node))
@@ -75,7 +75,7 @@ public class PermissionsManager
 						this.plugin.logDebug("Current permissionDefault: " + permission.getDefault().toString());
 						if (permission.getDefault() == PermissionDefault.TRUE)
 						{
-							this.plugin.logDebug("It was defautl true! Returning true!");
+							this.plugin.logDebug("It was default true! Returning true!");
 							return true;
 						}
 						else if (permission.getDefault() == PermissionDefault.OP)

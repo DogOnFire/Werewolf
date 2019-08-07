@@ -16,13 +16,10 @@ import com.google.gson.JsonParser;
 // File is not currently used, but can be used in future versions, as it works fine.
 public class MojangAPI
 {
-	private Werewolf plugin;
 	public Map<UUID, MojangSkin> mojangSkinCollection = new HashMap<UUID, MojangSkin>();
 
-	public MojangAPI(Werewolf instance)
-	{
-		this.plugin = instance;
-	}
+	public MojangAPI()
+	{}
 
 	public class MojangSkin
 	{
@@ -56,7 +53,7 @@ public class MojangAPI
 			} 
 			else
 			{
-				plugin.log("[ERROR] Could not fetch user's texture details! unDisguising user to default!");
+				Werewolf.instance().log("[ERROR] Could not fetch user's texture details! unDisguising user to default!");
 			}
 			reader.close();
 
@@ -103,7 +100,7 @@ public class MojangAPI
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			plugin.log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
+			Werewolf.instance().log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
 		}
 
 		mojangSkinCollection.put(player.getUniqueId(), mojangSkin);
