@@ -15,12 +15,8 @@ import com.google.gson.JsonParser;
 
 public class MojangAPI
 {
-	private Werewolf plugin;
-	
-	public MojangAPI(Werewolf instance)
-	{
-		this.plugin = instance;
-	}
+	public MojangAPI()
+	{}
 	
 	public class MojangSkin
 	{
@@ -54,7 +50,7 @@ public class MojangAPI
 			} 
 			else
 			{
-				plugin.log("[ERROR] Could not fetch user's texture details! unDisguising user to default!");
+				Werewolf.instance().log("[ERROR] Could not fetch user's texture details! unDisguising user to default!");
 			}
 			
 			/*
@@ -100,7 +96,7 @@ public class MojangAPI
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			plugin.log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
+			Werewolf.instance().log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
 		}
 
 		fullMap.put(player.getUniqueId(), mojangSkin);
