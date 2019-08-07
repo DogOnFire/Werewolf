@@ -40,7 +40,7 @@ public abstract class WerewolfDisguiseAPI
 
 	public static WerewolfDisguise getDisguise(UUID disguiseAccountId, String disguiseAccountName)
 	{
-		if(disguises.containsKey(disguiseAccountId))
+		if (disguises.containsKey(disguiseAccountId))
 		{
 			return disguises.get(disguiseAccountId);
 		}
@@ -67,8 +67,6 @@ public abstract class WerewolfDisguiseAPI
 		}
 
 		disguises.put(player.getUniqueId(), skin);
-		
-		Werewolf.instance().logDebug("Disguised player " + player.getName() + "!");
 
 		disguisedPlayers.put(player.getUniqueId(), skin.getSkinAccountUUID());
 
@@ -87,8 +85,6 @@ public abstract class WerewolfDisguiseAPI
 		{
 			return false;
 		}
-
-		Werewolf.instance().logDebug("Undisguised player " + player.getName() + "!");
 
 		disguisedPlayers.remove(player.getUniqueId());
 		

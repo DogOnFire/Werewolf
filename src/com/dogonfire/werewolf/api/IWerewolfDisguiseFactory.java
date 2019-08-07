@@ -17,7 +17,7 @@ public interface IWerewolfDisguiseFactory
 		UUID	accountId;
 		String	accountName;
 
-		public WerewolfDisguise(UUID werewolfDisguiseAccountId, String accountName)
+		public WerewolfDisguise(UUID accountId, String accountName)
 		{
 			Werewolf.instance().logDebug("Constructer Start! - Werewolfname: " + werewolfName + " - AccountId: " + accountId + " - AccountName: " + accountName);
 			if (werewolfName == null || werewolfName == "")
@@ -28,7 +28,7 @@ public interface IWerewolfDisguiseFactory
 			if (accountId == null)
 			{
 				// Account called Werewolf. No clan has this skin...
-				this.accountId = UUID.fromString("c21f069b-137c-4992-8edc-e1a12995ff0f");
+				accountId = UUID.fromString("c21f069b-137c-4992-8edc-e1a12995ff0f");
 			}
 
 			if (accountName == null || accountName == "")
@@ -37,6 +37,7 @@ public interface IWerewolfDisguiseFactory
 				accountName = "Werewolf";
 			}
 
+			this.accountId = accountId;
 			this.accountName = accountName;
 		}
 

@@ -69,11 +69,11 @@ public class SkinManager
 			plugin.log("WerewolfDisguise Skin is null!");
 		}
 		
-		plugin.logDebug("Skin: " + skin.toString() + ". Skin others: " + skin.getSkinAccountName() + " " + skin.getWerewolfName());
+		plugin.logDebug("Skin: " + skin.toString() + ". SkinName: " + skin.getSkinAccountName() + " - SkinUUID: " + skin.getSkinAccountUUID());
 		
 		if(WerewolfDisguiseAPI.disguise(player, skin, werewolfName))
 		{
-			plugin.logDebug("Disguised " + player.getName());
+			plugin.logDebug("Disguised player " + player.getName() + "!");
 			Werewolf.getWerewolfManager().howl(player);
 		}
 		else
@@ -95,7 +95,7 @@ public class SkinManager
 
 		if(WerewolfDisguiseAPI.undisguise(player))
 		{
-			plugin.logDebug("Undisguised " + player.getName());
+			plugin.logDebug("Undisguised player " + player.getName() + "!");
 		}
 		else
 		{

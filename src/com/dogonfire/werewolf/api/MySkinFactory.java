@@ -42,6 +42,7 @@ public class MySkinFactory implements IWerewolfDisguiseFactory
 			{
 				// Load the Disguise skin from the cache, and if it returns null, load the skin from the MojangAPI and put it in the cache
 				Werewolf.instance().logDebug("[MySkin] Started Disguising of player: " + player.getName());
+				Werewolf.instance().logDebug("Skinaccountuuid: " + getSkinAccountUUID());
 				disguiseSkinProperty = mySkin.getCache().loadSkinProperty(getSkinAccountUUID());
 				if (disguiseSkinProperty == null)
 				{
