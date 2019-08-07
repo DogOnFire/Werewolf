@@ -13,15 +13,17 @@ import com.dogonfire.werewolf.Werewolf;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+// File is not currently used, but can be used in future versions, as it works fine.
 public class MojangAPI
 {
 	private Werewolf plugin;
-	
+	public Map<UUID, MojangSkin> mojangSkinCollection = new HashMap<UUID, MojangSkin>();
+
 	public MojangAPI(Werewolf instance)
 	{
 		this.plugin = instance;
 	}
-	
+
 	public class MojangSkin
 	{
 		String value;
@@ -33,12 +35,12 @@ public class MojangAPI
 			this.signature = signature;
 		}
 	}
-	
+
 	public Map<UUID, MojangSkin> getSkinDetails(Player player)
 	{
 		MojangSkin mojangSkin = new MojangSkin("eyJ0aW1lc3RhbXAiOjE1NjUxMjgzMjI3MDIsInByb2ZpbGVJZCI6Ijg2NjdiYTcxYjg1YTQwMDRhZjU0NDU3YTk3MzRlZWQ3IiwicHJvZmlsZU5hbWUiOiJTdGV2ZSIsInNpZ25hdHVyZVJlcXVpcmVkIjp0cnVlLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGMxYzc3Y2U4ZTU0OTI1YWI1ODEyNTQ0NmVjNTNiMGNkZDNkMGNhM2RiMjczZWI5MDhkNTQ4Mjc4N2VmNDAxNiJ9LCJDQVBFIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTUzY2FjOGI3NzlmZTQxMzgzZTY3NWVlMmI4NjA3MWE3MTY1OGYyMTgwZjU2ZmJjZThhYTMxNWVhNzBlMmVkNiJ9fX0=", "XmomE7hQjmADK1AJJajzFDuK2QCRyvkIdSaa/JSHJYQaqQWasxvR5h0bmxI3L2v+wYeRbso0+5b5xNGo5ATfuTilPD1vWmlplo0OmnTGYnW7SrmUf+QcC9J+CQusfCbQDOOMPbSlsZPMBQwRlCGPG8GzWDRXgNerw0MJoVYGi9pgI6ThGuoNDtz4wnDsnVFi35/j+SlttWJrDfIP7WlMQyVZjCZ1gcXFE6idNzf0kfH+CeTxd65ltINWQGDi7aIq51zKCSfuceQkQq0gK5//Smm5mC+OoiDGSpnArc+/1SeMWPBWB4dwPbm4YHrLiWGFk+gVu2sBopz9+8FsCo2nuOhjoWbaMCWTKCmSYnTcp3fJR5zlXAu2I2jOK+g36wOL1DLZcWkJkZbIjqhMJL8h7i+teeUbUMDL1lZUhb2QezDJjgYl8RzXavsSwf3gw2/fEejsSFsZ7mzgzEhmY4NXFQYrLOzu0RdajJ/W3ZrnzvpeXA431QqQ4ayUaLEWoEawgutPT9gkWPt42a90M35zAI2cdVuYxglrMLnCqlIanwTxYTpXn1e0eGJ4nbYFQttpCgoT2eRoCWmDeSFn0sN1pX1lvHKAS9aS7XamutGA+S1lYkjmb5CwpMPWBgrfXYw8DkzBQwMFPuwHY2gjFd288ScAVRYbU2HruQOYxiVcXts=");
 		String uuid = player.getUniqueId().toString().replace("-", "");
-		
+
 		Map<UUID, MojangSkin> fullMap = new HashMap<UUID, MojangSkin>();
 
 		try
@@ -56,7 +58,8 @@ public class MojangAPI
 			{
 				plugin.log("[ERROR] Could not fetch user's texture details! unDisguising user to default!");
 			}
-			
+			reader.close();
+
 			/*
 			URLConnection uc = mojang.openConnection();
 			uc.setUseCaches(false);
@@ -78,7 +81,7 @@ public class MojangAPI
 			{
 				plugin.log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
 			}*/
-			
+
 			/*@SuppressWarnings("resource")
 			String json = new Scanner(uc.getInputStream(), "UTF-8").useDelimiter("\\A").next();
 			JSONParser parser = new JSONParser();
@@ -96,14 +99,14 @@ public class MojangAPI
 					plugin.log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
 				}
 			}*/
-		} 
+		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 			plugin.log("[ERROR] Could not fetch user's texture details! Cannot unDisguise user!");
 		}
 
-		fullMap.put(player.getUniqueId(), mojangSkin);
+		mojangSkinCollection.put(player.getUniqueId(), mojangSkin);
 
         return fullMap;
 	}

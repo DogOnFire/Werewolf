@@ -65,7 +65,7 @@ public class UndisguiseTask implements Runnable
 			player.setPlayerListName(player.getDisplayName());
 			if (this.makeVisible)
 			{
-				// Before trying to undisguise, check if LibsDisguises is enabled...
+				// Before trying to undisguise, check if Disguises are enabled...
 				if (plugin.disguisesEnabled) {
 					Werewolf.getSkinManager().unsetWerewolfSkin(player);
 				}

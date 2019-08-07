@@ -215,7 +215,7 @@ public class WerewolfDisguiseAPI
 		// End Check \\
 		if (disguised)
 		{
-			Werewolf.getWerewolfManager().howl(player);
+			plugin.logDebug("Disguised sucessfully, using method " + method + "!");
 		}
 	}
 
@@ -253,7 +253,7 @@ public class WerewolfDisguiseAPI
 		}
 		else
 		{
-			Werewolf.getWerewolfManager().howl(player);
+			plugin.logDebug("Undisguised sucessfully, using method " + method + "!");
 		}
 	}
 }

@@ -256,7 +256,7 @@ public class DisguiseTask implements Runnable
 		Werewolf.getWerewolfManager().pushPlayerData(this.player);
 		Werewolf.getStatisticsManager().clearStatistics(this.player.getUniqueId());
 
-		// Before trying to disguise, check if LibsDisguises is enabled...
+		// Before trying to disguise, check if Disguises are enabled...
 		if (plugin.disguisesEnabled)
 		{
 			Werewolf.getSkinManager().setWerewolfSkin(this.player, this.player.getPlayerListName());
