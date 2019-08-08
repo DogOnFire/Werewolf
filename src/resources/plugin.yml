@@ -1,26 +1,33 @@
-name: Werewolf-Reloaded
+name: Werewolf
 main: com.dogonfire.werewolf.Werewolf
 author: DogOnFire
-version: 0.8.1
+version: ${project.version}
+api-version: 1.13
+load: POSTWORLD
 description: Werewolves in Minecraft!
-softdepend: [Vault, HealthBar, NoCheatPlus,AntiCheatPlus,PermissionsBukkit, PermissionsEx, bPermissions, GroupManager]
+depend: []
+softdepend: [Vault, HealthBar, LibsDisguises, MySkin]
 website: http://dev.bukkit.org/server-mods/werewolf
 commands:
-   ww:
-      description: Command for Werewolf
-      usage: /ww <playername>
    werewolf:
-      description: Command for Werewolf
-      usage: /werewolf <playername>
+      description: Command for the Werewolf plugin
+      usage: /<command> [toggle|infect|addbounty|check|reload|save|help|clan|list|transform|toggle|bounty|home|sethome|call|top|hunt|infectionpotion|curepotion|wolfbane|silversword|lorebook|on|off] [player]
+      aliases: [ww]
    growl:
       description: Command for Werewolves to growl
-      usage: /growl
+      usage: /<command>
    howl:
       description: Command for Werewolves to howl
-      usage: /howl
+      usage: /<command>
 permissions:
     werewolf.*:
         description: Gives access to all Werewolf commands
+        default: false
+        children:
+            werewolf.all: true
+    werewolf.all:
+        description: Gives access to all Werewolf commands
+        default: false
         children:
             werewolf.sethome: true
             werewolf.home: true
@@ -45,9 +52,21 @@ permissions:
             werewolf.transform: true
             werewolf.clan: true
             werewolf.list: true
+            werewolf.reload: true
+            werewolf.save: true
+            werewolf.infect: true
+            werewolf.infectself: true
+            werewolf.togglewerewolf: true
+            werewolf.togglewerewolfself: true
     werewolf.sethome:
         description: Player can set the clan home
         default: true
+    werewolf.reload:
+        description: Player can reload the configuration(s)
+        default: false
+    werewolf.save:
+        description: Player can save the configuration(s)
+        default: false
     werewolf.home:
         description: Player can teleport to their clan home
         default: true
@@ -116,7 +135,10 @@ permissions:
         default: false           
     werewolf.listener:
         description: Allows the Player to understand Werewolf chat 
-        default: false           
+        default: false                
+    werewolf.superlistener:
+        description: Allows the Player to understand Werewolf chat and see their names
+        default: false      
     werewolf.howl:
         description: Allows a Player to howl when being a werewolf 
         default: true            

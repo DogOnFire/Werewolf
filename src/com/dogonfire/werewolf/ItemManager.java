@@ -28,37 +28,37 @@ public class ItemManager
 	{
 		if(plugin.craftableInfectionPotionEnabled)
 		{			
-			Bukkit.addRecipe(Recipes.InfectionPotion(plugin));
+			Bukkit.addRecipe(Recipes.infectionPotion(plugin));
 			plugin.logDebug("Cratable infection potions are enabled");
 		}
 		
 		if(plugin.craftableCurePotionEnabled)
 		{
-			Bukkit.addRecipe(Recipes.CurePotion(plugin));
+			Bukkit.addRecipe(Recipes.curePotion(plugin));
 			plugin.logDebug("Craftable cure potions are enabled");
 		}
 
 		if(plugin.craftableWolfbanePotionEnabled)
 		{
-			Bukkit.addRecipe(Recipes.WolfbanePotion(plugin));
+			Bukkit.addRecipe(Recipes.wolfbanePotion(plugin));
 			plugin.logDebug("Craftable wolfbane potions are enabled");
 		}
 
 		if(plugin.craftableSilverSwordEnabled)
 		{
-			Bukkit.addRecipe(Recipes.SilverSwordRecipe(plugin));
+			Bukkit.addRecipe(Recipes.silverSwordRecipe(plugin));
 			plugin.logDebug("Craftable silver swords are enabled");
 		}
 
 		if(plugin.craftableSilverArmorEnabled)
 		{
-			Bukkit.addRecipe(Recipes.SilverArmorRecipe(plugin));
+			Bukkit.addRecipe(Recipes.silverArmorRecipe(plugin));
 			plugin.logDebug("Craftable silver armors are enabled");
 		}
 
 		if(plugin.craftableLoreBookEnabled)
 		{
-			Bukkit.addRecipe(Recipes.LoreBook(plugin));
+			Bukkit.addRecipe(Recipes.loreBook(plugin));
 			plugin.logDebug("Craftable lore books are enabled");
 		}
 	}
@@ -226,7 +226,7 @@ public class ItemManager
 			bookPages.add("§lCrafting the Cure\n§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.CurePotion(plugin).getIngredientList())
+			for(ItemStack ingredient : Recipes.curePotion(plugin).getIngredientList())
 			{
 				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
@@ -239,7 +239,7 @@ public class ItemManager
 			bookPages.add("§lCrafting the Infection\n§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.InfectionPotion(plugin).getIngredientList())
+			for(ItemStack ingredient : Recipes.infectionPotion(plugin).getIngredientList())
 			{
 				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
@@ -252,7 +252,7 @@ public class ItemManager
 			bookPages.add("§lCrafting the Wolfbane\n§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.WolfbanePotion(plugin).getIngredientList())
+			for(ItemStack ingredient : Recipes.wolfbanePotion(plugin).getIngredientList())
 			{
 				bookPages.add("\n§r\n " + n + ") " + ingredient.getType().name()); 
 				n++;
@@ -266,7 +266,7 @@ public class ItemManager
 			bookPages.add("§lCrafting the Silver Sword\n§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.SilverSwordRecipe(plugin).getIngredientMap().values())
+			for(ItemStack ingredient : Recipes.silverSwordRecipe(plugin).getIngredientMap().values())
 			{
 				if(ingredient!=null)
 				{
@@ -283,7 +283,7 @@ public class ItemManager
 			bookPages.add("§lCrafting the Silver Armor\n§r\nIn a workbench, place the following ingredients:");			
 			
 			int n = 1;
-			for(ItemStack ingredient : Recipes.SilverArmorRecipe(plugin).getIngredientMap().values())
+			for(ItemStack ingredient : Recipes.silverArmorRecipe(plugin).getIngredientMap().values())
 			{
 				if(ingredient!=null)
 				{
@@ -329,11 +329,7 @@ public class ItemManager
 		{
 			return false;
 		}
-		if (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.SilverSwordTitle, ChatColor.GOLD)))
-		{
-			return true;
-		}
-		return false;
+		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.SilverSwordTitle, ChatColor.GOLD)));
 	}
 
 	public boolean isCurePotion(ItemStack IS)
@@ -347,11 +343,7 @@ public class ItemManager
 		{
 			return false;
 		}
-		if (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionTitle, ChatColor.GOLD)))
-		{
-			return true;
-		}
-		return false;
+		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionTitle, ChatColor.GOLD)));
 	}
 
 	public boolean isInfectionPotion(ItemStack IS)
@@ -365,11 +357,7 @@ public class ItemManager
 		{
 			return false;
 		}
-		if (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.InfectionPotionTitle, ChatColor.GOLD)))
-		{
-			return true;
-		}
-		return false;
+		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.InfectionPotionTitle, ChatColor.GOLD)));
 	}
 	
 	public boolean isWolfbanePotion(ItemStack IS)
@@ -383,11 +371,7 @@ public class ItemManager
 		{
 			return false;
 		}
-		if (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WolfbanePotionTitle, ChatColor.GOLD)))
-		{
-			return true;
-		}
-		return false;
+		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WolfbanePotionTitle, ChatColor.GOLD)));
 	}
 
 	public boolean isLoreBook(ItemStack IS)
@@ -401,10 +385,6 @@ public class ItemManager
 		{
 			return false;
 		}
-		if (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.LoreBookTitle, ChatColor.GOLD)))
-		{
-			return true;
-		}
-		return false;
+		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.LoreBookTitle, ChatColor.GOLD)));
 	}
 }

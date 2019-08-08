@@ -6,24 +6,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.Socket;
-import java.net.SocketException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Random;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.EntityType;
 
 public class LanguageManager
 {
@@ -35,76 +24,6 @@ public class LanguageManager
 	private String				type;
 	private String				authorName;
 	private String				languageName;
-
-	private void detectCountry()
-	{
-		// String localAddress = "";
-		//
-		// Enumeration<NetworkInterface> interfaces = null;
-		// try
-		// {
-		// interfaces = NetworkInterface.getNetworkInterfaces();
-		// }
-		// catch (SocketException e)
-		// {
-		// e.printStackTrace();
-		// }
-		//
-		// Enumeration<InetAddress> addresses;
-		//
-		// label143: for (; interfaces.hasMoreElements();
-		// addresses.hasMoreElements())
-		// {
-		// NetworkInterface current = (NetworkInterface)
-		// interfaces.nextElement();
-		// System.out.println(current);
-		//
-		// try
-		// {
-		// if ((!current.isUp()) || (current.isLoopback()) ||
-		// (current.isVirtual()))
-		// {
-		// break label143;
-		// }
-		//
-		// current_addr = (InetAddress) addresses.nextElement();
-		// }
-		// catch (SocketException e)
-		// {
-		// e.printStackTrace();
-		//
-		// addresses = current.getInetAddresses();
-		// }
-		// InetAddress current_addr;
-		// if (!current_addr.isLoopbackAddress())
-		// {
-		// if ((current_addr instanceof Inet4Address))
-		// {
-		// localAddress = current_addr.getHostAddress();
-		// System.out.println(current_addr.getHostAddress());
-		// }
-		// }
-		// }
-		// try
-		// {
-		// Socket s = new Socket("internic.net", 43);
-		// InputStream in = s.getInputStream();
-		// OutputStream out = s.getOutputStream();
-		// String str = localAddress + "\\n";
-		// byte[] buf = str.getBytes();
-		// out.write(buf);
-		// int c;
-		// while ((c = in.read()) != -1)
-		// {
-		// int c;
-		// System.out.print((char) c);
-		// }
-		// s.close();
-		// }
-		// catch (Exception localException)
-		// {
-		// }
-	}
 
 	private void downloadLanguageFile(String fileName) throws IOException
 	{
@@ -187,6 +106,27 @@ public class LanguageManager
 			{
 				this.plugin.log("Could not load " + languageFileName + "!");
 			}
+		}
+	}
+	
+	public void save()
+	{
+		String languageFileName = this.plugin.language + ".yml";
+		File languageConfigFile = new File(this.plugin.getDataFolder() + "/lang/" + languageFileName);
+		
+		if ((!languageConfigFile.exists()) || languageConfigFile == null)
+		{
+			return;
+		}
+		
+		try
+		{
+			this.languageConfig = new YamlConfiguration();
+			this.languageConfig.save(languageConfigFile);
+		}
+		catch (Exception ex)
+		{
+			this.plugin.log("Could not save language config to " + languageConfigFile + ": " + ex.getMessage());
 		}
 	}
 
@@ -301,30 +241,6 @@ public class LanguageManager
 		this.type = t;
 	}
 
-	public String getItemTypeName(Material material)
-	{
-		String itemTypeName = null;
-		if (itemTypeName == null)
-		{
-			String languageFileName = this.plugin.language + ".yml";
-			this.plugin.logDebug("WARNING: No language string in " + languageFileName + " for the item '" + material.name() + "'");
-			return material.name();
-		}
-		return itemTypeName;
-	}
-
-	public String getMobTypeName(EntityType type)
-	{
-		String mobTypeName = null;
-		if (mobTypeName == null)
-		{
-			String languageFileName = this.plugin.language + ".yml";
-			this.plugin.logDebug("WARNING: No language string in " + languageFileName + " for the mob type '" + type.name() + "'");
-			return type.name();
-		}
-		return mobTypeName;
-	}
-
 	public static enum LANGUAGESTRING
 	{
 		PlayerIsAFullWerewolf,
@@ -346,6 +262,7 @@ public class LanguageManager
 		YouPlacedASilverSwordSign,
 		YouPlacedABookSign,
 		YouAreNotTheAlphaOfTheClan,
+		DenyVampire,
 		NoRecentAlphaCall,
 		ClanAlphaCannotAnswerCall,
 		YouCalledClanMember,
@@ -414,6 +331,7 @@ public class LanguageManager
 		BiteWildWolf,
 		KilledMob,
 		WerewolfTryEat,
+		WerewolfTryDefense,
 		DrinkCureSuccess,
 		DrinkCureFailure,
 		DrinkInfectionSuccess,

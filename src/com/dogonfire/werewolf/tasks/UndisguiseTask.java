@@ -3,14 +3,7 @@ package com.dogonfire.werewolf.tasks;
 import java.util.UUID;
 
 import com.dogonfire.werewolf.Werewolf;
-
-import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
-import net.dynamicdev.anticheat.api.AntiCheatAPI;
-import net.dynamicdev.anticheat.check.CheckType;
-
 import org.bukkit.Bukkit;
-import org.bukkit.World;
-
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -21,15 +14,13 @@ public class UndisguiseTask implements Runnable
 	public UUID	playerId;
 	private boolean	makeVisible;
 	private boolean	forever;
-	private World	world;
 
-	public UndisguiseTask(Werewolf instance, World world, UUID playerId, boolean visible, boolean forever)
+	public UndisguiseTask(Werewolf instance, UUID playerId, boolean visible, boolean forever)
 	{
 		this.plugin = instance;
 		this.playerId = playerId;
 		this.makeVisible = visible;
 		this.forever = forever;
-		this.world = world;
 	}
 
 	public void run()
@@ -39,24 +30,19 @@ public class UndisguiseTask implements Runnable
 		
 		if (player != null)
 		{
-			if (this.plugin.noCheatPlusEnabled)
-			{
-				NCPExemptionManager.unexempt(player);
-			}
-			if (this.plugin.antiCheatEnabled)
-			{
-				AntiCheatAPI.unexemptPlayer(player, CheckType.FLY);
-				AntiCheatAPI.unexemptPlayer(player, CheckType.SPEED);
-			}
 			
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.CONFUSION);
+			// Walkspeed works sooo, but let's still remove it...
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.SPEED);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.HUNGER);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.NIGHT_VISION);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.INCREASE_DAMAGE);
 			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.REGENERATION);
+			Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.JUMP);
 			
 			player.setWalkSpeed(0.2F);
+			
+			// \/ what? \/
 			if (!this.plugin.usePounce)
 			{
 				Werewolf.pu.removePotionEffectNoGraphic(player, PotionEffectType.JUMP);
@@ -66,6 +52,7 @@ public class UndisguiseTask implements Runnable
 				player.setAllowFlight(false);
 			}
 			
+			/*
 			String playerListName = Werewolf.getWerewolfManager().getPlayerListName(player);
 			if (playerListName == null)
 			{
@@ -74,10 +61,14 @@ public class UndisguiseTask implements Runnable
 			else
 			{
 				player.setPlayerListName(playerListName);
-			}
+			}*/
+			player.setPlayerListName(player.getDisplayName());
 			if (this.makeVisible)
 			{
-				Werewolf.getSkinManager().unsetWerewolfSkin(player);
+				// Before trying to undisguise, check if Disguises are enabled...
+				if (plugin.disguisesEnabled) {
+					Werewolf.getSkinManager().unsetWerewolfSkin(player);
+				}
 			}
 			if (this.plugin.healthBarEnabled)
 			{

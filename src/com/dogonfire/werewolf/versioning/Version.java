@@ -14,10 +14,11 @@ public class Version implements Comparable<Version>
 	 * Because, if the plugin is disabled, then our compatibility check should
 	 * fail.
 	 */
-	Tester			tester;
-	Object			object;
+	@SuppressWarnings("rawtypes")
+	private Tester	tester;
+	private Object	object;
 	final String	version;
-	String			separator	= "[_.-]";
+	private String	separator	= "[_.-]";
 
 	/**
 	 * VersionFactory methods getPluginVersion(), getServerVersion(),
@@ -47,6 +48,7 @@ public class Version implements Comparable<Version>
 	 * @param object
 	 *            The object to be tested. <br/>
 	 */
+	@SuppressWarnings("rawtypes")
 	public Version(String version, Tester tester, Object object)
 	{
 		this.version = version;
@@ -54,6 +56,7 @@ public class Version implements Comparable<Version>
 		this.object = object;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isEnabled()
 	{
 		return tester.isEnabled(object);
@@ -90,11 +93,7 @@ public class Version implements Comparable<Version>
 			return false;
 
 		int x = compareTo(new Version(maxVersion));
-		if (x <= 0)
-		{
-			return true;
-		}
-		return false;
+		return (x <= 0);
 	}
 
 	@Override
@@ -167,11 +166,7 @@ public class Version implements Comparable<Version>
 			return false;
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(this.version);
-		if (matcher.find())
-		{
-			return true;
-		}
-		return false;
+		return (matcher.find());
 	}
 
 	/**

@@ -14,14 +14,11 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class WerewolfScoreboardManager
 {
-	private Werewolf plugin;
 	private ScoreboardManager manager;
 	private HashMap<UUID, Objective> playerHuntingObjectives = new HashMap<UUID, Objective>();
 	
 	WerewolfScoreboardManager(Werewolf plugin)
 	{
-		this.plugin = plugin;
-
 		manager = Bukkit.getScoreboardManager();
 	}
 
@@ -31,25 +28,29 @@ public class WerewolfScoreboardManager
 	
 		//Team team = board.registerNewTeam("teamname");
 	
-		Objective objective = board.registerNewObjective("test", "dummy");
+		// Setting the scoreboard/objective and it's display name
+		Objective objective = board.registerNewObjective("test", "dummy", ChatColor.DARK_AQUA + "Hunting Status");
 	
 		// Setting where to display the scoreboard/objective (either SIDEBAR, PLAYER_LIST or BELOW_NAME)
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 	 
 		// Setting the display name of the scoreboard/objective
-		objective.setDisplayName(ChatColor.DARK_AQUA + "Hunting Status");
+		//objective.setDisplayName(ChatColor.DARK_AQUA + "Hunting Status");
 		
 		playerHuntingObjectives.put(player.getUniqueId(), objective);
 		
 		player.setScoreboard(board);		
 		
 		setMobKillsForPlayer(player, 0);
-		setHumanKillsForPlayer(player, 0);
+		setHumanKillsForPlayer(player, 0);	
 		
-		if(plugin.vampireEnabled)
-		{
-			setVampireKillsForPlayer(player, 0);			
-		}		
+		/* TODO: re-add Vampire integration..
+		
+		if(plugin.vampireEnabled)	
+		{	
+			setVampireKillsForPlayer(player, 0);				
+		}
+		*/
 	}
 	
 

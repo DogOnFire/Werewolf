@@ -1,6 +1,7 @@
 package com.dogonfire.werewolf;
 
 import com.dogonfire.werewolf.Metrics.Graph;
+import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.listeners.ChatListener;
 import com.dogonfire.werewolf.listeners.DamageListener;
 import com.dogonfire.werewolf.listeners.InteractListener;
@@ -11,9 +12,6 @@ import com.dogonfire.werewolf.tasks.DisguiseTask;
 import com.dogonfire.werewolf.tasks.UndisguiseTask;
 import com.dogonfire.werewolf.versioning.Version;
 import com.dogonfire.werewolf.versioning.VersionFactory;
-import com.massivecraft.vampire.entity.UPlayer;
-
-import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -34,21 +31,28 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+/* TODO: re-add Vampire integration..
+
+import com.massivecraft.vampire.entity.UPlayer;
+*/
 
 public class Werewolf extends JavaPlugin
 {
+	public static Werewolf 						instance;
 	public static boolean						pluginEnabled							= false;
-	public boolean								vampireEnabled							= false;
+	/*
+	 * TODO: re-add Vampire integration..
+	 * 
+	 * public boolean vapireEnabled = false;
+	 */
 	public boolean								vaultEnabled							= false;
-	public boolean								noCheatPlusEnabled						= false;
-	public boolean								antiCheatEnabled						= false;
+	public boolean								disguisesEnabled						= false;
 	public boolean								healthBarEnabled						= false;
 	public static int							nightStart								= 13300;
 	public static int							nightEnd								= 23500;
@@ -86,7 +90,7 @@ public class Werewolf extends JavaPlugin
 	public double								silverSwordPrice						= 1000.0D;
 	public double								wolfbanePrice							= 200.0D;
 	public double								bookPrice								= 100.0D;
-	public boolean								useClans								= false;
+	public boolean								useClans								= true;
 	public boolean								useUpdateNotifications					= true;
 	public boolean								useScoreboards							= true;
 	public boolean								metricsOptOut							= false;
@@ -97,38 +101,45 @@ public class Werewolf extends JavaPlugin
 	public boolean								usePounce								= false;
 	public float								pouncePlaneSpeed						= 1.0F;
 	public float								pounceHeightSpeed						= 1.0F;
-	public String								alphaSkin								= "WerewolfAlpha";
-	public String								witherfangSkin							= "Werewolf";
-	public String								silvermoonSkin							= "SM_Werewolf";
-	public String								bloodmoonSkin							= "BM_Werewolf";
 	public List<String>							allowedWorlds							= new ArrayList<String>();
 	private static Werewolf						plugin;
 	private static FileConfiguration			config									= null;
 	public static PacketUtils					pu										= null;
 	private static LanguageManager				languageManager							= null;
-	//private static PotionManager				potionManager							= null;
+	// private static PotionManager potionManager = null;
 	private static ClanManager					clanManager								= null;
 	private static SignManager					signManager								= null;
 	private static WerewolfManager				werewolfManager							= null;
 	private static HuntManager					huntManager								= null;
 	private static TrophyManager				trophyManager							= null;
-	private static WerewolfSkinManager			skinManager								= null;
+	private static SkinManager					skinManager								= null;
 	private static PermissionsManager			permissionsManager						= null;
 	private static WerewolfScoreboardManager	werewolfScoreboardManager				= null;
 	private static StatisticsManager			statisticsManager						= null;
 	private static ItemManager					itemManager								= null;
-	
+
+	public String								potionName								= "Witherfang";
+	public String								werewolfBiteName						= "Bloodmoon";
+	public String								wildBiteName							= "Silvermane";
+	public String								alphaAccountName						= "WerewolfAlpha";
+	public String								potionAccountName						= "WF_Werewolf";
+	public String								werewolfBiteAccountName					= "SM_Werewolf";
+	public String								wildBiteAccountName						= "BM_Werewolf";
+	public String								alphaAccountUUID						= "e0d074bd-6722-47fc-95d3-f28e2899e155";
+	public String								potionAccountUUID						= "c61647e5-fc2f-4536-abe9-c851911ad22f";
+	public String								werewolfBiteAccountUUID					= "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee";
+	public String								wildBiteAccountUUID						= "da508ecc-dbd9-46c5-8095-47b91aa4ff5f";
+
+	public boolean								werewolfNamesEnabled					= true;
+	public List<String>							givenNames								= Arrays.asList("Black", "White", "Red", "Blood", "Blue", "Gray", "Neon", "Lurking", "Rampaging", "Bloodthirsty", "Fearsome", "Ghoulish", "Demonic", "Wrathful", "Sadistic", "Teenage", "Rogue");
+	public List<String>							surnames								= Arrays.asList("Devourer", "Fang", "Wolf", "Howl", "Turned", "Ghoul");
+
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
-	private DamageListener						damageListener							= null;
-	private PlayerListener						playerListener							= null;
-	private InteractListener					interactListener						= null;
-	private InventoryListener					inventoryListener						= null;
-	private ChatListener						chatListener							= null;
-	private String								chatPrefix								= "<Werewolf>: ";
+	private String								chatPrefix								= "Werewolf";
 	public String								serverName								= "Your Server";
 
-	public int 									wolfbaneUntransformChance				= 25;
+	public int									wolfbaneUntransformChance				= 25;
 	public boolean								craftableInfectionPotionEnabled			= true;
 	public boolean								craftableCurePotionEnabled				= true;
 	public boolean								craftableWolfbanePotionEnabled			= true;
@@ -136,13 +147,16 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableSilverArmorEnabled				= true;
 	public boolean								craftableLoreBookEnabled				= true;
 
-	private Version								version;
-	public static final String					MAX										= "1.12.2-R0.1-SNAPSHOT";
-	public static final String					MIN										= "1.12";
+	private Version								version									= null;
+	public static final String					MAX										= "1.14.4-R0.1-SNAPSHOT";
+	public static final String					MIN										= "1.13";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;
-	
-	private ConsoleCommandSender console;
+
+	public static Werewolf instance()
+	{
+		return instance;
+	}
 	
 	public static Class<?> isCombatibleServer() throws Exception
 	{
@@ -175,10 +189,8 @@ public class Werewolf extends JavaPlugin
 	}
 
 	/*
-	public static PotionManager getPotionManager()
-	{
-		return potionManager;
-	}*/
+	 * public static PotionManager getPotionManager() { return potionManager; }
+	 */
 
 	public static PermissionsManager getPermissionsManager()
 	{
@@ -205,7 +217,7 @@ public class Werewolf extends JavaPlugin
 		return trophyManager;
 	}
 
-	public static WerewolfSkinManager getSkinManager()
+	public static SkinManager getSkinManager()
 	{
 		return skinManager;
 	}
@@ -222,12 +234,12 @@ public class Werewolf extends JavaPlugin
 
 	public void announcementMessage(World world, String messageText, Sound sound, long delay)
 	{
-		server.getScheduler().scheduleSyncDelayedTask(plugin, new CentralMessageTask(plugin, world, messageText, sound), delay);
+		server.getScheduler().runTaskLater(plugin, new CentralMessageTask(world, messageText, sound), delay);
 	}
 
 	public void disguiseWerewolf(Player p)
 	{
-		server.getScheduler().scheduleSyncDelayedTask(plugin, new DisguiseTask(plugin, p), 1L);
+		server.getScheduler().runTaskLater(plugin, new DisguiseTask(plugin, p), 1L);
 	}
 
 	public void undisguiseWerewolf(UUID playerId, boolean makeVisible, boolean forever)
@@ -236,11 +248,11 @@ public class Werewolf extends JavaPlugin
 
 		if (player != null)
 		{
-			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, null, playerId, makeVisible, forever), 8L);
+			server.getScheduler().runTaskLater(plugin, new UndisguiseTask(plugin, playerId, makeVisible, forever), 8L);
 		}
 		else
 		{
-			server.getScheduler().scheduleSyncDelayedTask(plugin, new UndisguiseTask(plugin, null, playerId, makeVisible, forever), 8L);
+			server.getScheduler().runTaskLater(plugin, new UndisguiseTask(plugin, playerId, makeVisible, forever), 8L);
 		}
 	}
 
@@ -278,10 +290,25 @@ public class Werewolf extends JavaPlugin
 		return isCompatible;
 	}
 
-	public void OnDisable()
+	public void onDisable()
 	{
-		CompassTracker.stop();
+		if (vaultEnabled)
+		{
+			CompassTracker.stop();
+		}
 
+		for (Player player : getServer().getOnlinePlayers())
+		{
+			if (getWerewolfManager().isWerewolf(player))
+			{
+				if (getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
+				{
+					untransform(player);
+				}
+			}
+		}
+
+		saveSettings();
 		reloadSettings();
 
 		pluginEnabled = false;
@@ -290,13 +317,19 @@ public class Werewolf extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
+		DamageListener damageListener = null;
+		PlayerListener playerListener = null;
+		InteractListener interactListener = null;
+		InventoryListener inventoryListener = null;
+		ChatListener chatListener = null;
+		
 		plugin = this;
+		instance = this;
 		server = getServer();
 		config = getConfig();
 		version = VersionFactory.getServerVersion();
 
 		this.commands = new Commands(this);
-		this.console = server.getConsoleSender();
 
 		if (!version.isSupported(MAX) || !version.isCompatible(MIN))
 		{
@@ -313,44 +346,45 @@ public class Werewolf extends JavaPlugin
 			return;
 		}
 
-
 		pluginEnabled = true;
 
-		permissionsManager = new PermissionsManager(this);
 		werewolfManager = new WerewolfManager(this);
 		clanManager = new ClanManager(this);
-		skinManager = new WerewolfSkinManager(this);
-		//potionManager = new PotionManager(this);
+		// potionManager = new PotionManager(this);
 		languageManager = new LanguageManager(this);
-
-		statisticsManager = new StatisticsManager(this);		
+		statisticsManager = new StatisticsManager(this);
 		itemManager = new ItemManager(this);		
-		this.damageListener = new DamageListener(this);
-		this.playerListener = new PlayerListener(this);
-		this.interactListener = new InteractListener(this);
-		this.chatListener = new ChatListener(this);
+		damageListener = new DamageListener(this);
+		playerListener = new PlayerListener(this);
+		interactListener = new InteractListener(this);
+		chatListener = new ChatListener(this);
+		this.disguisesEnabled = true;
+		skinManager = new SkinManager(this);
 		
+		if(!WerewolfDisguiseAPI.init())
+		{
+			onDisable();
+			return;
+		}
+		
+		// Pre-cache some known disguises
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(potionAccountUUID), potionAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(wildBiteAccountUUID), wildBiteAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(werewolfBiteAccountUUID), werewolfBiteAccountName);
+		WerewolfDisguiseAPI.getDisguise(UUID.fromString(alphaAccountUUID), alphaAccountName);
+				
 		// If ! prevent armor
-		this.inventoryListener = new InventoryListener(this);
+		if (this.dropArmorOnTransform)
+		{
+			inventoryListener = new InventoryListener(this);
+		}
 
 		pu = new PacketUtils(this);
 
-
 		PluginManager pm = getServer().getPluginManager();
-		if (pm.isPluginEnabled("NoCheatPlus"))
-		{
-			plugin.log("NoCheatPlus detected. Overriding cheat checking for Werewolves.");
 
-			this.noCheatPlusEnabled = true;
-		}
-		if (pm.getPlugin("AntiCheat") != null)
-		{
-			plugin.log("AntiCheat detected. Overriding cheat checking for Werewolves.");
-
-			this.antiCheatEnabled = true;
-		}
-
-		if (pm.getPlugin("Vault") != null)
+		// Check for Vault
+		if (pm.getPlugin("Vault") != null && pm.getPlugin("Vault").isEnabled())
 		{
 			this.vaultEnabled = true;
 			huntManager = new HuntManager(this);
@@ -374,22 +408,39 @@ public class Werewolf extends JavaPlugin
 		{
 			log("Vault not found. Werewolf bounties and signs are disabled.");
 		}
-		if (pm.getPlugin("Vampire") != null)
-		{
-			log("Vampire plugin detected. Enabling support for vampirism :-)");
 
-			this.vampireEnabled = true;
-		}
-		if (pm.getPlugin("HealthBar") != null)
+		permissionsManager = new PermissionsManager(this);
+		/*
+		 * TODO: re-add Vampire integration..
+		 * 
+		 * if (pm.getPlugin("Vampire") != null) {
+		 * log("Vampire plugin detected. Enabling support for vampirism :-)");
+		 * 
+		 * this.vampireEnabled = true; }
+		 */
+
+		// Check for HealthBar
+		if (pm.getPlugin("HealthBar") != null && pm.getPlugin("HealthBar").isEnabled())
 		{
 			log("HealthBar plugin detected. Enabling support for healthbars.");
 
 			this.healthBarEnabled = true;
 		}
-		getServer().getPluginManager().registerEvents(this.playerListener, this);
-		getServer().getPluginManager().registerEvents(this.interactListener, this);
-		getServer().getPluginManager().registerEvents(this.damageListener, this);
-		getServer().getPluginManager().registerEvents(this.chatListener, this);
+
+		// Check for PlaceholderAPI
+		if (pm.getPlugin("PlaceholderAPI") != null && pm.getPlugin("PlaceholderAPI").isEnabled())
+		{
+			new WerewolfPlaceholderExpansion(this).register();
+		}
+
+		getServer().getPluginManager().registerEvents(playerListener, this);
+		getServer().getPluginManager().registerEvents(interactListener, this);
+		getServer().getPluginManager().registerEvents(damageListener, this);
+		getServer().getPluginManager().registerEvents(chatListener, this);
+		if (this.dropArmorOnTransform)
+		{
+			getServer().getPluginManager().registerEvents(inventoryListener, this);
+		}
 
 		loadSettings();
 		saveSettings();
@@ -398,8 +449,8 @@ public class Werewolf extends JavaPlugin
 		werewolfManager.load();
 		clanManager.load();
 		languageManager.load();
-		
-		itemManager.setupRecipes();				
+
+		itemManager.setupRecipes();
 
 		if (this.vaultEnabled)
 		{
@@ -413,7 +464,6 @@ public class Werewolf extends JavaPlugin
 
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 		{
-			@Override
 			public void run()
 			{
 				Werewolf.getWerewolfManager().update();
@@ -424,7 +474,6 @@ public class Werewolf extends JavaPlugin
 		{
 			getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 			{
-				@Override
 				public void run()
 				{
 					Werewolf.getClanManager().updateClans();
@@ -443,19 +492,13 @@ public class Werewolf extends JavaPlugin
 		return this.allowedWorlds.contains(player.getWorld().getName());
 	}
 
-	public boolean isVampire(Player player)
-	{
-		if (this.vampireEnabled)
-		{
-			UPlayer uplayer = UPlayer.get(player);
-			if (uplayer == null)
-			{
-				return false;
-			}
-			return uplayer.isVampire();
-		}
-		return false;
-	}
+	/*
+	 * TODO: re-add Vampire integration..
+	 * 
+	 * public boolean isVampire(Player player) { if (this.vampireEnabled) {
+	 * UPlayer uplayer = UPlayer.get(player); if (uplayer == null) { return
+	 * false; } return uplayer.isVampire(); } return false; }
+	 */
 
 	public boolean isUnderOpenSky(Player player)
 	{
@@ -507,36 +550,28 @@ public class Werewolf extends JavaPlugin
 		int phaseInt = days % 8;
 		switch (phaseInt)
 		{
-			case 0:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.Today, ChatColor.GOLD);
-			case 1:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In7Days, ChatColor.GOLD);
-			case 2:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In6Days, ChatColor.GOLD);
-			case 3:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In5Days, ChatColor.GOLD);
-			case 4:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In4Days, ChatColor.GOLD);
-			case 5:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In3Days, ChatColor.GOLD);
-			case 6:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In3Days, ChatColor.GOLD);
-			case 7:
-				return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.Tomorrow, ChatColor.GOLD);
+		case 0:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.Today, ChatColor.GOLD);
+		case 1:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In7Days, ChatColor.GOLD);
+		case 2:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In6Days, ChatColor.GOLD);
+		case 3:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In5Days, ChatColor.GOLD);
+		case 4:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In4Days, ChatColor.GOLD);
+		case 5:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In3Days, ChatColor.GOLD);
+		case 6:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.In2Days, ChatColor.GOLD);
+		case 7:
+			return getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.Tomorrow, ChatColor.GOLD);
 		}
 		return "WTF?";
 	}
 
-	public static enum MoonPhase
-	{
-		FullMoon,
-		WaningGibbous,
-		LastQuarter,
-		WaningCrescent,
-		NewMoon,
-		WaxingCrescent,
-		FirstQuarter,
-		WaxingGibbous;
+	public static enum MoonPhase {
+		FullMoon, WaningGibbous, LastQuarter, WaningCrescent, NewMoon, WaxingCrescent, FirstQuarter, WaxingGibbous;
 	}
 
 	public boolean hasTransformation()
@@ -583,44 +618,49 @@ public class Werewolf extends JavaPlugin
 		werewolfManager.unsetWerewolfSkin(player.getUniqueId(), true);
 	}
 
-	public void setPositionUpdater(Player player, PlayerDisguise skin)
+	/*public void setPositionUpdater(Player player, WerewolfDisguise skin)
 	{
 		if (this.movementUpdateThreading)
 		{
 			this.positionUpdaters.put(player, Integer.valueOf(getServer().getScheduler().scheduleSyncRepeatingTask(this, new PlayerPositionUpdater(this, player, skin), 1L, this.movementUpdateFrequency)));
 		}
 	}
+	*/
 
 	public void log(String message)
 	{
-		console.sendMessage("[" + getDescription().getFullName() + "] " + message);
-		//Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
+		plugin.getLogger().info(message);
 	}
 
 	public void logDebug(String message)
 	{
 		if (this.debug)
 		{
-			Logger.getLogger("minecraft").info("[" + getDescription().getFullName() + "] " + message);
+			plugin.getLogger().info("[Debug] " + message);
 		}
 	}
 
 	public void reloadSettings()
 	{
 		reloadConfig();
-
 		loadSettings();
+
+		getWerewolfManager().load();
+		getClanManager().load();
+		getLanguageManager().load();
 	}
 
 	public void loadSettings()
 	{
+		config = getConfig();
+
 		this.debug = config.getBoolean("Settings.Debug", false);
 
 		DamageManager.werewolfItemDamage = config.getInt("WerewolfWolf.ItemDamage", 3);
-		DamageManager.werewolfHandDamage = config.getInt("WerewolfWolf.HandDamage", 8);		
+		DamageManager.werewolfHandDamage = config.getInt("WerewolfWolf.HandDamage", 8);
 		DamageManager.SilverArmorMultiplier = config.getDouble("WerewolfWolf.ArmorMultiplier", 0.8D);
 		this.wolfdistance = config.getInt("WerewolfWolf.WolfDistance", 10);
-		
+
 		this.cureChance = config.getDouble("Infection.CurePotionChance", 1.0D);
 
 		this.werewolfInfectionRisk = config.getDouble("Infection.WerewolfBiteRisk", 0.05D);
@@ -642,7 +682,7 @@ public class Werewolf extends JavaPlugin
 			}
 		}
 		//
-		//DamageListener.WEREWOLF_GROWL = config.getString("Files.Growl", "");
+		// DamageListener.WEREWOLF_GROWL = config.getString("Files.Growl", "");
 
 		nightStart = config.getInt("Night.Start", 13000);
 		nightEnd = config.getInt("Night.End", 23000);
@@ -671,7 +711,7 @@ public class Werewolf extends JavaPlugin
 		{
 			trophyManager = new TrophyManager(this);
 		}
-				
+
 		this.autoBounty = config.getBoolean("Settings.AutoBounty", false);
 		this.autoBountyMaximum = config.getInt("Settings.AutoBountyMaximum", 1000);
 		this.renameWerewolves = config.getBoolean("Settings.RenameWerewolves", true);
@@ -709,21 +749,41 @@ public class Werewolf extends JavaPlugin
 		this.transformsForGoldImmunity = config.getInt("Maturity.GoldImmunity", 10);
 
 		/*
-		this.usePounce = config.getBoolean("Pounce.Enabled", false);
-		this.pouncePlaneSpeed = ((float) config.getDouble("Pounce.PlaneSpeed", 2.25D));
-		this.pounceHeightSpeed = ((float) config.getDouble("Pounce.HeightSpeed", 1.1D));
-		if (this.useTrophies && (trophyManager == null))
-		{
-			trophyManager = new TrophyManager(this);
-			trophyManager.load();
-		}
-		*/
+		 * this.usePounce = config.getBoolean("Pounce.Enabled", false);
+		 * this.pouncePlaneSpeed = ((float)
+		 * config.getDouble("Pounce.PlaneSpeed", 2.25D)); this.pounceHeightSpeed
+		 * = ((float) config.getDouble("Pounce.HeightSpeed", 1.1D)); if
+		 * (this.useTrophies && (trophyManager == null)) { trophyManager = new
+		 * TrophyManager(this); trophyManager.load(); }
+		 */
 
-		this.chatPrefix = config.getString("Chat.Prefix", "<Werewolf>: ");
+		this.chatPrefix = config.getString("Chat.Prefix", "Werewolf");
 
 		this.useScoreboards = config.getBoolean("Scoreboards.Enabled", true);
 
 		this.useClans = config.getBoolean("Clans.Enabled", true);
+		this.potionName = config.getString("Clans.PotionName", "Witherfang");
+		this.werewolfBiteName = config.getString("Clans.WerewolfBiteName", "Bloodmoon");
+		this.wildBiteName = config.getString("Clans.WildBiteName", "Silvermane");
+		this.alphaAccountName = config.getString("Clans.AlphaAccountName", "WerewolfAlpha");
+		this.potionAccountName = config.getString("Clans.PotionAccountName", "WF_Werewolf");
+		this.werewolfBiteAccountName = config.getString("Clans.WerewolfBiteAccountName", "SM_Werewolf");
+		this.wildBiteAccountName = config.getString("Clans.WildBiteAccountName", "BM_Werewolf");
+		this.alphaAccountUUID = config.getString("Clans.AlphaAccountUUID", "e0d074bd-6722-47fc-95d3-f28e2899e155");
+		this.potionAccountUUID = config.getString("Clans.PotionAccountUUID", "c61647e5-fc2f-4536-abe9-c851911ad22f");
+		this.werewolfBiteAccountUUID = config.getString("Clans.WerewolfBiteAccountUUID", "b68a8f00-7d24-4c52-b6ad-1423bfbe26ee");
+		this.wildBiteAccountUUID = config.getString("Clans.WildBiteAccountUUID", "da508ecc-dbd9-46c5-8095-47b91aa4ff5f");
+
+		this.werewolfNamesEnabled = config.getBoolean("WerewolfNames.Enabled", true);
+		if (config.contains("WerewolfNames.Given_names"))
+		{
+			this.givenNames = config.getStringList("WerewolfNames.Given_names");
+		}
+
+		if (config.contains("WerewolfNames.Surnames"))
+		{
+			this.surnames = config.getStringList("WerewolfNames.Surnames");
+		}
 
 		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
 		this.wolfbaneUntransformChance = config.getInt("Items.WolfbaneUntransformChance", 25);
@@ -733,10 +793,6 @@ public class Werewolf extends JavaPlugin
 		this.craftableInfectionPotionEnabled = config.getBoolean("Items.CraftableInfectionPotionEnabled", true);
 		this.craftableCurePotionEnabled = config.getBoolean("Items.CraftableCurePotionEnabled", true);
 		this.craftableWolfbanePotionEnabled = config.getBoolean("Items.CraftableWolfbanePotionEnabled", true);
-		this.alphaSkin = config.getString("Skins.AlphaSkin", "WerewolfAlpha");
-		this.witherfangSkin = config.getString("Skins.WitherfangSkin", "Werewolf");
-		this.silvermoonSkin = config.getString("Skins.SilvermoonSkin", "SM_Werewolf");
-		this.bloodmoonSkin = config.getString("Skins.BloodmoonSkin", "BM_Werewolf");
 	}
 
 	public void saveSettings()
@@ -783,6 +839,21 @@ public class Werewolf extends JavaPlugin
 		config.set("Night.End", Integer.valueOf(nightEnd));
 
 		config.set("Clans.Enabled", Boolean.valueOf(this.useClans));
+		config.set("Clans.PotionName", this.potionName);
+		config.set("Clans.WerewolfBiteName", this.werewolfBiteName);
+		config.set("Clans.WildBiteName", this.wildBiteName);
+		config.set("Clans.AlphaAccountName", this.alphaAccountName);
+		config.set("Clans.PotionAccountName", this.potionAccountName);
+		config.set("Clans.WerewolfBiteAccountName", this.werewolfBiteAccountName);
+		config.set("Clans.WildBiteAccountName", this.wildBiteAccountName);
+		config.set("Clans.AlphaAccountUUID", this.alphaAccountUUID);
+		config.set("Clans.PotionAccountUUID", this.potionAccountUUID);
+		config.set("Clans.WerewolfBiteAccountUUID", this.werewolfBiteAccountUUID);
+		config.set("Clans.WildBiteAccountUUID", this.wildBiteAccountUUID);
+
+		config.set("WerewolfNames.Enabled", this.werewolfNamesEnabled);
+		config.set("WerewolfNames.Given_names", this.givenNames);
+		config.set("WerewolfNames.Surnames", this.surnames);
 
 		config.set("Signs.Enabled", Boolean.valueOf(this.useSigns));
 		config.set("Signs.CurePrice", Double.valueOf(this.curePrice));
@@ -806,19 +877,20 @@ public class Werewolf extends JavaPlugin
 		config.set("Items.CraftableInfectionPotionEnabled", Boolean.valueOf(this.craftableInfectionPotionEnabled));
 		config.set("Items.CraftableCurePotionEnabled", Boolean.valueOf(this.craftableCurePotionEnabled));
 		config.set("Items.CraftableWolfbanePotionEnabled", Boolean.valueOf(this.craftableWolfbanePotionEnabled));
-		
-		config.set("Skins.AlphaSkin", this.alphaSkin);
-		config.set("Skins.WitherfangSkin", this.witherfangSkin);
-		config.set("Skins.SilvermoonSkin", this.silvermoonSkin);
-		config.set("Skins.BloodmoonSkin", this.bloodmoonSkin);
 		/*
-		DamageManager.SilverSwordMultiplier = config.getInt("Items.SilverSwordMultiplier", 2);
-		this.craftableSilverSwordEnabled = config.getBoolean("Items.CraftableSilverSword", true);
-		this.craftableLoreBookEnabled = config.getBoolean("Items.CraftableLoreBookEnabled", true);
-		this.craftableInfectionPotionEnabled = config.getBoolean("Items.CraftableInfectionPotionEnabled", true);
-		this.craftableCurePotionEnabled = config.getBoolean("Items.CraftableCurePotionEnabled", true);
-		this.craftableWolfbanePotionEnabled = config.getBoolean("Items.CraftableWolfbanePotionEnabled", true);
-*/
+		 * DamageManager.SilverSwordMultiplier =
+		 * config.getInt("Items.SilverSwordMultiplier", 2);
+		 * this.craftableSilverSwordEnabled =
+		 * config.getBoolean("Items.CraftableSilverSword", true);
+		 * this.craftableLoreBookEnabled =
+		 * config.getBoolean("Items.CraftableLoreBookEnabled", true);
+		 * this.craftableInfectionPotionEnabled =
+		 * config.getBoolean("Items.CraftableInfectionPotionEnabled", true);
+		 * this.craftableCurePotionEnabled =
+		 * config.getBoolean("Items.CraftableCurePotionEnabled", true);
+		 * this.craftableWolfbanePotionEnabled =
+		 * config.getBoolean("Items.CraftableWolfbanePotionEnabled", true);
+		 */
 
 		saveConfig();
 	}
@@ -827,6 +899,12 @@ public class Werewolf extends JavaPlugin
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
 		return this.commands.onCommand(sender, cmd, label, args);
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args)
+	{
+		return this.commands.onTabComplete(sender, cmd, alias, args);
 	}
 
 	public void startMetrics()
@@ -850,44 +928,15 @@ public class Werewolf extends JavaPlugin
 				}
 			});
 
-			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Vampire")
-			{
-				@Override
-				public int getValue()
-				{
-					if (Werewolf.this.vampireEnabled)
-					{
-						return 1;
-					}
-					return 0;
-				}
-			});
-
-			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using AntiCheat")
-			{
-				@Override
-				public int getValue()
-				{
-					if (Werewolf.this.antiCheatEnabled)
-					{
-						return 1;
-					}
-					return 0;
-				}
-			});
-
-			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using NoCheatPlus")
-			{
-				@Override
-				public int getValue()
-				{
-					if (Werewolf.this.noCheatPlusEnabled)
-					{
-						return 1;
-					}
-					return 0;
-				}
-			});
+			/*
+			 * TODO: re-add Vampire integration..
+			 * 
+			 * pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Vampire")
+			 * {
+			 * 
+			 * @Override public int getValue() { if
+			 * (Werewolf.this.vampireEnabled) { return 1; } return 0; } });
+			 */
 
 			Graph featuresEnabledGraph = metrics.createGraph("Features enabled");
 

@@ -26,26 +26,26 @@ public class DamageManager
 					
 		switch (mat)
 		{
-			case WOOD_PICKAXE: damage = 3; break;
-			case GOLD_PICKAXE: damage = 3; break;
+			case WOODEN_PICKAXE: damage = 3; break;
+			case GOLDEN_PICKAXE: damage = 3; break;
 			case STONE_PICKAXE: damage = 4; break;
 			case IRON_PICKAXE: damage = 5; break;
 			case DIAMOND_PICKAXE: damage = 6; break;
 
-			case WOOD_SPADE: damage = 2; break;
-			case GOLD_SPADE: damage = 2; break;
-			case STONE_SPADE: damage = 3; break;
-			case IRON_SPADE: damage = 4; break;
-			case DIAMOND_SPADE: damage = 5; break;
+			case WOODEN_SHOVEL: damage = 2; break;
+			case GOLDEN_SHOVEL: damage = 2; break;
+			case STONE_SHOVEL: damage = 3; break;
+			case IRON_SHOVEL: damage = 4; break;
+			case DIAMOND_SHOVEL: damage = 5; break;
 
-			case WOOD_AXE: damage = 4; break;
-			case GOLD_AXE: damage = 4; break;
+			case WOODEN_AXE: damage = 4; break;
+			case GOLDEN_AXE: damage = 4; break;
 			case STONE_AXE: damage = 5; break;
 			case IRON_AXE: damage = 6; break;
 			case DIAMOND_AXE: damage = 7; break;
 
-			case WOOD_SWORD: damage = 5; break;
-			case GOLD_SWORD: damage = 5; break;
+			case WOODEN_SWORD: damage = 5; break;
+			case GOLDEN_SWORD: damage = 5; break;
 			case STONE_SWORD: damage = 6; break;
 			case IRON_SWORD: damage = 7; break;
 			case DIAMOND_SWORD: damage = 8; break;
@@ -101,11 +101,7 @@ public class DamageManager
 		int[] playerVector = getVectorForPoints(startPos[0], startPos[1], l.getBlockX(), l.getBlockY());
 
 		double angle = getAngleBetweenVectors(endA, playerVector);
-		if ((Math.toDegrees(angle) < degrees) && (Math.toDegrees(angle) > 0.0D))
-		{
-			return true;
-		}
-		return false;
+		return ((Math.toDegrees(angle) < degrees) && (Math.toDegrees(angle) > 0.0D));
 	}
 
 	public static int[] getVectorForPoints(int x1, int y1, int x2, int y2)

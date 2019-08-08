@@ -1,22 +1,16 @@
 package com.dogonfire.werewolf;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-
-import org.apache.commons.codec.binary.Base64;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Server;
-import org.bukkit.World;
-import org.bukkit.block.Block;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
@@ -25,13 +19,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.plugin.PluginManager;
-
 import com.dogonfire.werewolf.ClanManager.ClanType;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
 public class TrophyManager implements Listener
 {
@@ -75,7 +64,7 @@ public class TrophyManager implements Listener
 
 	public ItemStack getTrophyFromWerewolfPlayer(UUID killerId, UUID werewolfId)
 	{
-		ItemStack skullTrophy = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+		ItemStack skullTrophy = new ItemStack(Material.PLAYER_HEAD);
 
 		SkullMeta skullMeta = (SkullMeta) skullTrophy.getItemMeta();
 
@@ -85,7 +74,9 @@ public class TrophyManager implements Listener
 
 		ClanType clan = Werewolf.getWerewolfManager().getWerewolfClan(werewolfId);
 				
-		skullMeta.setOwner(Werewolf.getClanManager().getWerewolfAccountForClan(clan));
+		OfflinePlayer skullPlayer = plugin.getServer().getOfflinePlayer(Werewolf.getClanManager().getWerewolfAccountIdForClan(clan));
+		
+		skullMeta.setOwningPlayer(skullPlayer);
 		skullMeta.setDisplayName(ChatColor.GOLD + "Werewolf Head");
 
 		String killerName = plugin.getServer().getPlayer(killerId).getName();
@@ -153,10 +144,12 @@ public class TrophyManager implements Listener
 		{
 			return false;
 		}
+		
 		SkullMeta skullMeta = (SkullMeta) skullItem.getItemMeta();
+		
 		skullMeta.setDisplayName(ChatColor.GOLD + "Werewolf Head");
 
-		List<String> lorePages = new ArrayList();
+		List<String> lorePages = new ArrayList<String>();
 		lorePages.add(description);
 		skullMeta.setLore(lorePages);
 
@@ -172,7 +165,7 @@ public class TrophyManager implements Listener
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
 	public void onBlockBreak(BlockBreakEvent event)
 	{
-		if (event.getBlock().getType() != Material.SKULL)
+		if (event.getBlock().getType() != Material.PLAYER_HEAD)
 		{
 			return;
 		}
@@ -188,7 +181,7 @@ public class TrophyManager implements Listener
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
 	public void onBlockPlace(BlockPlaceEvent event)
 	{
-		if (event.getItemInHand().getType() != Material.SKULL_ITEM)
+		if (event.getItemInHand().getType() != Material.PLAYER_HEAD)
 		{
 			return;
 		}

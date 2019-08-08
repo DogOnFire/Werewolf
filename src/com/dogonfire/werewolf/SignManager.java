@@ -13,6 +13,8 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.dogonfire.werewolf.api.WerewolfAPI;
+
 public class SignManager implements Listener
 {
 	private Werewolf	plugin;
@@ -25,61 +27,37 @@ public class SignManager implements Listener
 	private boolean isWerewolfSignEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(0);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("Werewolf"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && (signTitle.trim().equalsIgnoreCase("Werewolf")));
 	}
 
 	private boolean isWerewolfSignInfectionPotionEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(1);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("Infection"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && signTitle.trim().equalsIgnoreCase("Infection"));
 	}
 
 	private boolean isWerewolfSignCurePotionEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(1);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("Cure"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && signTitle.trim().equalsIgnoreCase("Cure"));
 	}
 
 	private boolean isWerewolfSignSilverSwordEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(1);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("SilverSword"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && signTitle.trim().equalsIgnoreCase("SilverSword"));
 	}
 
 	private boolean isWerewolfSignWolfbanePotionEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(1);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("Wolfbane"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && signTitle.trim().equalsIgnoreCase("Wolfbane"));
 	}
 
 	private boolean isWerewolfSignLoreBookEvent(SignChangeEvent event)
 	{
 		String signTitle = event.getLine(1);
-		if ((signTitle == null) || !signTitle.trim().equalsIgnoreCase("LoreBook"))
-		{
-			return false;
-		}
-		return true;
+		return ((signTitle != null) && signTitle.trim().equalsIgnoreCase("LoreBook"));
 	}
 
 	public boolean handleNewWerewolfInfectionPotionSign(SignChangeEvent event)
@@ -158,7 +136,7 @@ public class SignManager implements Listener
 	}
 
 	@EventHandler(priority = EventPriority.LOW)
-	public void OnSignChange(SignChangeEvent event)
+	public void onSignChange(SignChangeEvent event)
 	{
 		Player player = event.getPlayer();
 		if (!isWerewolfSignEvent(event))
@@ -174,7 +152,7 @@ public class SignManager implements Listener
 				{
 					event.setCancelled(true);
 					event.getBlock().setType(Material.AIR);
-					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 				}
 				else
 				{
@@ -194,7 +172,7 @@ public class SignManager implements Listener
 			{
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 			}
 			return;
 		}
@@ -207,7 +185,7 @@ public class SignManager implements Listener
 				{
 					event.setCancelled(true);
 					event.getBlock().setType(Material.AIR);
-					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 				}
 				else
 				{
@@ -226,7 +204,7 @@ public class SignManager implements Listener
 			{
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 			}
 			return;
 		}
@@ -239,7 +217,7 @@ public class SignManager implements Listener
 				{
 					event.setCancelled(true);
 					event.getBlock().setType(Material.AIR);
-					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 				}
 				else
 				{
@@ -258,7 +236,7 @@ public class SignManager implements Listener
 			{
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 			}
 			return;
 		}
@@ -271,7 +249,7 @@ public class SignManager implements Listener
 				{
 					event.setCancelled(true);
 					event.getBlock().setType(Material.AIR);
-					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 				}
 				else
 				{
@@ -290,7 +268,7 @@ public class SignManager implements Listener
 			{
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 			}
 			return;
 		}
@@ -303,7 +281,7 @@ public class SignManager implements Listener
 				{
 					event.setCancelled(true);
 					event.getBlock().setType(Material.AIR);
-					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+					event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 				}
 				else
 				{
@@ -322,7 +300,7 @@ public class SignManager implements Listener
 			{
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
-				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.SIGN, 1));
+				event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.OAK_SIGN, 1));
 			}
 			return;
 		}
@@ -333,7 +311,7 @@ public class SignManager implements Listener
 	{
 		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 		{
-			if (event.getClickedBlock().getType() != Material.WALL_SIGN)
+			if (event.getClickedBlock().getType() != Material.OAK_WALL_SIGN)
 			{
 				return false;
 			}
@@ -351,151 +329,136 @@ public class SignManager implements Listener
 			Player player = event.getPlayer();
 			String typeLine = sign.getLine(1);
 			
-			if (typeLine.equals("Infection"))
+			if (typeLine.equals("Infection") && (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.infection.use")))
 			{
-				if (player.isOp() || Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.infection.use"))
+				double price = 0.0D;
+				if (this.plugin.vaultEnabled)
 				{
-					double price = 0.0D;
-					if (this.plugin.vaultEnabled)
+					Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.infectionPrice));
+
+					price = this.plugin.infectionPrice;
+					if (!Werewolf.getEconomy().has(player, price))
 					{
-						Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.infectionPrice));
-
-						price = this.plugin.infectionPrice;
-						if (!Werewolf.getEconomy().has(player, price))
-						{
-							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
-							return true;
-						}
-						Werewolf.getEconomy().withdrawPlayer(player, price);
+						this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
+						return true;
 					}
-					else
-					{
-						Werewolf.getLanguageManager().setAmount("free");
-					}
-					
-					event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfInfectionPotion());
-
-					this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAInfectionPotion, ChatColor.GREEN, "", (int)price, 1);
-					this.plugin.log(event.getPlayer().getName() + " bought a werewolf infection potion for " + price);
-
-					return true;
+					Werewolf.getEconomy().withdrawPlayer(player, price);
 				}
+				else
+				{
+					Werewolf.getLanguageManager().setAmount("free");
+				}
+				
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfInfectionPotion());
+
+				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAInfectionPotion, ChatColor.GREEN, "", (int)price, 1);
+				this.plugin.log(event.getPlayer().getName() + " bought a werewolf infection potion for " + price);
+
+				return true;
 			}
-			else if (typeLine.equals("Cure"))
+			else if (typeLine.equals("Cure") && (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.cure.use"))))
 			{
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.cure.use")))
+				double price = 0.0D;
+
+				Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.curePrice));
+				if (this.plugin.vaultEnabled)
 				{
-					double price = 0.0D;
-
-					Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.curePrice));
-					if (this.plugin.vaultEnabled)
+					price = this.plugin.curePrice;
+					if (!Werewolf.getEconomy().has(player, price))
 					{
-						price = this.plugin.curePrice;
-						if (!Werewolf.getEconomy().has(player, price))
-						{
-							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
-							return true;
-						}
-						Werewolf.getEconomy().withdrawPlayer(player, price);
+						this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
+						return true;
 					}
-					else
-					{
-						Werewolf.getLanguageManager().setAmount("free");
-					}
-					event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfCurePotion());
-
-					this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtACurePotion, ChatColor.GREEN, "", (int)price, 1);
-					this.plugin.log(event.getPlayer().getName() + " bought a werewolf cure potion for " + price);
-
-					return true;
+					Werewolf.getEconomy().withdrawPlayer(player, price);
 				}
+				else
+				{
+					Werewolf.getLanguageManager().setAmount("free");
+				}
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfCurePotion());
+
+				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtACurePotion, ChatColor.GREEN, "", (int)price, 1);
+				this.plugin.log(event.getPlayer().getName() + " bought a werewolf cure potion for " + price);
+
+				return true;
 			}
-			else if (typeLine.equals("Wolfbane"))
+			else if (typeLine.equals("Wolfbane") && (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.wolfbane.use"))))
 			{
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.wolfbane.use")))
+				double price = 0.0D;
+
+				Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.wolfbanePrice));
+				if (this.plugin.vaultEnabled)
 				{
-					double price = 0.0D;
-
-					Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.wolfbanePrice));
-					if (this.plugin.vaultEnabled)
+					price = this.plugin.wolfbanePrice;
+					if (!Werewolf.getEconomy().has(player, price))
 					{
-						price = this.plugin.wolfbanePrice;
-						if (!Werewolf.getEconomy().has(player, price))
-						{
-							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
-							return true;
-						}
-						Werewolf.getEconomy().withdrawPlayer(player, price);
+						this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
+						return true;
 					}
-					else
-					{
-						Werewolf.getLanguageManager().setAmount("free");
-					}
-					event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfWolfbanePotion());
-
-					this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAWolfbanePotion, ChatColor.GREEN, "", (int)price, 1);
-					this.plugin.log(event.getPlayer().getName() + " bought a werewolf wolfbane potion for " + price);
-
-					return true;
+					Werewolf.getEconomy().withdrawPlayer(player, price);
 				}
+				else
+				{
+					Werewolf.getLanguageManager().setAmount("free");
+				}
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfWolfbanePotion());
+
+				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtAWolfbanePotion, ChatColor.GREEN, "", (int)price, 1);
+				this.plugin.log(event.getPlayer().getName() + " bought a werewolf wolfbane potion for " + price);
+
+				return true;
 			}
-			else if (typeLine.equals("SilverSword"))
+			else if (typeLine.equals("SilverSword") && (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.silversword.use"))))
 			{
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.silversword.use")))
+				double price = 0.0D;
+
+				Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.silverSwordPrice));
+				if (this.plugin.vaultEnabled)
 				{
-					double price = 0.0D;
-
-					Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.silverSwordPrice));
-					if (this.plugin.vaultEnabled)
+					price = this.plugin.silverSwordPrice;
+					if (!Werewolf.getEconomy().has(player, price))
 					{
-						price = this.plugin.silverSwordPrice;
-						if (!Werewolf.getEconomy().has(player, price))
-						{
-							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
-							return true;
-						}
-						Werewolf.getEconomy().withdrawPlayer(player, price);
+						this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
+						return true;
 					}
-					else
-					{
-						Werewolf.getLanguageManager().setAmount("free");
-					}
-					event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfSilverSword());
-
-					this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtASilverSword, ChatColor.GREEN, "", (int)price, 1);
-					this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);
-
-					return true;
+					Werewolf.getEconomy().withdrawPlayer(player, price);
 				}
+				else
+				{
+					Werewolf.getLanguageManager().setAmount("free");
+				}
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfSilverSword());
+
+				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtASilverSword, ChatColor.GREEN, "", (int)price, 1);
+				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);
+
+				return true;
 			}
-			else if (typeLine.equals("LoreBook"))
+			else if (typeLine.equals("LoreBook") && (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.lorebook.use"))))
 			{
-				if (player.isOp() || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.sign.lorebook.use")))
+				double price = 0.0D;
+
+				Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.bookPrice));
+				if (this.plugin.vaultEnabled)
 				{
-					double price = 0.0D;
-
-					Werewolf.getLanguageManager().setAmount(Werewolf.getEconomy().format(this.plugin.bookPrice));
-					if (this.plugin.vaultEnabled)
+					price = this.plugin.bookPrice;
+					if (!Werewolf.getEconomy().has(player, price))
 					{
-						price = this.plugin.bookPrice;
-						if (!Werewolf.getEconomy().has(player, price))
-						{
-							this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
-							return true;
-						}
-						Werewolf.getEconomy().withdrawPlayer(player, price);
+						this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouDoNotHaveEnoughMoney, ChatColor.RED, "", (int)price, 1);
+						return true;
 					}
-					else
-					{
-						Werewolf.getLanguageManager().setAmount("free");
-					}
-					event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), API.newWerewolfLorebook());
-
-					this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtALoreBook, ChatColor.GREEN, "", (int)price, 1);
-					this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);
-
-					return true;
+					Werewolf.getEconomy().withdrawPlayer(player, price);
 				}
+				else
+				{
+					Werewolf.getLanguageManager().setAmount("free");
+				}
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLorebook());
+
+				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtALoreBook, ChatColor.GREEN, "", (int)price, 1);
+				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);
+
+				return true;
 			}
 
 			return true;

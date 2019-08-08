@@ -35,13 +35,61 @@ public class InteractListener implements Listener
 			case BREAD:
 			case PUMPKIN:
 			case MELON:
-			case MUSHROOM_SOUP:
+			case MUSHROOM_STEW:
+			case BEETROOT_SOUP:
+			case BEETROOT:
 			case BAKED_POTATO:
+			case PUMPKIN_PIE:
 			case POTATO:
+			case POISONOUS_POTATO:
+			case GOLDEN_APPLE:
+			case ENCHANTED_GOLDEN_APPLE:
+			case DRIED_KELP:
 			case CAKE:
 			case COOKIE:
 			case CARROT:
+			case MILK_BUCKET:
 				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryEat, ChatColor.RED));
+				event.setCancelled(true);
+				return true;
+			default:
+				break;
+		}
+		
+		return false;
+	}
+	
+	private boolean checkForDefense(PlayerInteractEvent event)
+	{
+		Player player = event.getPlayer();
+		
+		Material type = player.getInventory().getItemInMainHand().getType();
+		switch (type)
+		{
+			case GOLDEN_CHESTPLATE:
+			case LEATHER_CHESTPLATE:
+			case DIAMOND_CHESTPLATE:
+			case CHAINMAIL_CHESTPLATE:
+			case IRON_CHESTPLATE:
+			case CHAINMAIL_BOOTS:
+			case GOLDEN_BOOTS:
+			case LEATHER_BOOTS:
+			case IRON_BOOTS:
+			case DIAMOND_BOOTS:
+			case GOLDEN_LEGGINGS:
+			case CHAINMAIL_LEGGINGS:
+			case LEATHER_LEGGINGS:
+			case IRON_LEGGINGS:
+			case DIAMOND_LEGGINGS:
+			case CHAINMAIL_HELMET:
+			case GOLDEN_HELMET:
+			case LEATHER_HELMET:
+			case IRON_HELMET:
+			case DIAMOND_HELMET:
+			case TURTLE_HELMET:
+			case ELYTRA:
+			case SHIELD:
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryDefense, ChatColor.RED));
 				event.setCancelled(true);
 				return true;
 			default:
@@ -138,13 +186,13 @@ public class InteractListener implements Listener
 		{
 			return false;
 		}
-*/
+
 		
 		if (!handItem.getItemMeta().getDisplayName().substring(2).contains("Werewolf infection"))
 		{
 			return false;
 		}
-		
+*/
 		if ((!Werewolf.getPermissionsManager().hasPermission(player, "werewolf.potion.infection.drink")) && (!player.isOp()))
 		{
 			return false;
@@ -194,12 +242,10 @@ public class InteractListener implements Listener
 			return;
 		}
 		Player player = event.getPlayer();
-		if ((event.getAction().equals(Action.RIGHT_CLICK_AIR)) || (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+		if (((event.getAction().equals(Action.RIGHT_CLICK_AIR)) || (event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) && (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId())))
 		{
-			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
-			{
-				checkForEatingFood(event);
-			}
+			checkForEatingFood(event);
+			checkForDefense(event);
 		}
 	}
 

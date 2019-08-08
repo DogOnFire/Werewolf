@@ -1,14 +1,12 @@
 package com.dogonfire.werewolf.listeners;
 
-import com.dogonfire.werewolf.PermissionsManager;
-import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.WerewolfManager;
 import java.util.Random;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import com.dogonfire.werewolf.Werewolf;
 
 public class ChatListener implements Listener
 {
@@ -56,22 +54,33 @@ public class ChatListener implements Listener
 			String alternativeMessage = (String) this.plugin.wolfMessage.toArray()[r.nextInt(this.plugin.wolfMessage.size())];
 
 			String message = getWerewolfLanguage(e.getMessage());
+			
+			String messageToSend = "";
 			for (Player receiver : e.getRecipients())
 			{
-				if ((receiver.isOp()) || (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.listener")))
+				if (Werewolf.getPermissionsManager().hasPermission(receiver, "werewolf.superlistener"))
 				{
-					receiver.sendMessage("<" + Werewolf.getWerewolfManager().getPlayerListName(player) + ">(Werewolf): " + e.getMessage());
+					messageToSend = String.format(e.getFormat(), "Werewolf " + player.getName(), e.getMessage());
+					this.plugin.logDebug("Recipent for message has superlistener perm: " + receiver.getName() + " - Message: " + messageToSend);
+				}
+				else if ((receiver.isOp()) || (Werewolf.getPermissionsManager().hasPermission(receiver, "werewolf.listener")))
+				{
+					messageToSend = String.format(e.getFormat(), Werewolf.getWerewolfManager().getPlayerListName(player), e.getMessage());
+					this.plugin.logDebug("Recipent for message is OP or has perm: " + receiver.getName() + " - Message: " + messageToSend);
 				}
 				else if (Werewolf.getWerewolfManager().isWerewolf(receiver.getUniqueId()))
 				{
-					receiver.sendMessage("<" + Werewolf.getWerewolfManager().getPlayerListName(player) + ">: " + ChatColor.RED + message);
+					messageToSend = String.format(e.getFormat(), Werewolf.getWerewolfManager().getPlayerListName(player), message);
+					this.plugin.logDebug("Recipent for message is Werewolf: " + receiver.getName() + " - Message: " + messageToSend);
 				}
 				else
 				{
-					receiver.sendMessage(plugin.getChatPrefix() + alternativeMessage);
+					messageToSend = String.format(e.getFormat(), plugin.getChatPrefix(), alternativeMessage);
+					this.plugin.logDebug("Recipent for message is Human (non-werewolf): " + receiver.getName() + " - Message: " + messageToSend);
 				}
+				receiver.sendMessage(messageToSend);
 			}
-			this.plugin.log("<" + Werewolf.getWerewolfManager().getPlayerListName(player) + ">(Werewolf): " + message);
+			this.plugin.log(String.format(e.getFormat(), "Werewolf " + player.getName(), e.getMessage()));
 
 			Werewolf.getWerewolfManager().growl(player);
 		}

@@ -42,12 +42,16 @@ YouPlacedABookSign:
 - You placed a sign selling werewolf lorebooks for $Amount
 YouAreNotTheAlphaOfTheClan:
 - You are not the alpha of your clan  
+DenyVampire:
+- You cannot be a werewolf when you are a vampire!  
 NoRecentAlphaCall:
 - There is no call from your alpha  
 ClanAlphaCannotAnswerCall:
 - You cannot answer your own call  
 YouCalledClanMember:
-- You called $PlayerName to you!  
+- You called $PlayerName to you! 
+HelpCall:
+- Call a clanmember to you! 
 YouAreBeingCalled:
 - You are being called by $PlayerName!
 NewClanAlpha:
@@ -132,14 +136,16 @@ HelpHome:
 - Use $Type to teleport you to your clan home
 HelpSetHome:
 - Use $Type to set the home for your clan
+ClanSetHome:
+- Home sucessfully set!
 TakeCompassInHands:
 - You must have a compass in your hands!
 Infected:
 - You have been infected with the Werewolf infection by $PlayerName!
 MadeWerewolf:
-- You have been turned into a werewolf by $PlayerName!
+- You have been turned into a Werewolf by $PlayerName!
 UnMadeWerewolf:
-- You have been unturned from being a werewolf by $PlayerName!
+- You have been unturned from being a Werewolf by $PlayerName!
 NoWerewolvesOnline:
 - There are no werewolves online
 WerewolvesCannotHuntWerewolves:
@@ -198,6 +204,8 @@ KilledMob:
 - That was a good kill. You feasted for $Amount health!
 WerewolfTryEat:
 - Werewolves do not eat that. You crave meat!
+WerewolfTryDefense:
+- Werewolves does not need any defense!
 DrinkInfectionSuccess:
 - Whoa! A warm feeling is flowing through your body...
 DrinkInfectionFailure:

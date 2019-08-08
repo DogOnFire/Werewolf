@@ -1,11 +1,14 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.api;
 
 import java.util.UUID;
 
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class API
-{
+import com.dogonfire.werewolf.Werewolf;
+
+public class WerewolfAPI
+{	
 	public static void setFullWerewolf(UUID playerId)
 	{
 		// Werewolf.getWerewolfManager().makeWerewolf(player, turnNow, clan);
@@ -39,6 +42,21 @@ public class API
 	public static boolean isWerewolf(UUID playerId)
 	{
 		return Werewolf.getWerewolfManager().isWerewolf(playerId);
+	}
+
+	public static boolean isWerewolf(Player player)
+	{
+		return Werewolf.getWerewolfManager().isWerewolf(player.getUniqueId());
+	}
+
+	public static boolean isAlpha(UUID playerId)
+	{
+		return Werewolf.getClanManager().isAlpha(playerId);
+	}
+
+	public static boolean isAlpha(Player player)
+	{
+		return Werewolf.getClanManager().isAlpha(player.getUniqueId());
 	}
 
 	public static int getNumberOfWerewolves()

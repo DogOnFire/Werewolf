@@ -15,13 +15,12 @@ public class StatisticsManager
 		WerewolfStatistics()
 		{}
 	}
-		
-	private Werewolf	plugin;
+	
 	private HashMap<UUID, WerewolfStatistics> werewolfStatistics = new HashMap<UUID, WerewolfStatistics>();
 		
 	StatisticsManager(Werewolf plugin)
 	{
-		this.plugin = plugin;
+		
 	}
 
 	public void clearStatistics(UUID playerId)
