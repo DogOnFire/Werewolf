@@ -1,7 +1,7 @@
 Werewolf
 ======
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8296799b90684dbe8745823d38e26bf0)](https://www.codacy.com/app/Fido2603/Werewolf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DoggyCraftDK/Werewolf&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8296799b90684dbe8745823d38e26bf0)](https://www.codacy.com/app/DogOnFire/Werewolf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DoggyCraftDK/Werewolf&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.com/DogOnFire/Werewolf.svg?branch=master)](https://travis-ci.com/DogOnFire/Werewolf)
 
 ![Werewolf](https://raw.githubusercontent.com/DogOnFire/Werewolf/master/img/Werewolf.jpg)
