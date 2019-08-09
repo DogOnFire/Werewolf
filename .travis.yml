@@ -1,6 +1,16 @@
 language: java
 jdk:
 - openjdk8
+deploy:
+  provider: releases
+  api_key:
+    secure: "qvnNtOg/pIMuu6TlORc6EwJAeszbTvGyue5M5qPiQ56RJFaHHmW1yefVh4bIwydt3Ju4LnJXyYBl7i7WTCJDQj70DhH3GmDENiRalhLxAMFtTTk+Hz6WSYu8VVBj1iQ+attnmxmCBFmlCVRtM5YzYRJu+d/Nm9Abbh9fY6kA+Q+ERoiNJ/npc0QO6z1DFrGTaGog7QkN5K4E7PsNNJN0HFlp+lQZqivoCMrK1gjefZlCZcZ8dQRwCsUOQWlQXKXEcjcUgamvruFyRxL7XYXpQ/BGSlebkFvf65m9pZezPDa+AUa3PkadTLrnv5tJ4FToMFcQpHb788k9MreXPGdT9Nrx60NcLC3BuF44mDSbGJGk2ZTryQdNzWM3FPmU+Lq09ELg8hTeCDM8SpXyKevfsodda1z6WCh6+AKPGVzdntXXpz5NLf9zzJVOULsU18oksQi7MEhPgkVYwf+X94rLmWA52+e3yAP8/hj0KzLLBpyUkabQ3envXaZDCKVr3xZ6FHkuRWCJjRErcCyWurX87D7U6oqltt0iQsIpSUF6gYiDTZ+rofU9nLkMH5T9OSMFrpulVp+ruHldR7Cvk2pfo/ALcv4u3JpV+h0R4wE4RuuRYawAa2nA6kJ75jLKLWC7dCV4nOdcFrI0RTBSJmL147nbVeYfQGqZTcC+KRXrZlc="
+  file: target/Werewolf-*.jar
+  skip_cleanup: true
+  on:
+    repo: DoggyCraft/Werewolf
+    tags: true
+sudo: false
 before_install:
   - mkdir lib/
   - wget -P "lib/" https://www.doggycraft.dk/lib/MySkin.jar
