@@ -80,6 +80,11 @@ public class Commands implements TabExecutor
 
 				player.sendMessage("");
 
+				Werewolf.getLanguageManager().setPlayerName(Werewolf.getWerewolfManager().getWerewolfName(player.getUniqueId()));
+				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.YourWerewolfName, ChatColor.AQUA));
+
+				player.sendMessage("");
+
 				if (numberOfTransformations >= this.plugin.transformsForNoDropItems)
 				{
 					player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfCommandNoDropItems, ChatColor.WHITE));
