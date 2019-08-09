@@ -8,13 +8,8 @@ Werewolf
 
 The plugin for adding werewolves into Minecraft!
 
-### Resources
-
-* [Bukkit Plugin Page](https://dev.bukkit.org/bukkit-plugins/werewolf/)
-* [Spigot Resource Page](https://www.spigotmc.org/resources/werewolf.7442/)
-
-Rules
-------
+Background
+---------
 To become a Werewolf, you have to get bitten (attacked) by a wolf or Werewolf at night and contract the Werewolf infection. This infection will turn the player into a Werewolf every night, starting the next night, if the player is under a open sky. To prevent turning, the player can stay inside during night.
 
 *  When in wolf-form, character skin changes to a Werewolf skin (Only visible to other players)
@@ -37,3 +32,46 @@ To become a Werewolf, you have to get bitten (attacked) by a wolf or Werewolf at
 *  Werewolves are flock creatures and live in clans
 *  Werewolves are the natural leaders of wild wolves
 *  The Werewolf infection can be cured by drinking the werewolf cure potion
+
+Installation
+---------
+* [Install a Spigot server](https://github.com/DogOnFire/Werewolf/#obtain-a-build-of-spigot)
+* [Download Werewolf](https://github.com/DogOnFire/Werewolf/#download)
+* Drop the Werewolf.jar in to the plugins folder.
+* Start your Spigot/CraftBukkit server. (Using /reload can have unwanted side effects with players still online, and with complex plugins dependencies, so it's not recommended.)
+
+Links
+---------
+
+###### Project
+* [Werewolf at SpigotMC](https://www.spigotmc.org/resources/werewolf.7442/)
+* [Werewolf at BukkitDev](https://dev.bukkit.org/bukkit-plugins/werewolf/)
+
+###### Download
+* [BukkitDev](https://dev.bukkit.org/projects/werewolf/files/)
+* [SpigotMC](https://www.spigotmc.org/resources/werewolf/updates)
+
+###### Support and Documentation
+* [Issues/Tickets](https://github.com/DogOnFire/Issues/issues)
+* [Wiki](https://github.com/DogOnFire/Docs/wiki)
+* [Configuration](https://github.com/DogOnFire/Docs/wiki/Configuration)
+* [Permissions](https://github.com/DogOnFire/Docs/wiki/Permissions)
+* [Commands](https://github.com/DogOnFire/Docs/wiki/Commands)
+
+###### Developers
+* [License (GPLv3)](https://github.com/DogOnFire/Werewolf/blob/master/LICENSE.txt)
+* [API](https://github.com/DogOnFire/Docs/wiki/API)
+* [Contribute](https://github.com/DogOnFire/Werewolf/blob/master/CONTRIBUTING.md)
+
+###### Related Plugins
+* [ProtocolLib at BukkitDev](https://dev.bukkit.org/bukkit-plugins/protocollib)
+
+Compiling Werewolf.jar
+---------
+* Werewolf must be compiled with java 8 compliance. Make sure you have a JDK 8 installed.
+* Werewolf has developed using Eclipse (But any other IDE should work as well)
+* Check out this repo using git in a commandline: git clone https://github.com/DogOnFire/Werewolf.git
+* Open the Werewolf project folder in Eclipse
+* Right click the Werewolf project folder in Eclipse and select "Run as maven build..."
+* Click the "Run" button in the configuration window that appears
+* The Werewolf.jar file will be compiled and available in the /target folder under your project folder
