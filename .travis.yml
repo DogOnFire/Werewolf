@@ -9,7 +9,6 @@ deploy:
   skip_cleanup: true
   on:
     repo: DogOnFire/Werewolf
-    tags: true
 sudo: false
 before_install:
   - mkdir lib/
