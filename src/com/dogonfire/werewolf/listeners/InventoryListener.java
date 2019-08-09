@@ -158,60 +158,71 @@ public class InventoryListener implements Listener
 		{
 			return;
 		}
+
 		if (!(event.getPlayer() instanceof Player))
 		{
 			return;
 		}
+
 		Player player = (Player) event.getPlayer();
 		if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 		{
 			return;
 		}
-		if (player.getInventory().getItemInOffHand() != null)
+
+		removeOffHand(player);
+		removeMainHand(player);
+		removeArmor(player);
+	}
+
+	public void removeMainHand(Player player)
+	{
+		if (isForbiddenItem(player.getInventory().getItemInMainHand().getType()))
 		{
-			if (isForbiddenItem(player.getInventory().getItemInOffHand().getType()))
-			{
-				if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
-					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-				}
-				else {
-					ItemStack stack = player.getInventory().getItemInOffHand();
-					int slot = player.getInventory().firstEmpty();
-					if (slot > -1)
-					{
-						player.getInventory().setItem(slot, stack);
-					}
-					else
-					{
-						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-					}
-				}
-				player.getInventory().setItemInOffHand(null);
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
 			}
-		}
-		if (player.getInventory().getItemInMainHand() != null)
-		{
-			if (isForbiddenItem(player.getInventory().getItemInMainHand().getType()))
-			{
-				if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+			else {
+				ItemStack stack = player.getInventory().getItemInMainHand();
+				int slot = player.getInventory().firstEmpty();
+				if (slot > -1)
+				{
+					player.getInventory().setItem(slot, stack);
+				}
+				else
+				{
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
 				}
-				else {
-					ItemStack stack = player.getInventory().getItemInMainHand();
-					int slot = player.getInventory().firstEmpty();
-					if (slot > -1)
-					{
-						player.getInventory().setItem(slot, stack);
-					}
-					else
-					{
-						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
-					}
-				}
-				player.getInventory().setItemInMainHand(null);
 			}
+			player.getInventory().setItemInMainHand(null);
 		}
+	}
 
+	public void removeOffHand(Player player)
+	{
+		if (isForbiddenItem(player.getInventory().getItemInOffHand().getType()))
+		{
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
+			}
+			else {
+				ItemStack stack = player.getInventory().getItemInOffHand();
+				int slot = player.getInventory().firstEmpty();
+				if (slot > -1)
+				{
+					player.getInventory().setItem(slot, stack);
+				}
+				else
+				{
+					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
+				}
+			}
+			player.getInventory().setItemInOffHand(null);
+		}
+	}
+
+	public void removeArmor(Player player)
+	{
 		PlayerInventory inventory = player.getInventory();
 		for (ItemStack stack : inventory.getArmorContents())
 		{
@@ -263,17 +274,15 @@ public class InventoryListener implements Listener
 					Boolean foundSlot = false;
 					
 					for (int slot = 0; slot < inventorySlots; slot++) {
-						if (player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) {
-							if (slot != heldItemSlot) {
-								player.getInventory().setItem(slot, stack);
-								player.getInventory().setItem(heldItemSlot, new ItemStack(Material.AIR));
-								foundSlot = true;
-								break;
-							}
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot) {
+							player.getInventory().setItem(slot, stack);
+							player.getInventory().setItem(heldItemSlot, new ItemStack(Material.AIR));
+							foundSlot = true;
+							break;
 						}
 					}
 					
-					if (foundSlot == false) {
+					if (!foundSlot) {
 						event.setCancelled(true);
 					}
 				}
@@ -307,18 +316,16 @@ public class InventoryListener implements Listener
 					Boolean foundSlot = false;
 					
 					for (int slot = 0; slot < inventorySlots; slot++) {
-						if (player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) {
-							if (slot != heldItemSlot) {
-								player.getInventory().setItem(slot, stack);
-								event.getItem().remove();
-								event.setCancelled(true);
-								foundSlot = true;
-								break;
-							}
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot) {
+							player.getInventory().setItem(slot, stack);
+							event.getItem().remove();
+							event.setCancelled(true);
+							foundSlot = true;
+							break;
 						}
 					}
 					
-					if (foundSlot == false) {
+					if (!foundSlot) {
 						event.setCancelled(true);
 					}
 				}

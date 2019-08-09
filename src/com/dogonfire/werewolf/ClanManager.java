@@ -257,6 +257,7 @@ public class ClanManager
 		return (String) this.clanNames.get(clan);
 	}
 
+	// TODO Bloodrage clan?
 	public void updateClans()
 	{
 		if (!this.plugin.useClans)
