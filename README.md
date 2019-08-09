@@ -54,9 +54,9 @@ Links
 ###### Support and Documentation
 * [Issues/Tickets](https://github.com/DogOnFire/Issues/issues)
 * [Wiki](https://github.com/DogOnFire/Docs/wiki)
-* [Configuration](https://github.com/DogOnFire/Docs/wiki/Configuration)
-* [Permissions](https://github.com/DogOnFire/Docs/wiki/Permissions)
-* [Commands](https://github.com/DogOnFire/Docs/wiki/Commands)
+* [Configuration](https://github.com/DogOnFire/Werewolf/wiki/Configuration)
+* [Permissions](https://github.com/DogOnFire/Werewolf/wiki/Permissions)
+* [Commands](https://github.com/DogOnFire/Werewolf/wiki/Commands)
 
 ###### Developers
 * [License (GPLv3)](https://github.com/DogOnFire/Werewolf/blob/master/LICENSE.txt)
