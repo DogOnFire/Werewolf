@@ -20,7 +20,7 @@ public interface IWerewolfDisguiseFactory
 		public WerewolfDisguise(UUID accountId, String accountName)
 		{
 			Werewolf.instance().logDebug("Constructer Start! - Werewolfname: " + werewolfName + " - AccountId: " + accountId + " - AccountName: " + accountName);
-			if (werewolfName.isEmpty())
+			if (werewolfName == null || werewolfName.isEmpty())
 			{
 				werewolfName = "Werewolf";
 			}
@@ -31,7 +31,7 @@ public interface IWerewolfDisguiseFactory
 				accountId = UUID.fromString("c21f069b-137c-4992-8edc-e1a12995ff0f");
 			}
 
-			if (accountName.isEmpty())
+			if (werewolfName == null || accountName.isEmpty())
 			{
 				// Account called Werewolf. No clan has this skin...
 				accountName = "Werewolf";
@@ -43,12 +43,12 @@ public interface IWerewolfDisguiseFactory
 
 		public WerewolfDisguise(String werewolfName, String accountName)
 		{
-			if (werewolfName.isEmpty())
+			if (werewolfName == null || werewolfName.isEmpty())
 			{
 				werewolfName = "Werewolf";
 			}
 
-			if (accountName.isEmpty())
+			if (werewolfName == null || accountName.isEmpty())
 			{
 				// Account called Werewolf. No clan has this skin...
 				accountName = "Werewolf";
@@ -85,7 +85,7 @@ public interface IWerewolfDisguiseFactory
 
 		public WerewolfDisguise(String werewolfName, ClanType clanType)
 		{
-			if (werewolfName.isEmpty())
+			if (werewolfName == null || werewolfName.isEmpty())
 			{
 				werewolfName = "Werewolf";
 			}
