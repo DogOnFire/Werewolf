@@ -42,7 +42,8 @@ Installation
 ---------
 * [Install a Spigot server](https://github.com/DogOnFire/Werewolf/#obtain-a-build-of-spigot)
 * [Download Werewolf](https://github.com/DogOnFire/Werewolf/#download)
-* Drop the Werewolf.jar in to the plugins folder.
+* Drop the Werewolf.jar into the plugins folder.
+* Drop either [MySkin.jar](https://www.spigotmc.org/resources/myskin-1-8-1-14-4.52303/) or [LibsDisguises](https://www.spigotmc.org/resources/libs-disguises.32453/) into the plugins folder.
 * Start your Spigot/CraftBukkit server. (Using /reload can have unwanted side effects with players still online, and with complex plugins dependencies, so it's not recommended.)
 
 Links
