@@ -55,7 +55,7 @@ Links
 
 ###### Download
 *	[BukkitDev](https://dev.bukkit.org/projects/werewolf/files/)
-*	[SpigotMC](https://www.spigotmc.org/resources/werewolf/updates)
+*	[SpigotMC](https://www.spigotmc.org/resources/werewolf.7442/updates)
 
 ###### Support and Documentation
 *	[Issues/Tickets](https://github.com/DogOnFire/Issues/issues)
