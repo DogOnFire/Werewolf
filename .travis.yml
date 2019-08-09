@@ -8,7 +8,7 @@ deploy:
   file: target/Werewolf-*.jar
   skip_cleanup: true
   on:
-    repo: DoggyCraftDK/Werewolf
+    repo: DoggyCraft/Werewolf
     tags: true
 sudo: false
 before_install:
