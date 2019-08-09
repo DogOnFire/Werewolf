@@ -1,8 +1,12 @@
 Werewolf
 ======
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8296799b90684dbe8745823d38e26bf0)](https://www.codacy.com/app/Fido2603/Werewolf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DoggyCraftDK/Werewolf&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.com/DoggyCraftDK/Werewolf.svg?branch=master)](https://travis-ci.com/DoggyCraftDK/Werewolf)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DogOnFire_Werewolf&metric=alert_status)](https://sonarcloud.io/dashboard?id=DogOnFire_Werewolf)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DogOnFire_Werewolf&metric=ncloc)](https://sonarcloud.io/dashboard?id=DogOnFire_Werewolf)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8296799b90684dbe8745823d38e26bf0)](https://www.codacy.com/app/Fido2603/Werewolf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DoggyCraftDK/Werewolf&amp;utm_campaign=Badge_Grade)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=DogOnFire_Werewolf&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=DogOnFire_Werewolf)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=DogOnFire_Werewolf&metric=bugs)](https://sonarcloud.io/dashboard?id=DogOnFire_Werewolf)
 
 ![Werewolf](https://raw.githubusercontent.com/DoggyCraftDK/Werewolf/master/img/Werewolf.jpg)
 
