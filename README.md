@@ -12,8 +12,8 @@ Background
 ---------
 To become a Werewolf, you have to get bitten (attacked) by a wolf or Werewolf at night and contract the Werewolf infection. This infection will turn the player into a Werewolf every night, starting the next night, if the player is under a open sky. To prevent turning, the player can stay inside during night.
 
-*  When in wolf-form, character skin changes to a Werewolf skin (Only visible to other players)
-*  When in wolf-form, players will become identifiable only as "Werewolf" in the playerlist and chat (Adding a element of mystery)
+*  When in wolf-form, character skin changes to a Werewolf skin
+*  When in wolf-form, players will become identifiable only as their werewolf name in the playerlist and chat (Adding a element of mystery)
 *  When in wolf-form, werewolves speak in a language which appears as growling noises to normal players.
 *  A Werewolf automatically turns into his Wolf-form during a full moon, when under a open sky.
 *  A Werewolf automatically turns into his Human-form at dawn.
