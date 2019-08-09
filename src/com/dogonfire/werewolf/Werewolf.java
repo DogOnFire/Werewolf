@@ -131,8 +131,8 @@ public class Werewolf extends JavaPlugin
 	public String								wildBiteAccountUUID						= "da508ecc-dbd9-46c5-8095-47b91aa4ff5f";
 
 	public boolean								werewolfNamesEnabled					= true;
-	public List<String>							givenNames								= Arrays.asList("Black", "White", "Red", "Blood", "Blue", "Gray", "Neon", "Lurking", "Rampaging", "Bloodthirsty", "Fearsome", "Ghoulish", "Demonic", "Wrathful", "Sadistic", "Teenage", "Rogue");
-	public List<String>							surnames								= Arrays.asList("Devourer", "Fang", "Wolf", "Howl", "Turned", "Ghoul");
+	public List<String>							givenNames								= Arrays.asList("Dark", "Black", "White", "Red", "Blood", "Blue", "Gray", "Neon", "Wild", "Lurking", "Feral", "Bestial", "Fierce", "Vicious", "Bloodthirsty", "Fearsome", "Ghoulish", "Wrathful", "Teenage", "Savage");
+	public List<String>							surnames								= Arrays.asList("Devourer", "Fang", "Wolf", "Howl", "Turned", "Ghoul", "Paws", "Claw");
 
 	private static Economy						economy									= null;
 	private Commands							commands								= null;
@@ -339,7 +339,6 @@ public class Werewolf extends JavaPlugin
 			log(ChatColor.RED + "* Werewolves are now disabled.");
 
 			pluginEnabled = false;
-
 			isCompatible = false;
 			// this.getServer().getPluginManager().disablePlugin(this);
 

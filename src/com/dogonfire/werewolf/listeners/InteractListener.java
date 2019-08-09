@@ -64,36 +64,11 @@ public class InteractListener implements Listener
 		Player player = event.getPlayer();
 		
 		Material type = player.getInventory().getItemInMainHand().getType();
-		switch (type)
+		if (isForbiddenDefense(type))
 		{
-			case GOLDEN_CHESTPLATE:
-			case LEATHER_CHESTPLATE:
-			case DIAMOND_CHESTPLATE:
-			case CHAINMAIL_CHESTPLATE:
-			case IRON_CHESTPLATE:
-			case CHAINMAIL_BOOTS:
-			case GOLDEN_BOOTS:
-			case LEATHER_BOOTS:
-			case IRON_BOOTS:
-			case DIAMOND_BOOTS:
-			case GOLDEN_LEGGINGS:
-			case CHAINMAIL_LEGGINGS:
-			case LEATHER_LEGGINGS:
-			case IRON_LEGGINGS:
-			case DIAMOND_LEGGINGS:
-			case CHAINMAIL_HELMET:
-			case GOLDEN_HELMET:
-			case LEATHER_HELMET:
-			case IRON_HELMET:
-			case DIAMOND_HELMET:
-			case TURTLE_HELMET:
-			case ELYTRA:
-			case SHIELD:
-				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryDefense, ChatColor.RED));
-				event.setCancelled(true);
-				return true;
-			default:
-				break;
+			player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryDefense, ChatColor.RED));
+			event.setCancelled(true);
+			return true;
 		}
 		
 		return false;
@@ -266,6 +241,39 @@ public class InteractListener implements Listener
 		else if (!checkForDrinkingWerewolfInfectionPotion(event))
 		{
 			checkForDrinkingWerewolfCurePotion(event);
+		}
+	}	
+	
+	public boolean isForbiddenDefense(Material material)
+	{
+		switch (material)
+		{
+		case GOLDEN_CHESTPLATE:
+		case LEATHER_CHESTPLATE:
+		case DIAMOND_CHESTPLATE:
+		case CHAINMAIL_CHESTPLATE:
+		case IRON_CHESTPLATE:
+		case CHAINMAIL_BOOTS:
+		case GOLDEN_BOOTS:
+		case LEATHER_BOOTS:
+		case IRON_BOOTS:
+		case DIAMOND_BOOTS:
+		case GOLDEN_LEGGINGS:
+		case CHAINMAIL_LEGGINGS:
+		case LEATHER_LEGGINGS:
+		case IRON_LEGGINGS:
+		case DIAMOND_LEGGINGS:
+		case CHAINMAIL_HELMET:
+		case GOLDEN_HELMET:
+		case LEATHER_HELMET:
+		case IRON_HELMET:
+		case DIAMOND_HELMET:
+		case TURTLE_HELMET:
+		case ELYTRA:
+		case SHIELD:
+			return true;
+		default:
+			return false;
 		}
 	}
 }
