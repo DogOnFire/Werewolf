@@ -164,28 +164,25 @@ public class PlayerListener implements Listener
 	{
 		if (event.getEntity().getKiller() == null || event.getEntity().getKiller().getUniqueId() == null)
 		{
-			if (this.plugin.renameWerewolves)
+			if (this.plugin.renameWerewolves && Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
 			{
-				if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
+				String werewolfName = "Werewolf";
+				if (plugin.werewolfNamesEnabled) {
+					werewolfName = Werewolf.getWerewolfManager().getWerewolfName(event.getEntity().getUniqueId());
+				}
+				switch (this.random.nextInt(3))
 				{
-					String werewolfName = "Werewolf";
-					if (plugin.werewolfNamesEnabled) {
-						werewolfName = Werewolf.getWerewolfManager().getWerewolfName(event.getEntity().getUniqueId());
-					}
-					switch (this.random.nextInt(3))
-					{
-						case 0:
-							event.setDeathMessage(werewolfName + " died");
-							break;
-						case 1:
-							event.setDeathMessage(werewolfName + " was killed");
-							break;
-						case 2:
-							event.setDeathMessage(werewolfName + " died");
-							break;
-						default:
-							break;
-					}
+					case 0:
+						event.setDeathMessage(werewolfName + " died");
+						break;
+					case 1:
+						event.setDeathMessage(werewolfName + " was killed");
+						break;
+					case 2:
+						event.setDeathMessage(werewolfName + " died");
+						break;
+					default:
+						break;
 				}
 			}
 			return;
@@ -306,19 +303,16 @@ public class PlayerListener implements Listener
 			{
 				Player player = (Player) livingEntity;
 
-				if (Werewolf.getWerewolfManager().isWolfForm(player.getUniqueId()))
+				if (Werewolf.getWerewolfManager().isWolfForm(player.getUniqueId()) && random.nextInt(100) < plugin.wolfbaneUntransformChance)
 				{
-					if (random.nextInt(100) < plugin.wolfbaneUntransformChance)
-					{
-						Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, player, new PotionEffect(PotionEffectType.POISON, 4 * 20, 2)), 16L);
-						
-						player.spawnParticle(Particle.FIREWORKS_SPARK, player.getLocation(), 100);
-						DustOptions dustOptions = new DustOptions(Color.BLACK, 1);
-						player.spawnParticle(Particle.REDSTONE, player.getLocation().add(new Vector(0, 1, 0)), 100, dustOptions);
-						player.spawnParticle(Particle.REDSTONE, player.getLocation().add(new Vector(0, 2, 0)), 100, dustOptions);
+					Werewolf.server.getScheduler().scheduleSyncDelayedTask(this.plugin, new PotionEffectTask(this.plugin, player, new PotionEffect(PotionEffectType.POISON, 4 * 20, 2)), 16L);
+					
+					player.spawnParticle(Particle.FIREWORKS_SPARK, player.getLocation(), 100);
+					DustOptions dustOptions = new DustOptions(Color.BLACK, 1);
+					player.spawnParticle(Particle.REDSTONE, player.getLocation().add(new Vector(0, 1, 0)), 100, dustOptions);
+					player.spawnParticle(Particle.REDSTONE, player.getLocation().add(new Vector(0, 2, 0)), 100, dustOptions);
 
-						plugin.untransform(player);
-					}
+					plugin.untransform(player);
 				}
 			}
 		}

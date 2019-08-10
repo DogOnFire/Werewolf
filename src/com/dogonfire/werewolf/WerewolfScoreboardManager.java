@@ -17,7 +17,7 @@ public class WerewolfScoreboardManager
 	private ScoreboardManager manager;
 	private HashMap<UUID, Objective> playerHuntingObjectives = new HashMap<UUID, Objective>();
 	
-	WerewolfScoreboardManager(Werewolf plugin)
+	WerewolfScoreboardManager()
 	{
 		manager = Bukkit.getScoreboardManager();
 	}

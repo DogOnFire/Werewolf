@@ -538,7 +538,7 @@ public class Commands implements TabExecutor
 		int n = 1;
 		for (ClanManager.ClanType clan : clanList)
 		{
-			if (clan == playerClan)
+			if (clan.equals(playerClan))
 			{
 				this.plugin.sendInfo(player, "" + ChatColor.GOLD + n + ") " + ChatColor.GOLD + Werewolf.getClanManager().getClanName(clan) + ChatColor.AQUA + "  -  " + Werewolf.getWerewolfManager().getWerewolfClanMembers(clan).size() + " members  -  "
 						+ String.format("%1$,.2f", new Object[] { Double.valueOf(Werewolf.getClanManager().getClanPoint(clan)) }) + " clan points");
