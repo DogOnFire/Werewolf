@@ -76,6 +76,7 @@ public class MySkinFactory implements IWerewolfDisguiseFactory
 				// Apply the loaded SkinProperty to the player
 				mySkin.getHandler().setSkinProperty(player, disguiseSkinProperty);
 				mySkin.getHandler().update(player);
+				Werewolf.getWerewolfScoreboardManager().showNametagForPlayer(player, false);
 
 				return true;
 			}
@@ -123,6 +124,7 @@ public class MySkinFactory implements IWerewolfDisguiseFactory
 				mySkin.getHandler().setSkinProperty(player, playerSkinProperty);
 				mySkin.getHandler().update(player);
 				mySkin.getCache().resetSkinOfPlayer(player.getUniqueId());
+				Werewolf.getWerewolfScoreboardManager().showNametagForPlayer(player, true);
 				
 				return true;
 			}

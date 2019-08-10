@@ -195,19 +195,23 @@ public class PlayerListener implements Listener
 		{
 			if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getKiller().getUniqueId()))
 			{
+				String werewolfName = "Werewolf";
+				if (plugin.werewolfNamesEnabled) {
+					werewolfName = Werewolf.getWerewolfManager().getWerewolfName(event.getEntity().getKiller().getUniqueId());
+				}
 				switch (this.random.nextInt(4))
 				{
 					case 0:
-						event.setDeathMessage(victimName + " was slaughtered by a Werewolf");
+						event.setDeathMessage(victimName + " was slaughtered by " + werewolfName);
 						break;
 					case 1:
-						event.setDeathMessage(victimName + " was ripped apart by a Werewolf");
+						event.setDeathMessage(victimName + " was ripped apart by " + werewolfName);
 						break;
 					case 2:
-						event.setDeathMessage(victimName + " was torn to pieces by a Werewolf");
+						event.setDeathMessage(victimName + " was torn to pieces by " + werewolfName);
 						break;
 					case 3:
-						event.setDeathMessage(victimName + " was eaten by a Werewolf");
+						event.setDeathMessage(victimName + " was eaten by " + werewolfName);
 						break;
 					default:
 						break;
@@ -215,13 +219,17 @@ public class PlayerListener implements Listener
 			}
 			else if (Werewolf.getWerewolfManager().hasWerewolfSkin(event.getEntity().getUniqueId()))
 			{
+				String werewolfName = "Werewolf";
+				if (plugin.werewolfNamesEnabled) {
+					werewolfName = Werewolf.getWerewolfManager().getWerewolfName(event.getEntity().getUniqueId());
+				}
 				if (killerName != null)
 				{
-					event.setDeathMessage("Werewolf was slain by " + killerName);
+					event.setDeathMessage(werewolfName + " was slain by " + killerName);
 				}
 				else
 				{
-					event.setDeathMessage("Werewolf died");
+					event.setDeathMessage(werewolfName + " died");
 				}
 			}
 		}
