@@ -179,10 +179,12 @@ public class InventoryListener implements Listener
 	{
 		if (isForbiddenItem(player.getInventory().getItemInMainHand().getType()))
 		{
-			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId()))
+			{
 				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
 			}
-			else {
+			else
+			{
 				ItemStack stack = player.getInventory().getItemInMainHand();
 				int slot = player.getInventory().firstEmpty();
 				if (slot > -1)
@@ -202,10 +204,12 @@ public class InventoryListener implements Listener
 	{
 		if (isForbiddenItem(player.getInventory().getItemInOffHand().getType()))
 		{
-			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId()))
+			{
 				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
 			}
-			else {
+			else
+			{
 				ItemStack stack = player.getInventory().getItemInOffHand();
 				int slot = player.getInventory().firstEmpty();
 				if (slot > -1)
@@ -294,17 +298,20 @@ public class InventoryListener implements Listener
 	public void onPlayerPickupItem(EntityPickupItemEvent event)
 	{
 		Entity entity = event.getEntity();
-		if (entity.getType() == EntityType.PLAYER) {
+		if (entity.getType() == EntityType.PLAYER)
+		{
 			Player player = (Player) entity;
-			
+
 			if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 			{
 				return;
 			}
-			
+
 			Material material = event.getItem().getItemStack().getType();
-			// The difference is that, if it is not a forbidden item, we still don't want
-			// the item to be in the main hand, but if there is no other choice, then it's fine.
+			// The difference is that, if it is not a forbidden item, we still
+			// don't want
+			// the item to be in the main hand, but if there is no other choice,
+			// then it's fine.
 			if (!isForbiddenItem(material))
 			{
 				if (player.getInventory().getItemInMainHand().getType() == Material.AIR)
@@ -314,8 +321,10 @@ public class InventoryListener implements Listener
 					int heldItemSlot = player.getInventory().getHeldItemSlot();
 					int inventorySlots = 36;
 
-					for (int slot = 0; slot < inventorySlots; slot++) {
-						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot) {
+					for (int slot = 0; slot < inventorySlots; slot++)
+					{
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot)
+						{
 							player.getInventory().setItem(slot, stack);
 							event.getItem().remove();
 							event.setCancelled(true);
@@ -333,11 +342,13 @@ public class InventoryListener implements Listener
 					ItemStack stack = event.getItem().getItemStack();
 
 					int heldItemSlot = player.getInventory().getHeldItemSlot();
-					int inventorySlots = 36; //player.getInventory().getSize();
+					int inventorySlots = 36; // player.getInventory().getSize();
 					Boolean foundSlot = false;
 
-					for (int slot = 0; slot < inventorySlots; slot++) {
-						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot) {
+					for (int slot = 0; slot < inventorySlots; slot++)
+					{
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot)
+						{
 							player.getInventory().setItem(slot, stack);
 							event.getItem().remove();
 							event.setCancelled(true);
@@ -346,12 +357,13 @@ public class InventoryListener implements Listener
 						}
 					}
 
-					if (!foundSlot) {
+					if (!foundSlot)
+					{
 						event.setCancelled(true);
 					}
 				}
-			}	
-		}				
+			}
+		}
 	}
 
 	public boolean isForbiddenItem(Material material)

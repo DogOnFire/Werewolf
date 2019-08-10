@@ -262,6 +262,7 @@ public class LanguageManager
 		YouPlacedASilverSwordSign,
 		YouPlacedABookSign,
 		YouAreNotTheAlphaOfTheClan,
+		YourWerewolfName,
 		DenyVampire,
 		NoRecentAlphaCall,
 		ClanAlphaCannotAnswerCall,
