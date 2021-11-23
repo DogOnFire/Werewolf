@@ -370,42 +370,47 @@ public class InventoryListener implements Listener
 	{
 		switch (material)
 		{
-		case WOODEN_SWORD:
-		case GOLDEN_SWORD:
-		case STONE_SWORD:
-		case DIAMOND_SWORD:
-		case IRON_SWORD:
-		case SHIELD:
-		case BOW:
-		case POTION:
-		case SPLASH_POTION:
-		case WOODEN_AXE:
-		case GOLDEN_AXE:
-		case STONE_AXE:
-		case DIAMOND_AXE:
-		case IRON_AXE:
-		case WOODEN_PICKAXE:
-		case GOLDEN_PICKAXE:
-		case STONE_PICKAXE:
-		case DIAMOND_PICKAXE:
-		case IRON_PICKAXE:
-		case WOODEN_HOE:
-		case GOLDEN_HOE:
-		case STONE_HOE:
-		case DIAMOND_HOE:
-		case IRON_HOE:
-		case WOODEN_SHOVEL:
-		case GOLDEN_SHOVEL:
-		case STONE_SHOVEL:
-		case DIAMOND_SHOVEL:
-		case IRON_SHOVEL:
-		case FLINT_AND_STEEL:
-		case FISHING_ROD:
-		case TRIDENT:
-		case CROSSBOW:
-			return true;
-		default:
-			return false;
+			case WOODEN_SWORD:
+			case GOLDEN_SWORD:
+			case STONE_SWORD:
+			case DIAMOND_SWORD:
+			case NETHERITE_SWORD:
+			case IRON_SWORD:
+			case SHIELD:
+			case BOW:
+			case POTION:
+			case SPLASH_POTION:
+			case WOODEN_AXE:
+			case GOLDEN_AXE:
+			case STONE_AXE:
+			case DIAMOND_AXE:
+			case NETHERITE_AXE:
+			case IRON_AXE:
+			case WOODEN_PICKAXE:
+			case GOLDEN_PICKAXE:
+			case STONE_PICKAXE:
+			case DIAMOND_PICKAXE:
+			case NETHERITE_PICKAXE:
+			case IRON_PICKAXE:
+			case WOODEN_HOE:
+			case GOLDEN_HOE:
+			case STONE_HOE:
+			case DIAMOND_HOE:
+			case NETHERITE_HOE:
+			case IRON_HOE:
+			case WOODEN_SHOVEL:
+			case GOLDEN_SHOVEL:
+			case STONE_SHOVEL:
+			case DIAMOND_SHOVEL:
+			case NETHERITE_SHOVEL:
+			case IRON_SHOVEL:
+			case FLINT_AND_STEEL:
+			case FISHING_ROD:
+			case TRIDENT:
+			case CROSSBOW:
+				return true;
+			default:
+				return false;
 		}
 	}
 }

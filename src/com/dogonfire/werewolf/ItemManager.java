@@ -29,7 +29,7 @@ public class ItemManager
 		if(plugin.craftableInfectionPotionEnabled)
 		{			
 			Bukkit.addRecipe(Recipes.infectionPotion(plugin));
-			plugin.logDebug("Cratable infection potions are enabled");
+			plugin.logDebug("Craftable infection potions are enabled");
 		}
 		
 		if(plugin.craftableCurePotionEnabled)
