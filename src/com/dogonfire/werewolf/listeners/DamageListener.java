@@ -7,6 +7,7 @@ import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Wolf;
@@ -239,68 +240,68 @@ public class DamageListener implements Listener
 			int health = 0;
 			switch (event.getEntity().getType())
 			{
-			case PLAYER:
-				health = 4;
-				break;
-			case VILLAGER:
-				health = 4;
-				break;
-			case HORSE:
-				health = 4;
-				break;
-			case COW:
-				health = 4;
-				break;
-			case ENDERMAN:
-				health = 3;
-				break;
-			case ZOMBIE:
-				health = 3;
-				break;
-			case LLAMA:
-				health = 3;
-				break;
-			case DROWNED:
-				health = 3;
-				break;
-			case DOLPHIN:
-				health = 3;
-				break;
-			case PIG_ZOMBIE:
-				health = 3;
-				break;
-			case SHEEP:
-				health = 2;
-				break;
-			case OCELOT:
-				health = 2;
-				break;
-			case RABBIT:
-				health = 2;
-				break;
-			case PIG:
-				health = 2;
-				break;
-			case WOLF:
-				health = 2;
-				break;
-			case TURTLE:
-				health = 2;
-				break;
-			case SPIDER:
-				health = 2;
-				break;
-			case SKELETON:
-				health = 1;
-				break;
-			case CHICKEN:
-				health = 1;
-				break;
-			case SILVERFISH:
-				health = 1;
-				break;
-			default:
-				break;
+				case PLAYER:
+				case VILLAGER:
+				case WANDERING_TRADER:
+				case PILLAGER:
+				case VINDICATOR:
+				case EVOKER:
+				case ILLUSIONER:
+				case RAVAGER:
+				case HORSE:
+				case DONKEY:
+				case MULE:
+				case COW:
+				case MUSHROOM_COW:
+				case ZOGLIN:
+				case PIGLIN_BRUTE:
+				case POLAR_BEAR:
+					health = 4;
+					break;
+				case ENDERMAN:
+				case ZOMBIE:
+				case ZOMBIE_VILLAGER:
+				case LLAMA:
+				case TRADER_LLAMA:
+				case PANDA:
+				case DROWNED:
+				case HUSK:
+				case DOLPHIN:
+				case PIGLIN:
+				case STRIDER:
+				case ZOMBIFIED_PIGLIN:
+				case WITCH:
+					health = 3;
+					break;
+				case SHEEP:
+				case GOAT:
+				case WOLF:
+				case CAT:
+				case OCELOT:
+				case RABBIT:
+				case PIG:
+				case TURTLE:
+				case FOX:
+				case SPIDER:
+					health = 2;
+					break;
+				case SKELETON:
+				case WITHER_SKELETON:
+				case STRAY:
+				case CHICKEN:
+				case PARROT:
+				case VEX:
+				case AXOLOTL:
+				case BEE:
+				case SILVERFISH:
+				case COD:
+				case SALMON:
+				case PUFFERFISH:
+				case TROPICAL_FISH:
+					health = 1;
+					break;
+				default:
+					break;
 			}
 
 			if (health > 0 && killer.getHealth() < killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue())

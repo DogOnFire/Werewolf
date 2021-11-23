@@ -148,7 +148,7 @@ public class Werewolf extends JavaPlugin
 	public boolean								craftableLoreBookEnabled				= true;
 
 	private Version								version									= null;
-	public static final String					MAX										= "1.14.4-R0.1-SNAPSHOT";
+	public static final String					MAX										= "1.17.1-R0.1-SNAPSHOT";
 	public static final String					MIN										= "1.13";
 	public static final String					NMS										= VersionFactory.getNmsVersion().toString();
 	private static boolean						isCompatible							= true;

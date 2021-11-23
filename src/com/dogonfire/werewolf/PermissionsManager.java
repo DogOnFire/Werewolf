@@ -28,7 +28,13 @@ public class PermissionsManager
 			vaultPermission = permissionProvider.getProvider();
 
 			RegisteredServiceProvider<Chat> chatProvider = plugin.getServer().getServicesManager().getRegistration(Chat.class);
-			vaultChat = chatProvider.getProvider();
+			try {
+				vaultChat = chatProvider.getProvider();
+			}
+			catch (NullPointerException e) {
+				this.plugin.log("No chatprovider found, Vault cannot get prefixes.");
+			}
+
 		}
 	}
 
@@ -130,8 +136,10 @@ public class PermissionsManager
 	{
 		if (this.plugin.vaultEnabled)
 		{
-			Player player = plugin.getServer().getPlayer(playerName);
-			return vaultChat.getPlayerPrefix(player);
+			if (vaultChat != null) {
+				Player player = plugin.getServer().getPlayer(playerName);
+				return vaultChat.getPlayerPrefix(player);
+			}
 		}
 		return "";
 	}
