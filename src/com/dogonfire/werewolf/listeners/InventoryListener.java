@@ -158,60 +158,75 @@ public class InventoryListener implements Listener
 		{
 			return;
 		}
+
 		if (!(event.getPlayer() instanceof Player))
 		{
 			return;
 		}
+
 		Player player = (Player) event.getPlayer();
 		if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 		{
 			return;
 		}
-		if (player.getInventory().getItemInOffHand() != null)
+
+		removeOffHand(player);
+		removeMainHand(player);
+		removeArmor(player);
+	}
+
+	public void removeMainHand(Player player)
+	{
+		if (isForbiddenItem(player.getInventory().getItemInMainHand().getType()))
 		{
-			if (isForbiddenItem(player.getInventory().getItemInOffHand().getType()))
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId()))
 			{
-				if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
-					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-				}
-				else {
-					ItemStack stack = player.getInventory().getItemInOffHand();
-					int slot = player.getInventory().firstEmpty();
-					if (slot > -1)
-					{
-						player.getInventory().setItem(slot, stack);
-					}
-					else
-					{
-						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
-					}
-				}
-				player.getInventory().setItemInOffHand(null);
+				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
 			}
-		}
-		if (player.getInventory().getItemInMainHand() != null)
-		{
-			if (isForbiddenItem(player.getInventory().getItemInMainHand().getType()))
+			else
 			{
-				if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId())) {
+				ItemStack stack = player.getInventory().getItemInMainHand();
+				int slot = player.getInventory().firstEmpty();
+				if (slot > -1)
+				{
+					player.getInventory().setItem(slot, stack);
+				}
+				else
+				{
 					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
 				}
-				else {
-					ItemStack stack = player.getInventory().getItemInMainHand();
-					int slot = player.getInventory().firstEmpty();
-					if (slot > -1)
-					{
-						player.getInventory().setItem(slot, stack);
-					}
-					else
-					{
-						player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInMainHand());
-					}
-				}
-				player.getInventory().setItemInMainHand(null);
 			}
+			player.getInventory().setItemInMainHand(null);
 		}
+	}
 
+	public void removeOffHand(Player player)
+	{
+		if (isForbiddenItem(player.getInventory().getItemInOffHand().getType()))
+		{
+			if (Werewolf.getWerewolfManager().hasToDropItems(player.getUniqueId()))
+			{
+				player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
+			}
+			else
+			{
+				ItemStack stack = player.getInventory().getItemInOffHand();
+				int slot = player.getInventory().firstEmpty();
+				if (slot > -1)
+				{
+					player.getInventory().setItem(slot, stack);
+				}
+				else
+				{
+					player.getWorld().dropItemNaturally(player.getLocation(), player.getInventory().getItemInOffHand());
+				}
+			}
+			player.getInventory().setItemInOffHand(null);
+		}
+	}
+
+	public void removeArmor(Player player)
+	{
 		PlayerInventory inventory = player.getInventory();
 		for (ItemStack stack : inventory.getArmorContents())
 		{
@@ -235,10 +250,10 @@ public class InventoryListener implements Listener
 				}
 			}
 		}
-		
+
 		player.getInventory().setArmorContents(new ItemStack[] { new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR) });
 	}
-	
+
 	@EventHandler
 	public void onPlayerNewHeldItem(PlayerItemHeldEvent event)
 	{
@@ -249,7 +264,7 @@ public class InventoryListener implements Listener
 			{
 				return;
 			}
-			
+
 			if (this.plugin.keepWerewolfHandsFree)
 			{
 				int heldItemSlot = event.getNewSlot();
@@ -257,115 +272,145 @@ public class InventoryListener implements Listener
 				{
 					Material material = player.getInventory().getItem(heldItemSlot).getType();
 					if (!isForbiddenItem(material)) { return; }
-					
+
 					ItemStack stack = player.getInventory().getItem(heldItemSlot);
 					int inventorySlots = 36; //player.getInventory().getSize();
 					Boolean foundSlot = false;
-					
+
 					for (int slot = 0; slot < inventorySlots; slot++) {
-						if (player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) {
-							if (slot != heldItemSlot) {
-								player.getInventory().setItem(slot, stack);
-								player.getInventory().setItem(heldItemSlot, new ItemStack(Material.AIR));
-								foundSlot = true;
-								break;
-							}
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot) {
+							player.getInventory().setItem(slot, stack);
+							player.getInventory().setItem(heldItemSlot, new ItemStack(Material.AIR));
+							foundSlot = true;
+							break;
 						}
 					}
 					
-					if (foundSlot == false) {
+					if (!foundSlot) {
 						event.setCancelled(true);
 					}
 				}
 			}	
 		}
 	}
-	
+
 	@EventHandler
 	public void onPlayerPickupItem(EntityPickupItemEvent event)
 	{
 		Entity entity = event.getEntity();
-		if (entity.getType() == EntityType.PLAYER) {
+		if (entity.getType() == EntityType.PLAYER)
+		{
 			Player player = (Player) entity;
-			
+
 			if (!Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
 			{
 				return;
 			}
-			
+
 			Material material = event.getItem().getItemStack().getType();
-			if (!isForbiddenItem(material)) { return; }
-	
+			// The difference is that, if it is not a forbidden item, we still
+			// don't want
+			// the item to be in the main hand, but if there is no other choice,
+			// then it's fine.
+			if (!isForbiddenItem(material))
+			{
+				if (player.getInventory().getItemInMainHand().getType() == Material.AIR)
+				{
+					ItemStack stack = event.getItem().getItemStack();
+
+					int heldItemSlot = player.getInventory().getHeldItemSlot();
+					int inventorySlots = 36;
+
+					for (int slot = 0; slot < inventorySlots; slot++)
+					{
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot)
+						{
+							player.getInventory().setItem(slot, stack);
+							event.getItem().remove();
+							event.setCancelled(true);
+							break;
+						}
+					}
+				}
+				return;
+			}
+
 			if (this.plugin.keepWerewolfHandsFree)
 			{
 				if (player.getInventory().getItemInMainHand().getType() == Material.AIR)
 				{
 					ItemStack stack = event.getItem().getItemStack();
-					
+
 					int heldItemSlot = player.getInventory().getHeldItemSlot();
-					int inventorySlots = 36; //player.getInventory().getSize();
+					int inventorySlots = 36; // player.getInventory().getSize();
 					Boolean foundSlot = false;
-					
-					for (int slot = 0; slot < inventorySlots; slot++) {
-						if (player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) {
-							if (slot != heldItemSlot) {
-								player.getInventory().setItem(slot, stack);
-								event.getItem().remove();
-								event.setCancelled(true);
-								foundSlot = true;
-								break;
-							}
+
+					for (int slot = 0; slot < inventorySlots; slot++)
+					{
+						if ((player.getInventory().getItem(slot) == null || player.getInventory().getItem(slot).getType() == Material.AIR) && slot != heldItemSlot)
+						{
+							player.getInventory().setItem(slot, stack);
+							event.getItem().remove();
+							event.setCancelled(true);
+							foundSlot = true;
+							break;
 						}
 					}
-					
-					if (foundSlot == false) {
+
+					if (!foundSlot)
+					{
 						event.setCancelled(true);
 					}
 				}
-			}	
-		}				
+			}
+		}
 	}
-	
+
 	public boolean isForbiddenItem(Material material)
 	{
 		switch (material)
 		{
-		case WOODEN_SWORD:
-		case GOLDEN_SWORD:
-		case STONE_SWORD:
-		case DIAMOND_SWORD:
-		case IRON_SWORD:
-		case SHIELD:
-		case BOW:
-		case POTION:
-		case SPLASH_POTION:
-		case WOODEN_AXE:
-		case GOLDEN_AXE:
-		case STONE_AXE:
-		case DIAMOND_AXE:
-		case IRON_AXE:
-		case WOODEN_PICKAXE:
-		case GOLDEN_PICKAXE:
-		case STONE_PICKAXE:
-		case DIAMOND_PICKAXE:
-		case IRON_PICKAXE:
-		case WOODEN_HOE:
-		case GOLDEN_HOE:
-		case STONE_HOE:
-		case DIAMOND_HOE:
-		case IRON_HOE:
-		case WOODEN_SHOVEL:
-		case GOLDEN_SHOVEL:
-		case STONE_SHOVEL:
-		case DIAMOND_SHOVEL:
-		case IRON_SHOVEL:
-		case FLINT_AND_STEEL:
-		case FISHING_ROD:
-		case TRIDENT:
-		case CROSSBOW:
-			return true;
-		default:
-			return false;
+			case WOODEN_SWORD:
+			case GOLDEN_SWORD:
+			case STONE_SWORD:
+			case DIAMOND_SWORD:
+			case NETHERITE_SWORD:
+			case IRON_SWORD:
+			case SHIELD:
+			case BOW:
+			case POTION:
+			case SPLASH_POTION:
+			case WOODEN_AXE:
+			case GOLDEN_AXE:
+			case STONE_AXE:
+			case DIAMOND_AXE:
+			case NETHERITE_AXE:
+			case IRON_AXE:
+			case WOODEN_PICKAXE:
+			case GOLDEN_PICKAXE:
+			case STONE_PICKAXE:
+			case DIAMOND_PICKAXE:
+			case NETHERITE_PICKAXE:
+			case IRON_PICKAXE:
+			case WOODEN_HOE:
+			case GOLDEN_HOE:
+			case STONE_HOE:
+			case DIAMOND_HOE:
+			case NETHERITE_HOE:
+			case IRON_HOE:
+			case WOODEN_SHOVEL:
+			case GOLDEN_SHOVEL:
+			case STONE_SHOVEL:
+			case DIAMOND_SHOVEL:
+			case NETHERITE_SHOVEL:
+			case IRON_SHOVEL:
+			case FLINT_AND_STEEL:
+			case FISHING_ROD:
+			case TRIDENT:
+			case CROSSBOW:
+				return true;
+			default:
+				return false;
 		}
 	}
 }

@@ -7,6 +7,7 @@ import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Wolf;
@@ -44,22 +45,19 @@ public class DamageListener implements Listener
 		{
 			Player player = (Player) event.getEntity();
 
-			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()))
+			// Before trying to use Disguises, check if Disguises is
+			// enabled...
+			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()) && plugin.disguisesEnabled)
 			{
-				// Before trying to use LibsDisguises, check if LibsDisguises is
-				// enabled...
-				if (plugin.disguisesEnabled)
+				WerewolfDisguise skin = Werewolf.getSkinManager().getSkin(player);
+				
+				if (skin != null)
 				{
-					WerewolfDisguise skin = Werewolf.getSkinManager().getSkin(player);
-					
-					if (skin != null)
-					{
-						Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
-					}
-					else
-					{
-						this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
-					}
+					Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
+				}
+				else
+				{
+					this.plugin.logDebug("onEntityDamage: Skin is null for " + player.getName());
 				}
 			}
 		}
@@ -168,32 +166,29 @@ public class DamageListener implements Listener
 						 * if (!this.plugin.isVampire(victim))
 						 * {
 						 */
-							if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected"))
+						if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected") && !Werewolf.getWerewolfManager().isWerewolf(victim))
+						{
+							this.plugin.logDebug(player.getName() + " is doing risk damage to " + victim.getName());
+
+							if (Math.random() < this.plugin.werewolfInfectionRisk)
 							{
-								if (!Werewolf.getWerewolfManager().isWerewolf(victim))
-								{
-									this.plugin.logDebug(player.getName() + " is doing risk damage to " + victim.getName());
+								ClanManager.ClanType clanType = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
 
-									if (Math.random() < this.plugin.werewolfInfectionRisk)
-									{
-										ClanManager.ClanType clanType = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
+								Werewolf.getWerewolfManager().makeWerewolf(victim, false, clanType);
 
-										Werewolf.getWerewolfManager().makeWerewolf(victim, false, clanType);
+								Werewolf.getLanguageManager().setPlayerName(player.getName());
+								victim.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
 
-										Werewolf.getLanguageManager().setPlayerName(player.getName());
-										victim.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
+								Werewolf.getLanguageManager().setPlayerName(victim.getName());
+								player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteAttacker, ChatColor.LIGHT_PURPLE));
 
-										Werewolf.getLanguageManager().setPlayerName(victim.getName());
-										player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteAttacker, ChatColor.LIGHT_PURPLE));
+								victim.getLocation().getWorld().playEffect(player.getLocation(), Effect.SMOKE, 100);
+								victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 1, 0)), Effect.SMOKE, 100);
+								victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 2, 0)), Effect.SMOKE, 100);
 
-										victim.getLocation().getWorld().playEffect(player.getLocation(), Effect.SMOKE, 100);
-										victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 1, 0)), Effect.SMOKE, 100);
-										victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 2, 0)), Effect.SMOKE, 100);
-
-										this.plugin.log(player.getName() + " infected " + victim.getName() + " with the werewolf infection!");
-									}
-								}
-							/*}*/
+								this.plugin.log(player.getName() + " infected " + victim.getName() + " with the werewolf infection!");
+							}
+						/*}*/
 						}
 					}
 				}
@@ -245,68 +240,68 @@ public class DamageListener implements Listener
 			int health = 0;
 			switch (event.getEntity().getType())
 			{
-			case PLAYER:
-				health = 4;
-				break;
-			case VILLAGER:
-				health = 4;
-				break;
-			case HORSE:
-				health = 4;
-				break;
-			case COW:
-				health = 4;
-				break;
-			case ENDERMAN:
-				health = 3;
-				break;
-			case ZOMBIE:
-				health = 3;
-				break;
-			case LLAMA:
-				health = 3;
-				break;
-			case DROWNED:
-				health = 3;
-				break;
-			case DOLPHIN:
-				health = 3;
-				break;
-			case PIG_ZOMBIE:
-				health = 3;
-				break;
-			case SHEEP:
-				health = 2;
-				break;
-			case OCELOT:
-				health = 2;
-				break;
-			case RABBIT:
-				health = 2;
-				break;
-			case PIG:
-				health = 2;
-				break;
-			case WOLF:
-				health = 2;
-				break;
-			case TURTLE:
-				health = 2;
-				break;
-			case SPIDER:
-				health = 2;
-				break;
-			case SKELETON:
-				health = 1;
-				break;
-			case CHICKEN:
-				health = 1;
-				break;
-			case SILVERFISH:
-				health = 1;
-				break;
-			default:
-				break;
+				case PLAYER:
+				case VILLAGER:
+				case WANDERING_TRADER:
+				case PILLAGER:
+				case VINDICATOR:
+				case EVOKER:
+				case ILLUSIONER:
+				case RAVAGER:
+				case HORSE:
+				case DONKEY:
+				case MULE:
+				case COW:
+				case MUSHROOM_COW:
+				case ZOGLIN:
+				case PIGLIN_BRUTE:
+				case POLAR_BEAR:
+					health = 4;
+					break;
+				case ENDERMAN:
+				case ZOMBIE:
+				case ZOMBIE_VILLAGER:
+				case LLAMA:
+				case TRADER_LLAMA:
+				case PANDA:
+				case DROWNED:
+				case HUSK:
+				case DOLPHIN:
+				case PIGLIN:
+				case STRIDER:
+				case ZOMBIFIED_PIGLIN:
+				case WITCH:
+					health = 3;
+					break;
+				case SHEEP:
+				case GOAT:
+				case WOLF:
+				case CAT:
+				case OCELOT:
+				case RABBIT:
+				case PIG:
+				case TURTLE:
+				case FOX:
+				case SPIDER:
+					health = 2;
+					break;
+				case SKELETON:
+				case WITHER_SKELETON:
+				case STRAY:
+				case CHICKEN:
+				case PARROT:
+				case VEX:
+				case AXOLOTL:
+				case BEE:
+				case SILVERFISH:
+				case COD:
+				case SALMON:
+				case PUFFERFISH:
+				case TROPICAL_FISH:
+					health = 1;
+					break;
+				default:
+					break;
 			}
 
 			if (health > 0 && killer.getHealth() < killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue())
@@ -365,12 +360,9 @@ public class DamageListener implements Listener
 			return;
 		}
 
-		if (this.plugin.vaultEnabled)
+		if (this.plugin.vaultEnabled && !Werewolf.getWerewolfManager().hasWerewolfSkin(killer.getUniqueId()))
 		{
-			if (!Werewolf.getWerewolfManager().hasWerewolfSkin(killer.getUniqueId()))
-			{
-				Werewolf.getHuntManager().handleKill(killer.getUniqueId(), killer.getName());
-			}
+			Werewolf.getHuntManager().handleKill(killer.getUniqueId(), killer.getName());
 		}
 	}
 }
