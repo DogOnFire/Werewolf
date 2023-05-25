@@ -50,6 +50,13 @@ public class InteractListener implements Listener
 			case COOKIE:
 			case CARROT:
 			case MILK_BUCKET:
+			case GOLDEN_CARROT:
+			case SUSPICIOUS_STEW:
+			case CHORUS_FRUIT:
+			case MELON_SLICE:
+			case SWEET_BERRIES:
+			case GLOW_BERRIES:
+			case HONEY_BOTTLE:
 				player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WerewolfTryEat, ChatColor.RED));
 				event.setCancelled(true);
 				return true;
@@ -263,32 +270,36 @@ public class InteractListener implements Listener
 	{
 		switch (material)
 		{
-		case GOLDEN_CHESTPLATE:
-		case LEATHER_CHESTPLATE:
-		case DIAMOND_CHESTPLATE:
-		case CHAINMAIL_CHESTPLATE:
-		case IRON_CHESTPLATE:
-		case CHAINMAIL_BOOTS:
-		case GOLDEN_BOOTS:
-		case LEATHER_BOOTS:
-		case IRON_BOOTS:
-		case DIAMOND_BOOTS:
-		case GOLDEN_LEGGINGS:
-		case CHAINMAIL_LEGGINGS:
-		case LEATHER_LEGGINGS:
-		case IRON_LEGGINGS:
-		case DIAMOND_LEGGINGS:
-		case CHAINMAIL_HELMET:
-		case GOLDEN_HELMET:
-		case LEATHER_HELMET:
-		case IRON_HELMET:
-		case DIAMOND_HELMET:
-		case TURTLE_HELMET:
-		case ELYTRA:
-		case SHIELD:
-			return true;
-		default:
-			return false;
+			case GOLDEN_CHESTPLATE:
+			case LEATHER_CHESTPLATE:
+			case DIAMOND_CHESTPLATE:
+			case CHAINMAIL_CHESTPLATE:
+			case IRON_CHESTPLATE:
+			case NETHERITE_CHESTPLATE:
+			case CHAINMAIL_BOOTS:
+			case GOLDEN_BOOTS:
+			case LEATHER_BOOTS:
+			case IRON_BOOTS:
+			case DIAMOND_BOOTS:
+			case NETHERITE_BOOTS:
+			case GOLDEN_LEGGINGS:
+			case CHAINMAIL_LEGGINGS:
+			case LEATHER_LEGGINGS:
+			case IRON_LEGGINGS:
+			case DIAMOND_LEGGINGS:
+			case NETHERITE_LEGGINGS:
+			case CHAINMAIL_HELMET:
+			case GOLDEN_HELMET:
+			case LEATHER_HELMET:
+			case IRON_HELMET:
+			case DIAMOND_HELMET:
+			case NETHERITE_HELMET:
+			case TURTLE_HELMET:
+			case ELYTRA:
+			case SHIELD:
+				return true;
+			default:
+				return false;
 		}
 	}
 }
