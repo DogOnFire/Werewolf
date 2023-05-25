@@ -61,16 +61,16 @@ public interface IWerewolfDisguiseFactory
 				switch (accountName)
 				{
 				case "WerewolfAlpha":
-					this.accountId = UUID.fromString("e0d074bd-6722-47fc-95d3-f28e2899e155");
+					this.accountId = UUID.fromString(Werewolf.instance().alphaAccountUUID);
 					break;
 				case "WF_Werewolf":
-					this.accountId = UUID.fromString("c61647e5-fc2f-4536-abe9-c851911ad22f");
+					this.accountId = UUID.fromString(Werewolf.instance().potionAccountUUID);
 					break;
 				case "SM_Werewolf":
-					this.accountId = UUID.fromString("b68a8f00-7d24-4c52-b6ad-1423bfbe26ee");
+					this.accountId = UUID.fromString(Werewolf.instance().werewolfBiteAccountUUID);
 					break;
 				case "BM_Werewolf":
-					this.accountId = UUID.fromString("da508ecc-dbd9-46c5-8095-47b91aa4ff5f");
+					this.accountId = UUID.fromString(Werewolf.instance().wildBiteAccountUUID);
 					break;
 				default:
 					// Account called Werewolf. No clan has this skin...

@@ -242,6 +242,7 @@ public class PlayerListener implements Listener
 			{
 				switch (killer.getInventory().getItemInMainHand().getType())
 				{
+					case NETHERITE_SWORD:
 					case DIAMOND_SWORD:
 					case GOLDEN_SWORD:
 					case IRON_SWORD:
