@@ -31,7 +31,7 @@ To become a Werewolf, you have to get bitten (attacked) by a wolf or Werewolf at
 *	A Werewolf cannot wield Armor while in Wolf-form, but has a high natural defense
 *	A Werewolf can growl with /growl
 *	A Werewolf can howl with /howl
-*	~~Vampires cannot be infected with the Werewolf infection~~ **_Vampire integration removed, for now_**
+*	Vampires cannot be infected with the Werewolf infection
 *	When a Werewolf gets killed, the player re-spawns in human form.
 *	Werewolves are very vulnerable to silver weapons.
 *	Werewolves are flock creatures and live in clans

@@ -1,5 +1,6 @@
 package com.dogonfire.werewolf;
 
+import com.clanjhoo.vampire.VampireAPI;
 import com.dogonfire.werewolf.Metrics.Graph;
 import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.listeners.ChatListener;
@@ -33,24 +34,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
-/* TODO: re-add Vampire integration..
-
-import com.massivecraft.vampire.entity.UPlayer;
-*/
 
 public class Werewolf extends JavaPlugin
 {
 	public static Werewolf 						instance;
 	public static boolean						pluginEnabled							= false;
-	/*
-	 * TODO: re-add Vampire integration..
-	 * 
-	 * public boolean vapireEnabled = false;
-	 */
+
+	public boolean 								vampireEnabled 							= false;
 	public boolean								vaultEnabled							= false;
 	public boolean								disguisesEnabled						= false;
 	public boolean								healthBarEnabled						= false;
@@ -423,14 +418,13 @@ public class Werewolf extends JavaPlugin
 		}
 
 		permissionsManager = new PermissionsManager(this);
-		/*
-		 * TODO: re-add Vampire integration..
-		 * 
-		 * if (pm.getPlugin("Vampire") != null) {
-		 * log("Vampire plugin detected. Enabling support for vampirism :-)");
-		 * 
-		 * this.vampireEnabled = true; }
-		 */
+
+		if (pm.getPlugin("Vampire") != null)
+		{
+			log("Vampire plugin detected. Enabling support for vampirism :-)");
+
+			this.vampireEnabled = true;
+		}
 
 		// Check for HealthBar
 		if (pm.getPlugin("HealthBar") != null && pm.getPlugin("HealthBar").isEnabled())
@@ -505,13 +499,13 @@ public class Werewolf extends JavaPlugin
 		return this.allowedWorlds.contains(player.getWorld().getName());
 	}
 
-	/*
-	 * TODO: re-add Vampire integration..
-	 * 
-	 * public boolean isVampire(Player player) { if (this.vampireEnabled) {
-	 * UPlayer uplayer = UPlayer.get(player); if (uplayer == null) { return
-	 * false; } return uplayer.isVampire(); } return false; }
-	 */
+	public boolean isVampire(Player player) {
+		if (this.vampireEnabled)
+		{
+			return VampireAPI.isVampire(player);
+		}
+		return false;
+	}
 
 	public boolean isUnderOpenSky(Player player)
 	{
@@ -958,15 +952,43 @@ public class Werewolf extends JavaPlugin
 				}
 			});
 
-			/*
-			 * TODO: re-add Vampire integration..
-			 * 
-			 * pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Vampire")
-			 * {
-			 * 
-			 * @Override public int getValue() { if
-			 * (Werewolf.this.vampireEnabled) { return 1; } return 0; } });
-			 */
+			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Lib's Disguises")
+			{
+				@Override public int getValue()
+				{
+					Plugin pl = getServer().getPluginManager().getPlugin("LibsDisguises");
+					if (pl != null && pl.isEnabled())
+					{
+						return 1;
+					}
+					return 0;
+				}
+			});
+
+			pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using SkinsRestorer")
+			{
+				@Override public int getValue()
+				{
+					Plugin pl = getServer().getPluginManager().getPlugin("SkinsRestorer");
+					if (pl != null && pl.isEnabled())
+					{
+						return 1;
+					}
+					return 0;
+				}
+			});
+
+			 pluginsUsedGraph.addPlotter(new Metrics.Plotter("Using Vampire")
+			 {
+				 @Override public int getValue()
+				 {
+					 if (Werewolf.this.vampireEnabled)
+					 {
+						 return 1;
+					 }
+					 return 0;
+				 }
+			 });
 
 			Graph featuresEnabledGraph = metrics.createGraph("Features enabled");
 
