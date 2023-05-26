@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
 import com.dogonfire.werewolf.ClanManager;
 import com.dogonfire.werewolf.Werewolf;

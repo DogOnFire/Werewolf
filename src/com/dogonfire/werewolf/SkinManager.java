@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.UUID;
 import org.bukkit.entity.Player;
 
-import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
-import com.dogonfire.werewolf.api.WerewolfDisguiseAPI;
+import com.dogonfire.werewolf.disguises.IWerewolfDisguiseFactory.WerewolfDisguise;
+import com.dogonfire.werewolf.disguises.WerewolfDisguiseAPI;
 
 public class SkinManager
 {

@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

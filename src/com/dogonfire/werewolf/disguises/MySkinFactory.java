@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
 import java.util.UUID;
 import org.bukkit.entity.Player;
