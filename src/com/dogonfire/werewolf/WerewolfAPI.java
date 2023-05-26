@@ -23,7 +23,7 @@ public class WerewolfAPI
 		return Werewolf.getItemManager().newSilverSword(1);
 	}
 
-	public static ItemStack newWerewolfLorebook()
+	public static ItemStack newWerewolfLoreBook()
 	{
 		return Werewolf.getItemManager().newLoreBook();
 	}
@@ -41,6 +41,31 @@ public class WerewolfAPI
 	public static ItemStack newWerewolfWolfbanePotion()
 	{
 		return Werewolf.getItemManager().newWolfbanePotion();
+	}
+
+	public static boolean isWerewolfSilverSword(ItemStack item)
+	{
+		return Werewolf.getItemManager().isSilverSword(item);
+	}
+
+	public static boolean isWerewolfLoreBook(ItemStack item)
+	{
+		return Werewolf.getItemManager().isLoreBook(item);
+	}
+
+	public static boolean isWerewolfCurePotion(ItemStack item)
+	{
+		return Werewolf.getItemManager().isCurePotion(item);
+	}
+
+	public static boolean isWerewolfInfectionPotion(ItemStack item)
+	{
+		return Werewolf.getItemManager().isInfectionPotion(item);
+	}
+
+	public static boolean isWerewolfWolfbanePotion(ItemStack item)
+	{
+		return Werewolf.getItemManager().isWolfbanePotion(item);
 	}
 
 	public static boolean isWerewolf(UUID playerId)

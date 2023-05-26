@@ -454,7 +454,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLorebook());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLoreBook());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtALoreBook, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);

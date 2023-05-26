@@ -2,13 +2,17 @@ package com.dogonfire.werewolf.managers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.dogonfire.werewolf.items.Recipes;
 import com.dogonfire.werewolf.Werewolf;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -20,10 +24,23 @@ import org.bukkit.ChatColor;
 public class ItemManager
 {
 	private Werewolf plugin;
+	private NamespacedKey namespacedKey;
 
 	public ItemManager(Werewolf plugin)
 	{
 		this.plugin = plugin;
+		this.namespacedKey = new NamespacedKey(plugin, "ww-item");
+	}
+
+	private boolean isWerewolfItem(ItemStack item, String itemName)
+	{
+		ItemMeta itemMeta = item.getItemMeta();
+		if (itemMeta == null)
+		{
+			return false;
+		}
+		PersistentDataContainer dataContainer = itemMeta.getPersistentDataContainer();
+		return dataContainer.has(namespacedKey, PersistentDataType.STRING) && Objects.equals(dataContainer.get(namespacedKey, PersistentDataType.STRING), itemName);
 	}
 	
 	public void setupRecipes()
@@ -82,6 +99,9 @@ public class ItemManager
 	    //potionMeta.setMainEffect(PotionEffectType.CONFUSION);
 	    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 0), true);
 
+		// Add NBT data
+		potionMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "InfectionPotion");
+
 		potion.setItemMeta(potionMeta);
 
 		return potion;
@@ -103,6 +123,9 @@ public class ItemManager
 	    potionMeta.setLore(pages);
 	    //potionMeta.setMainEffect(PotionEffectType.CONFUSION);
 	    potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 0), true);
+
+		// Add NBT data
+		potionMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "CurePotion");
 
 		potion.setItemMeta(potionMeta);
 
@@ -137,6 +160,9 @@ public class ItemManager
 	    //itemStack.setItemMeta(potionMeta);
 		
 		//return itemStack;
+
+		// Add NBT data
+		potionMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "WolfbanePotion");
 	    
 	    potion.setItemMeta(potionMeta);
 		
@@ -159,6 +185,9 @@ public class ItemManager
 
 		itemMeta.setLore(pages);
 
+		// Add NBT data
+		itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "SilverSword");
+
 		weapon.setItemMeta(itemMeta);
 
 		return weapon;
@@ -179,6 +208,9 @@ public class ItemManager
 	    pages.add(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.SilverArmorDescription2, ChatColor.GRAY));
 
 		itemMeta.setLore(pages);
+
+		// Add NBT data
+		itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "SilverArmor");
 
 		weapon.setItemMeta(itemMeta);
 
@@ -314,6 +346,9 @@ public class ItemManager
 
 		itemMeta.setLore(pages);
 
+		// Add NBT data
+		itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, "LoreBook");
+
 		book.setItemMeta(itemMeta);
 
 		return book;
@@ -322,71 +357,26 @@ public class ItemManager
 	
 	public boolean isSilverSword(ItemStack IS)
 	{
-		ItemMeta itemMeta = IS.getItemMeta();
-		if (itemMeta == null)
-		{
-			return false;
-		}
-		if (itemMeta.getDisplayName() == null)
-		{
-			return false;
-		}
-		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.SilverSwordTitle, ChatColor.GOLD)));
+		return isWerewolfItem(IS, "SilverSword");
 	}
 
 	public boolean isCurePotion(ItemStack IS)
 	{
-		ItemMeta itemMeta = IS.getItemMeta();
-		if (itemMeta == null)
-		{
-			return false;
-		}
-		if (itemMeta.getDisplayName() == null)
-		{
-			return false;
-		}
-		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.CurePotionTitle, ChatColor.GOLD)));
+		return isWerewolfItem(IS, "CurePotion");
 	}
 
 	public boolean isInfectionPotion(ItemStack IS)
 	{
-		ItemMeta itemMeta = IS.getItemMeta();
-		if (itemMeta == null)
-		{
-			return false;
-		}
-		if (itemMeta.getDisplayName() == null)
-		{
-			return false;
-		}
-		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.InfectionPotionTitle, ChatColor.GOLD)));
+		return isWerewolfItem(IS, "InfectionPotion");
 	}
 	
 	public boolean isWolfbanePotion(ItemStack IS)
 	{
-		ItemMeta itemMeta = IS.getItemMeta();
-		if (itemMeta == null)
-		{
-			return false;
-		}
-		if (itemMeta.getDisplayName() == null)
-		{
-			return false;
-		}
-		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.WolfbanePotionTitle, ChatColor.GOLD)));
+		return isWerewolfItem(IS, "WolfbanePotion");
 	}
 
 	public boolean isLoreBook(ItemStack IS)
 	{
-		ItemMeta itemMeta = IS.getItemMeta();
-		if (itemMeta == null)
-		{
-			return false;
-		}
-		if (itemMeta.getDisplayName() == null)
-		{
-			return false;
-		}
-		return (itemMeta.getDisplayName().contains(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.LoreBookTitle, ChatColor.GOLD)));
+		return isWerewolfItem(IS, "LoreBook");
 	}
 }
