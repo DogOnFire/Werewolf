@@ -3,9 +3,9 @@ package com.dogonfire.werewolf.listeners;
 import java.util.Collection;
 import java.util.Random;
 
-import com.dogonfire.werewolf.ClanManager;
-import com.dogonfire.werewolf.DamageManager;
-import com.dogonfire.werewolf.LanguageManager;
+import com.dogonfire.werewolf.managers.ClanManager;
+import com.dogonfire.werewolf.managers.DamageManager;
+import com.dogonfire.werewolf.managers.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
 import com.dogonfire.werewolf.tasks.CheckTransformationTask;
 import com.dogonfire.werewolf.tasks.PotionEffectTask;

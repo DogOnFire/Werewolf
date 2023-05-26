@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.dogonfire.werewolf.LanguageManager;
+import com.dogonfire.werewolf.managers.LanguageManager;
 import com.dogonfire.werewolf.Werewolf;
 
 public class InfoTask implements Runnable

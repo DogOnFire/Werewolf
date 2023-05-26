@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class PacketUtils
 {
 
-	PacketUtils()
+	public PacketUtils()
 	{
 	}
 

@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.api.IWerewolfDisguiseFactory.WerewolfDisguise;
+import com.dogonfire.werewolf.disguises.IWerewolfDisguiseFactory.WerewolfDisguise;
 
 import net.md_5.bungee.api.ChatColor;
 

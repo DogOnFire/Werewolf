@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,7 +21,7 @@ import org.bukkit.entity.Player;
 
 public class ClanManager
 {
-	private Werewolf	plugin;
+	private Werewolf plugin;
 
 	public enum ClanType
 	{
@@ -45,7 +46,7 @@ public class ClanManager
 	private UUID 						alphaAccountId		= null;
 	private String 						alphaAccount		= "";
 
-	ClanManager(Werewolf plugin)
+	public ClanManager(Werewolf plugin)
 	{
 		this.plugin = plugin;
 	}
@@ -182,25 +183,88 @@ public class ClanManager
 		
 		switch (mobType)
 		{
+			case WARDEN:
+			case ENDER_DRAGON:
+			case WITHER:
+				points = 50.0D;
+				break;
 			case PLAYER:
+			case VILLAGER:
+			case WANDERING_TRADER:
+			case PILLAGER:
+			case VINDICATOR:
+			case EVOKER:
+			case ILLUSIONER:
+			case RAVAGER:
+			case ZOGLIN:
+			case PIGLIN_BRUTE:
+			case ELDER_GUARDIAN:
+			case ENDERMAN:
 				points = 5.0D;
 				break;
-			case SKELETON:
+			case POLAR_BEAR:
+			case HORSE:
+			case DONKEY:
+			case MULE:
 			case COW:
-			case SHEEP:
-			case ENDERMAN:
+			case MUSHROOM_COW:
+			case ZOMBIE:
+			case ZOMBIE_VILLAGER:
+			case LLAMA:
+			case TRADER_LLAMA:
+			case PANDA:
+			case DROWNED:
+			case HUSK:
+			case DOLPHIN:
+			case PIGLIN:
+			case STRIDER:
+			case ZOMBIFIED_PIGLIN:
+			case WITCH:
+			case GUARDIAN:
+			case SKELETON:
+			case WITHER_SKELETON:
+			case CAMEL:
+			case SNIFFER:
 				points = 3.0D;
 				break;
+			case SHEEP:
+			case GOAT:
+			case WOLF:
+			case CAT:
+			case OCELOT:
+			case RABBIT:
+			case PIG:
+			case TURTLE:
+			case FOX:
 			case SPIDER:
-			case ZOMBIE:
+			case GLOW_SQUID:
+			case PHANTOM:
 				points = 2.0D;
 				break;
-			case RABBIT:
+			case BLAZE:
+			case STRAY:
 			case CHICKEN:
-			case SILVERFISH:
+			case PARROT:
+			case AXOLOTL:
+			case SQUID:
+			case BEE:
+			case COD:
+			case SALMON:
+			case PUFFERFISH:
+			case TROPICAL_FISH:
+			case FROG:
+			case TADPOLE:
+			case BAT:
+			case VEX:
 				points = 1.0D;
 				break;
+			case ALLAY:
+			case ENDERMITE:
+			case SNOWMAN:
+			case MAGMA_CUBE:
+			case SILVERFISH:
 			default:
+				points = 0.5D;
 				break;
 		}
 				

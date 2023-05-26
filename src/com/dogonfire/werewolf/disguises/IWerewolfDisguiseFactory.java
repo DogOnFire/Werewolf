@@ -1,11 +1,11 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
 import com.dogonfire.werewolf.Werewolf;
-import com.dogonfire.werewolf.ClanManager.ClanType;
+import com.dogonfire.werewolf.managers.ClanManager.ClanType;
 
 
 // Let's abstract disguise commands away, so that we don't depend on a particular Disguise plugin

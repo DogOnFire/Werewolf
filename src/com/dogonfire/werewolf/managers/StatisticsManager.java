@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class StatisticsManager
 		{}
 	}
 		
-	StatisticsManager()
+	public StatisticsManager()
 	{	
 	}
 

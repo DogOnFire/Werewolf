@@ -1,6 +1,6 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf.disguises;
 
-import com.dogonfire.werewolf.ClanManager;
+import com.dogonfire.werewolf.managers.ClanManager;
 import com.dogonfire.werewolf.Werewolf;
 import net.skinsrestorer.api.PlayerWrapper;
 import net.skinsrestorer.api.SkinsRestorerAPI;

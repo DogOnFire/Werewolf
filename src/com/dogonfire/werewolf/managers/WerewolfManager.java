@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -15,6 +15,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
+import com.dogonfire.werewolf.WerewolfAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -24,7 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.dogonfire.werewolf.ClanManager.ClanType;
+import com.dogonfire.werewolf.managers.ClanManager.ClanType;
 import com.dogonfire.werewolf.tasks.CheckTransformationTask;
 /*
 import org.bukkit.block.Biome;
@@ -53,7 +55,7 @@ public class WerewolfManager
 	private HashMap<UUID, Integer>	packWolves						= new HashMap<UUID, Integer>();
 	private HashMap<UUID, Long>		lastWorldUpdates				= new HashMap<UUID, Long>();
 
-	WerewolfManager(Werewolf plugin)
+	public WerewolfManager(Werewolf plugin)
 	{
 		this.plugin = plugin;
 
@@ -1065,15 +1067,13 @@ public class WerewolfManager
 
 		if (isWerewolf(player))
 		{
-			/*
-			 * TODO: re-add Vampire integration..
-			 * 
-			 * if (this.plugin.isVampire(player)) {
-			 * this.plugin.log(player.getName() +
-			 * " is a Vampire! Removing his Werewolf infection...");
-			 * Werewolf.getWerewolfManager().unmakeWerewolf(player.getUniqueId()
-			 * ); return; }
-			 */
+			if (WerewolfAPI.isVampire(player))
+			{
+				this.plugin.log(player.getName() + " is a Vampire! Removing his Werewolf infection...");
+				Werewolf.getWerewolfManager().unmakeWerewolf(player.getUniqueId());
+				return;
+			}
+
 			if (Werewolf.getWerewolfManager().canTransform(player))
 			{
 				this.plugin.transform(player);

@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -13,13 +14,13 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.dogonfire.werewolf.api.WerewolfAPI;
+import com.dogonfire.werewolf.WerewolfAPI;
 
 public class SignManager implements Listener
 {
-	private Werewolf	plugin;
+	private Werewolf plugin;
 
-	SignManager(Werewolf p)
+	public SignManager(Werewolf p)
 	{
 		this.plugin = p;
 	}
@@ -453,7 +454,7 @@ public class SignManager implements Listener
 				{
 					Werewolf.getLanguageManager().setAmount("free");
 				}
-				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLorebook());
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), WerewolfAPI.newWerewolfLoreBook());
 
 				this.plugin.sendInfo(player.getUniqueId(), LanguageManager.LANGUAGESTRING.YouBoughtALoreBook, ChatColor.GREEN, "", (int)price, 1);
 				this.plugin.log(event.getPlayer().getName() + " bought a werewolf lorebook for " + price);

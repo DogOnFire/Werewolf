@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dogonfire</groupId>
     <artifactId>werewolf</artifactId>
-    <version>0.10.0</version>
+    <version>0.11.0</version>
     <name>Werewolf</name>
     <description>Werewolves in Minecraft!</description>
     <url>https://github.com/DogOnFire/Werewolf</url>
@@ -68,6 +68,21 @@
             <id>codemc-releases</id>
             <url>https://repo.codemc.org/repository/maven-releases/</url>
         </repository>
+        <!-- Clan Jhoo for Vampire(Revamp) -->
+        <repository>
+            <id>clan-jhoo</id>
+            <url>https://nexus.clanjhoo.com/repository/maven-public/</url>
+        </repository>
+        <!-- NeetGames for McMMO -->
+<!--        <repository>-->
+<!--            <id>neetgames</id>-->
+<!--            <url>https://nexus.neetgames.com/repository/maven-releases/</url>-->
+<!--        </repository>-->
+        <!-- JitPack for GitHub repos -->
+<!--        <repository>-->
+<!--            <id>jitpack.io</id>-->
+<!--            <url>https://jitpack.io</url>-->
+<!--        </repository>-->
     </repositories>
     <dependencies>
         <!-- Spigot -->
@@ -119,6 +134,32 @@
             <version>2.11.3</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Vampire(Revamp) -->
+        <dependency>
+            <groupId>com.clanjhoo</groupId>
+            <artifactId>vampire</artifactId>
+            <version>1.0.BETA-17</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.Mowstyl</groupId>-->
+<!--            <artifactId>Vampire</artifactId>-->
+<!--            <version>master-SNAPSHOT</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+        <!-- McMMO -->
+<!--        <dependency>-->
+<!--            <groupId>com.gmail.nossr50.mcMMO</groupId>-->
+<!--            <artifactId>mcMMO</artifactId>-->
+<!--            <version>2.1.220</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
         <!-- SonarQube Code Analysis -->
         <dependency>
             <groupId>org.sonarsource.scanner.maven</groupId>

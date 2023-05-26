@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.items;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -82,7 +83,7 @@ public class Recipes
 	public static ShapedRecipe silverArmorRecipe(Plugin plugin)
 	{
 		ItemStack silverArmor = Werewolf.getItemManager().newSilverArmor(1);
-		NamespacedKey key = new NamespacedKey(plugin, "SilverArmor");
+		NamespacedKey key = new NamespacedKey(plugin, "SilverArmorRecipe");
 
 		ShapedRecipe silverArmorRecipe = new ShapedRecipe(key, silverArmor);
 		silverArmorRecipe.shape("BXB", "LSL", "BXB");
@@ -97,7 +98,7 @@ public class Recipes
 	public static ShapedRecipe silverSwordRecipe(Plugin plugin)
 	{
 		ItemStack silverSword = Werewolf.getItemManager().newSilverSword(1);
-		NamespacedKey key = new NamespacedKey(plugin, "SilverSword");
+		NamespacedKey key = new NamespacedKey(plugin, "SilverSwordRecipe");
 
 		ShapedRecipe silverSwordRecipe = new ShapedRecipe(key, silverSword);
 		silverSwordRecipe.shape("OBX", "OXB", "SOO");
@@ -111,7 +112,7 @@ public class Recipes
 	public static ShapelessRecipe wolfbanePotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newWolfbanePotion();
-		NamespacedKey key = new NamespacedKey(plugin, "WolfbanePotion");
+		NamespacedKey key = new NamespacedKey(plugin, "WolfbanePotionRecipe");
 
 		ShapelessRecipe wolfbaneRecipe = new ShapelessRecipe(key, potion);
 		wolfbaneRecipe.addIngredient(Material.GLASS_BOTTLE);
@@ -126,7 +127,7 @@ public class Recipes
 	public static ShapelessRecipe infectionPotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newInfectionPotion();
-		NamespacedKey key = new NamespacedKey(plugin, "InfectionPotion");
+		NamespacedKey key = new NamespacedKey(plugin, "InfectionPotionRecipe");
 		
 		ShapelessRecipe infectionRecipe = new ShapelessRecipe(key, potion);
 		infectionRecipe.addIngredient(Material.SLIME_BALL);
@@ -141,7 +142,7 @@ public class Recipes
 	public static ShapelessRecipe curePotion(Plugin plugin)
 	{
 		ItemStack potion = Werewolf.getItemManager().newCurePotion();
-		NamespacedKey key = new NamespacedKey(plugin, "CurePotion");
+		NamespacedKey key = new NamespacedKey(plugin, "CurePotionRecipe");
 
 		ShapelessRecipe cureRecipe = new ShapelessRecipe(key, potion);
 		cureRecipe.addIngredient(Material.POPPY);
@@ -153,7 +154,7 @@ public class Recipes
 
 	public static ShapedRecipe loreBook(Plugin plugin)
 	{
-		NamespacedKey key = new NamespacedKey(plugin, "LoreBook");
+		NamespacedKey key = new NamespacedKey(plugin, "LoreBookRecipe");
 		ShapedRecipe loreBookRecipe = new ShapedRecipe(key, Werewolf.getItemManager().newLoreBook());
 
 		loreBookRecipe.shape("BPB", "PXP", "BPB");
