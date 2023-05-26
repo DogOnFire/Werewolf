@@ -166,34 +166,30 @@ public class DamageListener implements Listener
 					if (damageEvent.getEntity() instanceof Player)
 					{
 						Player victim = (Player) damageEvent.getEntity();
-						/*
-						 * TODO: Readd Vampire integration
-						 * if (!this.plugin.isVampire(victim))
-						 * {
-						 */
-						if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected") && !Werewolf.getWerewolfManager().isWerewolf(victim))
+
+						if (!this.plugin.isVampire(victim))
 						{
-							this.plugin.logDebug(player.getName() + " is doing risk damage to " + victim.getName());
+							if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected") && !Werewolf.getWerewolfManager().isWerewolf(victim)) {
+								this.plugin.logDebug(player.getName() + " is doing risk damage to " + victim.getName());
 
-							if (Math.random() < this.plugin.werewolfInfectionRisk)
-							{
-								ClanManager.ClanType clanType = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
+								if (Math.random() < this.plugin.werewolfInfectionRisk) {
+									ClanManager.ClanType clanType = Werewolf.getWerewolfManager().getWerewolfClan(player.getUniqueId());
 
-								Werewolf.getWerewolfManager().makeWerewolf(victim, false, clanType);
+									Werewolf.getWerewolfManager().makeWerewolf(victim, false, clanType);
 
-								Werewolf.getLanguageManager().setPlayerName(player.getName());
-								victim.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
+									Werewolf.getLanguageManager().setPlayerName(player.getName());
+									victim.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteVictim, ChatColor.LIGHT_PURPLE));
 
-								Werewolf.getLanguageManager().setPlayerName(victim.getName());
-								player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteAttacker, ChatColor.LIGHT_PURPLE));
+									Werewolf.getLanguageManager().setPlayerName(victim.getName());
+									player.sendMessage(Werewolf.getLanguageManager().getLanguageString(LanguageManager.LANGUAGESTRING.BiteAttacker, ChatColor.LIGHT_PURPLE));
 
-								victim.getLocation().getWorld().playEffect(player.getLocation(), Effect.SMOKE, 100);
-								victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 1, 0)), Effect.SMOKE, 100);
-								victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 2, 0)), Effect.SMOKE, 100);
+									victim.getLocation().getWorld().playEffect(player.getLocation(), Effect.SMOKE, 100);
+									victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 1, 0)), Effect.SMOKE, 100);
+									victim.getLocation().getWorld().playEffect(player.getLocation().add(new Vector(0, 2, 0)), Effect.SMOKE, 100);
 
-								this.plugin.log(player.getName() + " infected " + victim.getName() + " with the werewolf infection!");
+									this.plugin.log(player.getName() + " infected " + victim.getName() + " with the werewolf infection!");
+								}
 							}
-						/*}*/
 						}
 					}
 				}
@@ -352,20 +348,16 @@ public class DamageListener implements Listener
 
 			if (event.getEntity() instanceof Player)
 			{
-				/*
-				 * TODO: Readd Vampire integration.. if(plugin.vampireEnabled) {
-				 * if(plugin.isVampire((Player)event.getEntity())) {
-				 * Werewolf.getWerewolfScoreboardManager().
-				 * setVampireKillsForPlayer(killer,
-				 * Werewolf.getStatisticsManager().increaseVampireKills(killer.
-				 * getUniqueId())); } else {
-				 * Werewolf.getWerewolfScoreboardManager().
-				 * setHumanKillsForPlayer(killer,
-				 * Werewolf.getStatisticsManager().increaseHumanKills(killer.
-				 * getUniqueId())); } } else {
-				 */
-				Werewolf.getWerewolfScoreboardManager().setHumanKillsForPlayer(killer, Werewolf.getStatisticsManager().increaseHumanKills(killer.getUniqueId()));
-				/* } */
+				 if(plugin.isVampire((Player)event.getEntity()))
+				 {
+					 Werewolf.getWerewolfScoreboardManager().setVampireKillsForPlayer(killer,
+							 Werewolf.getStatisticsManager().increaseVampireKills(killer.getUniqueId()));
+				 }
+				 else
+				 {
+					 Werewolf.getWerewolfScoreboardManager().setHumanKillsForPlayer(killer,
+							 Werewolf.getStatisticsManager().increaseHumanKills(killer.getUniqueId()));
+				 }
 			}
 			else
 			{
