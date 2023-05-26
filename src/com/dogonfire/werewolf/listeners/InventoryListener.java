@@ -278,16 +278,33 @@ public class InventoryListener implements Listener
 			case NETHERITE_SHOVEL:
 			case IRON_SHOVEL:
 			case FLINT_AND_STEEL:
-			case FISHING_ROD:
-			case LEAD:
-			case COMPASS:
-			case SHEARS:
+//			case FISHING_ROD:
+//			case LEAD:
+//			case COMPASS:
+//			case CLOCK:
+			case ENDER_PEARL:
+//			case ENDER_EYE:
+//			case WRITABLE_BOOK:
+//			case BOOK:
+			case FIRE_CHARGE:
+//			case NAME_TAG:
+//			case CARROT_ON_A_STICK:
+//			case WARPED_FUNGUS_ON_A_STICK:
+//			case MAP:
+//			case FILLED_MAP:
+//			case BUCKET:
+//			case WATER_BUCKET:
+//			case PUFFERFISH_BUCKET:
+//			case SALMON_BUCKET:
+//			case MILK_BUCKET:
+//			case SHEARS:
 			case TRIDENT:
+			case TOTEM_OF_UNDYING:
 			case CROSSBOW:
 			case SPYGLASS:
-			case RECOVERY_COMPASS:
-			case BUNDLE:
-			case BRUSH:
+//			case RECOVERY_COMPASS:
+//			case BUNDLE:
+//			case BRUSH:
 				return true;
 			default:
 				return false;

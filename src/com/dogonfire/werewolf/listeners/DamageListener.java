@@ -295,32 +295,32 @@ public class DamageListener implements Listener
 				case SPIDER:
                 case SQUID:
                 case GLOW_SQUID:
-                case ALLAY:
                 case PHANTOM:
 					health = 2;
 					break;
-				case SKELETON:
-				case WITHER_SKELETON:
                 case BLAZE:
 				case STRAY:
 				case CHICKEN:
 				case PARROT:
-				case VEX:
 				case AXOLOTL:
 				case BEE:
-				case SILVERFISH:
 				case COD:
 				case SALMON:
 				case PUFFERFISH:
 				case TROPICAL_FISH:
                 case FROG:
                 case TADPOLE:
-                case ENDERMITE:
                 case BAT:
-                case MAGMA_CUBE:
-                case SNOWMAN:
 					health = 1;
 					break;
+				case ALLAY:
+				case ENDERMITE:
+				case SKELETON:
+				case WITHER_SKELETON:
+				case SNOWMAN:
+				case MAGMA_CUBE:
+				case SILVERFISH:
+				case VEX:
 				default:
 					break;
 			}
