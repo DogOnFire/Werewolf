@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.dogonfire.werewolf.Werewolf;
+import com.dogonfire.werewolf.WerewolfAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -1066,7 +1067,7 @@ public class WerewolfManager
 
 		if (isWerewolf(player))
 		{
-			if (this.plugin.isVampire(player))
+			if (WerewolfAPI.isVampire(player))
 			{
 				this.plugin.log(player.getName() + " is a Vampire! Removing his Werewolf infection...");
 				Werewolf.getWerewolfManager().unmakeWerewolf(player.getUniqueId());

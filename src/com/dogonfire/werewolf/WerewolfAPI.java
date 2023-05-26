@@ -2,6 +2,10 @@ package com.dogonfire.werewolf;
 
 import java.util.UUID;
 
+import com.clanjhoo.vampire.VampireAPI;
+import com.dogonfire.werewolf.managers.ClanManager;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -46,7 +50,38 @@ public class WerewolfAPI
 
 	public static boolean isWerewolf(Player player)
 	{
-		return Werewolf.getWerewolfManager().isWerewolf(player.getUniqueId());
+		return isWerewolf(player.getUniqueId());
+	}
+	public static boolean isVampire(Player player)
+	{
+		if (Werewolf.instance().vampireEnabled)
+		{
+			return VampireAPI.isVampire(player);
+		}
+		return false;
+	}
+
+	public static boolean isVampire(UUID playerId)
+	{
+		if (Werewolf.instance().vampireEnabled)
+		{
+			Player player = Bukkit.getPlayer(playerId);
+			if (player == null) {
+				player = (Player) Bukkit.getOfflinePlayer(playerId);
+			}
+			return VampireAPI.isVampire(player);
+		}
+		return false;
+	}
+
+	public static boolean isHuman(UUID playerId)
+	{
+		return !isWerewolf(playerId) && !isVampire(playerId);
+	}
+
+	public static boolean isHuman(Player player)
+	{
+		return isHuman(player.getUniqueId());
 	}
 
 	public static boolean isAlpha(UUID playerId)
@@ -62,5 +97,12 @@ public class WerewolfAPI
 	public static int getNumberOfWerewolves()
 	{
 		return Werewolf.getWerewolfManager().getNumberOfWerewolves();
+	}
+
+	public static ClanManager.ClanType getWerewolfClan(UUID playerId) {
+		if (!isWerewolf(playerId)) {
+			return null;
+		}
+		return Werewolf.getWerewolfManager().getWerewolfClan(playerId);
 	}
 }

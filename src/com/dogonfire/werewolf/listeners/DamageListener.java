@@ -2,6 +2,7 @@ package com.dogonfire.werewolf.listeners;
 
 import java.util.Random;
 
+import com.dogonfire.werewolf.WerewolfAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
@@ -166,7 +167,7 @@ public class DamageListener implements Listener
 					{
 						Player victim = (Player) damageEvent.getEntity();
 
-						if (!this.plugin.isVampire(victim))
+						if (!WerewolfAPI.isVampire(victim))
 						{
 							if (Werewolf.getPermissionsManager().hasPermission(player, "werewolf.infectother") && Werewolf.getPermissionsManager().hasPermission(victim, "werewolf.becomeinfected") && !Werewolf.getWerewolfManager().isWerewolf(victim)) {
 								this.plugin.logDebug(player.getName() + " is doing risk damage to " + victim.getName());
@@ -347,7 +348,7 @@ public class DamageListener implements Listener
 
 			if (event.getEntity() instanceof Player)
 			{
-				 if(plugin.isVampire((Player)event.getEntity()))
+				 if(WerewolfAPI.isVampire((Player)event.getEntity()))
 				 {
 					 Werewolf.getWerewolfScoreboardManager().setVampireKillsForPlayer(killer,
 							 Werewolf.getStatisticsManager().increaseVampireKills(killer.getUniqueId()));

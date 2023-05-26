@@ -73,7 +73,12 @@
             <id>clan-jhoo</id>
             <url>https://nexus.clanjhoo.com/repository/maven-public/</url>
         </repository>
-        <!-- JitPack for Vampire(Revamp) -->
+        <!-- NeetGames for McMMO -->
+<!--        <repository>-->
+<!--            <id>neetgames</id>-->
+<!--            <url>https://nexus.neetgames.com/repository/maven-releases/</url>-->
+<!--        </repository>-->
+        <!-- JitPack for GitHub repos -->
 <!--        <repository>-->
 <!--            <id>jitpack.io</id>-->
 <!--            <url>https://jitpack.io</url>-->
@@ -146,6 +151,13 @@
 <!--            <groupId>com.github.Mowstyl</groupId>-->
 <!--            <artifactId>Vampire</artifactId>-->
 <!--            <version>master-SNAPSHOT</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+        <!-- McMMO -->
+<!--        <dependency>-->
+<!--            <groupId>com.gmail.nossr50.mcMMO</groupId>-->
+<!--            <artifactId>mcMMO</artifactId>-->
+<!--            <version>2.1.220</version>-->
 <!--            <scope>provided</scope>-->
 <!--        </dependency>-->
         <!-- SonarQube Code Analysis -->

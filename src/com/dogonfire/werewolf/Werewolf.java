@@ -505,14 +505,6 @@ public class Werewolf extends JavaPlugin
 		return this.allowedWorlds.contains(player.getWorld().getName());
 	}
 
-	public boolean isVampire(Player player) {
-		if (this.vampireEnabled)
-		{
-			return VampireAPI.isVampire(player);
-		}
-		return false;
-	}
-
 	public boolean isUnderOpenSky(Player player)
 	{
 		return player.getWorld().getHighestBlockYAt(player.getLocation()) <= player.getLocation().getBlockY();
