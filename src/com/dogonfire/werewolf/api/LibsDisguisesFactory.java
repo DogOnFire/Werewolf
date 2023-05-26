@@ -11,9 +11,9 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 
 public class LibsDisguisesFactory implements IWerewolfDisguiseFactory
 {
-	public class LibsDisguisesDisguise extends WerewolfDisguise
+	public class LibsDisguisesWerewolfDisguise extends WerewolfDisguise
 	{
-		public LibsDisguisesDisguise(UUID werewolfDisguiseAccountId, String werewolfDisguiseAccountName)
+		public LibsDisguisesWerewolfDisguise(UUID werewolfDisguiseAccountId, String werewolfDisguiseAccountName)
 		{
 			super(werewolfDisguiseAccountId, werewolfDisguiseAccountName);
 		}		
@@ -131,8 +131,8 @@ public class LibsDisguisesFactory implements IWerewolfDisguiseFactory
 	}*/
 
 	@Override
-	public LibsDisguisesDisguise newDisguise(UUID disguiseAccountId, String disguiseAccountName)
+	public LibsDisguisesWerewolfDisguise newDisguise(UUID disguiseAccountId, String disguiseAccountName)
 	{
-		return new LibsDisguisesDisguise(disguiseAccountId, disguiseAccountName);
+		return new LibsDisguisesWerewolfDisguise(disguiseAccountId, disguiseAccountName);
 	}
 }

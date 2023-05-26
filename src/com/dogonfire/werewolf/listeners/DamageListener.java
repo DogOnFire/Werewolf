@@ -50,7 +50,7 @@ public class DamageListener implements Listener
 			if (Werewolf.getWerewolfManager().hasWerewolfSkin(player.getUniqueId()) && plugin.disguisesEnabled)
 			{
 				WerewolfDisguise skin = Werewolf.getSkinManager().getSkin(player);
-				
+
 				if (skin != null)
 				{
 					Werewolf.getWerewolfManager().setPouncing(player.getUniqueId());
@@ -80,19 +80,24 @@ public class DamageListener implements Listener
 				double damage = event.getDamage();
 				switch (event.getCause())
 				{
-				case FALL:
-					damage = 0;
-					break;
-				case CONTACT:
-				case LAVA:
-				case LIGHTNING:
-				case BLOCK_EXPLOSION:
-				case ENTITY_ATTACK:
-					damage *= DamageManager.SilverArmorMultiplier;
-					break;
+					case FALL:
+						damage = 0;
+						break;
+					case CONTACT:
+					case LAVA:
+                    case FIRE:
+					case LIGHTNING:
+					case BLOCK_EXPLOSION:
+					case ENTITY_ATTACK:
+                    case ENTITY_SWEEP_ATTACK:
+                    case PROJECTILE:
+                    case THORNS:
+                    case FREEZE:
+						damage *= DamageManager.SilverArmorMultiplier;
+						break;
 
-				default:
-					break;
+					default:
+						break;
 				}
 
 				if (Werewolf.getClanManager().isAlpha(werewolfPlayer.getUniqueId()))
@@ -161,7 +166,7 @@ public class DamageListener implements Listener
 					if (damageEvent.getEntity() instanceof Player)
 					{
 						Player victim = (Player) damageEvent.getEntity();
-						/* 
+						/*
 						 * TODO: Readd Vampire integration
 						 * if (!this.plugin.isVampire(victim))
 						 * {
@@ -240,6 +245,11 @@ public class DamageListener implements Listener
 			int health = 0;
 			switch (event.getEntity().getType())
 			{
+                case WARDEN:
+                case ENDER_DRAGON:
+                case WITHER:
+                    health = 5;
+                    break;
 				case PLAYER:
 				case VILLAGER:
 				case WANDERING_TRADER:
@@ -256,6 +266,7 @@ public class DamageListener implements Listener
 				case ZOGLIN:
 				case PIGLIN_BRUTE:
 				case POLAR_BEAR:
+                case ELDER_GUARDIAN:
 					health = 4;
 					break;
 				case ENDERMAN:
@@ -271,6 +282,9 @@ public class DamageListener implements Listener
 				case STRIDER:
 				case ZOMBIFIED_PIGLIN:
 				case WITCH:
+                case GUARDIAN:
+                case CAMEL:
+                case SNIFFER:
 					health = 3;
 					break;
 				case SHEEP:
@@ -283,10 +297,15 @@ public class DamageListener implements Listener
 				case TURTLE:
 				case FOX:
 				case SPIDER:
+                case SQUID:
+                case GLOW_SQUID:
+                case ALLAY:
+                case PHANTOM:
 					health = 2;
 					break;
 				case SKELETON:
 				case WITHER_SKELETON:
+                case BLAZE:
 				case STRAY:
 				case CHICKEN:
 				case PARROT:
@@ -298,6 +317,12 @@ public class DamageListener implements Listener
 				case SALMON:
 				case PUFFERFISH:
 				case TROPICAL_FISH:
+                case FROG:
+                case TADPOLE:
+                case ENDERMITE:
+                case BAT:
+                case MAGMA_CUBE:
+                case SNOWMAN:
 					health = 1;
 					break;
 				default:
