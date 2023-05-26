@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import com.dogonfire.werewolf.items.Recipes;
 import com.dogonfire.werewolf.Werewolf;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,9 +17,6 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.ChatColor;
 
 public class ItemManager
 {
@@ -354,7 +351,6 @@ public class ItemManager
 		return book;
 	}
 
-	
 	public boolean isSilverSword(ItemStack IS)
 	{
 		return isWerewolfItem(IS, "SilverSword");
