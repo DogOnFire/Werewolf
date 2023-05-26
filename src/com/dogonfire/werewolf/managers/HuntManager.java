@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -10,6 +10,8 @@ import java.util.Set;
 
 import java.util.UUID;
 
+import com.dogonfire.werewolf.tasks.CompassTrackerTask;
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,13 +19,13 @@ import org.bukkit.entity.Player;
 
 public class HuntManager
 {
-	private Werewolf			plugin;
+	private Werewolf plugin;
 	private int					totalBounty			= 0;
 	private FileConfiguration	huntersConfig		= null;
 	private File				huntersConfigFile	= null;
 	private Random				random				= new Random();
 
-	HuntManager(Werewolf p)
+	public HuntManager(Werewolf p)
 	{
 		this.plugin = p;
 	}
@@ -57,18 +59,18 @@ public class HuntManager
 
 	public boolean isHunting(UUID playerId)
 	{
-		return CompassTracker.hasWatcher(playerId);
+		return CompassTrackerTask.hasWatcher(playerId);
 	}
 
 	public void setHunting(UUID playerId, boolean hunting)
 	{
 		if (hunting)
 		{
-			CompassTracker.addWatcher(playerId);
+			CompassTrackerTask.addWatcher(playerId);
 		}
 		else
 		{
-			CompassTracker.removeWatcher(playerId);
+			CompassTrackerTask.removeWatcher(playerId);
 		}
 	}
 

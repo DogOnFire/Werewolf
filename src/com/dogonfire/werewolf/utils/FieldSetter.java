@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.utils;
 
 import java.lang.reflect.Field;
 

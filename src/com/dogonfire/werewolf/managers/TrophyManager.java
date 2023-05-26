@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,15 +22,15 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import com.dogonfire.werewolf.ClanManager.ClanType;
+import com.dogonfire.werewolf.managers.ClanManager.ClanType;
 
 public class TrophyManager implements Listener
 {
-	private Werewolf			plugin				= null;
+	private Werewolf plugin				= null;
 	private FileConfiguration	skullsConfig		= null;
 	private File				skullsConfigFile	= null;
 
-	TrophyManager(Werewolf plugin)
+	public TrophyManager(Werewolf plugin)
 	{
 		this.plugin = plugin;
 	}

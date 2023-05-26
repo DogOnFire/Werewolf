@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;

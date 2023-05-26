@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,7 +21,7 @@ import org.bukkit.entity.Player;
 
 public class ClanManager
 {
-	private Werewolf	plugin;
+	private Werewolf plugin;
 
 	public enum ClanType
 	{
@@ -45,7 +46,7 @@ public class ClanManager
 	private UUID 						alphaAccountId		= null;
 	private String 						alphaAccount		= "";
 
-	ClanManager(Werewolf plugin)
+	public ClanManager(Werewolf plugin)
 	{
 		this.plugin = plugin;
 	}

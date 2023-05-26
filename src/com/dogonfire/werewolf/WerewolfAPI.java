@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf.api;
+package com.dogonfire.werewolf;
 
 import java.util.UUID;
 

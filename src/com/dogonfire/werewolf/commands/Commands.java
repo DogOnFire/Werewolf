@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+
+import com.dogonfire.werewolf.Werewolf;
+import com.dogonfire.werewolf.managers.ClanManager;
+import com.dogonfire.werewolf.managers.LanguageManager;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
@@ -24,13 +28,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StringUtil;
 
-import com.dogonfire.werewolf.ClanManager.ClanType;
+import com.dogonfire.werewolf.managers.ClanManager.ClanType;
 
 public class Commands implements TabExecutor
 {
 	private Werewolf plugin;
 
-	Commands(Werewolf p)
+	public Commands(Werewolf p)
 	{
 		this.plugin = p;
 	}

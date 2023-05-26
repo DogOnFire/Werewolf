@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
+import com.dogonfire.werewolf.Werewolf;
 import com.google.common.io.Files;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -16,7 +17,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class LanguageManager
 {
-	private Werewolf			plugin;
+	private Werewolf plugin;
 	private FileConfiguration	languageConfig	= null;
 	private Random				random			= new Random();
 	private String				amount;
@@ -143,7 +144,7 @@ public class LanguageManager
 		return parseString(text, color);
 	}
 
-	LanguageManager(Werewolf p)
+	public LanguageManager(Werewolf p)
 	{
 		this.plugin = p;
 	}

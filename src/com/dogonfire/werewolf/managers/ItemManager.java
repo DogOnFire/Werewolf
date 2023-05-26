@@ -1,8 +1,10 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dogonfire.werewolf.items.Recipes;
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,7 +19,7 @@ import org.bukkit.ChatColor;
 
 public class ItemManager
 {
-	private Werewolf	plugin;
+	private Werewolf plugin;
 
 	public ItemManager(Werewolf plugin)
 	{

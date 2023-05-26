@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

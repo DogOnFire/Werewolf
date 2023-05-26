@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.items;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;

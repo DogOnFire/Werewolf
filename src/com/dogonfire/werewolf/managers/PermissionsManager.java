@@ -1,5 +1,6 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
+import com.dogonfire.werewolf.Werewolf;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 
@@ -14,7 +15,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class PermissionsManager
 {
 	private String		pluginName		= "null";
-	private Werewolf	plugin;
+	private Werewolf plugin;
 	private Permission	vaultPermission	= null;
 	private static Chat	vaultChat		= null;
 

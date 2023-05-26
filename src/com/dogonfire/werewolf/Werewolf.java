@@ -1,16 +1,22 @@
 package com.dogonfire.werewolf;
 
 import com.clanjhoo.vampire.VampireAPI;
-import com.dogonfire.werewolf.Metrics.Graph;
+import com.dogonfire.werewolf.commands.Commands;
+import com.dogonfire.werewolf.tasks.CompassTrackerTask;
+import com.dogonfire.werewolf.utils.Metrics;
+import com.dogonfire.werewolf.utils.Metrics.Graph;
 import com.dogonfire.werewolf.disguises.WerewolfDisguiseAPI;
 import com.dogonfire.werewolf.listeners.ChatListener;
 import com.dogonfire.werewolf.listeners.DamageListener;
 import com.dogonfire.werewolf.listeners.InteractListener;
 import com.dogonfire.werewolf.listeners.InventoryListener;
 import com.dogonfire.werewolf.listeners.PlayerListener;
+import com.dogonfire.werewolf.managers.*;
 import com.dogonfire.werewolf.tasks.CentralMessageTask;
 import com.dogonfire.werewolf.tasks.DisguiseTask;
 import com.dogonfire.werewolf.tasks.UndisguiseTask;
+import com.dogonfire.werewolf.utils.PacketUtils;
+import com.dogonfire.werewolf.utils.WerewolfPlaceholderExpansion;
 import com.dogonfire.werewolf.versioning.Version;
 import com.dogonfire.werewolf.versioning.VersionFactory;
 
@@ -99,19 +105,19 @@ public class Werewolf extends JavaPlugin
 	public List<String>							allowedWorlds							= new ArrayList<String>();
 	private static Werewolf						plugin;
 	private static FileConfiguration			config									= null;
-	public static PacketUtils					pu										= null;
-	private static LanguageManager				languageManager							= null;
+	public static PacketUtils pu										= null;
+	private static LanguageManager languageManager							= null;
 	// private static PotionManager potionManager = null;
-	private static ClanManager					clanManager								= null;
+	private static ClanManager clanManager								= null;
 	private static SignManager					signManager								= null;
 	private static WerewolfManager				werewolfManager							= null;
-	private static HuntManager					huntManager								= null;
+	private static HuntManager huntManager								= null;
 	private static TrophyManager				trophyManager							= null;
 	private static SkinManager					skinManager								= null;
 	private static PermissionsManager			permissionsManager						= null;
 	private static WerewolfScoreboardManager	werewolfScoreboardManager				= null;
 	private static StatisticsManager			statisticsManager						= null;
-	private static ItemManager					itemManager								= null;
+	private static ItemManager itemManager								= null;
 
 	public String								potionName								= "Witherfang";
 	public String								werewolfBiteName						= "Bloodmoon";
@@ -138,7 +144,7 @@ public class Werewolf extends JavaPlugin
 	public List<String>							surnames								= Arrays.asList("Devourer", "Fang", "Wolf", "Howl", "Turned", "Ghoul", "Paws", "Claw");
 
 	private static Economy						economy									= null;
-	private Commands							commands								= null;
+	private Commands commands								= null;
 	private String								chatPrefix								= "Werewolf";
 	public String								serverName								= "Your Server";
 
@@ -297,7 +303,7 @@ public class Werewolf extends JavaPlugin
 	{
 		if (vaultEnabled)
 		{
-			CompassTracker.stop();
+			CompassTrackerTask.stop();
 		}
 
 		for (Player player : getServer().getOnlinePlayers())
@@ -399,8 +405,8 @@ public class Werewolf extends JavaPlugin
 
 			log("Vault detected. Bounties and sign economy are enabled!");
 
-			CompassTracker.setPlugin(this);
-			CompassTracker.setUpdateRate(this.compassUpdateRate);
+			CompassTrackerTask.setPlugin(this);
+			CompassTrackerTask.setUpdateRate(this.compassUpdateRate);
 
 			RegisteredServiceProvider<Economy> economyProvider = plugin.getServer().getServicesManager().getRegistration(Economy.class);
 			if (economyProvider != null)

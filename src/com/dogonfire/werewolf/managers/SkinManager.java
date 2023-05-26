@@ -1,7 +1,9 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.entity.Player;
 
 import com.dogonfire.werewolf.disguises.IWerewolfDisguiseFactory.WerewolfDisguise;
@@ -9,11 +11,11 @@ import com.dogonfire.werewolf.disguises.WerewolfDisguiseAPI;
 
 public class SkinManager
 {
-	private Werewolf						plugin;
+	private Werewolf plugin;
 	private HashMap<UUID, WerewolfDisguise>	skins	= new HashMap<UUID, WerewolfDisguise>();
 	protected int							nextID	= -2147483648;
 
-	SkinManager(Werewolf p)
+	public SkinManager(Werewolf p)
 	{
 		this.plugin = p;
 	}

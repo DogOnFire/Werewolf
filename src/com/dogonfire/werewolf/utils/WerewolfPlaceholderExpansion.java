@@ -1,4 +1,4 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.utils;
 
 import java.util.UUID;
 import org.bukkit.entity.Player;
@@ -7,11 +7,11 @@ import com.dogonfire.werewolf.Werewolf;
 
 /* From https://github.com/PlaceholderAPI/PlaceholderAPI/wiki/PlaceholderExpansion#internal-class */
 
-class WerewolfPlaceholderExpansion extends PlaceholderExpansion
+public class WerewolfPlaceholderExpansion extends PlaceholderExpansion
 {
 	private Werewolf plugin;
 
-	WerewolfPlaceholderExpansion(Werewolf plugin)
+	public WerewolfPlaceholderExpansion(Werewolf plugin)
 	{
 		this.plugin = plugin;
 	}

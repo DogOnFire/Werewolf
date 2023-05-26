@@ -1,16 +1,17 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.tasks;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-public class CompassTracker implements Runnable
+public class CompassTrackerTask implements Runnable
 {
 	private static ArrayList<UUID>		watchList	= new ArrayList<UUID>();
 	private static int					taskId		= -2;
-	private static Werewolf				plugin;
+	private static Werewolf plugin;
 	private static long					updateRate	= 100L;
 
 	public static void setPlugin(Werewolf newPlugin)
@@ -30,7 +31,7 @@ public class CompassTracker implements Runnable
 	{
 		if (!isRunning())
 		{
-			taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new CompassTracker(), 40L, updateRate);
+			taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new CompassTrackerTask(), 40L, updateRate);
 			if (isRunning())
 			{
 				return true;

@@ -1,8 +1,9 @@
-package com.dogonfire.werewolf;
+package com.dogonfire.werewolf.managers;
 
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.dogonfire.werewolf.Werewolf;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,7 +19,7 @@ public class WerewolfScoreboardManager
 	private ScoreboardManager manager;
 	private HashMap<UUID, Objective> playerHuntingObjectives = new HashMap<UUID, Objective>();
 	
-	WerewolfScoreboardManager()
+	public WerewolfScoreboardManager()
 	{
 		manager = Bukkit.getScoreboardManager();
 	}
